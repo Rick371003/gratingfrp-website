@@ -997,7 +997,7 @@
           await updateManifest(targetFilename, null);
         }
 
-        showAlert('Post saved successfully! Website will update in 2-3 minutes.', 'success');
+        showAlert('✅ Post saved! Cloudflare will deploy in 1-2 minutes. Then refresh the website to see the new article.', 'success');
         setTimeout(() => { window.location.hash = '/'; router(); }, 2000);
       } catch (e) {
         showAlert(`Failed to save: ${e.message}`, 'error');
