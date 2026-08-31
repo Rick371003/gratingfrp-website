@@ -565,6 +565,22 @@
   .video-info p{font-size:13.5px;color:var(--ink-soft);line-height:1.6;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   .video-meta{display:flex;gap:16px;font-size:12px;color:var(--ink-mute);font-family:var(--display)}
   .video-filter-btn.active{background:var(--accent)!important;color:var(--ink-dark)!important;border-color:var(--accent)!important}
+  
+  /* ===== About Us工厂图片画廊（响应式） ===== */
+  .factory-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .factory-hero-img{grid-column:span 3;aspect-ratio:21/9;background:var(--bg-3);border-radius:var(--radius-lg);overflow:hidden;position:relative}
+  .factory-img-item{aspect-ratio:4/3;background:var(--bg-3);border-radius:var(--radius);overflow:hidden}
+  .factory-img-item img{transition:transform .3s ease}
+  .factory-img-item:hover img{transform:scale(1.05)}
+  @media (max-width:1024px){
+    .factory-gallery{grid-template-columns:repeat(2,1fr);gap:14px}
+    .factory-hero-img{grid-column:span 2;aspect-ratio:16/9}
+  }
+  @media (max-width:640px){
+    .factory-gallery{grid-template-columns:1fr;gap:16px}
+    .factory-hero-img{grid-column:span 1;aspect-ratio:16/9;border-radius:var(--radius)}
+    .factory-img-item{aspect-ratio:16/10}
+  }
   .pcard{
     background:var(--surface-dark);border:1px solid var(--line);border-radius:var(--radius-lg);
     overflow:hidden;display:flex;flex-direction:column;
@@ -3104,30 +3120,30 @@
           <h2>Our Manufacturing Capability</h2>
           <p>Complete in-house production facilities for molded and pultruded FRP products — from raw material to finished composite solutions.</p>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
-          <div style="grid-column:span 3;aspect-ratio:21/9;background:var(--bg-3);border-radius:var(--radius-lg);overflow:hidden;position:relative">
+        <div class="factory-gallery">
+          <div class="factory-hero-img">
             <img src="https://aka.doubaocdn.com/s/HPDcB5ZsIi" alt="Full scale FRP fiberglass grating production workshop panoramic view manufacturing facility" style="width:100%;height:100%;object-fit:cover;display:block">
             <div style="position:absolute;bottom:0;left:0;right:0;padding:20px;background:linear-gradient(transparent,rgba(10,18,26,.85))">
               <div style="font-family:var(--display);font-size:16px;font-weight:600;color:#fff">Full-Scale FRP Production Workshop</div>
               <div style="font-size:12px;color:var(--ink-mute);margin-top:4px">Integrated manufacturing from molding to pultrusion</div>
             </div>
           </div>
-          <div style="aspect-ratio:4/3;background:var(--bg-3);border-radius:var(--radius);overflow:hidden">
+          <div class="factory-img-item">
             <img src="https://aka.doubaocdn.com/s/QjbIgEI7fP" alt="Hydraulic press machine for FRP molded grating production fiberglass composite manufacturing equipment" style="width:100%;height:100%;object-fit:cover;display:block">
           </div>
-          <div style="aspect-ratio:4/3;background:var(--bg-3);border-radius:var(--radius);overflow:hidden">
+          <div class="factory-img-item">
             <img src="https://aka.doubaocdn.com/s/PW4GT3HxFQ" alt="FRP pultrusion production line fiberglass grating manufacturing equipment continuous pultrusion process" style="width:100%;height:100%;object-fit:cover;display:block">
           </div>
-          <div style="aspect-ratio:4/3;background:var(--bg-3);border-radius:var(--radius);overflow:hidden">
+          <div class="factory-img-item">
             <img src="https://aka.doubaocdn.com/s/Rj2QULuVmW" alt="FRP fiberglass manufacturing workshop overview production facility factory interior grating production" style="width:100%;height:100%;object-fit:cover;display:block">
           </div>
-          <div style="aspect-ratio:4/3;background:var(--bg-3);border-radius:var(--radius);overflow:hidden">
+          <div class="factory-img-item">
             <img src="https://aka.doubaocdn.com/s/WPvR7twbKv" alt="FRP pultrusion equipment production line fiberglass composite manufacturing factory workshop" style="width:100%;height:100%;object-fit:cover;display:block">
           </div>
-          <div style="aspect-ratio:4/3;background:var(--bg-3);border-radius:var(--radius);overflow:hidden">
+          <div class="factory-img-item">
             <img src="https://aka.doubaocdn.com/s/Oishu1TCji" alt="Finished FRP fiberglass grating products warehouse yellow grey green molded grating stock" style="width:100%;height:100%;object-fit:cover;display:block">
           </div>
-          <div style="aspect-ratio:4/3;background:var(--bg-3);border-radius:var(--radius);overflow:hidden">
+          <div class="factory-img-item">
             <img src="https://aka.doubaocdn.com/s/0qqZQiVLtW" alt="FRP fiberglass grating production quality control factory manufacturing inspection" style="width:100%;height:100%;object-fit:cover;display:block">
           </div>
         </div>
@@ -5114,6 +5130,9 @@ function showToast(msg){
 }
 
 /* ===== 动态加载Blog文章（从blog文件夹JSON文件） ===== */
+let lastPostCount = 0; // 记录上次加载的文章数量，用于检测新文章
+let hasNewPosts = false; // 是否有新文章
+
 async function loadBlogPosts(){
   try{
     // 添加时间戳参数，避免浏览器/CDN缓存，确保每次都获取最新文件
@@ -5147,6 +5166,14 @@ async function loadBlogPosts(){
       posts = [...loadedPosts, ...hardcodedPosts];
       // 重新按日期排序
       posts.sort((a,b) => new Date(b.date) - new Date(a.date));
+      
+      // 检测是否有新文章
+      if(lastPostCount > 0 && posts.length > lastPostCount){
+        hasNewPosts = true;
+        showNewPostsNotification(posts.length - lastPostCount);
+      }
+      lastPostCount = posts.length;
+      
       // 重新渲染博客列表
       renderHomeBlog();
       renderBlogList();
@@ -5157,6 +5184,52 @@ async function loadBlogPosts(){
     // 加载失败时保留硬编码的默认数据
   }
 }
+
+// 显示新文章提示条
+function showNewPostsNotification(count){
+  // 移除已存在的提示条
+  const existing = document.getElementById('new-posts-notification');
+  if(existing) existing.remove();
+  
+  const notification = document.createElement('div');
+  notification.id = 'new-posts-notification';
+  notification.style.cssText = 'position:fixed;top:80px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--ink-dark);padding:14px 24px;border-radius:50px;box-shadow:0 8px 32px rgba(240,165,0,.4);z-index:999;cursor:pointer;font-family:var(--display);font-weight:600;font-size:14px;display:flex;align-items:center;gap:10px;animation:slideDown .3s ease';
+  notification.innerHTML = '✨ <span>' + count + ' new article' + (count > 1 ? 's' : '') + ' available — Click to refresh</span>';
+  notification.onclick = function(){
+    this.remove();
+    hasNewPosts = false;
+    loadBlogPosts();
+    window.scrollTo({top:0, behavior:'smooth'});
+  };
+  document.body.appendChild(notification);
+  
+  // 10秒后自动消失
+  setTimeout(() => {
+    if(notification.parentNode){
+      notification.style.opacity = '0';
+      notification.style.transition = 'opacity .3s';
+      setTimeout(() => notification.remove(), 300);
+    }
+  }, 10000);
+}
+
+// 添加滑动动画
+const style = document.createElement('style');
+style.textContent = '@keyframes slideDown{from{opacity:0;transform:translate(-50%,-20px)}to{opacity:1;transform:translate(-50%,0)}}';
+document.head.appendChild(style);
+
+// 定时检查新文章（每30秒）
+setInterval(() => {
+  if(document.hidden) return; // 页面不可见时不检查
+  loadBlogPosts();
+}, 30000);
+
+// 页面从后台切换到前台时检查新文章
+document.addEventListener('visibilitychange', () => {
+  if(!document.hidden){
+    setTimeout(loadBlogPosts, 500);
+  }
+});
 
 // 手动刷新文章列表（用户点击按钮时调用）
 async function refreshBlogPosts(){
@@ -5173,20 +5246,28 @@ async function refreshBlogPosts(){
 }
 
 /* ===== 初始化 ===== */
-renderHomeProducts();
-renderProductsList();
-renderHomeApps();
-renderAppsList();
-renderHomeProjects();
-renderHomeBlog();
-renderBlogList();
-renderVideoList(videos);
-renderFaqs();
-document.getElementById('about-thumb').innerHTML = '<img src="https://aka.doubaocdn.com/s/HPDcB5ZsIi" alt="FRP fiberglass grating manufacturing factory panoramic view China production facility" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">';
-window.addEventListener('hashchange', navigate);
-navigate();
-// 动态加载blog文章（后台编辑后自动更新）
-loadBlogPosts();
+try{
+  renderHomeProducts();
+  renderProductsList();
+  renderHomeApps();
+  renderAppsList();
+  renderHomeProjects();
+  renderHomeBlog();
+  renderBlogList();
+  renderVideoList(videos);
+  renderFaqs();
+  // 安全设置about-thumb图片（元素可能不存在）
+  const aboutThumbEl = document.getElementById('about-thumb');
+  if(aboutThumbEl){
+    aboutThumbEl.innerHTML = '<img src="https://aka.doubaocdn.com/s/HPDcB5ZsIi" alt="FRP fiberglass grating manufacturing factory panoramic view China production facility" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">';
+  }
+  window.addEventListener('hashchange', navigate);
+  navigate();
+  // 动态加载blog文章（后台编辑后自动更新）
+  loadBlogPosts();
+}catch(e){
+  console.error('Initialization error:', e);
+}
 
 /* ===== PDF预览与下载 ===== */
 const pdfUrls = {
