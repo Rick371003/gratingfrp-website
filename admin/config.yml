@@ -2,7 +2,7 @@ backend:
   name: github
   repo: Rick371003/gratingfrp-website
   branch: main
-  auth_type: token
+  base_url: https://frp-grating-oauth.236688188.workers.dev
 
 media_folder: images/uploads
 public_folder: /images/uploads
