@@ -5203,7 +5203,13 @@ async function loadBlogPosts(){
       // 检测是否有新文章
       if(lastPostCount > 0 && posts.length > lastPostCount){
         hasNewPosts = true;
-        showNewPostsNotification(posts.length - lastPostCount);
+        const newCount = posts.length - lastPostCount;
+        console.log('Detected', newCount, 'new article(s), auto-refreshing...');
+        // 自动更新，不需要用户点击
+        showToast('✨ ' + newCount + ' new article' + (newCount > 1 ? 's' : '') + ' published! Refreshing...');
+        // 重新渲染当前页面
+        renderHomeBlog();
+        renderBlogList();
       }
       lastPostCount = posts.length;
       
@@ -5251,11 +5257,11 @@ const style = document.createElement('style');
 style.textContent = '@keyframes slideDown{from{opacity:0;transform:translate(-50%,-20px)}to{opacity:1;transform:translate(-50%,0)}}';
 document.head.appendChild(style);
 
-// 定时检查新文章（每30秒）
+// 定时检查新文章（每15秒，更快检测后台发布的文章）
 setInterval(() => {
   if(document.hidden) return; // 页面不可见时不检查
   loadBlogPosts();
-}, 30000);
+}, 15000);
 
 // 页面从后台切换到前台时检查新文章
 document.addEventListener('visibilitychange', () => {
