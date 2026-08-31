@@ -640,19 +640,41 @@
       const end = textarea.selectionEnd;
       const selectedText = textarea.value.substring(start, end);
       
+      // 保存滚动位置
+      const scrollTop = textarea.scrollTop;
+      const scrollLeft = textarea.scrollLeft;
+      
       let insertText = text;
+      let cursorOffset = 0; // 光标相对于插入文本起始位置的偏移
+      
       // 如果有选中文本，用选中文本替换占位符
       if (selectedText && text.includes('{text}')) {
         insertText = text.replace('{text}', selectedText);
+        // 光标放在选中文本的后面（即替换后的文字后面，换行符前面）
+        const textPos = text.indexOf('{text}');
+        cursorOffset = textPos + selectedText.length;
       } else if (selectedText && text.includes('{content}')) {
         insertText = text.replace('{content}', selectedText);
+        const textPos = text.indexOf('{content}');
+        cursorOffset = textPos + selectedText.length;
+      } else {
+        // 没有选中文本，光标放在插入文本的最后
+        cursorOffset = insertText.length;
       }
       
       textarea.value = textarea.value.substring(0, start) + insertText + textarea.value.substring(end);
-      textarea.focus();
-      // 移动光标到插入文本之后
-      const newPos = start + insertText.length;
+      
+      // 恢复滚动位置（防止跳转到最后）
+      textarea.scrollTop = scrollTop;
+      textarea.scrollLeft = scrollLeft;
+      
+      // 设置光标位置
+      const newPos = start + cursorOffset;
       textarea.setSelectionRange(newPos, newPos);
+      
+      // 聚焦但不滚动
+      textarea.focus({preventScroll: true});
+      
       updatePreview();
     }
     
