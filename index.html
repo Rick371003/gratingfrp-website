@@ -759,11 +759,12 @@
   /* ===== 博客详情页新布局（参考machsfrp.com） ===== */
   .blog-detail-layout{
     display: grid;
-    grid-template-columns: 1fr 280px;
-    gap: 48px;
-    max-width: 1280px;
+    grid-template-columns: 1fr 300px;
+    gap: 56px;
+    max-width: 1440px;
     margin: 0 auto;
     align-items: start;
+    padding: 0 24px;
   }
   .blog-article-main{
     min-width: 0;
@@ -1040,6 +1041,361 @@
     .blog-meta-bottom{
       flex-direction: column;
       align-items: flex-start;
+    }
+  }
+
+  /* ===== 博客增强功能样式 ===== */
+  
+  /* 阅读进度条 */
+  .reading-progress{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), #ffb84d);
+    z-index: 9999;
+    transition: width 0.1s ease;
+    box-shadow: 0 0 10px rgba(240,165,0,.5);
+  }
+  
+  /* 返回顶部按钮 */
+  .back-to-top{
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--ink-dark);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(240,165,0,.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 9998;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .back-to-top.show{
+    opacity: 1;
+    visibility: visible;
+  }
+  .back-to-top:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(240,165,0,.6);
+  }
+  
+  /* 分享按钮 */
+  .share-buttons{
+    display: flex;
+    gap: 10px;
+    margin: 24px 0;
+    padding: 16px 20px;
+    background: var(--surface-dark);
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    align-items: center;
+  }
+  .share-label{
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-right: 10px;
+  }
+  .share-btn{
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--bg-3);
+    color: var(--ink-soft);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 14px;
+  }
+  .share-btn:hover{
+    background: var(--accent);
+    color: var(--ink-dark);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  
+  /* 作者信息卡片 */
+  .author-card{
+    display: flex;
+    gap: 20px;
+    padding: 24px;
+    background: var(--surface-dark);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--line);
+    margin: 32px 0;
+    align-items: center;
+  }
+  .author-avatar{
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), #ffb84d);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--ink-dark);
+    flex-shrink: 0;
+  }
+  .author-info h4{
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .author-info p{
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin: 0;
+  }
+  
+  /* 相关文章推荐 */
+  .related-posts{
+    margin-top: 48px;
+    padding-top: 36px;
+    border-top: 2px solid var(--line);
+  }
+  .related-posts h3{
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .related-posts h3::before{
+    content: '';
+    width: 4px;
+    height: 24px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .related-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .related-card{
+    background: var(--surface-dark);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .related-card:hover{
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: var(--accent);
+  }
+  .related-card .thumb{
+    aspect-ratio: 16/9;
+    background: var(--bg-3);
+    overflow: hidden;
+  }
+  .related-card .thumb img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .related-card .body{
+    padding: 16px 18px;
+  }
+  .related-card .cat{
+    font-family: var(--display);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .related-card h4{
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.4;
+    margin: 0;
+  }
+  
+  /* 上一篇/下一篇导航 */
+  .post-nav{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 32px;
+  }
+  .post-nav-item{
+    padding: 20px 24px;
+    background: var(--surface-dark);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all 0.25s;
+    text-decoration: none;
+  }
+  .post-nav-item:hover{
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .post-nav-item.next{
+    text-align: right;
+  }
+  .post-nav-label{
+    font-family: var(--display);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .post-nav-title{
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.4;
+  }
+  
+  /* FAQ折叠面板 */
+  .faq-accordion{
+    margin: 24px 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .faq-item{
+    border-bottom: 1px solid var(--line);
+  }
+  .faq-item:last-child{
+    border-bottom: none;
+  }
+  .faq-question{
+    width: 100%;
+    padding: 16px 20px;
+    background: var(--surface-dark);
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    transition: background 0.2s;
+  }
+  .faq-question:hover{
+    background: var(--bg-3);
+  }
+  .faq-question .faq-icon{
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-size: 20px;
+    transition: transform 0.3s;
+  }
+  .faq-item.open .faq-question .faq-icon{
+    transform: rotate(45deg);
+  }
+  .faq-answer{
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: var(--bg);
+  }
+  .faq-item.open .faq-answer{
+    max-height: 1000px;
+  }
+  .faq-answer-inner{
+    padding: 16px 20px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+  }
+  
+  /* 目录编号 */
+  .toc-nav a{
+    counter-increment: toc-counter;
+  }
+  .toc-nav{
+    counter-reset: toc-counter;
+  }
+  .toc-nav a.toc-h2::before{
+    content: counter(toc-counter) '. ';
+    color: var(--accent);
+    font-weight: 700;
+    margin-right: 4px;
+  }
+  
+  /* 图片说明文字 */
+  .blog-article-content img + em,
+  .blog-article-content img + p em{
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    color: var(--ink-mute);
+    margin-top: -16px;
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+  
+  /* 响应式 */
+  @media (max-width: 900px){
+    .related-grid{
+      grid-template-columns: 1fr 1fr;
+    }
+    .post-nav{
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 640px){
+    .related-grid{
+      grid-template-columns: 1fr;
+    }
+    .author-card{
+      flex-direction: column;
+      text-align: center;
+    }
+    .share-buttons{
+      flex-wrap: wrap;
+    }
+    .back-to-top{
+      bottom: 20px;
+      right: 20px;
+      width: 42px;
+      height: 42px;
     }
   }
 
@@ -2456,9 +2812,13 @@ function protectImages(){
   });
 }
 if(document.readyState === 'loading'){
-  document.addEventListener('DOMContentLoaded', protectImages);
+  document.addEventListener('DOMContentLoaded', function(){
+    protectImages();
+    initReadingProgress();
+  });
 } else {
   protectImages();
+  initReadingProgress();
 }
 // 动态内容加载后也保护图片
 const observer = new MutationObserver(function(mutations){
@@ -2852,8 +3212,27 @@ function renderDetail(type, id){
         <article class="blog-article-main">
           ${p.img ? '<div class="blog-cover-image"><img src="'+p.img+'" alt="'+p.title+'" style="width:100%;height:100%;object-fit:cover"></div>' : ''}
           <div class="blog-article-content" id="blog-content">
-            ${p.content}
+            ${renderBlogContent(p.content)}
           </div>
+          
+          <!-- 分享按钮 -->
+          <div class="share-buttons">
+            <span class="share-label">Share</span>
+            <button class="share-btn" onclick="shareToTwitter()" title="Share on Twitter">𝕏</button>
+            <button class="share-btn" onclick="shareToLinkedIn()" title="Share on LinkedIn">in</button>
+            <button class="share-btn" onclick="shareToFacebook()" title="Share on Facebook">f</button>
+            <button class="share-btn" onclick="copyLink()" title="Copy Link">🔗</button>
+          </div>
+          
+          <!-- 作者信息卡片 -->
+          <div class="author-card">
+            <div class="author-avatar">${p.author ? p.author.charAt(0).toUpperCase() : 'Z'}</div>
+            <div class="author-info">
+              <h4>${p.author || 'ZEALL Team'}</h4>
+              <p>FRP composite industry expert with 20+ years experience in manufacturing, engineering and international trade. Published by NANTONG ZEALL NEW MATERIALS CO., LTD.</p>
+            </div>
+          </div>
+          
           <div class="blog-meta-bottom">
             <div class="blog-meta-info">
               <span class="meta-label">Published:</span> ${p.date}
@@ -2864,6 +3243,12 @@ function renderDetail(type, id){
             </div>
             <a class="btn btn-primary" href="#/contact" data-nav>Have Questions? Contact Us <span class="arrow">→</span></a>
           </div>
+          
+          <!-- 上一篇/下一篇导航 -->
+          ${renderPostNav(p.id)}
+          
+          <!-- 相关文章推荐 -->
+          ${renderRelatedPosts(p.id, p.category)}
         </article>
         <!-- 右侧：目录导航 -->
         <aside class="blog-toc-sidebar" id="blog-toc-sidebar">
@@ -2945,6 +3330,118 @@ function navigate(){
   window.scrollTo({top:0, behavior:'auto'});
 }
 
+/* ===== 博客内容渲染（Markdown转HTML） ===== */
+function renderBlogContent(content){
+  if(!content) return '';
+  // 判断是否已经是HTML格式（包含HTML标签）
+  const isHtml = /<\/?[a-z][\s\S]*>/i.test(content.trim().substring(0, 100));
+  if(isHtml){
+    return content; // 已经是HTML，直接返回
+  }
+  // Markdown转HTML
+  return markdownToHtml(content);
+}
+
+function markdownToHtml(text){
+  if(!text) return '';
+  let html = text;
+  
+  // 保护代码块
+  const codeBlocks = [];
+  html = html.replace(/```([\s\S]*?)```/g, function(match, code){
+    codeBlocks.push(code);
+    return '%%CODEBLOCK' + (codeBlocks.length - 1) + '%%';
+  });
+  
+  // 标题（必须先处理，因为#会被其他规则影响）
+  html = html.replace(/^###### (.*$)/gm, '<h6>$1</h6>');
+  html = html.replace(/^##### (.*$)/gm, '<h5>$1</h5>');
+  html = html.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
+  html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+  html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
+  html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
+  
+  // 加粗和斜体
+  html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
+  html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/__(.*?)__/g, '<strong>$1</strong>');
+  html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+  html = html.replace(/_(.*?)_/g, '<em>$1</em>');
+  
+  // 删除线
+  html = html.replace(/~~(.*?)~~/g, '<del>$1</del>');
+  
+  // 行内代码
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+  
+  // 图片
+  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">');
+  
+  // 链接
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  
+  // 引用
+  html = html.replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>');
+  html = html.replace(/^>(.*$)/gm, '<blockquote>$1</blockquote>');
+  
+  // 分割线
+  html = html.replace(/^---$/gm, '<hr>');
+  html = html.replace(/^\*\*\*$/gm, '<hr>');
+  html = html.replace(/^___$/gm, '<hr>');
+  
+  // 无序列表
+  html = html.replace(/^[-*+] (.*$)/gm, '<li>$1</li>');
+  // 有序列表
+  html = html.replace(/^\d+\. (.*$)/gm, '<li>$1</li>');
+  
+  // 把连续的li包裹成ul或ol
+  // 先处理有序列表
+  html = html.replace(/(<li>.*<\/li>\n?)+/g, function(match){
+    // 判断是有序还是无序（简单判断：如果前面有数字就是有序，但这里已经都变成li了，所以统一用ul，后面再优化）
+    return '<ul>' + match + '</ul>';
+  });
+  
+  // 表格（简单处理）
+  html = html.replace(/^\|(.+)\|$/gm, function(match, content){
+    const cells = content.split('|').map(c => c.trim());
+    if(cells.every(c => /^[-:]+$/.test(c))){
+      return '%%TABLESEPARATOR%%';
+    }
+    return '<td>' + cells.join('</td><td>') + '</td>';
+  });
+  // 把表格行包裹起来
+  html = html.replace(/(<td>.*<\/td>\n?)+/g, function(match){
+    const rows = match.trim().split('\n');
+    let tableHtml = '<table>';
+    rows.forEach((row, index) => {
+      if(row === '%%TABLESEPARATOR%%') return;
+      const tag = index === 0 ? 'th' : 'td';
+      tableHtml += '<tr>' + row.replace(/<td>/g, '<' + tag + '>').replace(/<\/td>/g, '</' + tag + '>') + '</tr>';
+    });
+    tableHtml += '</table>';
+    return tableHtml;
+  });
+  
+  // 段落（把连续的非空行包裹成p）
+  // 先把双换行换成段落分隔
+  html = html.replace(/\n\n/g, '</p><p>');
+  html = '<p>' + html + '</p>';
+  
+  // 清理空段落和块级元素外面的p
+  html = html.replace(/<p><\/p>/g, '');
+  html = html.replace(/<p>\s*<\/p>/g, '');
+  // 把块级元素外面的p去掉
+  html = html.replace(/<p>\s*<(h[1-6]|ul|ol|blockquote|table|hr|div|img|iframe|video)/g, '<$1');
+  html = html.replace(/<\/(h[1-6]|ul|ol|blockquote|table|hr|div|img|iframe|video)>\s*<\/p>/g, '</$1>');
+  
+  // 恢复代码块
+  html = html.replace(/%%CODEBLOCK(\d+)%%/g, function(match, index){
+    return '<pre><code>' + codeBlocks[index] + '</code></pre>';
+  });
+  
+  return html;
+}
+
 /* ===== 博客目录导航（TOC）生成 ===== */
 function generateBlogTOC(){
   const content = document.getElementById('blog-content');
@@ -3019,6 +3516,140 @@ function updateTOCActive(headings){
   tocNav.querySelectorAll('a').forEach((link, index) => {
     link.classList.toggle('active', index === currentIndex);
   });
+}
+
+/* ===== 相关文章推荐 ===== */
+function renderRelatedPosts(currentId, category){
+  // 优先找同分类的文章，其次找其他文章
+  let related = posts.filter(p => p.id !== currentId && p.category === category);
+  if(related.length < 3){
+    const others = posts.filter(p => p.id !== currentId && p.category !== category);
+    related = related.concat(others).slice(0, 3);
+  }
+  if(related.length === 0) return '';
+  
+  return `
+    <div class="related-posts">
+      <h3>Related Articles</h3>
+      <div class="related-grid">
+        ${related.map(p => `
+          <div class="related-card" data-go="blog|${p.id}">
+            <div class="thumb">
+              ${p.img ? '<img src="'+p.img+'" alt="'+p.title+'">' : '<div style="width:100%;height:100%;background:var(--bg-3);display:flex;align-items:center;justify-content:center;color:var(--ink-mute);font-size:14px">FRP Grating</div>'}
+            </div>
+            <div class="body">
+              <div class="cat">${p.category}</div>
+              <h4>${p.title}</h4>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+/* ===== 上一篇/下一篇导航 ===== */
+function renderPostNav(currentId){
+  const index = posts.findIndex(p => p.id === currentId);
+  if(index === -1) return '';
+  
+  const prev = index > 0 ? posts[index - 1] : null;
+  const next = index < posts.length - 1 ? posts[index + 1] : null;
+  
+  return `
+    <div class="post-nav">
+      ${prev ? `
+        <div class="post-nav-item" data-go="blog|${prev.id}">
+          <div class="post-nav-label">← Previous Article</div>
+          <div class="post-nav-title">${prev.title}</div>
+        </div>
+      ` : '<div></div>'}
+      ${next ? `
+        <div class="post-nav-item next" data-go="blog|${next.id}">
+          <div class="post-nav-label">Next Article →</div>
+          <div class="post-nav-title">${next.title}</div>
+        </div>
+      ` : '<div></div>'}
+    </div>
+  `;
+}
+
+/* ===== 分享功能 ===== */
+function getShareUrl(){
+  return window.location.href;
+}
+function getShareTitle(){
+  return document.querySelector('.page-title')?.textContent || document.title;
+}
+function shareToTwitter(){
+  const url = encodeURIComponent(getShareUrl());
+  const text = encodeURIComponent(getShareTitle());
+  window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank', 'width=600,height=400');
+}
+function shareToLinkedIn(){
+  const url = encodeURIComponent(getShareUrl());
+  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank', 'width=600,height=400');
+}
+function shareToFacebook(){
+  const url = encodeURIComponent(getShareUrl());
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=400');
+}
+function copyLink(){
+  navigator.clipboard.writeText(getShareUrl()).then(()=>{
+    alert('Link copied to clipboard!');
+  }).catch(()=>{
+    // 降级方案
+    const textarea = document.createElement('textarea');
+    textarea.value = getShareUrl();
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    alert('Link copied to clipboard!');
+  });
+}
+
+/* ===== 阅读进度条 & 返回顶部 ===== */
+function initReadingProgress(){
+  // 创建进度条
+  const progress = document.createElement('div');
+  progress.className = 'reading-progress';
+  progress.id = 'reading-progress';
+  document.body.appendChild(progress);
+  
+  // 创建返回顶部按钮
+  const backToTop = document.createElement('button');
+  backToTop.className = 'back-to-top';
+  backToTop.id = 'back-to-top';
+  backToTop.innerHTML = '↑';
+  backToTop.title = 'Back to top';
+  backToTop.onclick = () => window.scrollTo({top:0, behavior:'smooth'});
+  document.body.appendChild(backToTop);
+  
+  // 滚动事件
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progressPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progress.style.width = progressPercent + '%';
+    
+    // 显示/隐藏返回顶部按钮
+    if(scrollTop > 400){
+      backToTop.classList.add('show');
+    } else {
+      backToTop.classList.remove('show');
+    }
+  }, {passive:true});
+}
+
+/* ===== FAQ折叠面板（自动识别文章中的FAQ格式） ===== */
+function initFAQAccordion(){
+  // 查找文章中的FAQ部分（如果有特定的HTML结构）
+  const content = document.getElementById('blog-content');
+  if(!content) return;
+  
+  // 查找所有以"Q:"或"Question:"开头的段落，转换为折叠面板
+  // 这个功能可以后续扩展，目前先保留基础结构
 }
 
 /* ===== 事件绑定 ===== */
