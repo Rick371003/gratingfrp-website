@@ -816,6 +816,13 @@
     .hero-panel.p2{width:170px;height:125px}
     .hero-panel.p3{width:150px;height:110px}
   }
+  /* 相关产品样式覆盖（确保优先级高于通用响应式样式） */
+  @media (max-width:1024px){
+    .grid-cards.related-products{grid-template-columns:repeat(2,1fr) !important}
+  }
+  @media (max-width:640px){
+    .grid-cards.related-products{grid-template-columns:1fr !important}
+  }
   /* ===== Catalogue 目录页面样式 ===== */
   .cat-cover{
     background:var(--surface-dark);border:1px solid var(--line);border-radius:var(--radius-lg);
