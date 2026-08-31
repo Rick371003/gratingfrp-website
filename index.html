@@ -3333,18 +3333,29 @@ function navigate(){
 /* ===== 博客内容渲染（Markdown转HTML） ===== */
 function renderBlogContent(content){
   if(!content) return '';
-  // 判断是否已经是HTML格式（包含HTML标签）
-  const isHtml = /<\/?[a-z][\s\S]*>/i.test(content.trim().substring(0, 100));
-  if(isHtml){
-    return content; // 已经是HTML，直接返回
+  const trimmed = content.trim();
+  
+  // 判断是否是Markdown格式：检查是否有Markdown标题（#开头）或Markdown特有语法
+  const hasMarkdownHeading = /(^|\n)#{1,6}\s/.test(trimmed);
+  const hasMarkdownList = /(^|\n)[-*+]\s/.test(trimmed);
+  const hasMarkdownTable = /(^|\n)\|.*\|/.test(trimmed);
+  const hasMarkdownQuote = /(^|\n)>\s/.test(trimmed);
+  
+  // 如果有Markdown特有语法，用Markdown渲染
+  if(hasMarkdownHeading || hasMarkdownList || hasMarkdownTable || hasMarkdownQuote){
+    return markdownToHtml(trimmed);
   }
-  // Markdown转HTML
-  return markdownToHtml(content);
+  
+  // 否则认为是HTML格式，直接返回
+  return trimmed;
 }
 
 function markdownToHtml(text){
   if(!text) return '';
   let html = text;
+  
+  // 统一换行符
+  html = html.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
   
   // 保护代码块
   const codeBlocks = [];
@@ -3353,13 +3364,109 @@ function markdownToHtml(text){
     return '%%CODEBLOCK' + (codeBlocks.length - 1) + '%%';
   });
   
-  // 标题（必须先处理，因为#会被其他规则影响）
-  html = html.replace(/^###### (.*$)/gm, '<h6>$1</h6>');
-  html = html.replace(/^##### (.*$)/gm, '<h5>$1</h5>');
-  html = html.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
-  html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
-  html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
-  html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
+  // 按双换行分割成块
+  const blocks = html.split(/\n\n+/);
+  let result = [];
+  
+  blocks.forEach(block => {
+    block = block.trim();
+    if(!block) return;
+    
+    // 判断块类型
+    const lines = block.split('\n');
+    
+    // 标题块（第一行是标题，允许前面有空格）
+    if(/^\s*#{1,6}\s/.test(lines[0])){
+      // 处理标题行（去除前面的空格）
+      lines[0] = lines[0].trim();
+      lines[0] = lines[0].replace(/^###### (.*$)/, '<h6>$1</h6>');
+      lines[0] = lines[0].replace(/^##### (.*$)/, '<h5>$1</h5>');
+      lines[0] = lines[0].replace(/^#### (.*$)/, '<h4>$1</h4>');
+      lines[0] = lines[0].replace(/^### (.*$)/, '<h3>$1</h3>');
+      lines[0] = lines[0].replace(/^## (.*$)/, '<h2>$1</h2>');
+      lines[0] = lines[0].replace(/^# (.*$)/, '<h1>$1</h1>');
+      // 处理标题后面的行（作为段落）
+      if(lines.length > 1){
+        const rest = lines.slice(1).join('\n');
+        result.push(lines[0]);
+        result.push('<p>' + processInline(rest) + '</p>');
+      } else {
+        result.push(lines[0]);
+      }
+      return;
+    }
+    
+    // 引用块
+    if(/^>/.test(lines[0])){
+      const quoteContent = lines.map(l => l.replace(/^>\s?/, '')).join(' ');
+      result.push('<blockquote>' + processInline(quoteContent) + '</blockquote>');
+      return;
+    }
+    
+    // 分割线
+    if(/^(-{3,}|\*{3,}|_{3,})$/.test(block)){
+      result.push('<hr>');
+      return;
+    }
+    
+    // 列表块（无序列表）
+    if(/^[-*+]\s/.test(lines[0])){
+      let items = lines.filter(l => /^[-*+]\s/.test(l)).map(l => '<li>' + processInline(l.replace(/^[-*+]\s/, '')) + '</li>');
+      result.push('<ul>' + items.join('') + '</ul>');
+      return;
+    }
+    
+    // 列表块（有序列表）
+    if(/^\d+\.\s/.test(lines[0])){
+      let items = lines.filter(l => /^\d+\.\s/.test(l)).map(l => '<li>' + processInline(l.replace(/^\d+\.\s/, '')) + '</li>');
+      result.push('<ol>' + items.join('') + '</ol>');
+      return;
+    }
+    
+    // 表格块
+    if(/^\|/.test(lines[0]) && lines.length > 1 && /^\|[-:| ]+\|/.test(lines[1])){
+      let tableHtml = '<table>';
+      lines.forEach((line, index) => {
+        if(index === 1) return; // 跳过分隔行
+        const cells = line.replace(/^\|/, '').replace(/\|$/, '').split('|').map(c => c.trim());
+        const tag = index === 0 ? 'th' : 'td';
+        tableHtml += '<tr>' + cells.map(c => '<' + tag + '>' + processInline(c) + '</' + tag + '>').join('') + '</tr>';
+      });
+      tableHtml += '</table>';
+      result.push(tableHtml);
+      return;
+    }
+    
+    // 代码块占位符
+    if(/^%%CODEBLOCK\d+%%$/.test(block)){
+      result.push(block);
+      return;
+    }
+    
+    // 普通段落
+    result.push('<p>' + processInline(block) + '</p>');
+  });
+  
+  html = result.join('\n');
+  
+  // 恢复代码块
+  html = html.replace(/%%CODEBLOCK(\d+)%%/g, function(match, index){
+    return '<pre><code>' + codeBlocks[index] + '</code></pre>';
+  });
+  
+  return html;
+}
+
+// 处理行内格式（加粗、斜体、链接、图片等）
+function processInline(text){
+  if(!text) return '';
+  let html = text;
+  
+  // 图片
+  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width:100%;height:auto;border-radius:8px;margin:16px 0">');
+  
+  // 链接
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline">$1</a>');
   
   // 加粗和斜体
   html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
@@ -3372,91 +3479,41 @@ function markdownToHtml(text){
   html = html.replace(/~~(.*?)~~/g, '<del>$1</del>');
   
   // 行内代码
-  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+  html = html.replace(/`([^`]+)`/g, '<code style="background:var(--bg-3);padding:2px 6px;border-radius:4px;font-size:0.9em">$1</code>');
   
-  // 图片
-  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">');
-  
-  // 链接
-  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-  
-  // 引用
-  html = html.replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>');
-  html = html.replace(/^>(.*$)/gm, '<blockquote>$1</blockquote>');
-  
-  // 分割线
-  html = html.replace(/^---$/gm, '<hr>');
-  html = html.replace(/^\*\*\*$/gm, '<hr>');
-  html = html.replace(/^___$/gm, '<hr>');
-  
-  // 无序列表
-  html = html.replace(/^[-*+] (.*$)/gm, '<li>$1</li>');
-  // 有序列表
-  html = html.replace(/^\d+\. (.*$)/gm, '<li>$1</li>');
-  
-  // 把连续的li包裹成ul或ol
-  // 先处理有序列表
-  html = html.replace(/(<li>.*<\/li>\n?)+/g, function(match){
-    // 判断是有序还是无序（简单判断：如果前面有数字就是有序，但这里已经都变成li了，所以统一用ul，后面再优化）
-    return '<ul>' + match + '</ul>';
-  });
-  
-  // 表格（简单处理）
-  html = html.replace(/^\|(.+)\|$/gm, function(match, content){
-    const cells = content.split('|').map(c => c.trim());
-    if(cells.every(c => /^[-:]+$/.test(c))){
-      return '%%TABLESEPARATOR%%';
-    }
-    return '<td>' + cells.join('</td><td>') + '</td>';
-  });
-  // 把表格行包裹起来
-  html = html.replace(/(<td>.*<\/td>\n?)+/g, function(match){
-    const rows = match.trim().split('\n');
-    let tableHtml = '<table>';
-    rows.forEach((row, index) => {
-      if(row === '%%TABLESEPARATOR%%') return;
-      const tag = index === 0 ? 'th' : 'td';
-      tableHtml += '<tr>' + row.replace(/<td>/g, '<' + tag + '>').replace(/<\/td>/g, '</' + tag + '>') + '</tr>';
-    });
-    tableHtml += '</table>';
-    return tableHtml;
-  });
-  
-  // 段落（把连续的非空行包裹成p）
-  // 先把双换行换成段落分隔
-  html = html.replace(/\n\n/g, '</p><p>');
-  html = '<p>' + html + '</p>';
-  
-  // 清理空段落和块级元素外面的p
-  html = html.replace(/<p><\/p>/g, '');
-  html = html.replace(/<p>\s*<\/p>/g, '');
-  // 把块级元素外面的p去掉
-  html = html.replace(/<p>\s*<(h[1-6]|ul|ol|blockquote|table|hr|div|img|iframe|video)/g, '<$1');
-  html = html.replace(/<\/(h[1-6]|ul|ol|blockquote|table|hr|div|img|iframe|video)>\s*<\/p>/g, '</$1>');
-  
-  // 恢复代码块
-  html = html.replace(/%%CODEBLOCK(\d+)%%/g, function(match, index){
-    return '<pre><code>' + codeBlocks[index] + '</code></pre>';
-  });
+  // 处理单换行（转换成<br>）
+  html = html.replace(/\n/g, '<br>');
   
   return html;
 }
 
 /* ===== 博客目录导航（TOC）生成 ===== */
+let tocScrollHandler = null; // 保存滚动事件处理函数，避免重复绑定
+
 function generateBlogTOC(){
   const content = document.getElementById('blog-content');
   const tocNav = document.getElementById('toc-nav');
   if(!content || !tocNav) return;
   
-  // 找到所有标题
-  const headings = content.querySelectorAll('h1, h2, h3, h4');
+  // 移除之前的滚动事件监听器
+  if(tocScrollHandler){
+    window.removeEventListener('scroll', tocScrollHandler);
+    tocScrollHandler = null;
+  }
+  
+  // 找到所有标题（包括h1-h6，以及带有标题样式的元素）
+  const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
+  
   if(headings.length === 0){
-    tocNav.innerHTML = '<div style="font-size:13px;color:var(--ink-mute);padding:8px 12px">No sections found</div>';
+    // 没有找到标题，显示提示并检查内容格式
+    console.log('[TOC] No headings found in blog content. Content preview:', content.innerHTML.substring(0, 200));
+    tocNav.innerHTML = '<div style="font-size:13px;color:var(--ink-mute);padding:12px;line-height:1.6"><strong style="color:var(--accent)">No sections found</strong><br><br>Tip: Use Markdown headings (## H2, ### H3) in your article to generate the table of contents.</div>';
     return;
   }
   
+  console.log('[TOC] Found', headings.length, 'headings');
+  
   let tocHTML = '';
-  let headingIndex = 0;
   
   headings.forEach((heading, index) => {
     // 给标题添加id
@@ -3466,8 +3523,10 @@ function generateBlogTOC(){
     heading.id = id;
     heading.style.scrollMarginTop = '100px'; // 滚动时留出顶部空间
     
-    // 生成目录项
-    tocHTML += `<a href="#${id}" class="toc-${level}" data-target="${id}">${text}</a>`;
+    // 生成目录项（根据层级缩进）
+    const levelNum = parseInt(level.replace('h', ''));
+    const indent = (levelNum - 1) * 12;
+    tocHTML += `<a href="#${id}" class="toc-${level}" data-target="${id}" style="padding-left:${indent}px">${text}</a>`;
   });
   
   tocNav.innerHTML = tocHTML;
@@ -3488,7 +3547,7 @@ function generateBlogTOC(){
   
   // 滚动时高亮当前章节
   let ticking = false;
-  window.addEventListener('scroll', () => {
+  tocScrollHandler = () => {
     if(!ticking){
       window.requestAnimationFrame(() => {
         updateTOCActive(headings);
@@ -3496,7 +3555,11 @@ function generateBlogTOC(){
       });
       ticking = true;
     }
-  }, {passive:true});
+  };
+  window.addEventListener('scroll', tocScrollHandler, {passive:true});
+  
+  // 初始高亮
+  updateTOCActive(headings);
 }
 
 function updateTOCActive(headings){
