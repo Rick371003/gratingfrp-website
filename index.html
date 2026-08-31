@@ -146,6 +146,42 @@
     --radius-lg:8px;
     --container:1200px;
   }
+  
+  /* 浅色主题 */
+  body.light-mode{
+    --bg:#F5F7FA;
+    --bg-2:#FFFFFF;
+    --bg-3:#EEF2F6;
+    --surface:#FFFFFF;
+    --surface-dark:#F0F2F5;
+    --ink:#1A2634;
+    --ink-dark:#0F1923;
+    --ink-soft:#4A5568;
+    --ink-mute:#718096;
+    --steel:#7F8C8D;
+    --line:#E2E8F0;
+    --line-light:#CBD5E0;
+    --deep:#FFFFFF;
+    --accent:#D69100;
+    --accent-dark:#B07700;
+    --accent-soft:rgba(214,145,0,.1);
+    --red:#C0392B;
+    --red-soft:rgba(192,57,43,.1);
+    --green:#27AE60;
+    --green-soft:rgba(39,174,96,.1);
+    --grey:#7F8C8D;
+    --grey-soft:rgba(127,140,141,.12);
+    --danger:#B3261E;
+    --shadow:0 1px 2px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.08);
+    --shadow-light:0 2px 8px rgba(0,0,0,.06);
+  }
+  body.light-mode .blog-article-content strong{
+    background: linear-gradient(transparent 60%, rgba(214,145,0,.2) 60%);
+  }
+  body.light-mode .blog-article-content h2{
+    background: linear-gradient(90deg, rgba(214,145,0,.08), transparent);
+  }
+  
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   /* 图片保护 */
@@ -283,6 +319,51 @@
   }
   nav.desktop a.navlink:hover{color:#fff;border-color:var(--accent)}
   nav.desktop a.navlink.active{color:#fff;border-color:var(--accent)}
+  
+  /* 导航栏工具按钮 */
+  .nav-tools{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 8px;
+  }
+  .font-size-control{
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background: var(--bg-3);
+    border-radius: 20px;
+    padding: 3px;
+  }
+  .tool-btn{
+    background: none;
+    border: none;
+    color: var(--ink-soft);
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: var(--display);
+    transition: all .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    min-height: 28px;
+  }
+  .tool-btn:hover{
+    background: var(--accent);
+    color: var(--ink-dark);
+  }
+  .theme-toggle{
+    font-size: 16px;
+    padding: 6px;
+  }
+  .theme-icon-light{display: none;}
+  body.light-mode .theme-icon-dark{display: none;}
+  body.light-mode .theme-icon-light{display: inline;}
+  
   .hamburger{display:none;background:none;border:0;cursor:pointer;padding:8px}
   .hamburger span{display:block;width:24px;height:2px;background:#fff;margin:5px 0;transition:.25s}
   .mobile-menu{
@@ -804,6 +885,37 @@
   .blog-article-meta .meta-sep{
     color: var(--ink-mute);
     font-weight: bold;
+  }
+  .like-btn{
+    background: none;
+    border: none;
+    color: var(--ink-soft);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 20px;
+    transition: all .2s;
+    font-family: inherit;
+  }
+  .like-btn:hover{
+    background: rgba(240,165,0,.1);
+    color: var(--accent);
+  }
+  .like-btn.liked{
+    color: #e74c3c;
+  }
+  .like-btn.liked svg{
+    fill: #e74c3c;
+    stroke: #e74c3c;
+  }
+  .like-btn.liked:hover{
+    background: rgba(231,76,60,.1);
+  }
+  .views-count, .like-count{
+    font-weight: 600;
   }
   
   /* ===== 博客详情页新布局（参考machsfrp.com，超宽屏） ===== */
@@ -1881,9 +1993,24 @@
       <a class="navlink" href="#/catalogue" data-nav>Catalogue</a>
       <a class="navlink" href="#/applications" data-nav>Applications</a>
       <a class="navlink" href="#/blog" data-nav>Blog</a>
+      <a class="navlink" href="#/calculator" data-nav style="color:var(--accent)">💰 Calculator</a>
       <a class="navlink" href="#/about" data-nav>About</a>
       <a class="navlink" href="#/faq" data-nav>FAQ</a>
       <a class="navlink" href="#/contact" data-nav>Contact</a>
+      <!-- 工具按钮组 -->
+      <div class="nav-tools">
+        <!-- 字体大小调节 -->
+        <div class="font-size-control" title="Font Size">
+          <button class="tool-btn" onclick="changeFontSize(-1)" title="Smaller text">A-</button>
+          <button class="tool-btn" onclick="changeFontSize(0)" title="Default text">A</button>
+          <button class="tool-btn" onclick="changeFontSize(1)" title="Larger text">A+</button>
+        </div>
+        <!-- 主题切换 -->
+        <button class="tool-btn theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">
+          <span class="theme-icon-dark">🌙</span>
+          <span class="theme-icon-light">☀️</span>
+        </button>
+      </div>
       <a class="btn btn-primary" href="#/contact" data-nav style="padding:12px 22px">Get a Quote</a>
     </nav>
     <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
@@ -2742,6 +2869,89 @@
   </div>
 </section>
 
+<!-- ===== 视图：FRP成本计算器 ===== -->
+<section class="view" id="view-calculator">
+  <div class="page-head" style="background-image:url('https://aka.doubaocdn.com/s/0fmkAXNc5Y');background-size:cover;background-position:center;background-repeat:no-repeat">
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,18,26,.9),rgba(10,18,26,.75))"></div>
+    <div class="grating-pattern" style="opacity:.15"></div>
+    <div class="container" style="position:relative">
+      <div class="breadcrumb"><a href="#/" data-nav>Home</a> / Cost Calculator</div>
+      <h1 style="line-height:1.2">FRP Grating Cost Calculator<br><span style="font-size:0.5em;font-weight:400;letter-spacing:.08em;color:var(--accent);display:block;margin-top:8px">Compare Total Cost of Ownership: FRP vs Steel vs Aluminum</span></h1>
+      <p>Calculate the real cost of FRP grating vs traditional materials. Compare initial cost, installation, maintenance, and total cost of ownership over 20 years.</p>
+    </div>
+  </div>
+  <div class="section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:40px;align-items:start">
+        <!-- 左侧：输入表单 -->
+        <div style="background:var(--surface-dark);border:1px solid var(--line);border-radius:var(--radius-lg);padding:32px">
+          <h3 style="font-family:var(--display);font-size:22px;margin-bottom:24px;color:#fff">Project Parameters</h3>
+          
+          <div style="margin-bottom:20px">
+            <label style="display:block;font-size:14px;font-weight:600;color:var(--ink-soft);margin-bottom:8px">Total Area (m²)</label>
+            <input type="number" id="calc-area" value="100" min="1" style="width:100%;padding:12px 16px;font-size:16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--bg);color:#fff;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--line)'" oninput="calculateCost()">
+          </div>
+          
+          <div style="margin-bottom:20px">
+            <label style="display:block;font-size:14px;font-weight:600;color:var(--ink-soft);margin-bottom:8px">Product Type</label>
+            <select id="calc-type" style="width:100%;padding:12px 16px;font-size:16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--bg);color:#fff;outline:none;cursor:pointer" onchange="calculateCost()">
+              <option value="molded">Molded FRP Grating</option>
+              <option value="pultruded">Pultruded FRP Grating</option>
+            </select>
+          </div>
+          
+          <div style="margin-bottom:20px">
+            <label style="display:block;font-size:14px;font-weight:600;color:var(--ink-soft);margin-bottom:8px">Thickness</label>
+            <select id="calc-thickness" style="width:100%;padding:12px 16px;font-size:16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--bg);color:#fff;outline:none;cursor:pointer" onchange="calculateCost()">
+              <option value="25">25mm (Light Duty)</option>
+              <option value="30">30mm (Medium Duty)</option>
+              <option value="38" selected>38mm (Standard Duty)</option>
+              <option value="50">50mm (Heavy Duty)</option>
+            </select>
+          </div>
+          
+          <div style="margin-bottom:20px">
+            <label style="display:block;font-size:14px;font-weight:600;color:var(--ink-soft);margin-bottom:8px">Resin System</label>
+            <select id="calc-resin" style="width:100%;padding:12px 16px;font-size:16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--bg);color:#fff;outline:none;cursor:pointer" onchange="calculateCost()">
+              <option value="polyester">General Purpose Polyester</option>
+              <option value="isophthalic" selected>Isophthalic Polyester</option>
+              <option value="vinyl">Vinyl Ester (High Corrosion)</option>
+            </select>
+          </div>
+          
+          <div style="margin-bottom:20px">
+            <label style="display:block;font-size:14px;font-weight:600;color:var(--ink-soft);margin-bottom:8px">Environment</label>
+            <select id="calc-env" style="width:100%;padding:12px 16px;font-size:16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--bg);color:#fff;outline:none;cursor:pointer" onchange="calculateCost()">
+              <option value="mild">Mild (Indoor, Dry)</option>
+              <option value="moderate" selected>Moderate (Chemical, Humid)</option>
+              <option value="severe">Severe (Coastal, Strong Chemical)</option>
+            </select>
+          </div>
+          
+          <div style="margin-bottom:20px">
+            <label style="display:block;font-size:14px;font-weight:600;color:var(--ink-soft);margin-bottom:8px">Project Lifespan (Years)</label>
+            <input type="range" id="calc-years" value="20" min="5" max="30" step="5" style="width:100%" oninput="document.getElementById('calc-years-value').textContent=this.value;calculateCost()">
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--ink-mute);margin-top:4px">
+              <span>5 years</span>
+              <span id="calc-years-value" style="color:var(--accent);font-weight:600">20 years</span>
+              <span>30 years</span>
+            </div>
+          </div>
+          
+          <button onclick="calculateCost()" style="width:100%;padding:14px;font-size:16px;font-weight:600;background:var(--accent);color:var(--ink-dark);border:none;border-radius:var(--radius);cursor:pointer;font-family:var(--display);letter-spacing:.05em;transition:opacity .2s" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='1'">
+            💰 Calculate Cost
+          </button>
+        </div>
+        
+        <!-- 右侧：结果显示 -->
+        <div id="calc-results">
+          <!-- 结果由JS动态生成 -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== 视图：关于我们 ===== -->
 <section class="view" id="view-about">
   <div class="page-head" style="background-image:url('https://aka.doubaocdn.com/s/GHVIFYalwg');background-size:cover;background-position:center;background-repeat:no-repeat">
@@ -3041,12 +3251,18 @@ function protectImages(){
 }
 if(document.readyState === 'loading'){
   document.addEventListener('DOMContentLoaded', function(){
+    restoreTheme();
+    restoreFontSize();
     protectImages();
     initReadingProgress();
+    lazyLoadImages();
   });
 } else {
+  restoreTheme();
+  restoreFontSize();
   protectImages();
   initReadingProgress();
+  lazyLoadImages();
 }
 // 动态内容加载后也保护图片
 const observer = new MutationObserver(function(mutations){
@@ -3418,6 +3634,11 @@ function renderDetail(type, id){
       type: 'product'
     });
     
+    // 恢复默认容器宽度（非博客页面）
+    content.parentElement.style.maxWidth = '';
+    content.parentElement.style.padding = '';
+    content.parentElement.style.width = '';
+    
     content.innerHTML = `
       <div class="detail-wrap">
         <div>
@@ -3464,6 +3685,12 @@ function renderDetail(type, id){
     bc.innerHTML = '<a href="#/" data-nav>Home</a> / <a href="#/applications" data-nav>Applications</a> / '+a.name;
     title.textContent = 'FRP Grating for '+a.name;
     sub.textContent = a.short;
+    
+    // 恢复默认容器宽度（非博客页面）
+    content.parentElement.style.maxWidth = '';
+    content.parentElement.style.padding = '';
+    content.parentElement.style.width = '';
+    
     content.innerHTML = `
       <div class="detail-wrap">
         <div class="detail-gallery">${a.img ? '<img src="'+a.img+'" alt="'+a.imgAlt+'" style="width:100%;height:100%;object-fit:cover;display:block">' : '<div class="frp-swatch grey"></div>'}</div>
@@ -3511,6 +3738,11 @@ function renderDetail(type, id){
       type: 'article'
     });
     
+    // 博客详情页全屏宽度（铺满整个屏幕）
+    content.parentElement.style.maxWidth = '100%';
+    content.parentElement.style.padding = '0';
+    content.parentElement.style.width = '100%';
+    
     content.innerHTML = `
       <div class="blog-detail-layout">
         <!-- 左侧：文章内容 -->
@@ -3533,6 +3765,18 @@ function renderDetail(type, id){
               <span class="meta-item">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                 By ${p.author}
+              </span>
+              <span class="meta-sep">·</span>
+              <span class="meta-item" id="post-views-${p.id}">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                <span class="views-count">0</span> views
+              </span>
+              <span class="meta-sep">·</span>
+              <span class="meta-item">
+                <button class="like-btn" id="like-btn-${p.id}" onclick="togglePostLike('${p.id}')" title="Like this article">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                  <span class="like-count">0</span>
+                </button>
               </span>
             </div>
           </div>
@@ -3592,10 +3836,11 @@ function renderDetail(type, id){
           </div>
         </aside>
       </div>`;
-    // 渲染完成后恢复目录折叠状态并生成目录
+    // 渲染完成后恢复目录折叠状态、生成目录、增加浏览量
     setTimeout(() => {
       restoreTOCState();
       generateBlogTOC();
+      incrementPostViews(p.id);
     }, 100);
   } else if(type==='project'){
     const p = projects.find(x=>x.id===id);
@@ -3735,16 +3980,62 @@ function updateMetaTag(attr, name, content){
 
 /* ===== 图片懒加载 ===== */
 function lazyLoadImages(){
-  // 给所有图片添加loading="lazy"属性（浏览器原生懒加载）
   document.querySelectorAll('img:not([loading])').forEach(img => {
     img.setAttribute('loading', 'lazy');
-    // 添加解码提示，提升性能
     img.setAttribute('decoding', 'async');
   });
 }
 
+/* ===== 主题切换（深色/浅色） ===== */
+function toggleTheme(){
+  const body = document.body;
+  body.classList.toggle('light-mode');
+  const isLight = body.classList.contains('light-mode');
+  try{
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  }catch(e){}
+}
+
+function restoreTheme(){
+  try{
+    const savedTheme = localStorage.getItem('theme');
+    if(savedTheme === 'light'){
+      document.body.classList.add('light-mode');
+    }
+  }catch(e){}
+}
+
+/* ===== 字体大小调节 ===== */
+let currentFontSize = 100; // 百分比
+const fontSizes = [90, 100, 110, 120]; // 可选档位
+
+function changeFontSize(delta){
+  if(delta === 0){
+    currentFontSize = 100;
+  } else {
+    const currentIndex = fontSizes.indexOf(currentFontSize);
+    let newIndex = currentIndex + delta;
+    newIndex = Math.max(0, Math.min(fontSizes.length - 1, newIndex));
+    currentFontSize = fontSizes[newIndex];
+  }
+  document.documentElement.style.fontSize = currentFontSize + '%';
+  try{
+    localStorage.setItem('font-size', currentFontSize);
+  }catch(e){}
+}
+
+function restoreFontSize(){
+  try{
+    const savedSize = parseInt(localStorage.getItem('font-size'));
+    if(savedSize && fontSizes.includes(savedSize)){
+      currentFontSize = savedSize;
+      document.documentElement.style.fontSize = currentFontSize + '%';
+    }
+  }catch(e){}
+}
+
 /* ===== 路由 ===== */
-const views = ['home','products','catalogue','applications','blog','about','faq','contact','detail'];
+const views = ['home','products','catalogue','applications','blog','calculator','about','faq','contact','detail'];
 function navigate(){
   const hash = location.hash || '#/';
   const parts = hash.replace(/^#\//,'').split('/');
@@ -3775,6 +4066,10 @@ function navigate(){
   window.scrollTo({top:0, behavior:'auto'});
   // 页面切换后给新图片添加懒加载
   setTimeout(lazyLoadImages, 100);
+  // 如果是计算器页面，自动计算
+  if(view === 'calculator'){
+    setTimeout(calculateCost, 200);
+  }
 }
 
 /* ===== 博客内容渲染（Markdown转HTML） ===== */
@@ -3953,6 +4248,225 @@ function restoreTOCState(){
       sidebar.classList.add('toc-collapsed');
     }
   }catch(e){}
+}
+
+/* ===== 文章浏览量和点赞统计 ===== */
+function getPostStats(postId){
+  try{
+    const stats = JSON.parse(localStorage.getItem('post-stats') || '{}');
+    return stats[postId] || { views: 0, likes: 0, liked: false };
+  }catch(e){
+    return { views: 0, likes: 0, liked: false };
+  }
+}
+
+function savePostStats(postId, stats){
+  try{
+    const allStats = JSON.parse(localStorage.getItem('post-stats') || '{}');
+    allStats[postId] = stats;
+    localStorage.setItem('post-stats', JSON.stringify(allStats));
+  }catch(e){}
+}
+
+function incrementPostViews(postId){
+  const stats = getPostStats(postId);
+  stats.views++;
+  savePostStats(postId, stats);
+  updatePostStatsUI(postId);
+}
+
+function togglePostLike(postId){
+  const stats = getPostStats(postId);
+  if(stats.liked){
+    stats.likes--;
+    stats.liked = false;
+  } else {
+    stats.likes++;
+    stats.liked = true;
+  }
+  savePostStats(postId, stats);
+  updatePostStatsUI(postId);
+}
+
+function updatePostStatsUI(postId){
+  const stats = getPostStats(postId);
+  const viewsEl = document.querySelector('#post-views-' + postId + ' .views-count');
+  if(viewsEl){
+    viewsEl.textContent = stats.views.toLocaleString();
+  }
+  const likeBtn = document.getElementById('like-btn-' + postId);
+  if(likeBtn){
+    const likeCount = likeBtn.querySelector('.like-count');
+    if(likeCount){
+      likeCount.textContent = stats.likes.toLocaleString();
+    }
+    if(stats.liked){
+      likeBtn.classList.add('liked');
+    } else {
+      likeBtn.classList.remove('liked');
+    }
+  }
+}
+
+/* ===== FRP成本计算器 ===== */
+const costData = {
+  molded: {
+    25: { polyester: 35, isophthalic: 42, vinyl: 55 },
+    30: { polyester: 40, isophthalic: 48, vinyl: 62 },
+    38: { polyester: 48, isophthalic: 58, vinyl: 75 },
+    50: { polyester: 65, isophthalic: 78, vinyl: 95 }
+  },
+  pultruded: {
+    25: { polyester: 40, isophthalic: 48, vinyl: 62 },
+    30: { polyester: 46, isophthalic: 55, vinyl: 70 },
+    38: { polyester: 55, isophthalic: 66, vinyl: 85 },
+    50: { polyester: 72, isophthalic: 86, vinyl: 108 }
+  }
+};
+
+function calculateCost(){
+  const area = parseFloat(document.getElementById('calc-area').value) || 100;
+  const type = document.getElementById('calc-type').value;
+  const thickness = document.getElementById('calc-thickness').value;
+  const resin = document.getElementById('calc-resin').value;
+  const env = document.getElementById('calc-env').value;
+  const years = parseInt(document.getElementById('calc-years').value);
+  
+  // FRP单价
+  let frpUnitPrice = costData[type][thickness][resin];
+  
+  // 环境因素调整
+  const envFactor = { mild: 1.0, moderate: 1.1, severe: 1.25 };
+  frpUnitPrice *= envFactor[env];
+  
+  // 钢和铝的单价
+  const steelUnitPrice = env === 'severe' ? 55 : (env === 'moderate' ? 45 : 38);
+  const aluminumUnitPrice = 85;
+  
+  // 初始成本
+  const frpInitial = area * frpUnitPrice;
+  const steelInitial = area * steelUnitPrice;
+  const aluminumInitial = area * aluminumUnitPrice;
+  
+  // 安装成本（FRP更轻，安装更快）
+  const frpInstall = area * 12;
+  const steelInstall = area * 22;
+  const aluminumInstall = area * 18;
+  
+  // 维护成本（每年）
+  const frpMaintenance = area * 0.5; // 几乎免维护
+  const steelMaintenance = env === 'severe' ? area * 18 : (env === 'moderate' ? area * 12 : area * 6);
+  const aluminumMaintenance = area * 4;
+  
+  // 替换成本（FRP寿命25+年，钢10-15年，铝15-20年）
+  let frpReplacement = 0;
+  let steelReplacement = 0;
+  let aluminumReplacement = 0;
+  
+  if(years > 25) frpReplacement = frpInitial * 0.3; // 部分更换
+  if(years > 12) steelReplacement = steelInitial * (Math.floor(years / 12));
+  if(years > 18) aluminumReplacement = aluminumInitial * (Math.floor(years / 18));
+  
+  // 20年总成本
+  const frpTotal = frpInitial + frpInstall + (frpMaintenance * years) + frpReplacement;
+  const steelTotal = steelInitial + steelInstall + (steelMaintenance * years) + steelReplacement;
+  const aluminumTotal = aluminumInitial + aluminumInstall + (aluminumMaintenance * years) + aluminumReplacement;
+  
+  // 节省金额
+  const savingVsSteel = steelTotal - frpTotal;
+  const savingVsAluminum = aluminumTotal - frpTotal;
+  const savingPercentVsSteel = ((savingVsSteel / steelTotal) * 100).toFixed(1);
+  const savingPercentVsAluminum = ((savingVsAluminum / aluminumTotal) * 100).toFixed(1);
+  
+  // 生成结果HTML
+  const resultsHtml = `
+    <div style="background:linear-gradient(135deg,var(--accent),#e69500);border-radius:var(--radius-lg);padding:32px;margin-bottom:24px;color:var(--ink-dark)">
+      <div style="font-size:14px;font-weight:600;opacity:.8;margin-bottom:8px">FRP Total Cost of Ownership (${years} years)</div>
+      <div style="font-size:42px;font-weight:800;font-family:var(--display)">$${frpTotal.toLocaleString()}</div>
+      <div style="font-size:16px;margin-top:8px;opacity:.9">$${(frpTotal/area).toFixed(2)} / m² total cost</div>
+    </div>
+    
+    <div style="background:var(--surface-dark);border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;margin-bottom:24px">
+      <h4 style="font-family:var(--display);font-size:18px;margin-bottom:16px;color:#fff">💰 Cost Comparison (${years} years, ${area} m²)</h4>
+      <table style="width:100%;border-collapse:collapse;font-size:14px">
+        <thead>
+          <tr style="border-bottom:2px solid var(--line)">
+            <th style="text-align:left;padding:10px;color:var(--ink-soft)">Material</th>
+            <th style="text-align:right;padding:10px;color:var(--ink-soft)">Initial</th>
+            <th style="text-align:right;padding:10px;color:var(--ink-soft)">Install</th>
+            <th style="text-align:right;padding:10px;color:var(--ink-soft)">Maintenance</th>
+            <th style="text-align:right;padding:10px;color:var(--accent)">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line);background:rgba(240,165,0,.08)">
+            <td style="padding:12px 10px;color:#fff;font-weight:600">🏆 FRP Grating</td>
+            <td style="text-align:right;padding:12px 10px;color:var(--ink-soft)">$${frpInitial.toLocaleString()}</td>
+            <td style="text-align:right;padding:12px 10px;color:var(--ink-soft)">$${frpInstall.toLocaleString()}</td>
+            <td style="text-align:right;padding:12px 10px;color:var(--ink-soft)">$${(frpMaintenance*years).toLocaleString()}</td>
+            <td style="text-align:right;padding:12px 10px;color:var(--accent);font-weight:700">$${frpTotal.toLocaleString()}</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--line)">
+            <td style="padding:12px 10px;color:var(--ink-soft)">Galvanized Steel</td>
+            <td style="text-align:right;padding:12px 10px;color:var(--ink-soft)">$${steelInitial.toLocaleString()}</td>
+            <td style="text-align:right;padding:12px 10px;color:var(--ink-soft)">$${steelInstall.toLocaleString()}</td>
+            <td style="text-align:right;padding:12px 10px;color:var(--ink-soft)">$${(steelMaintenance*years).toLocaleString()}</td>
+            <td style="text-align:right;padding:12px 10px;color:var(--ink-soft);font-weight:600">$${steelTotal.toLocaleString()}</td>
+          </tr>
+          <tr>
+            <td style="padding:12px 10px;color:var(--ink-soft)">Aluminum</td>
+            <td style="text-align:right;padding:12px 10px;color:var(--ink-soft)">$${aluminumInitial.toLocaleString()}</td>
+            <td style="text-align:right;padding:12px 10px;color:var(--ink-soft)">$${aluminumInstall.toLocaleString()}</td>
+            <td style="text-align:right;padding:12px 10px;color:var(--ink-soft)">$${(aluminumMaintenance*years).toLocaleString()}</td>
+            <td style="text-align:right;padding:12px 10px;color:var(--ink-soft);font-weight:600">$${aluminumTotal.toLocaleString()}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+      <div style="background:var(--green-soft);border:1px solid var(--green);border-radius:var(--radius-lg);padding:20px">
+        <div style="font-size:13px;color:var(--green);font-weight:600;margin-bottom:6px">VS GALVANIZED STEEL</div>
+        <div style="font-size:28px;font-weight:800;color:var(--green);font-family:var(--display)">$${savingVsSteel.toLocaleString()}</div>
+        <div style="font-size:13px;color:var(--ink-soft);margin-top:4px">${savingPercentVsSteel}% savings over ${years} years</div>
+      </div>
+      <div style="background:var(--green-soft);border:1px solid var(--green);border-radius:var(--radius-lg);padding:20px">
+        <div style="font-size:13px;color:var(--green);font-weight:600;margin-bottom:6px">VS ALUMINUM</div>
+        <div style="font-size:28px;font-weight:800;color:var(--green);font-family:var(--display)">$${savingVsAluminum.toLocaleString()}</div>
+        <div style="font-size:13px;color:var(--ink-soft);margin-top:4px">${savingPercentVsAluminum}% savings over ${years} years</div>
+      </div>
+    </div>
+    
+    <div style="background:var(--surface-dark);border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px">
+      <h4 style="font-family:var(--display);font-size:18px;margin-bottom:16px;color:#fff">📊 Key Findings</h4>
+      <ul style="list-style:none;padding:0;margin:0">
+        <li style="padding:10px 0;border-bottom:1px solid var(--line);color:var(--ink-soft);font-size:14px;line-height:1.6">
+          <span style="color:var(--accent);font-weight:600">✓</span> FRP initial cost is ${((frpInitial/steelInitial-1)*100).toFixed(0)}% higher than steel, but saves ${savingPercentVsSteel}% over ${years} years
+        </li>
+        <li style="padding:10px 0;border-bottom:1px solid var(--line);color:var(--ink-soft);font-size:14px;line-height:1.6">
+          <span style="color:var(--accent);font-weight:600">✓</span> FRP installation is ${((1-frpInstall/steelInstall)*100).toFixed(0)}% faster due to lightweight (70-80% lighter than steel)
+        </li>
+        <li style="padding:10px 0;border-bottom:1px solid var(--line);color:var(--ink-soft);font-size:14px;line-height:1.6">
+          <span style="color:var(--accent);font-weight:600">✓</span> FRP maintenance cost is only $${frpMaintenance.toFixed(2)}/m²/year vs $${steelMaintenance.toFixed(2)}/m²/year for steel in ${env} environment
+        </li>
+        <li style="padding:10px 0;color:var(--ink-soft);font-size:14px;line-height:1.6">
+          <span style="color:var(--accent);font-weight:600">✓</span> Payback period: ${(frpInitial/(steelMaintenance*area-frpMaintenance*area)).toFixed(1)} years through maintenance savings alone
+        </li>
+      </ul>
+      <div style="margin-top:20px;padding-top:20px;border-top:2px solid var(--line);text-align:center">
+        <a href="#/contact" data-nav class="btn btn-primary" style="display:inline-block;padding:14px 32px;font-size:16px">
+          Get Custom Quote for ${area} m² →
+        </a>
+      </div>
+    </div>
+  `;
+  
+  document.getElementById('calc-results').innerHTML = resultsHtml;
+}
+
+// 页面加载时自动计算
+if(document.getElementById('calc-area')){
+  calculateCost();
 }
 
 /* ===== 博客目录导航（TOC）生成 ===== */
