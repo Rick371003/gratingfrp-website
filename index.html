@@ -459,6 +459,11 @@
 
   /* ===== 产品卡片（升级） ===== */
   .grid-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  /* 相关产品：桌面2列，手机1列 */
+  .grid-cards.related-products{grid-template-columns:repeat(2,1fr);gap:16px}
+  @media (max-width:640px){
+    .grid-cards.related-products{grid-template-columns:1fr;gap:14px}
+  }
   .pcard{
     background:var(--surface-dark);border:1px solid var(--line);border-radius:var(--radius-lg);
     overflow:hidden;display:flex;flex-direction:column;
@@ -2217,6 +2222,22 @@ const products = [
    applications:['Custom structural parts','Industrial components','Equipment housings','Specialty composite parts']}
 ];
 
+// 根据当前产品智能推荐相关产品
+function getRelatedProducts(currentId){
+  const relatedMap = {
+    'molded': ['pultruded', 'covers', 'clips'],
+    'pultruded': ['molded', 'profiles', 'handrail'],
+    'covers': ['molded', 'clips', 'pultruded'],
+    'profiles': ['handrail', 'custom', 'pultruded'],
+    'handrail': ['profiles', 'molded', 'pultruded'],
+    'fabric': ['molded', 'custom', 'profiles'],
+    'clips': ['molded', 'pultruded', 'covers'],
+    'custom': ['profiles', 'fabric', 'molded']
+  };
+  const relatedIds = relatedMap[currentId] || ['molded', 'pultruded'];
+  return relatedIds.map(id=>products.find(p=>p.id===id)).filter(Boolean).slice(0,3);
+}
+
 const applications = [
   {id:'wastewater', name:'Wastewater Treatment', short:'Anti-corrosion walkways under sewage & chemical erosion', imgAlt:'FRP fiberglass grating walkway wastewater treatment plant corrosion resistant platform', img:'https://aka.doubaocdn.com/s/aYU8Apgxg5'},
   {id:'petrochemical', name:'Petrochemical', short:'Platforms & walkways in aggressive chemical plants', imgAlt:'FRP fiberglass grating platform petrochemical chemical plant corrosion resistant', img:'https://aka.doubaocdn.com/s/Uc905DywzA'},
@@ -2515,10 +2536,9 @@ function renderDetail(type, id){
         </div>
       </div>
       <div class="block">
-        <h3>Recommended Products</h3>
-        <div class="grid-cards" style="grid-template-columns:repeat(2,1fr)">
-          ${productCard(products[0])}
-          ${productCard(products[4])}
+        <h3>Related Products</h3>
+        <div class="grid-cards related-products">
+          ${getRelatedProducts(id).map(p=>productCard(p)).join('')}
         </div>
       </div>
       <div class="block">
