@@ -4,8 +4,42 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Manager | FRP Grating Master</title>
+  <script>
+    window.CMS_CONFIG = {
+      backend: {
+        name: 'github',
+        repo: 'Rick371003/gratingfrp-website',
+        branch: 'main',
+        auth_type: 'token'
+      },
+      media_folder: 'images/uploads',
+      public_folder: '/images/uploads',
+      collections: [
+        {
+          name: 'blog-posts',
+          label: 'Blog Posts',
+          folder: 'blog',
+          create: true,
+          slug: '{{slug}}',
+          extension: 'json',
+          format: 'json',
+          identifier_field: 'id',
+          fields: [
+            { label: 'ID (URL slug)', name: 'id', widget: 'string', hint: '英文小写，用连字符' },
+            { label: 'Title', name: 'title', widget: 'string' },
+            { label: 'Category', name: 'category', widget: 'select', options: ['Technical Guides', 'Market Report', 'Product Knowledge', 'Material Science', 'Case Study'] },
+            { label: 'Date', name: 'date', widget: 'string', hint: '格式: Sep 5, 2026' },
+            { label: 'Author', name: 'author', widget: 'string' },
+            { label: 'Excerpt', name: 'excerpt', widget: 'text' },
+            { label: 'Cover Image URL', name: 'img', widget: 'string', required: false },
+            { label: 'Content', name: 'content', widget: 'markdown' }
+          ]
+        }
+      ]
+    };
+  </script>
 </head>
 <body>
-  <script src="https://cdn.jsdelivr.net/npm/netlify-cms@2.10.192/dist/netlify-cms.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
