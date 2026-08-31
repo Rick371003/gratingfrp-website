@@ -6,22 +6,37 @@
   <title>Content Manager | FRP Grating Master</title>
   <script>
     (function() {
+      let accessToken = null;
+      let tokenType = 'bearer';
+      
       const params = new URLSearchParams(window.location.search);
-      const accessToken = params.get('access_token');
-      const tokenType = params.get('token_type') || 'bearer';
+      if (params.get('access_token')) {
+        accessToken = params.get('access_token');
+        tokenType = params.get('token_type') || 'bearer';
+      }
+      
+      if (!accessToken && window.location.hash) {
+        const hash = window.location.hash.replace(/^#\/?/, '');
+        const hashParams = new URLSearchParams(hash);
+        if (hashParams.get('access_token')) {
+          accessToken = hashParams.get('access_token');
+          tokenType = hashParams.get('token_type') || 'bearer';
+        }
+      }
       
       if (accessToken) {
         const user = {
           token: accessToken,
           tokenType: tokenType,
-          name: 'GitHub User',
-          login: 'Rick371003'
+          name: 'Rick371003',
+          login: 'Rick371003',
+          avatar_url: 'https://github.com/Rick371003.png'
         };
         
         try { localStorage.setItem('decap-cms-user', JSON.stringify(user)); } catch(e) {}
         try { localStorage.setItem('netlify-cms-user', JSON.stringify(user)); } catch(e) {}
         
-        window.location.href = window.location.pathname + '#/';
+        window.location.replace(window.location.pathname + '#/');
       }
     })();
   </script>
