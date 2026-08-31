@@ -3678,7 +3678,7 @@ function renderDetail(type, id){
       </div>
       <div class="block">
         <h3>Related Products</h3>
-        <div class="grid-cards" style="grid-template-columns:repeat(3,1fr)">
+        <div class="grid-cards related-products">
           ${products.filter(x=>x.id!==p.id).slice(0,3).map(productCard).join('')}
         </div>
       </div>
