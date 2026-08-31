@@ -2864,6 +2864,11 @@
           <svg style="position:absolute;left:18px;top:50%;transform:translateY(-50%);color:var(--ink-mute)" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         </div>
         <div id="blog-search-result" style="margin-top:12px;font-size:14px;color:var(--ink-mute)"></div>
+        <div style="margin-top:12px;text-align:center">
+          <button onclick="refreshBlogPosts()" style="background:none;border:1px solid var(--line);color:var(--ink-soft);padding:8px 16px;border-radius:20px;cursor:pointer;font-size:13px;transition:all .2s;font-family:inherit" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--line)';this.style.color='var(--ink-soft)'">
+            🔄 Refresh Articles
+          </button>
+        </div>
       </div>
       <div class="blog-grid" id="blog-list"></div>
     </div>
@@ -3625,6 +3630,10 @@ function renderDetail(type, id){
     bc.innerHTML = '<a href="#/" data-nav>Home</a> / <a href="#/products" data-nav>Products</a> / '+p.name;
     title.textContent = p.name;
     sub.textContent = p.short;
+    // 恢复page-head标题显示（博客详情页会隐藏）
+    document.querySelector('#view-detail .page-head h1').style.display = '';
+    document.querySelector('#view-detail .page-head p').style.display = '';
+    document.querySelector('#view-detail .page-head').style.padding = '';
     
     // 更新SEO（产品详情页独立meta标签）
     updateSEO('products', {
@@ -3687,6 +3696,11 @@ function renderDetail(type, id){
     title.textContent = 'FRP Grating for '+a.name;
     sub.textContent = a.short;
     
+    // 恢复page-head标题显示（博客详情页会隐藏）
+    document.querySelector('#view-detail .page-head h1').style.display = '';
+    document.querySelector('#view-detail .page-head p').style.display = '';
+    document.querySelector('#view-detail .page-head').style.padding = '';
+    
     // 恢复默认容器宽度（非博客页面）
     content.parentElement.style.maxWidth = '';
     content.parentElement.style.padding = '';
@@ -3723,8 +3737,14 @@ function renderDetail(type, id){
     const p = posts.find(x=>x.id===id);
     if(!p) return;
     bc.innerHTML = '<a href="#/" data-nav>Home</a> / <a href="#/blog" data-nav>Blog</a> / '+p.title;
-    title.textContent = p.title;
-    sub.textContent = p.category + ' · ' + p.date + ' · By ' + p.author;
+    // 博客详情页不在page-head显示标题（文章内容区域已有标题，避免重复）
+    title.textContent = '';
+    sub.textContent = '';
+    // 隐藏page-head的标题区域
+    document.querySelector('#view-detail .page-head h1').style.display = 'none';
+    document.querySelector('#view-detail .page-head p').style.display = 'none';
+    // 减少page-head的高度
+    document.querySelector('#view-detail .page-head').style.padding = '60px 0 40px';
     
     // 计算阅读时间（按每分钟250个单词计算）
     const wordCount = p.content ? p.content.replace(/<[^>]*>/g, '').split(/\s+/).length : 0;
@@ -4812,8 +4832,10 @@ function showToast(msg){
 /* ===== 动态加载Blog文章（从blog文件夹JSON文件） ===== */
 async function loadBlogPosts(){
   try{
+    // 添加时间戳参数，避免浏览器/CDN缓存，确保每次都获取最新文件
+    const cacheBuster = '?t=' + Date.now();
     // 加载manifest.json获取文章列表
-    const manifestRes = await fetch('blog/manifest.json');
+    const manifestRes = await fetch('blog/manifest.json' + cacheBuster, {cache: 'no-store'});
     if(!manifestRes.ok) throw new Error('manifest not found');
     const manifest = await manifestRes.json();
     if(!manifest.posts || !manifest.posts.length) throw new Error('no posts in manifest');
@@ -4822,7 +4844,7 @@ async function loadBlogPosts(){
     const loadedPosts = [];
     for(const filename of manifest.posts){
       try{
-        const res = await fetch('blog/' + filename);
+        const res = await fetch('blog/' + filename + cacheBuster, {cache: 'no-store'});
         if(res.ok){
           const post = await res.json();
           loadedPosts.push(post);
@@ -4835,16 +4857,35 @@ async function loadBlogPosts(){
     if(loadedPosts.length > 0){
       // 按日期排序（最新的在前）
       loadedPosts.sort((a,b) => new Date(b.date) - new Date(a.date));
-      posts = loadedPosts;
+      // 合并硬编码文章和动态加载文章（按id去重，动态加载的优先）
+      const existingIds = new Set(loadedPosts.map(p => p.id));
+      const hardcodedPosts = posts.filter(p => !existingIds.has(p.id));
+      posts = [...loadedPosts, ...hardcodedPosts];
+      // 重新按日期排序
+      posts.sort((a,b) => new Date(b.date) - new Date(a.date));
       // 重新渲染博客列表
       renderHomeBlog();
       renderBlogList();
-      console.log('Loaded', loadedPosts.length, 'blog posts from JSON files');
+      console.log('Loaded', loadedPosts.length, 'blog posts from JSON files, total', posts.length, 'posts');
     }
   }catch(e){
     console.log('Using default blog posts (dynamic load failed):', e.message);
     // 加载失败时保留硬编码的默认数据
   }
+}
+
+// 手动刷新文章列表（用户点击按钮时调用）
+async function refreshBlogPosts(){
+  const btn = event.target;
+  const originalText = btn.textContent;
+  btn.textContent = '⏳ Loading...';
+  btn.disabled = true;
+  await loadBlogPosts();
+  btn.textContent = '✅ Refreshed!';
+  setTimeout(() => {
+    btn.textContent = originalText;
+    btn.disabled = false;
+  }, 2000);
 }
 
 /* ===== 初始化 ===== */
