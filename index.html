@@ -3487,8 +3487,8 @@ const projects = [
    specs:[['Product','FRP Molded Grating 25mm'],['Resin','UV-stabilized Polyester'],['Color','Grey'],['Area','5,200 m²'],['Feature','Non-conductive & lightweight']]}
 ];
 
-/* ===== 视频教程数据 ===== */
-const videos = [
+/* ===== 视频教程数据（默认数据，会被JSON文件覆盖） ===== */
+let videos = [
   {
     id: 'molded-grating-installation',
     title: 'FRP Molded Grating Installation Guide',
@@ -3800,6 +3800,39 @@ function filterVideos(category, btn){
   // 过滤视频
   const filtered = category === 'all' ? videos : videos.filter(v=>v.category === category);
   renderVideoList(filtered);
+}
+
+/* ===== 视频动态加载（从videos文件夹JSON文件） ===== */
+async function loadVideos(){
+  try{
+    const cacheBuster = '?t=' + Date.now();
+    const manifestRes = await fetch('videos/manifest.json' + cacheBuster, {cache: 'no-store'});
+    if(!manifestRes.ok) throw new Error('videos manifest not found');
+    const manifest = await manifestRes.json();
+    if(!manifest.videos || !manifest.videos.length) throw new Error('no videos in manifest');
+    
+    const loadedVideos = [];
+    for(const filename of manifest.videos){
+      try{
+        const res = await fetch('videos/' + filename + cacheBuster, {cache: 'no-store'});
+        if(res.ok){
+          const video = await res.json();
+          loadedVideos.push(video);
+        }
+      }catch(e){
+        console.warn('Failed to load video:', filename, e);
+      }
+    }
+    
+    if(loadedVideos.length > 0){
+      videos = loadedVideos;
+      renderVideoList(videos);
+      console.log('Loaded', loadedVideos.length, 'videos from JSON files');
+    }
+  }catch(e){
+    console.log('Using default video data (dynamic load failed):', e.message);
+    // 加载失败时使用硬编码的默认数据
+  }
 }
 
 /* ===== 视频播放模态框 ===== */
@@ -5255,6 +5288,7 @@ try{
   renderHomeBlog();
   renderBlogList();
   renderVideoList(videos);
+  loadVideos(); // 从JSON文件动态加载视频（后台编辑后自动更新）
   renderFaqs();
   // 安全设置about-thumb图片（元素可能不存在）
   const aboutThumbEl = document.getElementById('about-thumb');
