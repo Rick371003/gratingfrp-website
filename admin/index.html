@@ -103,6 +103,140 @@
     .loading { text-align: center; padding: 40px; color: #888; }
     
     .hint { font-size: 12px; color: #666; margin-top: 5px; }
+    
+    /* ===== 富文本编辑器样式 ===== */
+    .editor-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      padding: 10px;
+      background: #1a2a40;
+      border: 1px solid #2a4a6a;
+      border-radius: 6px 6px 0 0;
+      border-bottom: none;
+    }
+    .editor-toolbar button {
+      padding: 6px 12px;
+      background: #0d2137;
+      color: #fff;
+      border: 1px solid #2a4a6a;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+    .editor-toolbar button:hover {
+      background: #f5a623;
+      color: #0a1628;
+      border-color: #f5a623;
+    }
+    .toolbar-sep {
+      width: 1px;
+      background: #2a4a6a;
+      margin: 0 4px;
+    }
+    .editor-container {
+      display: flex;
+      gap: 0;
+    }
+    .editor-textarea {
+      flex: 1;
+      padding: 16px;
+      background: #0d1b2e;
+      color: #e0e0e0;
+      border: 1px solid #2a4a6a;
+      border-radius: 0 0 0 6px;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 14px;
+      line-height: 1.7;
+      resize: vertical;
+      min-height: 500px;
+    }
+    .editor-textarea:focus {
+      outline: none;
+      border-color: #f5a623;
+    }
+    .preview-panel {
+      flex: 1;
+      border: 1px solid #2a4a6a;
+      border-left: none;
+      border-radius: 0 0 6px 0;
+      background: #fff;
+      color: #333;
+      overflow-y: auto;
+      max-height: 700px;
+    }
+    .preview-header {
+      padding: 10px 16px;
+      background: #f5a623;
+      color: #0a1628;
+      font-weight: 600;
+      font-size: 13px;
+      position: sticky;
+      top: 0;
+    }
+    .preview-content {
+      padding: 24px;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    .preview-content h1 { font-size: 28px; margin: 24px 0 16px; color: #0a1628; border-bottom: 2px solid #f5a623; padding-bottom: 8px; }
+    .preview-content h2 { font-size: 24px; margin: 24px 0 14px; color: #0a1628; }
+    .preview-content h3 { font-size: 20px; margin: 20px 0 12px; color: #1a3a5c; }
+    .preview-content h4 { font-size: 17px; margin: 16px 0 10px; color: #2a4a6a; }
+    .preview-content p { margin-bottom: 14px; }
+    .preview-content strong { color: #0a1628; }
+    .preview-content a { color: #f5a623; text-decoration: underline; }
+    .preview-content ul, .preview-content ol { margin: 14px 0; padding-left: 28px; }
+    .preview-content li { margin-bottom: 8px; }
+    .preview-content blockquote {
+      border-left: 4px solid #f5a623;
+      padding: 12px 20px;
+      margin: 16px 0;
+      background: #fff8e6;
+      color: #555;
+      font-style: italic;
+    }
+    .preview-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 16px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .preview-content video {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 16px 0;
+    }
+    .preview-content iframe {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 16px 0;
+    }
+    .preview-content hr {
+      border: none;
+      border-top: 2px solid #e0e0e0;
+      margin: 24px 0;
+    }
+    .preview-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+    }
+    .preview-content th, .preview-content td {
+      border: 1px solid #ddd;
+      padding: 10px 14px;
+      text-align: left;
+    }
+    .preview-content th {
+      background: #f5a623;
+      color: #0a1628;
+      font-weight: 600;
+    }
+    .preview-content tr:nth-child(even) {
+      background: #f9f9f9;
+    }
   </style>
 </head>
 <body>
@@ -349,8 +483,36 @@
             <textarea id="field-excerpt" style="min-height:80px">${content.excerpt || ''}</textarea>
           </div>
           <div class="form-group">
-            <label>Content (正文，支持Markdown) *</label>
-            <textarea id="field-content" style="min-height:400px">${content.content || ''}</textarea>
+            <label>Content (正文编辑器) *</label>
+            <!-- 工具栏 -->
+            <div class="editor-toolbar">
+              <button type="button" onclick="insertFormat('h2')" title="二级标题">H2</button>
+              <button type="button" onclick="insertFormat('h3')" title="三级标题">H3</button>
+              <button type="button" onclick="insertFormat('h4')" title="四级标题">H4</button>
+              <span class="toolbar-sep"></span>
+              <button type="button" onclick="insertFormat('bold')" title="加粗"><b>B</b></button>
+              <button type="button" onclick="insertFormat('italic')" title="斜体"><i>I</i></button>
+              <span class="toolbar-sep"></span>
+              <button type="button" onclick="insertFormat('ul')" title="无序列表">• 列表</button>
+              <button type="button" onclick="insertFormat('ol')" title="有序列表">1. 列表</button>
+              <button type="button" onclick="insertFormat('quote')" title="引用">❝ 引用</button>
+              <span class="toolbar-sep"></span>
+              <button type="button" onclick="insertLink()" title="插入超链接">🔗 链接</button>
+              <button type="button" onclick="insertImage()" title="插入图片">🖼️ 图片</button>
+              <button type="button" onclick="insertVideo()" title="插入视频">🎬 视频</button>
+              <span class="toolbar-sep"></span>
+              <button type="button" onclick="insertFormat('hr')" title="分割线">— 分割线</button>
+              <button type="button" onclick="togglePreview()" title="显示/隐藏预览">👁️ 预览</button>
+            </div>
+            <!-- 编辑区 + 预览区 -->
+            <div class="editor-container">
+              <textarea id="field-content" class="editor-textarea" style="min-height:500px" oninput="updatePreview()">${content.content || ''}</textarea>
+              <div id="preview-panel" class="preview-panel" style="display:none">
+                <div class="preview-header">实时预览 (网站显示效果)</div>
+                <div id="preview-content" class="preview-content"></div>
+              </div>
+            </div>
+            <div class="hint">支持Markdown语法。点击工具栏按钮快速插入格式。图片/视频会自动嵌入。</div>
           </div>
           <button class="btn btn-primary" style="padding:15px 40px;font-size:16px" onclick="savePost('${filename}', ${isNew})">
             ${isNew ? 'Create Post' : 'Save Changes'}
@@ -466,6 +628,223 @@
         statusEl.textContent = `上传失败: ${e.message}`;
         statusEl.style.color = '#dc3545';
         input.value = '';
+      }
+    }
+
+    // ===== 富文本编辑器功能 =====
+    
+    // 在光标位置插入文本
+    function insertAtCursor(text) {
+      const textarea = document.getElementById('field-content');
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const selectedText = textarea.value.substring(start, end);
+      
+      let insertText = text;
+      // 如果有选中文本，用选中文本替换占位符
+      if (selectedText && text.includes('{text}')) {
+        insertText = text.replace('{text}', selectedText);
+      } else if (selectedText && text.includes('{content}')) {
+        insertText = text.replace('{content}', selectedText);
+      }
+      
+      textarea.value = textarea.value.substring(0, start) + insertText + textarea.value.substring(end);
+      textarea.focus();
+      // 移动光标到插入文本之后
+      const newPos = start + insertText.length;
+      textarea.setSelectionRange(newPos, newPos);
+      updatePreview();
+    }
+    
+    // 插入格式
+    function insertFormat(type) {
+      const formats = {
+        'h2': '\n## {text}\n',
+        'h3': '\n### {text}\n',
+        'h4': '\n#### {text}\n',
+        'bold': '**{text}**',
+        'italic': '*{text}*',
+        'ul': '\n- {text}\n- 列表项2\n- 列表项3\n',
+        'ol': '\n1. {text}\n2. 列表项2\n3. 列表项3\n',
+        'quote': '\n> {text}\n',
+        'hr': '\n\n---\n\n'
+      };
+      const format = formats[type] || '';
+      if (format) {
+        insertAtCursor(format);
+      }
+    }
+    
+    // 插入超链接
+    function insertLink() {
+      const url = prompt('请输入链接地址 (URL):', 'https://');
+      if (!url) return;
+      const text = prompt('请输入链接文字 (显示的文字):', '点击这里');
+      const linkText = text || url;
+      insertAtCursor(`[${linkText}](${url})`);
+    }
+    
+    // 插入图片
+    function insertImage() {
+      const choice = confirm('点击"确定"上传本地图片到GitHub，点击"取消"输入已有图片URL');
+      if (choice) {
+        // 上传本地图片
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.onchange = function(e) {
+          const file = e.target.files[0];
+          if (!file) return;
+          
+          const timestamp = Date.now();
+          const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+          const filename = `${timestamp}_${safeName}`;
+          const path = `assets/images/${filename}`;
+          
+          const reader = new FileReader();
+          reader.onload = async function(ev) {
+            const base64Content = ev.target.result.split(',')[1];
+            try {
+              const response = await fetch(`${GITHUB_API}/repos/${REPO}/contents/${path}`, {
+                method: 'PUT',
+                headers: {
+                  'Authorization': `token ${token}`,
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  message: `Upload blog image: ${filename}`,
+                  content: base64Content,
+                  branch: BRANCH
+                })
+              });
+              if (!response.ok) throw new Error('Upload failed');
+              const rawUrl = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${path}`;
+              const alt = prompt('请输入图片描述 (alt文字，用于SEO):', filename);
+              insertAtCursor(`\n![${alt || 'image'}](${rawUrl})\n`);
+              alert('图片上传成功！已插入到文章中。');
+            } catch(err) {
+              alert('图片上传失败: ' + err.message);
+            }
+          };
+          reader.readAsDataURL(file);
+        };
+        input.click();
+      } else {
+        // 输入已有URL
+        const url = prompt('请输入图片URL:', 'https://');
+        if (!url) return;
+        const alt = prompt('请输入图片描述 (alt文字，用于SEO):', 'image');
+        insertAtCursor(`\n![${alt || 'image'}](${url})\n`);
+      }
+    }
+    
+    // 插入视频
+    function insertVideo() {
+      const url = prompt('请输入视频地址 (支持YouTube/Vimeo链接或直接视频URL):', 'https://');
+      if (!url) return;
+      
+      // 判断视频类型
+      let videoHtml = '';
+      if (url.includes('youtube.com') || url.includes('youtu.be')) {
+        // YouTube视频
+        let videoId = '';
+        if (url.includes('youtu.be/')) {
+          videoId = url.split('youtu.be/')[1].split('?')[0];
+        } else if (url.includes('v=')) {
+          videoId = url.split('v=')[1].split('&')[0];
+        }
+        if (videoId) {
+          videoHtml = `\n<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>\n`;
+        }
+      } else if (url.includes('vimeo.com')) {
+        // Vimeo视频
+        const videoId = url.split('vimeo.com/')[1].split('?')[0];
+        videoHtml = `\n<iframe src="https://player.vimeo.com/video/${videoId}" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>\n`;
+      } else {
+        // 直接视频URL
+        videoHtml = `\n<video width="100%" controls><source src="${url}" type="video/mp4">您的浏览器不支持视频播放。</video>\n`;
+      }
+      
+      if (videoHtml) {
+        insertAtCursor(videoHtml);
+      } else {
+        alert('无法识别视频格式，请检查URL。');
+      }
+    }
+    
+    // 切换预览显示
+    function togglePreview() {
+      const panel = document.getElementById('preview-panel');
+      if (panel.style.display === 'none') {
+        panel.style.display = 'block';
+        updatePreview();
+      } else {
+        panel.style.display = 'none';
+      }
+    }
+    
+    // 简单的Markdown转HTML
+    function markdownToHtml(text) {
+      if (!text) return '';
+      let html = text;
+      
+      // 转义HTML特殊字符（先处理，避免XSS）
+      // 注意：这里不转义，因为用户可能需要插入HTML（如视频iframe）
+      
+      // 标题
+      html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+      html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
+      html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
+      html = html.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
+      
+      // 加粗和斜体
+      html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+      
+      // 链接
+      html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+      
+      // 图片
+      html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">');
+      
+      // 引用
+      html = html.replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>');
+      
+      // 分割线
+      html = html.replace(/^---$/gm, '<hr>');
+      
+      // 无序列表
+      html = html.replace(/^- (.*$)/gm, '<li>$1</li>');
+      html = html.replace(/(<li>.*<\/li>\n?)+/g, function(match) {
+        return '<ul>' + match + '</ul>';
+      });
+      
+      // 有序列表
+      html = html.replace(/^\d+\. (.*$)/gm, '<li>$1</li>');
+      html = html.replace(/(<li>.*<\/li>\n?)+/g, function(match) {
+        if (!match.includes('<ul>')) {
+          return '<ol>' + match + '</ol>';
+        }
+        return match;
+      });
+      
+      // 段落（连续非空行）
+      html = html.replace(/\n\n/g, '</p><p>');
+      html = '<p>' + html + '</p>';
+      
+      // 清理空段落
+      html = html.replace(/<p><\/p>/g, '');
+      html = html.replace(/<p>\s*<\/p>/g, '');
+      
+      return html;
+    }
+    
+    // 更新预览
+    function updatePreview() {
+      const text = document.getElementById('field-content').value;
+      const previewContent = document.getElementById('preview-content');
+      if (previewContent) {
+        previewContent.innerHTML = markdownToHtml(text);
       }
     }
 
