@@ -237,6 +237,13 @@
     .preview-content tr:nth-child(even) {
       background: #f9f9f9;
     }
+    .nav-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+    .nav-tab { padding: 10px 20px; background: #2a4a6a; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 600; }
+    .nav-tab.active { background: #f5a623; color: #0a1628; }
+    .video-item { background: #0d2137; padding: 20px; margin-bottom: 15px; border-radius: 6px; border-left: 4px solid #3498db; display: flex; justify-content: space-between; align-items: center; }
+    .video-item h3 { font-size: 16px; margin-bottom: 5px; }
+    .video-item .meta { font-size: 12px; color: #888; }
+    .video-thumb { width: 120px; height: 68px; object-fit: cover; border-radius: 4px; margin-right: 15px; }
   </style>
 </head>
 <body>
@@ -247,6 +254,7 @@
     const REPO = 'Rick371003/gratingfrp-website';
     const BRANCH = 'main';
     const BLOG_FOLDER = 'blog';
+    const VIDEO_FOLDER = 'videos';
 
     let token = localStorage.getItem('github_token') || '';
 
@@ -267,6 +275,13 @@
         renderEditor(filename);
       } else if (hash === '/new') {
         renderNewPost();
+      } else if (hash === '/videos') {
+        renderVideoList();
+      } else if (hash.startsWith('/edit-video/')) {
+        const filename = hash.replace('/edit-video/', '');
+        renderVideoEditor(filename);
+      } else if (hash === '/new-video') {
+        renderNewVideo();
       } else {
         renderPostList();
       }
@@ -315,6 +330,7 @@
         <div class="header">
           <h1>FRP Grating Master - Blog Admin</h1>
           <div class="user-info">
+            <button class="btn btn-secondary" onclick="window.location.hash='/videos'">🎬 Videos</button>
             <button class="btn btn-primary" onclick="window.location.hash='/new'">+ New Post</button>
             <button class="btn btn-secondary" onclick="logout()">Logout</button>
           </div>
@@ -1052,6 +1068,352 @@
     // 初始化
     window.addEventListener('hashchange', router);
     router();
+
+    /* ===== 视频管理功能 ===== */
+
+    // 视频列表页面
+    async function renderVideoList() {
+      const app = document.getElementById('app');
+      app.innerHTML = `
+        <div class="header">
+          <h1>FRP Grating Master - Video Admin</h1>
+          <div class="user-info">
+            <button class="btn btn-primary" onclick="window.location.hash='/new-video'">+ New Video</button>
+            <button class="btn btn-secondary" onclick="window.location.hash='/'">Blog Posts</button>
+            <button class="btn btn-secondary" onclick="logout()">Logout</button>
+          </div>
+        </div>
+        <div class="container">
+          <div id="alert"></div>
+          <div id="video-list-container">
+            <p style="color:#888">Loading videos...</p>
+          </div>
+        </div>
+      `;
+      await loadVideoList();
+    }
+
+    // 加载视频列表
+    async function loadVideoList() {
+      try {
+        const manifestRes = await fetch(`${GITHUB_API}/repos/${REPO}/contents/${VIDEO_FOLDER}/manifest.json?ref=${BRANCH}`, {
+          headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3.raw' }
+        });
+        if (!manifestRes.ok) throw new Error('Failed to load manifest');
+        const manifest = await manifestRes.json();
+        
+        const container = document.getElementById('video-list-container');
+        if (!manifest.videos || manifest.videos.length === 0) {
+          container.innerHTML = '<p style="color:#888">No videos found. Click "New Video" to add one.</p>';
+          return;
+        }
+
+        let html = '<div class="post-list">';
+        for (const filename of manifest.videos) {
+          try {
+            const res = await fetch(`${GITHUB_API}/repos/${REPO}/contents/${VIDEO_FOLDER}/${filename}?ref=${BRANCH}`, {
+              headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3.raw' }
+            });
+            if (res.ok) {
+              const video = await res.json();
+              html += `
+                <div class="video-item">
+                  <div style="display:flex;align-items:center">
+                    ${video.thumbnail ? `<img src="${video.thumbnail}" class="video-thumb" alt="${video.title}">` : ''}
+                    <div>
+                      <h3>${video.title}</h3>
+                      <div class="meta">${video.categoryName || video.category} | ${video.duration || 'N/A'} | ${video.views || '0'} views</div>
+                      <div class="meta" style="margin-top:4px">${video.id}.json</div>
+                    </div>
+                  </div>
+                  <div class="actions">
+                    <button class="btn btn-secondary" onclick="window.location.hash='/edit-video/${video.id}.json'">Edit</button>
+                    <button class="btn btn-danger" onclick="deleteVideo('${video.id}.json')">Delete</button>
+                  </div>
+                </div>
+              `;
+            }
+          } catch (e) {
+            console.warn('Failed to load video:', filename, e);
+          }
+        }
+        html += '</div>';
+        container.innerHTML = html;
+      } catch (e) {
+        document.getElementById('video-list-container').innerHTML = `<p style="color:#e74c3c">Error loading videos: ${e.message}</p>`;
+      }
+    }
+
+    // 新建视频页面
+    function renderNewVideo() {
+      const app = document.getElementById('app');
+      app.innerHTML = `
+        <div class="header">
+          <h1>New Video</h1>
+          <div class="user-info">
+            <button class="btn btn-secondary" onclick="window.location.hash='/videos'">Back to Videos</button>
+            <button class="btn btn-secondary" onclick="logout()">Logout</button>
+          </div>
+        </div>
+        <div class="container">
+          <div id="alert"></div>
+          <div class="form-group">
+            <label>Video ID (filename, lowercase, hyphens)</label>
+            <input type="text" id="video-id" placeholder="my-new-video">
+          </div>
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="video-title" placeholder="Video Title">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="video-description" placeholder="Video description..." style="min-height:100px"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="video-category">
+              <option value="installation">Installation</option>
+              <option value="application">Applications</option>
+              <option value="manufacturing">Manufacturing</option>
+              <option value="technical">Technical</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Duration (e.g., 8:45)</label>
+            <input type="text" id="video-duration" placeholder="8:45">
+          </div>
+          <div class="form-group">
+            <label>Thumbnail URL</label>
+            <input type="text" id="video-thumbnail" placeholder="https://...">
+          </div>
+          <div class="form-group">
+            <label>Video URL (YouTube embed URL)</label>
+            <input type="text" id="video-url" placeholder="https://www.youtube.com/embed/...">
+          </div>
+          <div class="form-group">
+            <label>Views (e.g., 12.5K)</label>
+            <input type="text" id="video-views" placeholder="12.5K">
+          </div>
+          <button class="btn btn-primary" onclick="saveNewVideo()" style="margin-right:10px">Save Video</button>
+          <button class="btn btn-secondary" onclick="window.location.hash='/videos'">Cancel</button>
+        </div>
+      `;
+    }
+
+    // 保存新视频
+    async function saveNewVideo() {
+      const id = document.getElementById('video-id').value.trim().toLowerCase().replace(/\s+/g, '-');
+      const title = document.getElementById('video-title').value.trim();
+      const description = document.getElementById('video-description').value.trim();
+      const category = document.getElementById('video-category').value;
+      const categoryNames = { installation: 'Installation', application: 'Applications', manufacturing: 'Manufacturing', technical: 'Technical' };
+      const duration = document.getElementById('video-duration').value.trim();
+      const thumbnail = document.getElementById('video-thumbnail').value.trim();
+      const videoUrl = document.getElementById('video-url').value.trim();
+      const views = document.getElementById('video-views').value.trim();
+
+      if (!id || !title) {
+        showAlert('Video ID and Title are required', 'error');
+        return;
+      }
+
+      const videoData = { id, title, description, category, categoryName: categoryNames[category], duration, thumbnail, videoUrl, views };
+      const filename = id + '.json';
+
+      try {
+        // 保存视频文件
+        await saveToGitHub(`${VIDEO_FOLDER}/${filename}`, JSON.stringify(videoData, null, 2), `Add video: ${title}`);
+        
+        // 更新manifest
+        await updateVideoManifest(filename, true);
+        
+        showAlert('Video saved successfully!', 'success');
+        setTimeout(() => { window.location.hash = '/videos'; }, 1500);
+      } catch (e) {
+        showAlert('Error saving video: ' + e.message, 'error');
+      }
+    }
+
+    // 视频编辑器
+    async function renderVideoEditor(filename) {
+      const app = document.getElementById('app');
+      app.innerHTML = '<div class="container"><p style="color:#888">Loading video...</p></div>';
+      
+      try {
+        const res = await fetch(`${GITHUB_API}/repos/${REPO}/contents/${VIDEO_FOLDER}/${filename}?ref=${BRANCH}`, {
+          headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3.raw' }
+        });
+        if (!res.ok) throw new Error('Failed to load video');
+        const video = await res.json();
+
+        app.innerHTML = `
+          <div class="header">
+            <h1>Edit Video: ${video.title}</h1>
+            <div class="user-info">
+              <button class="btn btn-secondary" onclick="window.location.hash='/videos'">Back to Videos</button>
+              <button class="btn btn-secondary" onclick="logout()">Logout</button>
+            </div>
+          </div>
+          <div class="container">
+            <div id="alert"></div>
+            <input type="hidden" id="video-filename" value="${filename}">
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" id="video-title" value="${video.title || ''}">
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea id="video-description" style="min-height:100px">${video.description || ''}</textarea>
+            </div>
+            <div class="form-group">
+              <label>Category</label>
+              <select id="video-category">
+                <option value="installation" ${video.category === 'installation' ? 'selected' : ''}>Installation</option>
+                <option value="application" ${video.category === 'application' ? 'selected' : ''}>Applications</option>
+                <option value="manufacturing" ${video.category === 'manufacturing' ? 'selected' : ''}>Manufacturing</option>
+                <option value="technical" ${video.category === 'technical' ? 'selected' : ''}>Technical</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Duration</label>
+              <input type="text" id="video-duration" value="${video.duration || ''}">
+            </div>
+            <div class="form-group">
+              <label>Thumbnail URL</label>
+              <input type="text" id="video-thumbnail" value="${video.thumbnail || ''}">
+            </div>
+            <div class="form-group">
+              <label>Video URL</label>
+              <input type="text" id="video-url" value="${video.videoUrl || ''}">
+            </div>
+            <div class="form-group">
+              <label>Views</label>
+              <input type="text" id="video-views" value="${video.views || ''}">
+            </div>
+            <button class="btn btn-primary" onclick="saveVideoEdit()" style="margin-right:10px">Save Changes</button>
+            <button class="btn btn-secondary" onclick="window.location.hash='/videos'">Cancel</button>
+          </div>
+        `;
+      } catch (e) {
+        app.innerHTML = `<div class="container"><p style="color:#e74c3c">Error: ${e.message}</p></div>`;
+      }
+    }
+
+    // 保存视频编辑
+    async function saveVideoEdit() {
+      const filename = document.getElementById('video-filename').value;
+      const title = document.getElementById('video-title').value.trim();
+      const description = document.getElementById('video-description').value.trim();
+      const category = document.getElementById('video-category').value;
+      const categoryNames = { installation: 'Installation', application: 'Applications', manufacturing: 'Manufacturing', technical: 'Technical' };
+      const duration = document.getElementById('video-duration').value.trim();
+      const thumbnail = document.getElementById('video-thumbnail').value.trim();
+      const videoUrl = document.getElementById('video-url').value.trim();
+      const views = document.getElementById('video-views').value.trim();
+      const id = filename.replace('.json', '');
+
+      if (!title) {
+        showAlert('Title is required', 'error');
+        return;
+      }
+
+      const videoData = { id, title, description, category, categoryName: categoryNames[category], duration, thumbnail, videoUrl, views };
+
+      try {
+        await saveToGitHub(`${VIDEO_FOLDER}/${filename}`, JSON.stringify(videoData, null, 2), `Update video: ${title}`);
+        showAlert('Video updated successfully!', 'success');
+        setTimeout(() => { window.location.hash = '/videos'; }, 1500);
+      } catch (e) {
+        showAlert('Error updating video: ' + e.message, 'error');
+      }
+    }
+
+    // 删除视频
+    async function deleteVideo(filename) {
+      if (!confirm(`Are you sure you want to delete "${filename}"?`)) return;
+      try {
+        // 删除文件
+        const res = await fetch(`${GITHUB_API}/repos/${REPO}/contents/${VIDEO_FOLDER}/${filename}?ref=${BRANCH}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: `Delete video: ${filename}`, sha: await getFileSha(`${VIDEO_FOLDER}/${filename}`), branch: BRANCH })
+        });
+        if (!res.ok) throw new Error('Failed to delete video');
+        
+        // 更新manifest
+        await updateVideoManifest(filename, false);
+        
+        showAlert('Video deleted successfully!', 'success');
+        loadVideoList();
+      } catch (e) {
+        showAlert('Error deleting video: ' + e.message, 'error');
+      }
+    }
+
+    // 更新视频manifest
+    async function updateVideoManifest(filename, add) {
+      try {
+        const manifestRes = await fetch(`${GITHUB_API}/repos/${REPO}/contents/${VIDEO_FOLDER}/manifest.json?ref=${BRANCH}`, {
+          headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3.raw' }
+        });
+        let manifest = { videos: [] };
+        let sha = null;
+        if (manifestRes.ok) {
+          manifest = await manifestRes.json();
+          // 获取sha
+          const shaRes = await fetch(`${GITHUB_API}/repos/${REPO}/contents/${VIDEO_FOLDER}/manifest.json?ref=${BRANCH}`, {
+            headers: { 'Authorization': `token ${token}` }
+          });
+          if (shaRes.ok) {
+            const shaData = await shaRes.json();
+            sha = shaData.sha;
+          }
+        }
+        
+        if (add) {
+          if (!manifest.videos.includes(filename)) {
+            manifest.videos.push(filename);
+          }
+        } else {
+          manifest.videos = manifest.videos.filter(f => f !== filename);
+        }
+        
+        await saveToGitHub(`${VIDEO_FOLDER}/manifest.json`, JSON.stringify(manifest, null, 2), add ? `Add ${filename} to manifest` : `Remove ${filename} from manifest`, sha);
+      } catch (e) {
+        console.error('Error updating manifest:', e);
+      }
+    }
+
+    // 获取文件SHA
+    async function getFileSha(path) {
+      try {
+        const res = await fetch(`${GITHUB_API}/repos/${REPO}/contents/${path}?ref=${BRANCH}`, {
+          headers: { 'Authorization': `token ${token}` }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          return data.sha;
+        }
+      } catch (e) {}
+      return null;
+    }
+
+    // 保存到GitHub（通用函数）
+    async function saveToGitHub(path, content, message, sha = null) {
+      const body = { message, content: btoa(unescape(encodeURIComponent(content))), branch: BRANCH };
+      if (sha) body.sha = sha;
+      
+      const res = await fetch(`${GITHUB_API}/repos/${REPO}/contents/${path}`, {
+        method: 'PUT',
+        headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.message || 'GitHub API error');
+      }
+      return res.json();
+    }
   </script>
 </body>
 </html>
