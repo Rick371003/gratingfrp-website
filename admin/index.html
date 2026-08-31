@@ -354,6 +354,52 @@
       `;
     }
 
+    // 更新manifest.json
+    async function updateManifest(addFilename, removeFilename) {
+      const manifestPath = `${BLOG_FOLDER}/manifest.json`;
+      try {
+        // 获取现有manifest
+        const response = await fetch(`${GITHUB_API}/repos/${REPO}/contents/${manifestPath}?ref=${BRANCH}`, {
+          headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+        });
+        
+        let manifest = { posts: [] };
+        let sha = null;
+        
+        if (response.ok) {
+          const data = await response.json();
+          sha = data.sha;
+          const content = decodeURIComponent(escape(atob(data.content)));
+          manifest = JSON.parse(content);
+        }
+        
+        if (!manifest.posts) manifest.posts = [];
+        
+        // 添加或移除文件名
+        if (addFilename && !manifest.posts.includes(addFilename)) {
+          manifest.posts.push(addFilename);
+        }
+        if (removeFilename) {
+          manifest.posts = manifest.posts.filter(f => f !== removeFilename);
+        }
+        
+        // 更新manifest
+        await fetch(`${GITHUB_API}/repos/${REPO}/contents/${manifestPath}`, {
+          method: 'PUT',
+          headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: `Update manifest: ${addFilename ? 'add ' + addFilename : ''}${removeFilename ? 'remove ' + removeFilename : ''}`,
+            content: btoa(unescape(encodeURIComponent(JSON.stringify(manifest, null, 2)))),
+            branch: BRANCH,
+            sha: sha
+          })
+        });
+        console.log('Manifest updated successfully');
+      } catch(e) {
+        console.warn('Manifest update failed (non-critical):', e);
+      }
+    }
+
     // 保存文章
     async function savePost(filename, isNew) {
       const id = document.getElementById('field-id').value.trim();
@@ -404,6 +450,11 @@
           throw new Error(error.message || `GitHub API error: ${response.status}`);
         }
 
+        // 新建文章时更新manifest
+        if (isNew) {
+          await updateManifest(targetFilename, null);
+        }
+
         showAlert('Post saved successfully! Website will update in 2-3 minutes.', 'success');
         setTimeout(() => { window.location.hash = '/'; router(); }, 2000);
       } catch (e) {
@@ -435,6 +486,10 @@
         });
 
         if (!deleteResponse.ok) throw new Error(`Failed to delete: ${deleteResponse.status}`);
+        
+        // 从manifest中移除
+        await updateManifest(null, filename);
+        
         showAlert('Post deleted successfully!', 'success');
         setTimeout(router, 1500);
       } catch (e) {
