@@ -555,6 +555,12 @@
           sha = data.sha;
           const content = decodeURIComponent(escape(atob(data.content)));
           manifest = JSON.parse(content);
+        } else if (response.status === 404) {
+          // manifest不存在，创建新的
+          console.log('Manifest not found, creating new one');
+        } else {
+          // 获取失败，抛出错误，不要用空列表覆盖
+          throw new Error(`Failed to fetch manifest: ${response.status}`);
         }
         
         if (!manifest.posts) manifest.posts = [];
@@ -568,7 +574,7 @@
         }
         
         // 更新manifest
-        await fetch(`${GITHUB_API}/repos/${REPO}/contents/${manifestPath}`, {
+        const updateResponse = await fetch(`${GITHUB_API}/repos/${REPO}/contents/${manifestPath}`, {
           method: 'PUT',
           headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -578,9 +584,14 @@
             sha: sha
           })
         });
-        console.log('Manifest updated successfully');
+        
+        if (!updateResponse.ok) {
+          throw new Error(`Failed to update manifest: ${updateResponse.status}`);
+        }
+        console.log('Manifest updated successfully, total posts:', manifest.posts.length);
       } catch(e) {
-        console.warn('Manifest update failed (non-critical):', e);
+        console.error('Manifest update failed:', e);
+        throw e; // 抛出错误，让调用者知道更新失败
       }
     }
 
@@ -1013,8 +1024,8 @@
           await updateManifest(targetFilename, null);
         }
 
-        showAlert('✅ Post saved! Cloudflare will deploy in 1-2 minutes. Then refresh the website to see the new article.', 'success');
-        setTimeout(() => { window.location.hash = '/'; router(); }, 2000);
+        showAlert('✅ Post saved successfully! The website will auto-refresh within 15 seconds (no manual refresh needed).', 'success');
+        setTimeout(() => { window.location.hash = '/'; router(); }, 2500);
       } catch (e) {
         showAlert(`Failed to save: ${e.message}`, 'error');
       }
