@@ -145,6 +145,7 @@
     --radius:4px;
     --radius-lg:8px;
     --container:1200px;
+    --font-scale:1; /* 字体缩放比例，由JS控制 */
   }
   
   /* 浅色主题 */
@@ -921,13 +922,13 @@
   /* ===== 博客详情页新布局（参考machsfrp.com，超宽屏） ===== */
   .blog-detail-layout{
     display: grid;
-    grid-template-columns: 1fr 320px;
-    gap: 64px;
+    grid-template-columns: 1fr 280px;
+    gap: 40px;
     max-width: 100%;
     width: 100%;
     margin: 0 auto;
     align-items: start;
-    padding: 0 40px;
+    padding: 0 16px;
   }
   .blog-article-main{
     min-width: 0;
@@ -4007,7 +4008,7 @@ function restoreTheme(){
 
 /* ===== 字体大小调节 ===== */
 let currentFontSize = 100; // 百分比
-const fontSizes = [90, 100, 110, 120]; // 可选档位
+const fontSizes = [85, 100, 115, 130]; // 可选档位
 
 function changeFontSize(delta){
   if(delta === 0){
@@ -4018,7 +4019,8 @@ function changeFontSize(delta){
     newIndex = Math.max(0, Math.min(fontSizes.length - 1, newIndex));
     currentFontSize = fontSizes[newIndex];
   }
-  document.documentElement.style.fontSize = currentFontSize + '%';
+  // 用zoom属性缩放所有内容（包括固定px值的字体）
+  document.body.style.zoom = (currentFontSize / 100);
   try{
     localStorage.setItem('font-size', currentFontSize);
   }catch(e){}
@@ -4029,7 +4031,7 @@ function restoreFontSize(){
     const savedSize = parseInt(localStorage.getItem('font-size'));
     if(savedSize && fontSizes.includes(savedSize)){
       currentFontSize = savedSize;
-      document.documentElement.style.fontSize = currentFontSize + '%';
+      document.body.style.zoom = (currentFontSize / 100);
     }
   }catch(e){}
 }
