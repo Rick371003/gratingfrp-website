@@ -4,6 +4,27 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Manager | FRP Grating Master</title>
+  <script>
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const accessToken = params.get('access_token');
+      const tokenType = params.get('token_type') || 'bearer';
+      
+      if (accessToken) {
+        const user = {
+          token: accessToken,
+          tokenType: tokenType,
+          name: 'GitHub User',
+          login: 'Rick371003'
+        };
+        
+        try { localStorage.setItem('decap-cms-user', JSON.stringify(user)); } catch(e) {}
+        try { localStorage.setItem('netlify-cms-user', JSON.stringify(user)); } catch(e) {}
+        
+        window.location.href = window.location.pathname + '#/';
+      }
+    })();
+  </script>
 </head>
 <body>
   <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.js"></script>
