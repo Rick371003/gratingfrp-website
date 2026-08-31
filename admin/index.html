@@ -5,43 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Manager | FRP Grating Master</title>
   <script>
-    (function() {
-      let accessToken = null;
-      let tokenType = 'bearer';
-      
-      const params = new URLSearchParams(window.location.search);
-      if (params.get('access_token')) {
-        accessToken = params.get('access_token');
-        tokenType = params.get('token_type') || 'bearer';
-      }
-      
-      if (!accessToken && window.location.hash) {
-        const hash = window.location.hash.replace(/^#\/?/, '');
-        const hashParams = new URLSearchParams(hash);
-        if (hashParams.get('access_token')) {
-          accessToken = hashParams.get('access_token');
-          tokenType = hashParams.get('token_type') || 'bearer';
-        }
-      }
-      
-      if (accessToken) {
-        const user = {
-          token: accessToken,
-          tokenType: tokenType,
-          name: 'Rick371003',
-          login: 'Rick371003',
-          avatar_url: 'https://github.com/Rick371003.png'
-        };
-        
-        try { localStorage.setItem('decap-cms-user', JSON.stringify(user)); } catch(e) {}
-        try { localStorage.setItem('netlify-cms-user', JSON.stringify(user)); } catch(e) {}
-        
-        window.location.replace(window.location.pathname + '#/');
-      }
-    })();
+    window.CMS_MANUAL_INIT = true;
   </script>
 </head>
 <body>
-  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/netlify-cms@2.10.192/dist/netlify-cms.js"></script>
+  <script>
+    function waitForCMS() {
+      if (window.CMS && typeof window.CMS.init === 'function') {
+        try {
+          window.CMS.init({
+            load_config_file: false,
+            config: {
+              backend: {
+                name: 'github',
+                repo: 'Rick371003/gratingfrp-website',
+                branch: 'main',
+                auth_type: 'token'
+              },
+              media_folder: 'images/uploads',
+              public_folder: '/images/uploads',
+              collections: [
+                {
+                  name: 'blog',
+                  label: 'Blog Posts',
+                  folder: 'blog',
+                  create: true,
+                  slug: '{{slug}}',
+                  extension: 'json',
+                  format: 'json',
+                  identifier_field: 'id',
+                  fields: [
+                    { label: 'ID', name: 'id', widget: 'string', hint: '英文小写，用连字符' },
+                    { label: 'Title', name: 'title', widget: 'string' },
+                    { label: 'Category', name: 'category', widget: 'select', options: ['Technical Guides', 'Market Report', 'Product Knowledge', 'Material Science', 'Case Study'] },
+                    { label: 'Date', name: 'date', widget: 'string', hint: '格式: Sep 5, 2026' },
+                    { label: 'Author', name: 'author', widget: 'string' },
+                    { label: 'Excerpt', name: 'excerpt', widget: 'text' },
+                    { label: 'Cover Image URL', name: 'img', widget: 'string', required: false },
+                    { label: 'Content', name: 'content', widget: 'markdown' }
+                  ]
+                }
+              ]
+            }
+          });
+          console.log('CMS初始化成功！');
+        } catch(e) {
+          console.error('CMS初始化失败:', e);
+        }
+      } else {
+        setTimeout(waitForCMS, 200);
+      }
+    }
+    waitForCMS();
+  </script>
 </body>
 </html>
