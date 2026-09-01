@@ -546,12 +546,17 @@
             </div>
             <div class="hint">💡 像Word一样编辑：选中文字点"B"加粗，点"• 列表"变项目符号。支持直接粘贴Word内容。</div>
           </div>
-          <button class="btn btn-primary" style="padding:15px 40px;font-size:16px" onclick="savePost('${filename}', ${isNew})">
-            ${isNew ? 'Create Post' : 'Save Changes'}
-          </button>
-          <button class="btn btn-secondary" style="padding:15px 30px;font-size:16px;margin-left:10px" onclick="if(confirm('确定要离开吗？未保存的内容将丢失。')) window.location.hash='/'">
-            ← 返回列表
-          </button>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <button id="translate-btn" class="btn btn-secondary" style="padding:15px 30px;font-size:16px;background:#2980b9" onclick="autoTranslatePost()">
+              🌐 自动翻译为3种语言
+            </button>
+            <button class="btn btn-primary" style="padding:15px 40px;font-size:16px" onclick="savePost('${filename}', ${isNew})">
+              ${isNew ? 'Create Post' : 'Save Changes'}
+            </button>
+            <button class="btn btn-secondary" style="padding:15px 30px;font-size:16px" onclick="if(confirm('确定要离开吗？未保存的内容将丢失。')) window.location.hash='/'">
+              ← 返回列表
+            </button>
+          </div>
         </div>
       `;
       // 富文本编辑器：设置文章内容到contentEditable
@@ -560,6 +565,28 @@
         if (editor && content.content) {
           editor.innerHTML = content.content;
           updatePreview();
+        }
+        
+        // 加载已有的翻译内容
+        translatedData = {};
+        const langs = ['es', 'de', 'fr'];
+        const fields = ['title', 'category', 'excerpt', 'content'];
+        langs.forEach(lang => {
+          fields.forEach(field => {
+            const key = field + '_' + lang;
+            if (content[key]) {
+              translatedData[key] = content[key];
+            }
+          });
+        });
+        
+        // 如果已有翻译，显示提示
+        const translatedCount = Object.keys(translatedData).length;
+        if (translatedCount > 0) {
+          const btn = document.getElementById('translate-btn');
+          if (btn) {
+            btn.innerHTML = `🌐 已有翻译 (${translatedCount}/12)，可重新翻译`;
+          }
         }
       }, 50);
     }
@@ -997,6 +1024,127 @@
       }
     }
 
+    // 自动翻译相关变量
+    let translatedData = {}; // 存储翻译后的内容
+
+    // 调用MyMemory API翻译文本
+    async function translateText(text, fromLang, toLang) {
+      if (!text || text.trim().length === 0) return text;
+      try {
+        const response = await fetch('https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=' + fromLang + '|' + toLang);
+        const data = await response.json();
+        if (data.responseStatus === 200 && data.responseData && data.responseData.translatedText) {
+          const translated = data.responseData.translatedText;
+          // 检测并过滤警告信息
+          if (translated.includes('MYMEMORY WARNING') || translated.includes('YOU USED ALL AVAILABLE')) {
+            console.warn('MyMemory quota exceeded');
+            return text;
+          }
+          return translated;
+        }
+        return text;
+      } catch (e) {
+        console.error('Translation error:', e);
+        return text;
+      }
+    }
+
+    // 递归翻译HTML元素中的文本节点，保留HTML结构
+    async function translateHtmlContent(html, targetLang) {
+      // 创建临时容器
+      const temp = document.createElement('div');
+      temp.innerHTML = html;
+      
+      // 遍历所有文本节点
+      const walker = document.createTreeWalker(temp, NodeFilter.SHOW_TEXT, null, false);
+      const textNodes = [];
+      let node;
+      while (node = walker.nextNode()) {
+        const text = node.textContent.trim();
+        if (text && text.length > 1) {
+          textNodes.push(node);
+        }
+      }
+      
+      // 逐个翻译文本节点
+      for (const textNode of textNodes) {
+        const originalText = textNode.textContent;
+        const text = originalText.trim();
+        if (text && text.length > 1) {
+          const translated = await translateText(text, 'en', targetLang);
+          if (translated && translated !== text) {
+            // 保留原始的前后空白
+            const leadingSpace = originalText.match(/^\s*/)[0];
+            const trailingSpace = originalText.match(/\s*$/)[0];
+            textNode.textContent = leadingSpace + translated + trailingSpace;
+          }
+        }
+      }
+      
+      return temp.innerHTML;
+    }
+
+    // 自动翻译为3种语言
+    async function autoTranslatePost() {
+      const title = document.getElementById('field-title').value.trim();
+      const category = document.getElementById('field-category').value;
+      const excerpt = document.getElementById('field-excerpt').value.trim();
+      const content = document.getElementById('field-content').innerHTML.trim();
+      
+      if (!title || !content) {
+        showAlert('请先填写标题和内容', 'error');
+        return;
+      }
+      
+      const btn = document.getElementById('translate-btn');
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '⏳ 正在翻译... (0/12)';
+      
+      try {
+        const langs = ['es', 'de', 'fr'];
+        const langNames = { es: '西班牙语', de: '德语', fr: '法语' };
+        let progress = 0;
+        
+        for (const lang of langs) {
+          // 翻译标题
+          progress++;
+          btn.innerHTML = `⏳ 正在翻译${langNames[lang]}标题... (${progress}/12)`;
+          translatedData['title_' + lang] = await translateText(title, 'en', lang);
+          
+          // 翻译分类
+          progress++;
+          btn.innerHTML = `⏳ 正在翻译${langNames[lang]}分类... (${progress}/12)`;
+          translatedData['category_' + lang] = await translateText(category, 'en', lang);
+          
+          // 翻译摘要
+          progress++;
+          btn.innerHTML = `⏳ 正在翻译${langNames[lang]}摘要... (${progress}/12)`;
+          translatedData['excerpt_' + lang] = excerpt ? await translateText(excerpt, 'en', lang) : '';
+          
+          // 翻译内容（保留HTML结构）
+          progress++;
+          btn.innerHTML = `⏳ 正在翻译${langNames[lang]}内容... (${progress}/12)`;
+          translatedData['content_' + lang] = await translateHtmlContent(content, lang);
+        }
+        
+        btn.innerHTML = '✅ 翻译完成！点击保存';
+        btn.style.background = '#27ae60';
+        showAlert('✅ 自动翻译完成！翻译内容将在保存时一并写入JSON文件，永久保存。', 'success');
+        
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+          btn.style.background = '';
+        }, 3000);
+        
+      } catch (e) {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        showAlert('翻译失败: ' + e.message, 'error');
+      }
+    }
+
     // 保存文章
     async function savePost(filename, isNew) {
       const id = document.getElementById('field-id').value.trim();
@@ -1013,7 +1161,11 @@
         return;
       }
 
-      const postData = { id, title, category, date, author, img, excerpt, content };
+      // 构建文章数据，包含翻译内容
+      const postData = { 
+        id, title, category, date, author, img, excerpt, content,
+        ...translatedData // 合并翻译后的内容
+      };
       const targetFilename = isNew ? `${id}.json` : filename;
       const path = `${BLOG_FOLDER}/${targetFilename}`;
 
