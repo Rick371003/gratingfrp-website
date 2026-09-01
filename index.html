@@ -724,6 +724,42 @@
     .grid-cards.related-products{grid-template-columns:1fr;gap:14px}
   }
   
+  /* ===== 计算器页面响应式 ===== */
+  .calc-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:40px;align-items:start}
+  .calc-form{background:var(--surface-dark);border:1px solid var(--line);border-radius:var(--radius-lg);padding:32px}
+  .calc-form h3{font-family:var(--display);font-size:22px;margin-bottom:24px;color:#fff}
+  .calc-form label{display:block;font-size:14px;font-weight:600;color:var(--ink-soft);margin-bottom:8px}
+  .calc-form input[type="number"], .calc-form select{width:100%;padding:12px 16px;font-size:16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--bg);color:#fff;outline:none;transition:border-color .2s}
+  .calc-form input[type="number"]:focus, .calc-form select:focus{border-color:var(--accent)}
+  .calc-form .form-group{margin-bottom:20px}
+  .calc-form .range-labels{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-mute);margin-top:4px}
+  .calc-form .calc-btn{width:100%;padding:14px;font-size:16px;font-weight:600;background:var(--accent);color:var(--ink-dark);border:none;border-radius:var(--radius);cursor:pointer;font-family:var(--display);letter-spacing:.05em;transition:opacity .2s}
+  .calc-form .calc-btn:hover{opacity:.9}
+  .calc-results{min-height:400px}
+  
+  @media (max-width:1024px){
+    .calc-layout{grid-template-columns:1fr;gap:28px}
+    .calc-form{padding:28px}
+  }
+  @media (max-width:640px){
+    .calc-layout{gap:20px}
+    .calc-form{padding:20px}
+    .calc-form h3{font-size:18px;margin-bottom:18px}
+    .calc-form input[type="number"], .calc-form select{padding:14px 16px;font-size:15px}
+    .calc-form .calc-btn{padding:16px;font-size:15px}
+    .calc-results{min-height:300px}
+    /* 结果区域手机端适配 */
+    .calc-results > div:first-child{padding:20px !important}
+    .calc-results > div:first-child > div:nth-child(2){font-size:32px !important}
+    .calc-results > div:nth-child(2){padding:16px !important;overflow-x:auto}
+    .calc-results > div:nth-child(2) table{font-size:12px;min-width:480px}
+    .calc-results > div:nth-child(2) th, .calc-results > div:nth-child(2) td{padding:8px 6px !important}
+    .calc-results > div:nth-child(3){grid-template-columns:1fr !important;gap:12px !important}
+    .calc-results > div:nth-child(3) > div{padding:16px !important}
+    .calc-results > div:nth-child(3) > div > div:nth-child(2){font-size:22px !important}
+    .calc-results > div:last-child{padding:16px !important}
+  }
+  
   /* ===== 视频教程专区 ===== */
   .video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
   @media (max-width:1024px){.video-grid{grid-template-columns:repeat(2,1fr)}}
@@ -3154,9 +3190,9 @@
   </div>
   <div class="section">
     <div class="container">
-      <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:40px;align-items:start">
+      <div class="calc-layout">
         <!-- 左侧：输入表单 -->
-        <div style="background:var(--surface-dark);border:1px solid var(--line);border-radius:var(--radius-lg);padding:32px">
+        <div class="calc-form">
           <h3 style="font-family:var(--display);font-size:22px;margin-bottom:24px;color:#fff">Project Parameters</h3>
           
           <div style="margin-bottom:20px">
@@ -3216,7 +3252,7 @@
         </div>
         
         <!-- 右侧：结果显示 -->
-        <div id="calc-results">
+        <div id="calc-results" class="calc-results">
           <!-- 结果由JS动态生成 -->
         </div>
       </div>
