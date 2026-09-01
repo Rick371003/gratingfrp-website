@@ -824,7 +824,8 @@
   .hamburger span{display:block;width:24px;height:2px;background:#fff;margin:5px 0;transition:.25s}
   .mobile-menu{
     display:none;position:fixed;inset:0;z-index:110;
-    background:var(--deep);color:#fff;padding:100px 32px;flex-direction:column;gap:4px;
+    background:var(--deep);color:#fff;padding:80px 32px 40px;flex-direction:column;gap:4px;
+    overflow-y:auto;-webkit-overflow-scrolling:touch;
   }
   .mobile-menu.open{display:flex}
   .mobile-menu a{
@@ -2428,6 +2429,9 @@
     .case-grid,.blog-grid{grid-template-columns:1fr 1fr}
     .detail-wrap,.contact-wrap,.about-grid,.factory-grid{grid-template-columns:1fr}
     .foot-grid{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:1024px){
+    .app-grid,.case-grid,.blog-grid{grid-template-columns:repeat(2,1fr)}
   }
   @media (max-width:640px){
     nav.desktop{display:none}
@@ -5518,6 +5522,46 @@ async function translateBlogContent(element, text, targetLang) {
   }
 }
 
+// 递归翻译HTML元素中的所有文本节点，保留HTML结构
+async function translateHtmlElement(element, targetLang) {
+  if (!element || targetLang === 'en') return;
+  
+  // 遍历所有子节点
+  const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
+  const textNodes = [];
+  let node;
+  while (node = walker.nextNode()) {
+    const text = node.textContent.trim();
+    if (text && text.length > 1) {
+      textNodes.push(node);
+    }
+  }
+  
+  // 逐个翻译文本节点
+  for (const textNode of textNodes) {
+    const originalText = textNode.textContent;
+    const text = originalText.trim();
+    if (text && text.length > 1) {
+      try {
+        const translated = await autoTranslate(text, 'en', langCodes[targetLang]);
+        if (translated && translated !== text && !translated.includes('MYMEMORY WARNING')) {
+          // 保留原始的前后空白
+          const leadingSpace = originalText.match(/^\s*/)[0];
+          const trailingSpace = originalText.match(/\s*$/)[0];
+          textNode.textContent = leadingSpace + translated + trailingSpace;
+        }
+      } catch (e) {
+        console.warn('Failed to translate text node:', e);
+      }
+    }
+  }
+  
+  // 翻译完成后重新生成目录
+  setTimeout(() => {
+    generateBlogTOC();
+  }, 100);
+}
+
 function renderBlogList(){
   document.getElementById('blog-list').innerHTML = posts.map((p, idx)=>{
     const pTitle = getBlogText(p, 'title');
@@ -5878,30 +5922,14 @@ function renderDetail(type, id){
         if (!p['category_' + currentLang]) {
           translateBlogContent(document.getElementById('blog-detail-category'), p.category, currentLang);
         }
-        // 翻译内容（分段翻译以避免API限制）
+        // 翻译内容（保留HTML结构，逐个翻译文本节点）
         if (!p['content_' + currentLang]) {
           const contentEl = document.getElementById('blog-detail-content');
           if (contentEl && p.content) {
-            // 提取纯文本并翻译，然后替换HTML
-            const plainText = p.content.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-            if (plainText.length > 0) {
-              // 分段翻译（每段500字符）
-              const segments = [];
-              for (let i = 0; i < plainText.length; i += 500) {
-                segments.push(plainText.substring(i, i + 500));
-              }
-              // 逐段翻译并更新
-              let translatedContent = '';
-              segments.forEach(async (seg, idx) => {
-                const translated = await autoTranslate(seg, 'en', langCodes[currentLang]);
-                translatedContent += translated + ' ';
-                if (idx === segments.length - 1 && contentEl) {
-                  contentEl.innerHTML = '<p>' + translatedContent.trim().split(/(?<=[.!?])\s+/).join('</p><p>') + '</p>';
-                  // 重新生成目录
-                  generateBlogTOC();
-                }
-              });
-            }
+            // 先设置原始HTML内容
+            contentEl.innerHTML = p.content;
+            // 递归翻译所有文本节点，保留HTML结构
+            translateHtmlElement(contentEl, currentLang);
           }
         }
       }
