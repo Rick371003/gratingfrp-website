@@ -715,8 +715,11 @@
 
   /* ===== 产品卡片（升级） ===== */
   .grid-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-  /* 相关产品：桌面2列，手机1列 */
-  .grid-cards.related-products{grid-template-columns:repeat(2,1fr);gap:16px}
+  /* 相关产品：桌面3列，平板2列，手机1列 */
+  .grid-cards.related-products{grid-template-columns:repeat(3,1fr);gap:16px}
+  @media (max-width:1024px){
+    .grid-cards.related-products{grid-template-columns:repeat(2,1fr);gap:14px}
+  }
   @media (max-width:640px){
     .grid-cards.related-products{grid-template-columns:1fr;gap:14px}
   }
@@ -4242,7 +4245,7 @@ function renderDetail(type, id){
       <div class="block">
         <h3>Related Products</h3>
         <div class="grid-cards related-products">
-          ${products.filter(x=>x.id!==p.id).slice(0,3).map(productCard).join('')}
+          ${products.filter(x=>x.id!==p.id).slice(0,6).map(productCard).join('')}
         </div>
       </div>
       <div class="cta-band" style="margin-top:36px;border-radius:var(--radius-lg)">
