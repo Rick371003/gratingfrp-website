@@ -556,12 +556,12 @@
               <textarea id="field-excerpt-fr" style="min-height:50px">${content.excerpt_fr || ''}</textarea>
             </div>
             <div class="form-group">
-              <label style="color:#27ae60">💡 翻译进度</label>
-              <div id="translation-progress" style="font-size:13px;color:#aaa;line-height:1.8">
-                标题: <span id="prog-title">0/3</span><br>
-                分类: <span id="prog-category">0/3</span><br>
-                摘要: <span id="prog-excerpt">0/3</span><br>
-                正文: <span id="prog-content">0/3</span>
+              <label style="color:#27ae60">💡 翻译提示</label>
+              <div style="font-size:13px;color:#aaa;line-height:1.8;background:#0a1628;padding:10px;border-radius:6px;border:1px solid #1a2a3a">
+                1. 先写英文版，排好格式<br>
+                2. 切换到其他语言，直接粘贴翻译文字<br>
+                3. 用工具栏调整格式（标题、加粗、列表等）<br>
+                4. 4种语言格式可以不同，自由编辑
               </div>
             </div>
           </div>
@@ -576,43 +576,74 @@
               <button type="button" class="lang-tab" data-lang="fr" onclick="switchEditorLang('fr')" style="padding:10px 20px;background:#1a2a3a;color:#888;border:none;border-radius:6px 6px 0 0;cursor:pointer;font-weight:600;font-size:14px">🇫🇷 Français</button>
             </div>
             
-            <!-- 工具栏 - 简单实用 -->
-            <div class="editor-toolbar">
-              <button type="button" onclick="applyFormat('undo')" title="撤销上一步 (Ctrl+Z)">↩️ 撤销</button>
-              <button type="button" onclick="applyFormat('redo')" title="重做 (Ctrl+Y)">↪️ 重做</button>
+            <!-- 工具栏 - Word风格，简单实用 -->
+            <div class="editor-toolbar" style="flex-wrap:wrap;gap:4px;padding:10px">
+              <button type="button" onclick="applyFormat('undo')" title="撤销 (Ctrl+Z)" style="padding:6px 10px">↩️</button>
+              <button type="button" onclick="applyFormat('redo')" title="重做 (Ctrl+Y)" style="padding:6px 10px">↪️</button>
               <span class="toolbar-sep"></span>
-              <select onchange="applyFormat('formatBlock', this.value); this.value='';" style="padding:6px 10px;border:1px solid #2a4a6a;border-radius:4px;background:#0a1628;color:#fff;font-size:13px;cursor:pointer">
+              <!-- 段落样式 -->
+              <select onchange="applyFormat('formatBlock', this.value); this.value='';" style="padding:6px 8px;border:1px solid #2a4a6a;border-radius:4px;background:#0a1628;color:#fff;font-size:13px;cursor:pointer">
                 <option value="">段落样式</option>
-                <option value="h2">大标题 H2</option>
-                <option value="h3">中标题 H3</option>
-                <option value="h4">小标题 H4</option>
-                <option value="p">正文段落</option>
+                <option value="h1">标题 H1</option>
+                <option value="h2">标题 H2</option>
+                <option value="h3">标题 H3</option>
+                <option value="h4">标题 H4</option>
+                <option value="h5">标题 H5</option>
+                <option value="h6">标题 H6</option>
+                <option value="p">正文</option>
+                <option value="blockquote">引用</option>
+              </select>
+              <!-- 字体大小 -->
+              <select onchange="applyFormat('fontSize', this.value); this.value='3';" style="padding:6px 8px;border:1px solid #2a4a6a;border-radius:4px;background:#0a1628;color:#fff;font-size:13px;cursor:pointer">
+                <option value="1">极小</option>
+                <option value="2">小</option>
+                <option value="3" selected>正常</option>
+                <option value="4">中</option>
+                <option value="5">大</option>
+                <option value="6">特大</option>
+                <option value="7">极大</option>
               </select>
               <span class="toolbar-sep"></span>
-              <button type="button" onclick="applyFormat('bold')" title="加粗（选中文字后点击）"><b>B</b></button>
-              <button type="button" onclick="applyFormat('italic')" title="斜体"><i>I</i></button>
-              <button type="button" onclick="applyFormat('underline')" title="下划线"><u>U</u></button>
+              <!-- 基本格式 -->
+              <button type="button" onclick="applyFormat('bold')" title="加粗 (Ctrl+B)" style="padding:6px 12px;font-weight:bold;font-size:14px">B</button>
+              <button type="button" onclick="applyFormat('italic')" title="斜体 (Ctrl+I)" style="padding:6px 12px;font-style:italic;font-size:14px">I</button>
+              <button type="button" onclick="applyFormat('underline')" title="下划线 (Ctrl+U)" style="padding:6px 12px;text-decoration:underline;font-size:14px">U</button>
+              <button type="button" onclick="applyFormat('strikeThrough')" title="删除线" style="padding:6px 12px;text-decoration:line-through;font-size:14px">S</button>
               <span class="toolbar-sep"></span>
-              <button type="button" onclick="applyFormat('insertUnorderedList')" title="项目符号列表">• 列表</button>
-              <button type="button" onclick="applyFormat('insertOrderedList')" title="数字编号列表">1. 列表</button>
+              <!-- 文字颜色 -->
+              <label style="display:flex;align-items:center;gap:4px;cursor:pointer;padding:4px 8px;border:1px solid #2a4a6a;border-radius:4px;background:#0a1628">
+                <span style="font-size:12px;color:#aaa">A</span>
+                <input type="color" value="#ffffff" onchange="applyFormat('foreColor', this.value)" style="width:20px;height:20px;border:none;cursor:pointer;background:transparent;padding:0">
+              </label>
+              <!-- 背景颜色 -->
+              <label style="display:flex;align-items:center;gap:4px;cursor:pointer;padding:4px 8px;border:1px solid #2a4a6a;border-radius:4px;background:#0a1628">
+                <span style="font-size:12px;color:#aaa;background:#ffd700;color:#000;padding:0 3px">A</span>
+                <input type="color" value="#ffff00" onchange="applyFormat('hiliteColor', this.value)" style="width:20px;height:20px;border:none;cursor:pointer;background:transparent;padding:0">
+              </label>
               <span class="toolbar-sep"></span>
-              <button type="button" onclick="insertLink()" title="插入超链接">🔗 链接</button>
-              <button type="button" onclick="insertImage()" title="插入图片">🖼️ 图片</button>
-              <button type="button" onclick="insertTable()" title="插入表格">📊 表格</button>
+              <!-- 对齐方式 -->
+              <button type="button" onclick="applyFormat('justifyLeft')" title="左对齐" style="padding:6px 10px">⬅️</button>
+              <button type="button" onclick="applyFormat('justifyCenter')" title="居中" style="padding:6px 10px">⬛</button>
+              <button type="button" onclick="applyFormat('justifyRight')" title="右对齐" style="padding:6px 10px">➡️</button>
+              <button type="button" onclick="applyFormat('justifyFull')" title="两端对齐" style="padding:6px 10px">☰</button>
               <span class="toolbar-sep"></span>
-              <button type="button" onclick="applyFormat('removeFormat')" title="清除格式">🧹 清除</button>
-              <button type="button" onclick="togglePreview()" title="显示/隐藏预览">👁️ 预览</button>
-            </div>
-            
-            <!-- 复制格式按钮（非英文语言显示） -->
-            <div id="copy-format-bar" style="display:none;padding:10px;background:#1a3a2a;border:1px solid #2a5a4a;border-radius:6px;margin:10px 0">
-              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-                <span style="color:#7fdfb0;font-size:13px;font-weight:600">💡 格式同步：</span>
-                <button type="button" onclick="copyFormatFromEnglish()" style="padding:8px 16px;background:#27ae60;color:#fff;border:none;border-radius:4px;cursor:pointer;font-weight:600;font-size:13px">
-                  📋 从英文复制格式（只替换文字，保持HTML标签不变）
-                </button>
-                <span id="format-status" style="font-size:12px;color:#aaa"></span>
-              </div>
+              <!-- 列表 -->
+              <button type="button" onclick="applyFormat('insertUnorderedList')" title="无序列表" style="padding:6px 10px">• 列表</button>
+              <button type="button" onclick="applyFormat('insertOrderedList')" title="有序列表" style="padding:6px 10px">1. 列表</button>
+              <span class="toolbar-sep"></span>
+              <!-- 缩进 -->
+              <button type="button" onclick="applyFormat('outdent')" title="减少缩进" style="padding:6px 10px">⇤</button>
+              <button type="button" onclick="applyFormat('indent')" title="增加缩进" style="padding:6px 10px">⇥</button>
+              <span class="toolbar-sep"></span>
+              <!-- 插入 -->
+              <button type="button" onclick="insertLink()" title="插入链接" style="padding:6px 10px">🔗</button>
+              <button type="button" onclick="insertImage()" title="插入图片" style="padding:6px 10px">🖼️</button>
+              <button type="button" onclick="insertTable()" title="插入表格" style="padding:6px 10px">📊</button>
+              <button type="button" onclick="applyFormat('insertHorizontalRule')" title="分割线" style="padding:6px 10px">—</button>
+              <span class="toolbar-sep"></span>
+              <!-- 其他 -->
+              <button type="button" onclick="applyFormat('removeFormat')" title="清除格式" style="padding:6px 10px">🧹</button>
+              <button type="button" onclick="togglePreview()" title="预览" style="padding:6px 10px">👁️</button>
             </div>
             
             <!-- 编辑区 + 预览区 -->
@@ -622,13 +653,13 @@
                 <div id="field-content" class="editor-textarea" contenteditable="true" style="min-height:500px;outline:none;" oninput="updatePreview()"></div>
               </div>
               <div id="editor-es" class="lang-editor" style="display:none">
-                <div id="field-content-es" class="editor-textarea" contenteditable="true" style="min-height:500px;outline:none;" oninput="updateFormatStatus()"></div>
+                <div id="field-content-es" class="editor-textarea" contenteditable="true" style="min-height:500px;outline:none;" oninput="updatePreview()"></div>
               </div>
               <div id="editor-de" class="lang-editor" style="display:none">
-                <div id="field-content-de" class="editor-textarea" contenteditable="true" style="min-height:500px;outline:none;" oninput="updateFormatStatus()"></div>
+                <div id="field-content-de" class="editor-textarea" contenteditable="true" style="min-height:500px;outline:none;" oninput="updatePreview()"></div>
               </div>
               <div id="editor-fr" class="lang-editor" style="display:none">
-                <div id="field-content-fr" class="editor-textarea" contenteditable="true" style="min-height:500px;outline:none;" oninput="updateFormatStatus()"></div>
+                <div id="field-content-fr" class="editor-textarea" contenteditable="true" style="min-height:500px;outline:none;" oninput="updatePreview()"></div>
               </div>
               <div id="preview-panel" class="preview-panel" style="display:none">
                 <div class="preview-header">实时预览 (网站显示效果)</div>
@@ -640,9 +671,6 @@
           <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
             <button class="btn btn-primary" style="padding:15px 40px;font-size:16px" onclick="savePost('${filename}', ${isNew})">
               ${isNew ? 'Create Post' : 'Save Changes'}
-            </button>
-            <button class="btn btn-secondary" style="padding:15px 30px;font-size:16px" onclick="validateFormat()">
-              ✅ 验证格式一致性
             </button>
             <button class="btn btn-secondary" style="padding:15px 30px;font-size:16px" onclick="if(confirm('确定要离开吗？未保存的内容将丢失。')) window.location.hash='/'">
               ← 返回列表
@@ -667,10 +695,6 @@
             langEditor.innerHTML = content['content_' + lang];
           }
         });
-        
-        // 更新翻译进度
-        updateTranslationProgress();
-        updateFormatStatus();
       }, 50);
     }
 
@@ -699,144 +723,8 @@
           tab.classList.remove('active');
         }
       });
-      // 显示/隐藏复制格式按钮
-      const copyBar = document.getElementById('copy-format-bar');
-      if (copyBar) {
-        copyBar.style.display = lang === 'en' ? 'none' : 'block';
-      }
       // 更新预览
       updatePreview();
-      // 更新格式状态
-      updateFormatStatus();
-    }
-
-    // 从英文复制格式到当前语言
-    function copyFormatFromEnglish() {
-      const enEditor = document.getElementById('field-content');
-      const targetEditor = document.getElementById('field-content-' + currentEditorLang);
-      if (!enEditor || !targetEditor) {
-        alert('编辑器未找到');
-        return;
-      }
-      const enContent = enEditor.innerHTML;
-      if (!enContent || enContent === '<br>' || enContent.trim() === '') {
-        alert('英文内容为空，请先在英文版中写好内容并排好格式');
-        return;
-      }
-      // 复制HTML结构到目标编辑器
-      targetEditor.innerHTML = enContent;
-      // 更新状态
-      const status = document.getElementById('format-status');
-      if (status) {
-        status.textContent = '✅ 格式已复制！请替换文字内容，不要修改HTML标签';
-        status.style.color = '#27ae60';
-      }
-      // 更新翻译进度
-      updateTranslationProgress();
-      // 提示用户
-      alert('✅ 英文格式已复制到' + currentEditorLang.toUpperCase() + '编辑器！\n\n现在请只替换文字内容，不要删除或修改HTML标签（如<h2>、<p>、<strong>等）。\n\n建议：逐段替换，保持标签结构不变。');
-    }
-
-    // 更新格式状态
-    function updateFormatStatus() {
-      if (currentEditorLang === 'en') return;
-      const enEditor = document.getElementById('field-content');
-      const targetEditor = document.getElementById('field-content-' + currentEditorLang);
-      if (!enEditor || !targetEditor) return;
-      // 统计HTML标签数量
-      const enTags = (enEditor.innerHTML.match(/<[^>]+>/g) || []).length;
-      const targetTags = (targetEditor.innerHTML.match(/<[^>]+>/g) || []).length;
-      const status = document.getElementById('format-status');
-      if (status) {
-        if (targetTags === 0) {
-          status.textContent = '⚠️ 内容为空，建议先点击"从英文复制格式"';
-          status.style.color = '#f39c12';
-        } else if (enTags === targetTags) {
-          status.textContent = '✅ 格式一致（标签数：' + enTags + '）';
-          status.style.color = '#27ae60';
-        } else {
-          status.textContent = '⚠️ 格式不一致（英文：' + enTags + '标签，当前：' + targetTags + '标签）';
-          status.style.color = '#e74c3c';
-        }
-      }
-    }
-
-    // 更新翻译进度
-    function updateTranslationProgress() {
-      const langs = ['es', 'de', 'fr'];
-      // 标题
-      let titleCount = 0;
-      langs.forEach(lang => {
-        const el = document.getElementById('field-title-' + lang);
-        if (el && el.value.trim()) titleCount++;
-      });
-      document.getElementById('prog-title').textContent = titleCount + '/3';
-      document.getElementById('prog-title').style.color = titleCount === 3 ? '#27ae60' : '#f39c12';
-      // 分类
-      let catCount = 0;
-      langs.forEach(lang => {
-        const el = document.getElementById('field-category-' + lang);
-        if (el && el.value.trim()) catCount++;
-      });
-      document.getElementById('prog-category').textContent = catCount + '/3';
-      document.getElementById('prog-category').style.color = catCount === 3 ? '#27ae60' : '#f39c12';
-      // 摘要
-      let excerptCount = 0;
-      langs.forEach(lang => {
-        const el = document.getElementById('field-excerpt-' + lang);
-        if (el && el.value.trim()) excerptCount++;
-      });
-      document.getElementById('prog-excerpt').textContent = excerptCount + '/3';
-      document.getElementById('prog-excerpt').style.color = excerptCount === 3 ? '#27ae60' : '#f39c12';
-      // 正文
-      let contentCount = 0;
-      langs.forEach(lang => {
-        const el = document.getElementById('field-content-' + lang);
-        if (el && el.innerHTML.trim() && el.innerHTML !== '<br>') contentCount++;
-      });
-      document.getElementById('prog-content').textContent = contentCount + '/3';
-      document.getElementById('prog-content').style.color = contentCount === 3 ? '#27ae60' : '#f39c12';
-    }
-
-    // 验证格式一致性
-    function validateFormat() {
-      const langs = ['es', 'de', 'fr'];
-      const enEditor = document.getElementById('field-content');
-      const enTags = (enEditor.innerHTML.match(/<[^>]+>/g) || []).length;
-      let allMatch = true;
-      let report = '📊 格式一致性验证报告：\n\n';
-      report += '英文：' + enTags + '个HTML标签\n\n';
-      langs.forEach(lang => {
-        const editor = document.getElementById('field-content-' + lang);
-        const tags = (editor.innerHTML.match(/<[^>]+>/g) || []).length;
-        const hasContent = editor.innerHTML.trim() && editor.innerHTML !== '<br>';
-        if (!hasContent) {
-          report += lang.toUpperCase() + ': ⚠️ 内容为空\n';
-          allMatch = false;
-        } else if (tags === enTags) {
-          report += lang.toUpperCase() + ': ✅ 格式一致（' + tags + '标签）\n';
-        } else {
-          report += lang.toUpperCase() + ': ❌ 格式不一致（' + tags + '标签，应为' + enTags + '）\n';
-          allMatch = false;
-        }
-      });
-      report += '\n';
-      if (allMatch) {
-        report += '✅ 所有语言格式一致，可以保存！';
-        alert(report);
-      } else {
-        report += '⚠️ 部分语言格式不一致，建议点击"从英文复制格式"后重新翻译文字。';
-        if (confirm(report + '\n\n是否自动为所有未翻译的语言复制英文格式？')) {
-          langs.forEach(lang => {
-            const editor = document.getElementById('field-content-' + lang);
-            if (!editor.innerHTML.trim() || editor.innerHTML === '<br>') {
-              editor.innerHTML = enEditor.innerHTML;
-            }
-          });
-          updateTranslationProgress();
-          alert('✅ 已为空白语言复制英文格式，请替换文字内容后保存。');
-        }
-      }
     }
 
     // 更新manifest.json
@@ -1016,7 +904,6 @@
         editor.focus();
         document.execCommand(command, false, value);
         updatePreview();
-        updateFormatStatus();
       }
     }
     
