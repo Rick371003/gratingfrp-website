@@ -141,21 +141,30 @@
     }
     .editor-textarea {
       flex: 1;
-      padding: 16px;
-      background: #0d1b2e;
-      color: #e0e0e0;
-      border: 1px solid #2a4a6a;
-      border-radius: 0 0 0 6px;
-      font-family: 'Consolas', 'Monaco', monospace;
-      font-size: 14px;
-      line-height: 1.7;
-      resize: vertical;
+      padding: 24px;
+      background: #ffffff;
+      color: #333333;
+      border: 1px solid #ddd;
+      border-radius: 0 0 6px 6px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
       min-height: 500px;
+      outline: none;
     }
     .editor-textarea:focus {
-      outline: none;
       border-color: #f5a623;
+      box-shadow: 0 0 0 2px rgba(245, 166, 35, 0.15);
     }
+    .editor-textarea h2 { font-size: 22px; font-weight: 700; margin: 20px 0 10px; color: #1a1a1a; }
+    .editor-textarea h3 { font-size: 18px; font-weight: 700; margin: 16px 0 8px; color: #1a1a1a; }
+    .editor-textarea h4 { font-size: 16px; font-weight: 600; margin: 14px 0 6px; color: #333; }
+    .editor-textarea p { margin: 10px 0; }
+    .editor-textarea ul, .editor-textarea ol { margin: 10px 0; padding-left: 30px; }
+    .editor-textarea li { margin: 6px 0; }
+    .editor-textarea img { max-width: 100%; height: auto; border-radius: 6px; margin: 10px 0; }
+    .editor-textarea table { margin: 16px 0; border-collapse: collapse; }
+    .editor-textarea a { color: #f5a623; text-decoration: underline; }
     .preview-panel {
       flex: 1;
       border: 1px solid #2a4a6a;
@@ -500,42 +509,53 @@
           </div>
           <div class="form-group">
             <label>Content (正文编辑器) *</label>
-            <!-- 工具栏 -->
+            <!-- 工具栏 - 简单实用 -->
             <div class="editor-toolbar">
-              <button type="button" onclick="insertFormat('h2')" title="大标题（H2）" style="font-size:15px;font-weight:bold">大标题</button>
-              <button type="button" onclick="insertFormat('h3')" title="中标题（H3）" style="font-size:14px;font-weight:bold">中标题</button>
-              <button type="button" onclick="insertFormat('h4')" title="小标题（H4）" style="font-size:13px;font-weight:bold">小标题</button>
+              <select onchange="applyFormat('formatBlock', this.value); this.value='';" style="padding:6px 10px;border:1px solid #2a4a6a;border-radius:4px;background:#0a1628;color:#fff;font-size:13px;cursor:pointer">
+                <option value="">段落样式</option>
+                <option value="h2">大标题 H2</option>
+                <option value="h3">中标题 H3</option>
+                <option value="h4">小标题 H4</option>
+                <option value="p">正文段落</option>
+              </select>
               <span class="toolbar-sep"></span>
-              <button type="button" onclick="insertFormat('bold')" title="加粗"><b>B</b></button>
-              <button type="button" onclick="insertFormat('italic')" title="斜体"><i>I</i></button>
+              <button type="button" onclick="applyFormat('bold')" title="加粗（选中文字后点击）"><b>B</b></button>
+              <button type="button" onclick="applyFormat('italic')" title="斜体"><i>I</i></button>
+              <button type="button" onclick="applyFormat('underline')" title="下划线"><u>U</u></button>
               <span class="toolbar-sep"></span>
-              <button type="button" onclick="insertFormat('ul')" title="无序列表">• 列表</button>
-              <button type="button" onclick="insertFormat('ol')" title="有序列表">1. 列表</button>
-              <button type="button" onclick="insertFormat('quote')" title="引用">❝ 引用</button>
+              <button type="button" onclick="applyFormat('insertUnorderedList')" title="项目符号列表">• 列表</button>
+              <button type="button" onclick="applyFormat('insertOrderedList')" title="数字编号列表">1. 列表</button>
               <span class="toolbar-sep"></span>
               <button type="button" onclick="insertLink()" title="插入超链接">🔗 链接</button>
               <button type="button" onclick="insertImage()" title="插入图片">🖼️ 图片</button>
-              <button type="button" onclick="insertVideo()" title="插入视频">🎬 视频</button>
               <button type="button" onclick="insertTable()" title="插入表格">📊 表格</button>
               <span class="toolbar-sep"></span>
-              <button type="button" onclick="insertFormat('hr')" title="分割线">— 分割线</button>
+              <button type="button" onclick="applyFormat('removeFormat')" title="清除格式">🧹 清除</button>
               <button type="button" onclick="togglePreview()" title="显示/隐藏预览">👁️ 预览</button>
             </div>
             <!-- 编辑区 + 预览区 -->
             <div class="editor-container">
-              <textarea id="field-content" class="editor-textarea" style="min-height:500px" oninput="updatePreview()">${content.content || ''}</textarea>
+              <div id="field-content" class="editor-textarea" contenteditable="true" style="min-height:500px;outline:none;" oninput="updatePreview()"></div>
               <div id="preview-panel" class="preview-panel" style="display:none">
                 <div class="preview-header">实时预览 (网站显示效果)</div>
                 <div id="preview-content" class="preview-content"></div>
               </div>
             </div>
-            <div class="hint">支持Markdown语法。点击工具栏按钮快速插入格式。图片/视频会自动嵌入。</div>
+            <div class="hint">💡 像Word一样编辑：选中文字点"B"加粗，点"• 列表"变项目符号。支持直接粘贴Word内容。</div>
           </div>
           <button class="btn btn-primary" style="padding:15px 40px;font-size:16px" onclick="savePost('${filename}', ${isNew})">
             ${isNew ? 'Create Post' : 'Save Changes'}
           </button>
         </div>
       `;
+      // 富文本编辑器：设置文章内容到contentEditable
+      setTimeout(() => {
+        const editor = document.getElementById('field-content');
+        if (editor && content.content) {
+          editor.innerHTML = content.content;
+          updatePreview();
+        }
+      }, 50);
     }
 
     // 更新manifest.json
@@ -706,32 +726,19 @@
       updatePreview();
     }
     
-    // 插入格式
-    function insertFormat(type) {
-      const formats = {
-        'h2': '\n## {text}\n',
-        'h3': '\n### {text}\n',
-        'h4': '\n#### {text}\n',
-        'bold': '**{text}**',
-        'italic': '*{text}*',
-        'ul': '\n- {text}\n- 列表项2\n- 列表项3\n',
-        'ol': '\n1. {text}\n2. 列表项2\n3. 列表项3\n',
-        'quote': '\n> {text}\n',
-        'hr': '\n\n---\n\n'
-      };
-      const format = formats[type] || '';
-      if (format) {
-        insertAtCursor(format);
-      }
+    // 富文本格式化（像Word一样操作）
+    function applyFormat(command, value = null) {
+      const editor = document.getElementById('field-content');
+      editor.focus();
+      document.execCommand(command, false, value);
+      updatePreview();
     }
     
     // 插入超链接
     function insertLink() {
       const url = prompt('请输入链接地址 (URL):', 'https://');
       if (!url) return;
-      const text = prompt('请输入链接文字 (显示的文字):', '点击这里');
-      const linkText = text || url;
-      insertAtCursor(`[${linkText}](${url})`);
+      applyFormat('createLink', url);
     }
     
     // 插入图片
@@ -770,7 +777,15 @@
               if (!response.ok) throw new Error('Upload failed');
               const rawUrl = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${path}`;
               const alt = prompt('请输入图片描述 (alt文字，用于SEO):', filename);
-              insertAtCursor(`\n![${alt || 'image'}](${rawUrl})\n`);
+              // 插入图片到编辑器
+              const editor = document.getElementById('field-content');
+              editor.focus();
+              document.execCommand('insertImage', false, rawUrl);
+              // 给图片加alt属性
+              const imgs = editor.querySelectorAll('img');
+              const lastImg = imgs[imgs.length - 1];
+              if (lastImg) lastImg.alt = alt || 'image';
+              updatePreview();
               alert('图片上传成功！已插入到文章中。');
             } catch(err) {
               alert('图片上传失败: ' + err.message);
@@ -784,7 +799,13 @@
         const url = prompt('请输入图片URL:', 'https://');
         if (!url) return;
         const alt = prompt('请输入图片描述 (alt文字，用于SEO):', 'image');
-        insertAtCursor(`\n![${alt || 'image'}](${url})\n`);
+        const editor = document.getElementById('field-content');
+        editor.focus();
+        document.execCommand('insertImage', false, url);
+        const imgs = editor.querySelectorAll('img');
+        const lastImg = imgs[imgs.length - 1];
+        if (lastImg) lastImg.alt = alt || 'image';
+        updatePreview();
       }
     }
     
@@ -793,10 +814,8 @@
       const url = prompt('请输入视频地址 (支持YouTube/Vimeo链接或直接视频URL):', 'https://');
       if (!url) return;
       
-      // 判断视频类型
       let videoHtml = '';
       if (url.includes('youtube.com') || url.includes('youtu.be')) {
-        // YouTube视频
         let videoId = '';
         if (url.includes('youtu.be/')) {
           videoId = url.split('youtu.be/')[1].split('?')[0];
@@ -804,25 +823,26 @@
           videoId = url.split('v=')[1].split('&')[0];
         }
         if (videoId) {
-          videoHtml = `\n<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>\n`;
+          videoHtml = `<p><iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>`;
         }
       } else if (url.includes('vimeo.com')) {
-        // Vimeo视频
         const videoId = url.split('vimeo.com/')[1].split('?')[0];
-        videoHtml = `\n<iframe src="https://player.vimeo.com/video/${videoId}" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>\n`;
+        videoHtml = `<p><iframe src="https://player.vimeo.com/video/${videoId}" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></p>`;
       } else {
-        // 直接视频URL
-        videoHtml = `\n<video width="100%" controls><source src="${url}" type="video/mp4">您的浏览器不支持视频播放。</video>\n`;
+        videoHtml = `<p><video width="100%" controls><source src="${url}" type="video/mp4">您的浏览器不支持视频播放。</video></p>`;
       }
       
       if (videoHtml) {
-        insertAtCursor(videoHtml);
+        const editor = document.getElementById('field-content');
+        editor.focus();
+        document.execCommand('insertHTML', false, videoHtml);
+        updatePreview();
       } else {
         alert('无法识别视频格式，请检查URL。');
       }
     }
     
-    // 插入表格
+    // 插入表格（HTML表格，可直接编辑）
     function insertTable() {
       const rows = prompt('请输入表格行数（包括表头）:', '4');
       if (!rows) return;
@@ -840,30 +860,32 @@
         return;
       }
       
-      // 生成Markdown表格
-      let tableMarkdown = '\n';
+      // 生成HTML表格
+      let tableHtml = '<table border="1" cellpadding="8" style="border-collapse:collapse;width:100%;margin:16px 0">';
       
       // 表头
-      let headerRow = '|';
-      let separatorRow = '|';
+      tableHtml += '<thead><tr>';
       for (let i = 0; i < colNum; i++) {
-        headerRow += ' 列' + (i + 1) + ' |';
-        separatorRow += ' --- |';
+        tableHtml += '<th style="background:#f5a623;color:#0a1628;font-weight:600">列' + (i + 1) + '</th>';
       }
-      tableMarkdown += headerRow + '\n' + separatorRow + '\n';
+      tableHtml += '</tr></thead>';
       
       // 数据行
+      tableHtml += '<tbody>';
       for (let r = 0; r < rowNum - 1; r++) {
-        let dataRow = '|';
+        tableHtml += '<tr>';
         for (let c = 0; c < colNum; c++) {
-          dataRow += ' 内容 |';
+          tableHtml += '<td>内容</td>';
         }
-        tableMarkdown += dataRow + '\n';
+        tableHtml += '</tr>';
       }
+      tableHtml += '</tbody></table><p></p>';
       
-      tableMarkdown += '\n';
-      insertAtCursor(tableMarkdown);
-      alert('表格已插入！请修改表头和内容。');
+      const editor = document.getElementById('field-content');
+      editor.focus();
+      document.execCommand('insertHTML', false, tableHtml);
+      updatePreview();
+      alert('表格已插入！直接点击单元格修改内容。');
     }
     
     // 切换预览显示
@@ -960,12 +982,12 @@
       return html;
     }
     
-    // 更新预览
+    // 更新预览（直接用HTML，所见即所得）
     function updatePreview() {
-      const text = document.getElementById('field-content').value;
+      const editor = document.getElementById('field-content');
       const previewContent = document.getElementById('preview-content');
-      if (previewContent) {
-        previewContent.innerHTML = markdownToHtml(text);
+      if (previewContent && editor) {
+        previewContent.innerHTML = editor.innerHTML;
       }
     }
 
@@ -978,7 +1000,7 @@
       const author = document.getElementById('field-author').value.trim();
       const img = document.getElementById('field-img').value.trim();
       const excerpt = document.getElementById('field-excerpt').value.trim();
-      const content = document.getElementById('field-content').value.trim();
+      const content = document.getElementById('field-content').innerHTML.trim();
 
       if (!id || !title || !content) {
         showAlert('Please fill in ID, Title, and Content', 'error');
