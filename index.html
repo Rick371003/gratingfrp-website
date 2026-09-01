@@ -1429,8 +1429,11 @@
   .faq-a .in{padding:0 26px 24px;color:var(--ink-soft);font-size:16px;line-height:1.8}
 
   /* ===== 联系 ===== */
-  .contact-wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:40px;align-items:start}
-  .contact-info{display:grid;gap:18px}
+  .contact-wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:40px;align-items:stretch}
+  .contact-info{display:flex;flex-direction:column;gap:18px;height:100%}
+  .contact-info > .cinfo{flex-shrink:0}
+  /* 宣传卡片自动撑开剩余空间，使两侧底部对齐 */
+  .contact-info > div[style*="background-image"]{flex:1;display:flex;flex-direction:column;justify-content:center}
   .cinfo{
     background:var(--surface-dark);border:1px solid var(--line);border-radius:var(--radius);
     padding:22px;display:flex;gap:16px;align-items:flex-start;
@@ -1444,7 +1447,7 @@
   .cinfo p{color:var(--ink-soft);font-size:15.5px;line-height:1.65}
   .form{
     display:grid;gap:16px;background:var(--surface-dark);
-    border:1px solid var(--line);border-radius:var(--radius-lg);padding:32px;
+    border:1px solid var(--line);border-radius:var(--radius-lg);padding:32px;height:100%;align-content:start;
   }
   .form h2{font-family:var(--display);font-size:22px;font-weight:700;margin-bottom:6px;color:#fff}
   .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -3926,7 +3929,7 @@
             <div class="cicon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
             <div><h3 data-i18n="contact.workingHours">Working Hours</h3><p>Mon – Sat · 08:30 – 18:00 (GMT+8)</p></div>
           </div>
-          <div style="margin-top:12px;padding:60px 40px 56px;background-image:url('https://aka.doubaocdn.com/s/JIcsodJoUX');background-size:cover;background-position:center;background-repeat:no-repeat;border:1px solid rgba(245,184,0,.4);border-radius:var(--radius-lg);position:relative;overflow:hidden">
+          <div style="margin-top:12px;padding:56px 40px 40px;background-image:url('https://aka.doubaocdn.com/s/JIcsodJoUX');background-size:cover;background-position:center;background-repeat:no-repeat;border:1px solid rgba(245,184,0,.4);border-radius:var(--radius-lg);position:relative;overflow:hidden">
             <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,18,26,.92),rgba(10,18,26,.82))"></div>
             <div class="grating-pattern" style="position:absolute;inset:0;opacity:.12"></div>
             <div style="position:relative;z-index:2;text-align:center">
