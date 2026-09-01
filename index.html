@@ -824,13 +824,19 @@
   .hamburger span{display:block;width:24px;height:2px;background:#fff;margin:5px 0;transition:.25s}
   .mobile-menu{
     display:none;position:fixed;inset:0;z-index:110;
-    background:var(--deep);color:#fff;padding:80px 32px 40px;flex-direction:column;gap:4px;
+    background:var(--deep);color:#fff;padding:80px 32px 40px;flex-direction:column;gap:2px;
     overflow-y:auto;-webkit-overflow-scrolling:touch;
   }
   .mobile-menu.open{display:flex}
   .mobile-menu a{
-    font-family:var(--display);font-size:22px;font-weight:500;letter-spacing:.04em;
-    padding:14px 0;border-bottom:1px solid var(--line);
+    font-family:var(--display);font-size:18px;font-weight:500;letter-spacing:.04em;
+    padding:11px 0;border-bottom:1px solid var(--line);
+  }
+  /* Contact按钮突出显示 */
+  .mobile-menu a.mobile-contact-btn{
+    background:var(--accent);color:#fff;text-align:center;border-radius:8px;
+    padding:14px 20px;margin-bottom:12px;font-size:18px;font-weight:600;
+    border-bottom:none;
   }
 
   /* ===== 视图 ===== */
@@ -2769,6 +2775,7 @@
 
 <!-- ===== 移动菜单 ===== -->
 <div class="mobile-menu" id="mobile-menu">
+  <a href="#/contact" data-nav class="mobile-contact-btn" data-i18n="nav.contact">📞 Contact Us</a>
   <a href="#/" data-nav data-i18n="nav.home">Home</a>
   <a href="#/products" data-nav data-i18n="nav.products">Products</a>
   <a href="#/catalogue" data-nav data-i18n="nav.catalogue">Catalogue</a>
@@ -2778,7 +2785,6 @@
   <a href="#/calculator" data-nav>💰 <span data-i18n="nav.calculator">Calculator</span></a>
   <a href="#/about" data-nav data-i18n="nav.about">About</a>
   <a href="#/faq" data-nav data-i18n="nav.faq">FAQ</a>
-  <a href="#/contact" data-nav data-i18n="nav.contact">Contact</a>
   <div class="mobile-lang-switcher">
     <button class="lang-btn active" onclick="switchLanguage('en');closeMobile()">EN</button>
     <button class="lang-btn" onclick="switchLanguage('es');closeMobile()">ES</button>
