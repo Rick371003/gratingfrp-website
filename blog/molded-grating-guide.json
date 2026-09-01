@@ -1,10 +1,19 @@
 {
   "id": "molded-grating-guide",
   "title": "FRP Molded Grating: Complete Technical Guide & 2026 Market Analysis",
+  "title_es": "Rejilla FRP Moldeada: Guía Técnica Completa y Análisis de Mercado 2026",
+  "title_de": "FRP-Geformtes Gitter: Vollständige Technische Anleitung & Marktanalyse 2026",
+  "title_fr": "Grille FRP Moulée: Guide Technique Complet et Analyse de Marché 2026",
   "category": "Technical Guides",
+  "category_es": "Guías Técnicas",
+  "category_de": "Technische Anleitungen",
+  "category_fr": "Guides Techniques",
   "date": "Aug 25, 2026",
   "author": "Engineering Team",
   "excerpt": "A comprehensive technical guide covering molded FRP grating manufacturing process, material specifications, mechanical performance, corrosion resistance, and 2026 global market trends.",
+  "excerpt_es": "Una guía técnica completa que cubre el proceso de fabricación de rejillas FRP moldeadas, especificaciones de materiales, rendimiento mecánico, resistencia a la corrosión y tendencias del mercado global 2026.",
+  "excerpt_de": "Eine umfassende technische Anleitung zum Herstellungsprozess von geformten FRP-Gittern, Materialspezifikationen, mechanischer Leistung, Korrosionsbeständigkeit und globalen Markttrends 2026.",
+  "excerpt_fr": "Un guide technique complet couvrant le processus de fabrication des grilles FRP moulées, les spécifications des matériaux, les performances mécaniques, la résistance à la corrosion et les tendances du marché mondial 2026.",
   "img": "https://aka.doubaocdn.com/s/0fmkAXNc5Y",
   "content": "<h3>1. Manufacturing Process Overview</h3><p>FRP molded grating is manufactured by casting continuous glass fiber strands and thermosetting resin in precision-heated metal molds. The process creates a one-piece, integrated grid structure with bidirectional strength. Key manufacturing parameters include mold temperature (140-160°C), curing time (8-15 minutes), resin injection pressure (2-4 bar), and glass fiber content (60-65% by weight).</p><h3>2. Material Specifications & Standards</h3><p>Standard molded grating panels are 1220mm × 3660mm, with thickness options of 25mm, 30mm, 38mm, and 50mm. Mesh sizes are typically 38×38mm or 40×40mm square opening. Resin systems include general-purpose polyester (ASTM D3299), isophthalic polyester (ASTM D3567), and vinyl ester (ASTM D4162). Glass fiber types include E-glass (electrical grade) and C-glass (chemical grade).</p><h3>3. Mechanical Performance Data</h3><p>38mm thick molded grating with 38×38mm mesh typically achieves: bending strength 180-220 MPa, tensile strength 280-320 MPa, compressive strength 120-150 MPa, elastic modulus 12-15 GPa, and Barcol hardness 40-50. Load capacity at 600mm span: pedestrian load 5 kN/m², medium load 10 kN/m², heavy load 15 kN/m². Deflection limit is typically L/200 per industrial standards.</p><h3>4. Corrosion Resistance Performance</h3><p>Vinyl ester molded grating demonstrates excellent resistance to 50% sulfuric acid (weight loss <2% after 90 days immersion), 30% sodium hydroxide (<1.5% weight loss), and most organic solvents. Isophthalic polyester performs well in mild to moderate chemical environments. Operating temperature range: -40°C to +80°C continuous, with intermittent exposure up to 120°C for vinyl ester systems.</p><h3>5. 2026 Global Market Analysis</h3><p>The global FRP molded grating market is projected to reach USD 1.85 billion by 2026, growing at a CAGR of 6.2% from 2024. Key growth drivers include: infrastructure modernization in developing economies, replacement of corroded steel grating in chemical plants, increasing demand from wastewater treatment sector, and growing adoption in renewable energy projects (solar farm walkways). Asia-Pacific dominates with 42% market share, followed by North America (28%) and Europe (20%).</p>"
 }
