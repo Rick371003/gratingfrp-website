@@ -808,7 +808,8 @@
                 })
               });
               if (!response.ok) throw new Error('Upload failed');
-              const rawUrl = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${path}`;
+              // 使用网站域名，通过Cloudflare CDN加速
+              const rawUrl = `https://gratingfrp.com/blog/images/${filename}`;
               const alt = prompt('请输入图片描述 (alt文字，用于SEO):', filename);
               // 插入图片到编辑器
               const editor = document.getElementById('field-content');
