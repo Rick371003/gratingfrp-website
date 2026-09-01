@@ -7250,6 +7250,7 @@ async function refreshBlogPosts(){
 }
 
 /* ===== 初始化 ===== */
+// 先渲染静态内容
 try{
   renderHomeProducts();
   renderProductsList();
@@ -7259,31 +7260,49 @@ try{
   renderHomeBlog();
   renderBlogList();
   renderVideoList(videos);
-  loadVideos(); // 从JSON文件动态加载视频（后台编辑后自动更新）
   renderFaqs();
-  // 安全设置about-thumb图片（元素可能不存在）
   const aboutThumbEl = document.getElementById('about-thumb');
   if(aboutThumbEl){
     aboutThumbEl.innerHTML = '<img src="https://aka.doubaocdn.com/s/HPDcB5ZsIi" alt="FRP fiberglass grating manufacturing factory panoramic view China production facility" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">';
   }
+}catch(e){
+  console.error('Render error:', e);
+}
+
+// 路由（独立try-catch，不影响博客加载）
+try{
   window.addEventListener('hashchange', navigate);
   navigate();
-  // 动态加载blog文章（后台编辑后自动更新）
-  loadBlogPosts();
-  // 页面完全加载后再加载一次（确保manifest和文章都能正确加载）
-  window.addEventListener('load', () => {
-    setTimeout(loadBlogPosts, 500);
-  });
-  // 如果第一次加载失败，2秒后自动重试一次
-  setTimeout(() => {
-    if(lastPostCount === 0){
-      console.log('[Blog] First load may have failed, retrying...');
-      loadBlogPosts();
-    }
-  }, 2000);
 }catch(e){
-  console.error('Initialization error:', e);
+  console.error('Navigate error:', e);
 }
+
+// 动态加载视频（独立try-catch）
+try{
+  loadVideos();
+}catch(e){
+  console.error('Load videos error:', e);
+}
+
+// 动态加载博客文章（最重要，独立try-catch，确保一定执行）
+function safeLoadBlogPosts(){
+  try{
+    loadBlogPosts();
+  }catch(e){
+    console.error('[Blog] loadBlogPosts error:', e);
+  }
+}
+safeLoadBlogPosts();
+
+// 页面完全加载后再加载一次
+window.addEventListener('load', () => {
+  setTimeout(safeLoadBlogPosts, 500);
+});
+
+// 多重重试机制：1秒、3秒、5秒各重试一次
+setTimeout(safeLoadBlogPosts, 1000);
+setTimeout(safeLoadBlogPosts, 3000);
+setTimeout(safeLoadBlogPosts, 5000);
 
 /* ===== PDF预览与下载 ===== */
 const pdfUrls = {
