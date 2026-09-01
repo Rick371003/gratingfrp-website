@@ -5468,9 +5468,23 @@ async function autoTranslate(text, fromLang, toLang) {
   try {
     const response = await fetch('https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=' + fromLang + '|' + toLang);
     const data = await response.json();
+    // 检查响应状态，如果不是200则返回原文
+    if (data.responseStatus && data.responseStatus !== 200) {
+      console.warn('Translation API status:', data.responseStatus, data.responseDetails);
+      return text;
+    }
     if (data.responseData && data.responseData.translatedText) {
-      translationCache[cacheKey] = data.responseData.translatedText;
-      return data.responseData.translatedText;
+      const translated = data.responseData.translatedText;
+      // 检测并过滤MyMemory警告信息
+      if (translated.includes('MYMEMORY WARNING') || 
+          translated.includes('YOU USED ALL AVAILABLE') || 
+          translated.includes('NEXT AVAILABLE IN') ||
+          translated.includes('TRANSLATED.NET')) {
+        console.warn('MyMemory quota exceeded, returning original text');
+        return text;
+      }
+      translationCache[cacheKey] = translated;
+      return translated;
     }
   } catch (e) {
     console.error('Translation error:', e);
