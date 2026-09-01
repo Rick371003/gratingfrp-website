@@ -7113,6 +7113,37 @@ function showToast(msg){
 /* ===== 动态加载Blog文章（从blog文件夹JSON文件） ===== */
 let lastPostCount = 0; // 记录上次加载的文章数量，用于检测新文章
 let hasNewPosts = false; // 是否有新文章
+const BLOG_CACHE_KEY = 'frp_blog_posts_cache';
+
+// 从localStorage读取缓存的文章并立即渲染（第二次访问时秒开）
+function loadBlogFromCache(){
+  try{
+    const cached = localStorage.getItem(BLOG_CACHE_KEY);
+    if(cached){
+      const cachedPosts = JSON.parse(cached);
+      if(Array.isArray(cachedPosts) && cachedPosts.length > 0){
+        posts = cachedPosts;
+        renderHomeBlog();
+        renderBlogList();
+        lastPostCount = posts.length;
+        console.log('[Blog] Loaded', cachedPosts.length, 'posts from cache (instant display)');
+        return true;
+      }
+    }
+  }catch(e){
+    console.warn('[Blog] Cache read failed:', e);
+  }
+  return false;
+}
+
+// 保存文章到localStorage缓存
+function saveBlogToCache(postsArray){
+  try{
+    localStorage.setItem(BLOG_CACHE_KEY, JSON.stringify(postsArray));
+  }catch(e){
+    console.warn('[Blog] Cache save failed:', e);
+  }
+}
 
 async function loadBlogPosts(){
   try{
@@ -7128,10 +7159,8 @@ async function loadBlogPosts(){
     if(!manifest.posts || !manifest.posts.length) throw new Error('no posts in manifest');
     console.log('[Blog] Manifest loaded,', manifest.posts.length, 'posts found');
     
-    // 逐个加载文章JSON文件
-    const loadedPosts = [];
-    const failedPosts = [];
-    for(const filename of manifest.posts){
+    // 并行加载所有文章JSON文件（比逐个加载快很多）
+    const loadPromises = manifest.posts.map(async (filename) => {
       try{
         const postUrl = '/blog/' + filename + cacheBuster;
         const res = await fetch(postUrl, {cache: 'no-store'});
@@ -7142,19 +7171,23 @@ async function loadBlogPosts(){
             post.id = filename.replace(/\.json$/i, '');
             console.warn('[Blog] Post missing id field, using filename:', post.id);
           }
-          loadedPosts.push(post);
-        } else {
-          failedPosts.push({filename, status: res.status});
+          return post;
         }
+        return null;
       }catch(e){
         console.warn('Failed to load post:', filename, e);
-        failedPosts.push({filename, error: e.message});
+        return null;
       }
-    }
+    });
+    
+    const results = await Promise.all(loadPromises);
+    const loadedPosts = results.filter(p => p !== null);
+    const failedPosts = results.filter(p => p === null).length;
     
     console.log('[Blog] Manifest has', manifest.posts.length, 'posts, loaded', loadedPosts.length, 'successfully, failed:', failedPosts.length);
     console.log('[Blog] Loaded post IDs:', loadedPosts.map(p=>p.id));
     
+    // 不管加载成功几篇，都合并并重新渲染（关键修复！）
     if(loadedPosts.length > 0){
       // 按日期排序（最新的在前）
       loadedPosts.sort((a,b) => new Date(b.date) - new Date(a.date));
@@ -7164,28 +7197,23 @@ async function loadBlogPosts(){
       posts = [...loadedPosts, ...hardcodedPosts];
       // 重新按日期排序
       posts.sort((a,b) => new Date(b.date) - new Date(a.date));
-      
-      // 检测是否有新文章
-      if(lastPostCount > 0 && posts.length > lastPostCount){
-        hasNewPosts = true;
-        const newCount = posts.length - lastPostCount;
-        console.log('Detected', newCount, 'new article(s), auto-refreshing...');
-        // 自动更新，不需要用户点击
-        showToast('✨ ' + newCount + ' new article' + (newCount > 1 ? 's' : '') + ' published! Refreshing...');
-        // 重新渲染当前页面
-        renderHomeBlog();
-        renderBlogList();
-      }
-      lastPostCount = posts.length;
-      
-      // 重新渲染博客列表
-      renderHomeBlog();
-      renderBlogList();
-      console.log('Loaded', loadedPosts.length, 'blog posts from JSON files, total', posts.length, 'posts');
+      console.log('[Blog] Total posts after merge:', posts.length, 'IDs:', posts.map(p=>p.id));
+      // 保存到localStorage缓存，下次访问秒开
+      saveBlogToCache(posts);
+    } else {
+      console.log('[Blog] No posts loaded from JSON, using hardcoded posts only');
     }
+    
+    // 无论如何都重新渲染（关键！）
+    lastPostCount = posts.length;
+    renderHomeBlog();
+    renderBlogList();
+    console.log('[Blog] Blog list rendered, total posts:', posts.length);
   }catch(e){
-    console.log('Using default blog posts (dynamic load failed):', e.message);
-    // 加载失败时保留硬编码的默认数据
+    console.error('[Blog] loadBlogPosts error:', e);
+    // 出错时也重新渲染硬编码文章
+    renderHomeBlog();
+    renderBlogList();
   }
 }
 
@@ -7292,17 +7320,33 @@ function safeLoadBlogPosts(){
     console.error('[Blog] loadBlogPosts error:', e);
   }
 }
+
+// 第一步：先从localStorage缓存读取，实现秒开（第二次访问时文章立即显示，不需要等）
+loadBlogFromCache();
+
+// 第二步：异步加载最新数据，有更新就自动刷新
 safeLoadBlogPosts();
 
-// 页面完全加载后再加载一次
+// 页面完全加载后再加载一次（确保成功）
 window.addEventListener('load', () => {
-  setTimeout(safeLoadBlogPosts, 500);
+  setTimeout(safeLoadBlogPosts, 300);
 });
 
-// 多重重试机制：1秒、3秒、5秒各重试一次
-setTimeout(safeLoadBlogPosts, 1000);
-setTimeout(safeLoadBlogPosts, 3000);
-setTimeout(safeLoadBlogPosts, 5000);
+// 添加博客加载提示
+(function(){
+  const blogListEl = document.getElementById('blog-list');
+  if(blogListEl){
+    const loadingTip = document.createElement('div');
+    loadingTip.id = 'blog-loading-tip';
+    loadingTip.style.cssText = 'grid-column:1/-1;text-align:center;padding:20px;color:var(--ink-mute);font-size:14px;';
+    loadingTip.innerHTML = '⏳ Loading articles...';
+    blogListEl.parentNode.insertBefore(loadingTip, blogListEl.nextSibling);
+    // 3秒后隐藏提示
+    setTimeout(() => {
+      if(loadingTip.parentNode) loadingTip.remove();
+    }, 3000);
+  }
+})();
 
 /* ===== PDF预览与下载 ===== */
 const pdfUrls = {
