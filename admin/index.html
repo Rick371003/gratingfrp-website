@@ -511,6 +511,9 @@
             <label>Content (正文编辑器) *</label>
             <!-- 工具栏 - 简单实用 -->
             <div class="editor-toolbar">
+              <button type="button" onclick="applyFormat('undo')" title="撤销上一步 (Ctrl+Z)">↩️ 撤销</button>
+              <button type="button" onclick="applyFormat('redo')" title="重做 (Ctrl+Y)">↪️ 重做</button>
+              <span class="toolbar-sep"></span>
               <select onchange="applyFormat('formatBlock', this.value); this.value='';" style="padding:6px 10px;border:1px solid #2a4a6a;border-radius:4px;background:#0a1628;color:#fff;font-size:13px;cursor:pointer">
                 <option value="">段落样式</option>
                 <option value="h2">大标题 H2</option>
@@ -545,6 +548,9 @@
           </div>
           <button class="btn btn-primary" style="padding:15px 40px;font-size:16px" onclick="savePost('${filename}', ${isNew})">
             ${isNew ? 'Create Post' : 'Save Changes'}
+          </button>
+          <button class="btn btn-secondary" style="padding:15px 30px;font-size:16px;margin-left:10px" onclick="if(confirm('确定要离开吗？未保存的内容将丢失。')) window.location.hash='/'">
+            ← 返回列表
           </button>
         </div>
       `;
