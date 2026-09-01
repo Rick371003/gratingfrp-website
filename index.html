@@ -5814,8 +5814,17 @@ function renderDetail(type, id){
         <a class="btn btn-outline" href="#/contact" data-nav style="margin-top:12px">Contact Us for Project Solution <span class="arrow">→</span></a>
       </div>`;
   } else if(type==='blog'){
-    const p = posts.find(x=>x.id===id);
-    if(!p) return;
+    // 增强文章查找：尝试多种ID格式（精确匹配、小写、去掉特殊字符、文件名匹配）
+    const normalizeId = (s) => (s || '').toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+    const normalizedId = normalizeId(id);
+    let p = posts.find(x=>x.id===id) 
+      || posts.find(x=>normalizeId(x.id)===normalizedId)
+      || posts.find(x=>x.id.toLowerCase()===id.toLowerCase())
+      || posts.find(x=>(x.id || '').replace(/\.json$/i,'') === id.replace(/\.json$/i,''));
+    if(!p) {
+      console.warn('Blog post not found for id:', id, 'Available ids:', posts.map(x=>x.id));
+      return;
+    }
     const pTitle = getBlogText(p, 'title');
     const pExcerpt = getBlogText(p, 'excerpt');
     const pCategory = getBlogText(p, 'category');
@@ -6315,7 +6324,15 @@ function navigate(){
   const hash = location.hash || '#/';
   const parts = hash.replace(/^#\//,'').split('/');
   const root = parts[0] || 'home';
-  const detailId = parts[1];
+  // 对URL中的ID进行解码，处理空格(%20)、特殊字符等
+  let detailId = parts[1];
+  if(detailId){
+    try{
+      detailId = decodeURIComponent(detailId);
+    }catch(e){
+      // 解码失败时保留原始值
+    }
+  }
   let activeView;
   if((root==='product'||root==='app'||root==='blog'||root==='project') && detailId){
     activeView='detail';
