@@ -45,6 +45,161 @@ Allow: /
 User-agent: Bytespider
 Allow: /
 
+# DeepSeek AI爬虫
+User-agent: DeepSeekBot
+Allow: /
+
+User-agent: deepseek-crawler
+Allow: /
+
+# 其他AI爬虫
+User-agent: YouBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: meta-llama
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Pinterestbot
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: WhatsAppBot
+Allow: /
+
+User-agent: WeChatBot
+Allow: /
+
+User-agent: QQBot
+Allow: /
+
+User-agent: DingTalkBot
+Allow: /
+
+User-agent: FeishuBot
+Allow: /
+
+User-agent: DingTalkBot
+Allow: /
+
+User-agent: 360Spider
+Allow: /
+
+User-agent: Sogou web spider
+Allow: /
+
+User-agent: Sosospider
+Allow: /
+
+User-agent: ia_archiver
+Allow: /
+
+User-agent: AhrefsBot
+Allow: /
+
+User-agent: SemrushBot
+Allow: /
+
+User-agent: MJ12bot
+Allow: /
+
+User-agent: DotBot
+Allow: /
+
+User-agent: Rogerbot
+Allow: /
+
+User-agent: PetalBot
+Allow: /
+
+User-agent: SearchmetricsBot
+Allow: /
+
+User-agent: SeznamBot
+Allow: /
+
+User-agent: EtaoSpider
+Allow: /
+
+User-agent: EasouSpider
+Allow: /
+
+User-agent: JikeSpider
+Allow: /
+
+User-agent: JikeSpider
+Allow: /
+
+User-agent: MojeekBot
+Allow: /
+
+User-agent: SeekportBot
+Allow: /
+
+User-agent: MegaIndex
+Allow: /
+
+User-agent: BLEXBot
+Allow: /
+
+User-agent: DotBot
+Allow: /
+
+User-agent: rogerbot
+Allow: /
+
+User-agent: PetalBot
+Allow: /
+
+User-agent: SearchmetricsBot
+Allow: /
+
+User-agent: SeznamBot
+Allow: /
+
+User-agent: EtaoSpider
+Allow: /
+
+User-agent: EasouSpider
+Allow: /
+
+User-agent: JikeSpider
+Allow: /
+
+User-agent: MojeekBot
+Allow: /
+
+User-agent: SeekportBot
+Allow: /
+
+User-agent: MegaIndex
+Allow: /
+
+User-agent: BLEXBot
+Allow: /
+
 # 站点地图
 Sitemap: https://gratingfrp.com/sitemap.xml
 Sitemap: https://www.gratingfrp.com/sitemap.xml
