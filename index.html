@@ -7118,18 +7118,23 @@ async function loadBlogPosts(){
   try{
     // 添加时间戳参数，避免浏览器/CDN缓存，确保每次都获取最新文件
     const cacheBuster = '?t=' + Date.now();
+    // 使用绝对路径，确保在任何URL下都能正确加载
+    const manifestUrl = '/blog/manifest.json' + cacheBuster;
+    console.log('[Blog] Loading manifest from:', manifestUrl);
     // 加载manifest.json获取文章列表
-    const manifestRes = await fetch('blog/manifest.json' + cacheBuster, {cache: 'no-store'});
-    if(!manifestRes.ok) throw new Error('manifest not found');
+    const manifestRes = await fetch(manifestUrl, {cache: 'no-store'});
+    if(!manifestRes.ok) throw new Error('manifest not found: ' + manifestRes.status);
     const manifest = await manifestRes.json();
     if(!manifest.posts || !manifest.posts.length) throw new Error('no posts in manifest');
+    console.log('[Blog] Manifest loaded,', manifest.posts.length, 'posts found');
     
     // 逐个加载文章JSON文件
     const loadedPosts = [];
     const failedPosts = [];
     for(const filename of manifest.posts){
       try{
-        const res = await fetch('blog/' + filename + cacheBuster, {cache: 'no-store'});
+        const postUrl = '/blog/' + filename + cacheBuster;
+        const res = await fetch(postUrl, {cache: 'no-store'});
         if(res.ok){
           const post = await res.json();
           // 自动修复：如果文章没有id字段，用文件名（去掉.json）作为id
@@ -7265,6 +7270,17 @@ try{
   navigate();
   // 动态加载blog文章（后台编辑后自动更新）
   loadBlogPosts();
+  // 页面完全加载后再加载一次（确保manifest和文章都能正确加载）
+  window.addEventListener('load', () => {
+    setTimeout(loadBlogPosts, 500);
+  });
+  // 如果第一次加载失败，2秒后自动重试一次
+  setTimeout(() => {
+    if(lastPostCount === 0){
+      console.log('[Blog] First load may have failed, retrying...');
+      loadBlogPosts();
+    }
+  }, 2000);
 }catch(e){
   console.error('Initialization error:', e);
 }
