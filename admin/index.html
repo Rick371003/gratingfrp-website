@@ -824,11 +824,11 @@
             throw new Error(error.message || `Upload failed: ${response.status}`);
           }
           
-          // 生成raw URL
-          const rawUrl = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${path}`;
+          // 生成CDN URL（用gratingfrp.com域名，经过Cloudflare加速，加载更快）
+          const cdnUrl = `https://gratingfrp.com/${path}`;
           
           // 自动填入URL输入框
-          document.getElementById('field-img').value = rawUrl;
+          document.getElementById('field-img').value = cdnUrl;
           
           statusEl.textContent = '上传成功！URL已自动填入';
           statusEl.style.color = '#28a745';
@@ -948,19 +948,24 @@
                 })
               });
               if (!response.ok) throw new Error('Upload failed');
-              // 使用网站域名，通过Cloudflare CDN加速
-              const rawUrl = `https://gratingfrp.com/blog/images/${filename}`;
+              // 使用网站域名，通过Cloudflare CDN加速（路径和上传路径保持一致）
+              const cdnUrl = `https://gratingfrp.com/${path}`;
               const alt = prompt('请输入图片描述 (alt文字，用于SEO):', filename);
-              // 插入图片到编辑器
-              const editor = document.getElementById('field-content');
+              // 插入图片到当前激活的语言编辑器
+              const editorId = currentEditorLang === 'en' ? 'field-content' : 'field-content-' + currentEditorLang;
+              const editor = document.getElementById(editorId);
+              if (!editor) {
+                alert('编辑器未找到，请刷新页面重试');
+                return;
+              }
               editor.focus();
-              document.execCommand('insertImage', false, rawUrl);
+              document.execCommand('insertImage', false, cdnUrl);
               // 给图片加alt属性
               const imgs = editor.querySelectorAll('img');
               const lastImg = imgs[imgs.length - 1];
               if (lastImg) lastImg.alt = alt || 'image';
               updatePreview();
-              alert('图片上传成功！已插入到文章中。');
+              alert('图片上传成功！已插入到' + currentEditorLang.toUpperCase() + '编辑器中。');
             } catch(err) {
               alert('图片上传失败: ' + err.message);
             }
@@ -1863,8 +1868,8 @@
             
             await saveToGitHub(path, base64, `Upload video thumbnail: ${filename}`);
             
-            const rawUrl = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${path}`;
-            document.getElementById(targetInputId).value = rawUrl;
+            const cdnUrl = `https://gratingfrp.com/${path}`;
+            document.getElementById(targetInputId).value = cdnUrl;
             alert('缩略图上传成功！URL已自动填入。');
           } catch(err) {
             alert('图片上传失败: ' + err.message);
