@@ -5709,11 +5709,12 @@ function renderDetail(type, id){
     title.textContent = pName;
     sub.textContent = pShort;
     // 恢复page-head标题显示（博客详情页会隐藏）
-    document.querySelector('#view-detail .page-head h1').style.display = '';
-    document.querySelector('#view-detail .page-head p').style.display = '';
-    document.querySelector('#view-detail .page-head').style.padding = '';
-    
-    // 更新SEO（产品详情页独立meta标签）
+    const detailTitleEl = document.querySelector('#view-detail .page-head h2');
+    if(detailTitleEl) detailTitleEl.style.display = '';
+    const detailSubEl = document.querySelector('#view-detail .page-head p');
+    if(detailSubEl) detailSubEl.style.display = '';
+    const detailPageHead = document.querySelector('#view-detail .page-head');
+    if(detailPageHead) detailPageHead.style.padding = '';
     updateSEO('products', {
       title: p.name + ' | FRP Grating Manufacturer - ZEALL',
       description: p.short + ' ' + (p.features ? p.features.join('. ') : '') + ' High quality FRP products from ZEALL, 20+ years factory experience.',
@@ -5777,9 +5778,12 @@ function renderDetail(type, id){
     sub.textContent = aShort;
     
     // 恢复page-head标题显示（博客详情页会隐藏）
-    document.querySelector('#view-detail .page-head h1').style.display = '';
-    document.querySelector('#view-detail .page-head p').style.display = '';
-    document.querySelector('#view-detail .page-head').style.padding = '';
+    const appTitleEl = document.querySelector('#view-detail .page-head h2');
+    if(appTitleEl) appTitleEl.style.display = '';
+    const appSubEl = document.querySelector('#view-detail .page-head p');
+    if(appSubEl) appSubEl.style.display = '';
+    const appPageHead = document.querySelector('#view-detail .page-head');
+    if(appPageHead) appPageHead.style.padding = '';
     
     // 恢复默认容器宽度（非博客页面）
     content.parentElement.style.maxWidth = '';
@@ -5814,15 +5818,19 @@ function renderDetail(type, id){
         <a class="btn btn-outline" href="#/contact" data-nav style="margin-top:12px">Contact Us for Project Solution <span class="arrow">→</span></a>
       </div>`;
   } else if(type==='blog'){
-    // 增强文章查找：尝试多种ID格式（精确匹配、小写、去掉特殊字符、文件名匹配）
+    // 增强文章查找：尝试多种ID格式（精确匹配、小写、去掉特殊字符、文件名匹配、标题slug匹配）
     const normalizeId = (s) => (s || '').toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
     const normalizedId = normalizeId(id);
+    // 从标题生成slug（用于匹配ID不规范的文章）
+    const titleToSlug = (s) => (s || '').toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
     let p = posts.find(x=>x.id===id) 
       || posts.find(x=>normalizeId(x.id)===normalizedId)
       || posts.find(x=>x.id.toLowerCase()===id.toLowerCase())
-      || posts.find(x=>(x.id || '').replace(/\.json$/i,'') === id.replace(/\.json$/i,''));
+      || posts.find(x=>(x.id || '').replace(/\.json$/i,'') === id.replace(/\.json$/i,''))
+      || posts.find(x=>titleToSlug(x.title)===normalizedId)
+      || posts.find(x=>titleToSlug(x.title).includes(normalizedId) || normalizedId.includes(titleToSlug(x.title)));
     if(!p) {
-      console.warn('Blog post not found for id:', id, 'Available ids:', posts.map(x=>x.id));
+      console.warn('Blog post not found for id:', id, 'Available ids:', posts.map(x=>x.id), 'Titles:', posts.map(x=>x.title));
       return;
     }
     const pTitle = getBlogText(p, 'title');
@@ -5834,10 +5842,13 @@ function renderDetail(type, id){
     title.textContent = '';
     sub.textContent = '';
     // 隐藏page-head的标题区域
-    document.querySelector('#view-detail .page-head h1').style.display = 'none';
-    document.querySelector('#view-detail .page-head p').style.display = 'none';
+    const blogTitleEl = document.querySelector('#view-detail .page-head h2');
+    if(blogTitleEl) blogTitleEl.style.display = 'none';
+    const blogSubEl = document.querySelector('#view-detail .page-head p');
+    if(blogSubEl) blogSubEl.style.display = 'none';
     // 减少page-head的高度
-    document.querySelector('#view-detail .page-head').style.padding = '60px 0 40px';
+    const blogPageHead = document.querySelector('#view-detail .page-head');
+    if(blogPageHead) blogPageHead.style.padding = '60px 0 40px';
     
     // 计算阅读时间（按每分钟250个单词计算）
     const wordCount = pContent ? pContent.replace(/<[^>]*>/g, '').split(/\s+/).length : 0;
@@ -7115,17 +7126,29 @@ async function loadBlogPosts(){
     
     // 逐个加载文章JSON文件
     const loadedPosts = [];
+    const failedPosts = [];
     for(const filename of manifest.posts){
       try{
         const res = await fetch('blog/' + filename + cacheBuster, {cache: 'no-store'});
         if(res.ok){
           const post = await res.json();
+          // 自动修复：如果文章没有id字段，用文件名（去掉.json）作为id
+          if(!post.id){
+            post.id = filename.replace(/\.json$/i, '');
+            console.warn('[Blog] Post missing id field, using filename:', post.id);
+          }
           loadedPosts.push(post);
+        } else {
+          failedPosts.push({filename, status: res.status});
         }
       }catch(e){
         console.warn('Failed to load post:', filename, e);
+        failedPosts.push({filename, error: e.message});
       }
     }
+    
+    console.log('[Blog] Manifest has', manifest.posts.length, 'posts, loaded', loadedPosts.length, 'successfully, failed:', failedPosts.length);
+    console.log('[Blog] Loaded post IDs:', loadedPosts.map(p=>p.id));
     
     if(loadedPosts.length > 0){
       // 按日期排序（最新的在前）
