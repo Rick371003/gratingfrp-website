@@ -29,28 +29,28 @@
 <meta name="msvalidate.01" content="">
 <meta name="yandex-verification" content="">
 
-<!-- ===== Favicon 网站图标（本地文件，最稳定） ===== -->
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=3">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=3">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png?v=3">
-<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=3">
-<link rel="icon" type="image/png" sizes="128x128" href="/favicon.png?v=3">
-<link rel="shortcut icon" href="/favicon.png?v=3" type="image/png">
-<link rel="apple-touch-icon" sizes="57x57" href="/favicon.png?v=3">
-<link rel="apple-touch-icon" sizes="60x60" href="/favicon.png?v=3">
-<link rel="apple-touch-icon" sizes="72x72" href="/favicon.png?v=3">
-<link rel="apple-touch-icon" sizes="76x76" href="/favicon.png?v=3">
-<link rel="apple-touch-icon" sizes="114x114" href="/favicon.png?v=3">
-<link rel="apple-touch-icon" sizes="120x120" href="/favicon.png?v=3">
-<link rel="apple-touch-icon" sizes="144x144" href="/favicon.png?v=3">
-<link rel="apple-touch-icon" sizes="152x152" href="/favicon.png?v=3">
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon.png?v=3">
-<meta name="msapplication-TileImage" content="/favicon.png?v=3">
-<meta name="msapplication-square70x70logo" content="/favicon.png?v=3">
-<meta name="msapplication-square150x150logo" content="/favicon.png?v=3">
-<meta name="msapplication-square310x310logo" content="/favicon.png?v=3">
-<meta name="msapplication-wide310x150logo" content="/favicon.png?v=3">
-<link rel="mask-icon" href="/favicon.png?v=3" color="#F0A500">
+<!-- ===== Favicon 网站图标（本地文件，64x64优化版） ===== -->
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=4">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=4">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png?v=4">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=4">
+<link rel="icon" type="image/png" sizes="128x128" href="/favicon.png?v=4">
+<link rel="shortcut icon" href="/favicon.png?v=4" type="image/png">
+<link rel="apple-touch-icon" sizes="57x57" href="/favicon.png?v=4">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicon.png?v=4">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicon.png?v=4">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicon.png?v=4">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicon.png?v=4">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicon.png?v=4">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicon.png?v=4">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicon.png?v=4">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon.png?v=4">
+<meta name="msapplication-TileImage" content="/favicon.png?v=4">
+<meta name="msapplication-square70x70logo" content="/favicon.png?v=4">
+<meta name="msapplication-square150x150logo" content="/favicon.png?v=4">
+<meta name="msapplication-square310x310logo" content="/favicon.png?v=4">
+<meta name="msapplication-wide310x150logo" content="/favicon.png?v=4">
+<link rel="mask-icon" href="/favicon.png?v=4" color="#F0A500">
 <link rel="manifest" href="/manifest.json">
 
 <!-- AI引擎优化meta标签（ChatGPT, DeepSeek, 豆包, Claude, Gemini等） -->
@@ -1348,15 +1348,59 @@
     background:var(--bg-2);border-bottom:1px solid var(--line);
     padding:28px 0;
   }
-  .trust-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;align-items:center}
+  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:center}
   .trust-item{display:flex;align-items:center;gap:12px}
   .trust-icon{
     width:40px;height:40px;border-radius:3px;background:var(--accent-soft);
     display:flex;align-items:center;justify-content:center;flex-shrink:0;
   }
   .trust-icon svg{width:20px;height:20px;stroke:var(--accent)}
-  .trust-text .t1{font-family:var(--display);font-size:14px;font-weight:600;color:#fff}
-  .trust-text .t2{font-size:11.5px;color:var(--ink-mute);letter-spacing:.04em}
+  .trust-text .t1{font-family:var(--display);font-size:14px;font-weight:600;color:#fff;white-space:nowrap}
+  .trust-text .t2{font-size:11.5px;color:var(--ink-mute);letter-spacing:.04em;white-space:nowrap}
+
+  /* 信任条手机端响应式：2列整齐排列 */
+  @media (max-width:768px){
+    .trust-grid{
+      grid-template-columns:repeat(2,1fr) !important;
+      gap:16px !important;
+    }
+    .trust-item{
+      justify-content:flex-start !important;
+      padding:8px 0 !important;
+    }
+    .trust-icon{
+      width:36px !important;
+      height:36px !important;
+    }
+    .trust-icon svg{
+      width:18px !important;
+      height:18px !important;
+    }
+    .trust-text .t1{
+      font-size:13px !important;
+      white-space:normal !important;
+    }
+    .trust-text .t2{
+      font-size:11px !important;
+      white-space:normal !important;
+    }
+  }
+
+  /* 小屏幕手机（480px以下） */
+  @media (max-width:480px){
+    .trust-grid{
+      gap:12px !important;
+    }
+    .trust-item{
+      gap:8px !important;
+    }
+    .trust-text .t1{
+      font-size:12px !important;
+    }
+    .trust-text .t2{
+      font-size:10px !important;
+    }
+  }
 
   /* ===== 通用章节 ===== */
   .section{padding:84px 0}
@@ -3512,10 +3556,6 @@
         <div class="trust-item">
           <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg></div>
           <div class="trust-text"><div class="t1" data-i18n="home.trust4Title">Strict QC</div><div class="t2" data-i18n="home.trust4Sub">Batch Inspection</div></div>
-        </div>
-        <div class="trust-item">
-          <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-          <div class="trust-text"><div class="t1" data-i18n="home.trust5Title">24h Reply</div><div class="t2" data-i18n="home.trust5Sub">Fast Quotation</div></div>
         </div>
       </div>
     </div>
