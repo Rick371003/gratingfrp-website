@@ -673,6 +673,194 @@
     background: linear-gradient(90deg, rgba(214,145,0,.08), transparent);
   }
   
+  /* ===== 浅色主题全局修复：解决硬编码白色文字看不清问题 ===== */
+  body.light-mode h1,
+  body.light-mode h2,
+  body.light-mode h3,
+  body.light-mode h4,
+  body.light-mode h5,
+  body.light-mode h6,
+  body.light-mode p,
+  body.light-mode span,
+  body.light-mode li,
+  body.light-mode td,
+  body.light-mode th,
+  body.light-mode label,
+  body.light-mode a:not(.btn):not(.lang-btn){
+    color: var(--ink) !important;
+  }
+  /* 按钮文字保持白色 */
+  body.light-mode .btn,
+  body.light-mode .btn-primary,
+  body.light-mode .btn-outline,
+  body.light-mode .lang-btn,
+  body.light-mode .mobile-contact-btn{
+    color: #fff !important;
+  }
+  body.light-mode .btn-outline{
+    color: var(--accent) !important;
+  }
+  /* 深色背景区域改为浅色 */
+  body.light-mode .hero,
+  body.light-mode .page-head,
+  body.light-mode .section-dark,
+  body.light-mode .cta-section,
+  body.light-mode footer{
+    background: var(--bg-2) !important;
+    color: var(--ink) !important;
+  }
+  /* 卡片背景 */
+  body.light-mode .card,
+  body.light-mode .bcard,
+  body.light-mode .cinfo,
+  body.light-mode .form,
+  body.light-mode .tech-card,
+  body.light-mode .app-card,
+  body.light-mode .case-card,
+  body.light-mode .value-card,
+  body.light-mode .stat-card{
+    background: var(--surface) !important;
+    border-color: var(--line) !important;
+  }
+  /* 次要文字颜色 */
+  body.light-mode .lead,
+  body.light-mode .subtitle,
+  body.light-mode .desc,
+  body.light-mode .form-note,
+  body.light-mode .eyebrow{
+    color: var(--ink-soft) !important;
+  }
+  /* 输入框 */
+  body.light-mode input,
+  body.light-mode select,
+  body.light-mode textarea{
+    background: var(--surface) !important;
+    color: var(--ink) !important;
+    border-color: var(--line) !important;
+  }
+  /* 表格 */
+  body.light-mode table{
+    color: var(--ink) !important;
+  }
+  body.light-mode th{
+    background: var(--bg-3) !important;
+  }
+  /* 代码块 */
+  body.light-mode code,
+  body.light-mode pre{
+    background: var(--bg-3) !important;
+    color: var(--ink) !important;
+  }
+  /* 引用块 */
+  body.light-mode blockquote{
+    border-left-color: var(--accent) !important;
+    background: var(--accent-soft) !important;
+    color: var(--ink) !important;
+  }
+  /* 分隔线 */
+  body.light-mode hr{
+    border-color: var(--line) !important;
+  }
+  /* 移动菜单 */
+  body.light-mode .mobile-menu{
+    background: var(--bg-2) !important;
+  }
+  body.light-mode .mobile-menu a{
+    color: var(--ink) !important;
+    border-bottom-color: var(--line) !important;
+  }
+  /* 汉堡按钮 */
+  body.light-mode .hamburger span{
+    background: var(--ink) !important;
+  }
+  /* 导航栏 */
+  body.light-mode nav.desktop{
+    background: rgba(255,255,255,.95) !important;
+    backdrop-filter: blur(10px);
+  }
+  body.light-mode nav.desktop a{
+    color: var(--ink) !important;
+  }
+  body.light-mode nav.desktop a:hover{
+    color: var(--accent) !important;
+  }
+  /* 页脚文字 */
+  body.light-mode footer p,
+  body.light-mode footer span,
+  body.light-mode footer a{
+    color: var(--ink-soft) !important;
+  }
+  body.light-mode footer h4{
+    color: var(--ink) !important;
+  }
+  /* 博客文章内容 */
+  body.light-mode .blog-article-content p,
+  body.light-mode .blog-article-content li,
+  body.light-mode .blog-article-content h1,
+  body.light-mode .blog-article-content h2,
+  body.light-mode .blog-article-content h3,
+  body.light-mode .blog-article-content h4{
+    color: var(--ink) !important;
+  }
+  /* 计算器 */
+  body.light-mode .calc-result,
+  body.light-mode .calc-card{
+    background: var(--surface) !important;
+    color: var(--ink) !important;
+  }
+  /* 视频卡片 */
+  body.light-mode .video-card,
+  body.light-mode .video-info{
+    background: var(--surface) !important;
+    color: var(--ink) !important;
+  }
+  /* 目录页面 */
+  body.light-mode .catalogue-card,
+  body.light-mode .doc-card{
+    background: var(--surface) !important;
+    color: var(--ink) !important;
+  }
+  /* FAQ */
+  body.light-mode .faq-item,
+  body.light-mode .faq-question{
+    background: var(--surface) !important;
+    color: var(--ink) !important;
+  }
+  body.light-mode .faq-answer{
+    color: var(--ink-soft) !important;
+  }
+  /* 关于我们 */
+  body.light-mode .about-section,
+  body.light-mode .story-card,
+  body.light-mode .value-item{
+    background: var(--surface) !important;
+    color: var(--ink) !important;
+  }
+  /* 应用详情 */
+  body.light-mode .app-detail,
+  body.light-mode .spec-table{
+    background: var(--surface) !important;
+    color: var(--ink) !important;
+  }
+  /* 产品详情 */
+  body.light-mode .product-detail,
+  body.light-mode .product-specs,
+  body.light-mode .product-features{
+    background: var(--surface) !important;
+    color: var(--ink) !important;
+  }
+  /* 联系页面宣传卡片 */
+  body.light-mode .contact-info > div[style*="background-image"]{
+    background: var(--bg-3) !important;
+  }
+  body.light-mode .contact-info > div[style*="background-image"] *{
+    color: var(--ink) !important;
+  }
+  body.light-mode .contact-info > div[style*="background-image"] [style*="color:var(--accent)"],
+  body.light-mode .contact-info > div[style*="background-image"] [style*="color: #F0A500"]{
+    color: var(--accent) !important;
+  }
+  
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   /* 图片保护 */
@@ -773,22 +961,23 @@
     backdrop-filter:blur(12px);
     border-bottom:1px solid var(--line);
   }
-  .nav-bar{display:flex;align-items:center;justify-content:space-between;height:96px}
+  .nav-bar{display:flex;align-items:center;justify-content:space-between;height:110px;gap:20px}
+  .logo{display:flex;align-items:center;gap:12px;flex-shrink:0;min-width:0}
   .logo-img{
-    height:84px;width:auto;display:block;
+    height:68px;width:auto;max-width:220px;display:block;object-fit:contain;
     filter: drop-shadow(0 6px 10px rgba(0,0,0,.5)) saturate(1.35) contrast(1.08);
     transform: perspective(800px) rotateX(3deg);
     transition: transform .25s ease, filter .25s ease;
+    flex-shrink:0;
   }
   .logo-img:hover{
     transform: perspective(800px) rotateX(0deg) translateY(-2px);
     filter: drop-shadow(0 8px 14px rgba(0,0,0,.55)) saturate(1.4) contrast(1.1);
   }
   .footer-logo{
-    height:84px;width:auto;display:block;margin-bottom:18px;
+    height:72px;width:auto;max-width:200px;display:block;margin-bottom:18px;object-fit:contain;
     filter: drop-shadow(0 4px 8px rgba(0,0,0,.45)) saturate(1.3) contrast(1.05);
   }
-  .logo{display:flex;align-items:center;gap:12px}
   .logo-mark{
     width:38px;height:38px;border-radius:3px;
     background:var(--deep);
@@ -799,14 +988,15 @@
     border:2px solid var(--accent);
     flex-shrink:0;
   }
-  .logo-text{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:.05em;color:#fff}
+  .logo-text{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:.05em;color:#fff;white-space:nowrap}
   .logo-text span{color:var(--accent)}
-  .logo-sub{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-mute);margin-top:1px}
-  nav.desktop{display:flex;gap:28px;align-items:center}
+  .logo-sub{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-mute);margin-top:1px;white-space:nowrap}
+  nav.desktop{display:flex;gap:20px;align-items:center;flex:1;justify-content:flex-end;min-width:0}
   nav.desktop a.navlink{
-    font-family:var(--display);font-size:12.5px;font-weight:500;
-    letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);
+    font-family:var(--display);font-size:11.5px;font-weight:500;
+    letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);
     padding:8px 0;border-bottom:2px solid transparent;transition:.2s;
+    white-space:nowrap;flex-shrink:0;
   }
   nav.desktop a.navlink:hover{color:#fff;border-color:var(--accent)}
   nav.desktop a.navlink.active{color:#fff;border-color:var(--accent)}
@@ -879,6 +1069,36 @@
   }
   .lang-btn:hover{color:var(--accent)}
   .lang-btn.active{background:var(--accent);color:var(--ink-dark)}
+  
+  /* ===== 导航栏响应式：防止LOGO变形 ===== */
+  /* 大屏幕（1400px以下）：稍微减小间距 */
+  @media (max-width:1400px){
+    .nav-bar{height:100px;gap:16px}
+    .logo-img{height:62px;max-width:200px}
+    nav.desktop{gap:16px}
+    nav.desktop a.navlink{font-size:11px;letter-spacing:.04em}
+    .nav-tools{gap:6px;margin-left:4px}
+    .lang-btn{padding:3px 6px;font-size:10px}
+    .tool-btn{padding:5px 6px;min-width:26px;min-height:26px;font-size:11px}
+  }
+  /* 中等屏幕（1200px以下）：进一步优化，隐藏部分不常用链接 */
+  @media (max-width:1200px){
+    .nav-bar{height:92px;gap:12px}
+    .logo-img{height:56px;max-width:180px}
+    nav.desktop{gap:12px}
+    nav.desktop a.navlink{font-size:10.5px;padding:6px 0}
+    .nav-tools{gap:4px}
+    .font-size-control{display:none}
+    .lang-btn{padding:3px 5px;font-size:9.5px}
+    .theme-toggle{font-size:14px;padding:4px}
+  }
+  /* 较小屏幕（1024px以下）：切换到汉堡菜单 */
+  @media (max-width:1024px){
+    .nav-bar{height:80px}
+    .logo-img{height:52px;max-width:170px}
+    nav.desktop{display:none}
+    .hamburger{display:block}
+  }
   
   /* 手机端语言切换 */
   .mobile-lang-switcher{
