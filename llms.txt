@@ -37,10 +37,13 @@ ZEALL FRP Grating is a leading FRP (Fiber Reinforced Plastic) grating manufactur
 
 ### 4. FRP Pultruded Profiles
 - **URL:** [https://gratingfrp.com/#/product/profiles](https://gratingfrp.com/#/product/profiles)
-- **Profiles:** I-beam (100×50~600×200mm), Channel (50×25~300×90mm), Angle (25×25×3~150×150×12mm), Square Tube (25×25~200×200mm), Round Tube (OD20-300mm), Flat Bar (25-300×3-50mm)
-- **Standard Length:** 6m / 12m
-- **Resin:** Isophthalic Polyester, Vinyl Ester, Phenolic
-- **Features:** Continuous pultrusion, lightweight high strength, acid-alkali corrosion resistant, non-conductive & non-magnetic, maintenance-free, direct steel replacement
+- **Overview:** Produced by continuous pultrusion technology, including I-beam, channel, angle, square tube, round tube, flat bar and other sections. High strength-to-weight ratio, excellent acid & alkali corrosion resistance, non-conductive, non-magnetic and low-maintenance. Direct structural replacements for steel structures.
+- **Profiles:** I-beam (100×50~600×200mm, wall 6-18mm), Channel C-profile (50×25~300×90mm, wall 3-12mm), Angle L-profile (25×25×3~150×150×12mm), Square Tube (25×25~200×200mm, wall 3-12mm), Round Tube (OD20-300mm, wall 2-12mm), Flat Bar (25-300×3-50mm, solid)
+- **Standard Length:** 6m / 12m (custom cut available)
+- **Resin:** Isophthalic Polyester (general outdoor & wastewater), Vinyl Ester (heavy acid-alkali & marine corrosive), Phenolic (flame retardant & high-voltage insulation)
+- **Custom Shapes:** Per drawing custom cross-sections available
+- **Applications:** Chemical, Petrochemical & Electroplating; Water & Wastewater Treatment; Power & New Energy; Marine & Coastal; Rail Transit & Tunnel Engineering; Municipal Infrastructure & Public Works; General Industrial Plant; Food-Pharma & Livestock
+- **Matching Accessories:** FRP molded grating, FRP pultruded grating, FRP handrail & stair system, grating clips, FRP solid covers
 
 ### 5. FRP Handrail & Stair System
 - **URL:** [https://gratingfrp.com/#/product/handrail](https://gratingfrp.com/#/product/handrail)
