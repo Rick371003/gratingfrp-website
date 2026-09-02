@@ -2966,10 +2966,298 @@
     display:flex;justify-content:space-between;align-items:center;
   }
   .preview-modal-foot span{font-size:12px;color:var(--ink-mute)}
+  
+  /* ===== 手机端全面适配（768px以下） ===== */
   @media (max-width:768px){
-    .dc-item{grid-template-columns:1fr;gap:14px}
-    .dc-actions{flex-direction:column}
-    .dc-btn{text-align:center;justify-content:center}
+    /* 下载中心整体 */
+    .download-centre{
+      padding:24px 16px !important;
+      margin-bottom:24px !important;
+    }
+    .dc-head{
+      margin-bottom:24px !important;
+      max-width:100% !important;
+    }
+    .dc-eyebrow{
+      font-size:12px !important;
+      margin-bottom:8px !important;
+    }
+    .dc-head h3{
+      font-size:24px !important;
+      line-height:1.2 !important;
+      margin-bottom:10px !important;
+    }
+    .dc-head p{
+      font-size:14px !important;
+      line-height:1.6 !important;
+    }
+    .dc-list{
+      gap:12px !important;
+    }
+    .dc-item{
+      grid-template-columns:1fr !important;
+      gap:14px !important;
+      padding:18px 16px !important;
+    }
+    .dc-icon{
+      width:48px !important;
+      height:48px !important;
+      margin:0 auto !important;
+    }
+    .dc-icon svg{
+      width:24px !important;
+      height:24px !important;
+    }
+    .dc-info{
+      text-align:center !important;
+    }
+    .dc-info h4{
+      font-size:18px !important;
+      margin-bottom:6px !important;
+    }
+    .dc-info p{
+      font-size:13px !important;
+      line-height:1.6 !important;
+      margin-bottom:8px !important;
+    }
+    .dc-meta{
+      justify-content:center !important;
+      font-size:11px !important;
+      gap:8px !important;
+    }
+    .dc-meta span{
+      padding:3px 8px !important;
+    }
+    .dc-actions{
+      flex-direction:column !important;
+      gap:8px !important;
+    }
+    .dc-btn{
+      width:100% !important;
+      text-align:center !important;
+      justify-content:center !important;
+      font-size:13px !important;
+      padding:10px 16px !important;
+    }
+    
+    /* 产品目录部分 */
+    .cat-cover{
+      padding:24px 16px !important;
+      grid-template-columns:1fr !important;
+      gap:20px !important;
+      margin-bottom:24px !important;
+    }
+    .cat-eyebrow{
+      font-size:12px !important;
+      margin-bottom:8px !important;
+    }
+    .cat-cover-left h2{
+      font-size:22px !important;
+      margin-bottom:8px !important;
+    }
+    .cat-cover-left p{
+      font-size:13px !important;
+      margin-bottom:14px !important;
+    }
+    .cat-company-name{
+      font-size:16px !important;
+    }
+    .cat-company-tel{
+      font-size:12px !important;
+    }
+    .cat-contact{
+      font-size:12px !important;
+      gap:6px !important;
+    }
+    .cat-toc{
+      padding:20px 16px !important;
+      margin-bottom:24px !important;
+    }
+    .cat-toc h3{
+      font-size:18px !important;
+      margin-bottom:16px !important;
+    }
+    .cat-toc-grid{
+      grid-template-columns:1fr 1fr !important;
+      gap:8px !important;
+    }
+    .cat-toc-item{
+      font-size:12px !important;
+      padding:10px 12px !important;
+      gap:8px !important;
+    }
+    .cat-toc-item span{
+      font-size:13px !important;
+    }
+    .cat-product{
+      margin-bottom:20px !important;
+    }
+    .cat-product-head{
+      padding:16px !important;
+      gap:12px !important;
+      flex-direction:column !important;
+      align-items:flex-start !important;
+    }
+    .cat-num{
+      font-size:32px !important;
+    }
+    .cat-product-head h3{
+      font-size:18px !important;
+      margin-bottom:4px !important;
+    }
+    .cat-product-head p{
+      font-size:13px !important;
+    }
+    .cat-product-body{
+      grid-template-columns:1fr !important;
+      gap:16px !important;
+      padding:16px !important;
+    }
+    .cat-product-img{
+      min-height:160px !important;
+    }
+    .cat-product-info h4{
+      font-size:14px !important;
+      margin-bottom:8px !important;
+      margin-top:12px !important;
+    }
+    .cat-feat{
+      gap:6px !important;
+    }
+    .cat-feat li{
+      font-size:12px !important;
+      gap:6px !important;
+    }
+    .cat-colors{
+      font-size:12px !important;
+      gap:8px !important;
+    }
+    .cat-color{
+      width:18px !important;
+      height:18px !important;
+    }
+    .cat-product-spec h4{
+      font-size:14px !important;
+      margin-bottom:8px !important;
+    }
+    .cat-spec-table{
+      font-size:12px !important;
+    }
+    .cat-spec-table th,
+    .cat-spec-table td{
+      padding:6px 8px !important;
+    }
+    .cat-footer{
+      padding:20px 16px !important;
+      flex-direction:column !important;
+      align-items:flex-start !important;
+      gap:16px !important;
+    }
+    .cat-footer-left h3{
+      font-size:18px !important;
+      margin-bottom:6px !important;
+    }
+    .cat-footer-left p{
+      font-size:13px !important;
+    }
+    
+    /* 预览模态框 */
+    .preview-modal{
+      padding:16px !important;
+    }
+    .preview-modal-content{
+      max-height:90vh !important;
+    }
+    .preview-modal-head{
+      padding:12px 16px !important;
+    }
+    .preview-modal-head h3{
+      font-size:14px !important;
+    }
+    .preview-modal-body{
+      padding:16px !important;
+    }
+    .preview-modal-body .pdf-page{
+      padding:20px !important;
+      min-height:300px !important;
+    }
+    .preview-modal-body .pdf-page h2{
+      font-size:16px !important;
+    }
+    .preview-modal-body .pdf-page p{
+      font-size:12px !important;
+    }
+    .preview-modal-foot{
+      padding:10px 16px !important;
+      flex-direction:column !important;
+      gap:8px !important;
+    }
+  }
+  
+  /* ===== 小屏幕手机（480px以下）额外优化 ===== */
+  @media (max-width:480px){
+    .dc-head h3{
+      font-size:20px !important;
+    }
+    .dc-info h4{
+      font-size:16px !important;
+    }
+    .cat-cover-left h2{
+      font-size:18px !important;
+    }
+    .cat-toc-grid{
+      grid-template-columns:1fr !important;
+    }
+  }
+  
+  /* ===== 邮箱收集模态框手机端适配 ===== */
+  @media (max-width:768px){
+    .email-modal{
+      padding:16px !important;
+      align-items:center !important;
+      justify-content:center !important;
+      overflow-y:auto !important;
+    }
+    .email-modal > div{
+      max-width:100% !important;
+      max-height:88vh !important;
+      overflow-y:auto !important;
+      margin:auto !important;
+    }
+    .email-modal > div > div:last-child{
+      padding:24px 18px !important;
+      padding-top:50px !important;
+    }
+    .email-modal button[onclick="closeEmailModal()"]{
+      top:8px !important;
+      right:8px !important;
+      font-size:24px !important;
+      width:36px !important;
+      height:36px !important;
+      background:rgba(255,255,255,.1) !important;
+      color:#fff !important;
+    }
+    .email-modal h3{
+      font-size:18px !important;
+    }
+    .email-modal p{
+      font-size:13px !important;
+    }
+    .email-modal label{
+      font-size:12px !important;
+    }
+    .email-modal input{
+      padding:10px 12px !important;
+      font-size:14px !important;
+    }
+    .email-modal button[type="submit"]{
+      padding:12px !important;
+      font-size:14px !important;
+    }
+    .email-modal button[type="button"]{
+      padding:10px !important;
+      font-size:13px !important;
+    }
   }
 </style>
 
@@ -4060,9 +4348,9 @@
 </div>
 
 <!-- ===== 邮箱收集模态框（下载文件时弹出） ===== -->
-<div class="email-modal" id="email-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1100;align-items:center;justify-content:center;padding:20px">
+<div class="email-modal" id="email-modal" onclick="if(event.target===this)closeEmailModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1100;align-items:center;justify-content:center;padding:20px">
   <div style="position:relative;width:100%;max-width:480px;background:var(--surface-dark);border:1px solid var(--line);border-radius:12px;overflow:hidden">
-    <button onclick="closeEmailModal()" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--ink-mute);font-size:28px;cursor:pointer;line-height:1;z-index:10">&times;</button>
+    <button onclick="closeEmailModal()" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--ink-mute);font-size:28px;cursor:pointer;line-height:1;z-index:10;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%">&times;</button>
     <div style="padding:36px 32px">
       <div style="text-align:center;margin-bottom:24px">
         <div style="width:56px;height:56px;background:var(--accent-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
@@ -4091,6 +4379,9 @@
         <div id="email-error" style="display:none;color:#e74c3c;font-size:13px;margin-bottom:14px;padding:10px 14px;background:rgba(231,76,60,.1);border-radius:6px;border:1px solid rgba(231,76,60,.3)"></div>
         <button type="submit" style="width:100%;padding:14px;font-size:16px;font-weight:700;background:var(--accent);color:var(--ink-dark);border:none;border-radius:6px;cursor:pointer;font-family:var(--display);letter-spacing:.05em;transition:opacity .2s" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='1'">
           📥 <span data-i18n="emailModal.downloadNow">Download Now</span>
+        </button>
+        <button type="button" onclick="closeEmailModal()" style="width:100%;padding:12px;margin-top:10px;font-size:14px;font-weight:600;background:transparent;color:var(--ink-mute);border:1px solid var(--line);border-radius:6px;cursor:pointer;font-family:var(--display);letter-spacing:.05em;transition:all .2s" onmouseover="this.style.color='var(--ink-soft)';this.style.borderColor='var(--ink-mute)'" onmouseout="this.style.color='var(--ink-mute)';this.style.borderColor='var(--line)'">
+          ✕ <span data-i18n="emailModal.cancel">Cancel & Return</span>
         </button>
         <p style="text-align:center;font-size:11px;color:var(--ink-mute);margin-top:14px;line-height:1.5" data-i18n="emailModal.consent">By downloading, you agree to receive product information from ZEALL. We respect your privacy and will never share your data.</p>
       </form>
