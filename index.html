@@ -29,28 +29,28 @@
 <meta name="msvalidate.01" content="">
 <meta name="yandex-verification" content="">
 
-<!-- ===== Favicon 网站图标（公司LOGO PNG格式）- v2 强制刷新 ===== -->
-<link rel="icon" type="image/png" sizes="32x32" href="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2">
-<link rel="icon" type="image/png" sizes="16x16" href="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2">
-<link rel="icon" type="image/png" sizes="48x48" href="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2">
-<link rel="icon" type="image/png" sizes="64x64" href="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2">
-<link rel="icon" type="image/png" sizes="128x128" href="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2">
-<link rel="shortcut icon" href="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2" type="image/png">
-<link rel="apple-touch-icon" sizes="57x57" href="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2">
-<link rel="apple-touch-icon" sizes="60x60" href="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2">
-<link rel="apple-touch-icon" sizes="72x72" href="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2">
-<link rel="apple-touch-icon" sizes="76x76" href="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2">
-<link rel="apple-touch-icon" sizes="114x114" href="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2">
-<link rel="apple-touch-icon" sizes="120x120" href="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2">
-<link rel="apple-touch-icon" sizes="144x144" href="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2">
-<link rel="apple-touch-icon" sizes="152x152" href="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2">
-<link rel="apple-touch-icon" sizes="180x180" href="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2">
-<meta name="msapplication-TileImage" content="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2">
-<meta name="msapplication-square70x70logo" content="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2">
-<meta name="msapplication-square150x150logo" content="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2">
-<meta name="msapplication-square310x310logo" content="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2">
-<meta name="msapplication-wide310x150logo" content="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2">
-<link rel="mask-icon" href="https://aka.doubaocdn.com/s/qPxIguxgpu?v=2" color="#F0A500">
+<!-- ===== Favicon 网站图标（本地文件，最稳定） ===== -->
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=3">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=3">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png?v=3">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=3">
+<link rel="icon" type="image/png" sizes="128x128" href="/favicon.png?v=3">
+<link rel="shortcut icon" href="/favicon.png?v=3" type="image/png">
+<link rel="apple-touch-icon" sizes="57x57" href="/favicon.png?v=3">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicon.png?v=3">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicon.png?v=3">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicon.png?v=3">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicon.png?v=3">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicon.png?v=3">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicon.png?v=3">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicon.png?v=3">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon.png?v=3">
+<meta name="msapplication-TileImage" content="/favicon.png?v=3">
+<meta name="msapplication-square70x70logo" content="/favicon.png?v=3">
+<meta name="msapplication-square150x150logo" content="/favicon.png?v=3">
+<meta name="msapplication-square310x310logo" content="/favicon.png?v=3">
+<meta name="msapplication-wide310x150logo" content="/favicon.png?v=3">
+<link rel="mask-icon" href="/favicon.png?v=3" color="#F0A500">
 <link rel="manifest" href="/manifest.json">
 
 <!-- AI引擎优化meta标签（ChatGPT, DeepSeek, 豆包, Claude, Gemini等） -->
@@ -1235,6 +1235,62 @@
   }
   .color-dot{width:28px;height:28px;border-radius:3px;cursor:pointer;transition:.2s;border:2px solid rgba(255,255,255,.1)}
   .color-dot:hover{transform:scale(1.1);border-color:var(--accent)}
+
+  /* ===== Hero 手机端响应式：车间大图完整显示 ===== */
+  @media (max-width:768px){
+    .hero{
+      padding:60px 0 50px;
+    }
+    .hero::before{
+      background:
+        linear-gradient(135deg,rgba(10,18,26,.78) 0%,rgba(15,25,35,.68) 50%,rgba(10,18,26,.78) 100%),
+        url('https://aka.doubaocdn.com/s/w6hqXcp70n') center top/contain no-repeat !important;
+      background-color:var(--deep) !important;
+    }
+    .hero h1{
+      font-size:clamp(26px,7vw,38px) !important;
+      max-width:100% !important;
+    }
+    .hero p.lead{
+      font-size:clamp(14px,4vw,16px) !important;
+      max-width:100% !important;
+    }
+    .hero-cta{
+      flex-direction:column;
+      gap:10px;
+    }
+    .hero-cta a, .hero-cta button{
+      width:100%;
+      text-align:center;
+    }
+    .hero-badges{
+      gap:14px;
+      padding-top:20px;
+    }
+    .badge-item span{
+      font-size:13px !important;
+    }
+  }
+
+  /* 小屏幕手机（480px以下）额外优化 */
+  @media (max-width:480px){
+    .hero{
+      padding:50px 0 40px;
+    }
+    .hero::before{
+      background-position:center 20% !important;
+    }
+    .hero h1{
+      font-size:clamp(24px,8vw,32px) !important;
+    }
+    .eyebrow{
+      font-size:10px !important;
+      gap:6px !important;
+    }
+    .eyebrow::before{
+      width:20px !important;
+    }
+  }
 
   /* Hero 真实产品图展示框 */
   .hero-product-frame{
