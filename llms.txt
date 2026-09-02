@@ -26,9 +26,18 @@ ZEALL FRP Grating is a leading FRP (Fiber Reinforced Plastic) grating manufactur
 
 ### 2. FRP Pultruded Grating
 - **URL:** [https://gratingfrp.com/#/product/pultruded](https://gratingfrp.com/#/product/pultruded)
-- **Thickness:** 25/38/50mm
-- **Bar Profile:** I-shape / T-shape / custom
-- **Features:** High load capacity, uniform cross-section strength, heavy-duty industrial applications
+- **Overview:** Continuous pultrusion process with uniform cross-section strength, high load capacity & stiffness. Available in I-bar, T-bar and custom bar profiles. Features: acid-alkali corrosion resistance, lightweight high strength, non-conductive, fire-retardant resin option, anti-slip gritted surface. Ideal for heavy-duty industrial platforms, large span walkways, solar PV maintenance walkways, power plants, chemical plants, mining, marine & offshore applications. Fixed with Grating Clips, direct replacement for steel grating in corrosive conditions.
+- **Thickness:** 25 / 38 / 50 mm (standard); custom thickness available
+- **Bar Profile:** I-bar / T-bar / custom bar profiles
+- **Mesh Size:** Custom spacing per project requirements
+- **Standard Panel:** Custom cut to size, max length up to 6m
+- **Resin System:** Isophthalic Polyester / Vinyl Ester / Phenolic flame-retardant
+- **Surface:** Grit-top anti-slip / Smooth plain surface
+- **Color:** Grey / Yellow / Green / Red / custom color
+- **Accessory:** Grating Clips (SS304/SS316), bolts, washers; 4-8 clips per panel
+- **Key Features:** High load capacity & stiffness; Multiple bar profiles; Excellent for large span; Acid-alkali corrosion resistant; Lightweight high strength (70% lighter than steel); Non-conductive & non-magnetic; Anti-slip gritted surface; Fire-retardant resin option
+- **Applications:** Heavy-duty Industrial Platforms; Solar PV Maintenance Walkway; Power Plants & Substations; Chemical Plants; Mining & Metallurgy; Marine & Ship Access; Municipal Engineering; Railway Platforms; Factory Stair Treads; Battery Factories
+- **Matching Products:** FRP Molded Grating, FRP Covers & Panels, FRP Handrail & Stair System, Grating Clips, FRP Pultruded Profiles
 
 ### 3. FRP Covers & Panels
 - **URL:** [https://gratingfrp.com/#/product/covers](https://gratingfrp.com/#/product/covers)
