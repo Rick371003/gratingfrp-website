@@ -2789,71 +2789,73 @@
   /* ===== Catalogue 目录页面样式 ===== */
   .cat-cover{
     background:var(--surface-dark);border:1px solid var(--line);border-radius:var(--radius-lg);
-    padding:44px;display:grid;grid-template-columns:1.5fr 1fr;gap:36px;align-items:center;margin-bottom:40px;
+    padding:52px;display:grid;grid-template-columns:1.5fr 1fr;gap:40px;align-items:center;margin-bottom:44px;
   }
-  .cat-eyebrow{font-family:var(--display);font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px}
-  .cat-cover-left h2{font-family:var(--display);font-size:30px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:12px}
-  .cat-cover-left p{color:var(--ink-soft);font-size:16px;margin-bottom:20px;line-height:1.7}
-  .cat-contact{display:grid;gap:8px;font-size:15px;color:var(--ink-mute);line-height:1.6}
+  .cat-eyebrow{font-family:var(--display);font-size:16px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:16px}
+  .cat-cover-left h2{font-family:var(--display);font-size:36px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:14px}
+  .cat-cover-left p{color:var(--ink-soft);font-size:18px;margin-bottom:24px;line-height:1.8}
+  .cat-contact{display:grid;gap:10px;font-size:17px;color:var(--ink-mute);line-height:1.7}
   .cat-contact strong{color:var(--ink-soft);font-weight:600}
-  .cat-cover-right{display:flex;flex-direction:column;gap:12px}
+  .cat-company-name{font-family:var(--display);font-size:22px;font-weight:700;color:#fff;letter-spacing:.03em;line-height:1.3;margin-bottom:6px}
+  .cat-company-tel{font-size:16px;color:var(--ink-mute);margin-top:6px}
+  .cat-cover-right{display:flex;flex-direction:column;gap:14px}
   .cat-toc{
     background:var(--surface-dark);border:1px solid var(--line);border-radius:var(--radius-lg);
-    padding:36px;margin-bottom:40px;
+    padding:44px;margin-bottom:44px;
   }
-  .cat-toc h3{font-family:var(--display);font-size:22px;font-weight:600;color:#fff;margin-bottom:22px}
-  .cat-toc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .cat-toc h3{font-family:var(--display);font-size:26px;font-weight:600;color:#fff;margin-bottom:26px}
+  .cat-toc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
   .cat-toc-item{
-    display:flex;align-items:center;gap:12px;padding:14px 16px;
+    display:flex;align-items:center;gap:14px;padding:16px 18px;
     background:var(--bg-3);border:1px solid var(--line);border-radius:var(--radius);
-    font-size:14px;color:var(--ink-soft);transition:.2s;line-height:1.4;
+    font-size:16px;color:var(--ink-soft);transition:.2s;line-height:1.4;
   }
   .cat-toc-item:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
-  .cat-toc-item span{font-family:var(--display);font-weight:700;color:var(--accent);font-size:16px}
+  .cat-toc-item span{font-family:var(--display);font-weight:700;color:var(--accent);font-size:18px}
   .cat-product{
     background:var(--surface-dark);border:1px solid var(--line);border-radius:var(--radius-lg);
-    margin-bottom:32px;overflow:hidden;
+    margin-bottom:36px;overflow:hidden;
   }
   .cat-product-head{
-    display:flex;align-items:center;gap:24px;padding:28px 32px;
+    display:flex;align-items:center;gap:28px;padding:32px 36px;
     background:var(--bg-3);border-bottom:1px solid var(--line);
   }
   .cat-num{
-    font-family:var(--display);font-size:42px;font-weight:700;color:var(--accent);
+    font-family:var(--display);font-size:48px;font-weight:700;color:var(--accent);
     line-height:1;flex-shrink:0;opacity:.8;
   }
-  .cat-product-head h3{font-family:var(--display);font-size:24px;font-weight:600;color:#fff;margin-bottom:6px}
-  .cat-product-head p{font-size:15px;color:var(--ink-soft);margin:0;line-height:1.6}
+  .cat-product-head h3{font-family:var(--display);font-size:28px;font-weight:600;color:#fff;margin-bottom:8px}
+  .cat-product-head p{font-size:17px;color:var(--ink-soft);margin:0;line-height:1.7}
   .cat-product-body{
-    display:grid;grid-template-columns:1fr 1.2fr 1.2fr;gap:28px;padding:28px 32px;
+    display:grid;grid-template-columns:1fr 1.2fr 1.2fr;gap:32px;padding:32px 36px;
   }
   .cat-product-img{
     background:var(--bg-3);border:1px solid var(--line);border-radius:var(--radius);
-    min-height:220px;overflow:hidden;position:relative;
+    min-height:240px;overflow:hidden;position:relative;
   }
-  .cat-product-info h4{font-family:var(--display);font-size:16px;font-weight:600;color:#fff;margin-bottom:12px;margin-top:16px}
+  .cat-product-info h4{font-family:var(--display);font-size:18px;font-weight:600;color:#fff;margin-bottom:14px;margin-top:18px}
   .cat-product-info h4:first-child{margin-top:0}
-  .cat-feat{list-style:none;display:grid;gap:9px;margin-bottom:10px}
-  .cat-feat li{font-size:14px;color:var(--ink-soft);display:flex;align-items:flex-start;gap:10px;line-height:1.6}
-  .cat-feat li::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;flex-shrink:0;margin-top:6px}
-  .cat-colors{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:14px;color:var(--ink-mute)}
-  .cat-color{width:22px;height:22px;border-radius:4px;flex-shrink:0;border:1px solid rgba(255,255,255,.15)}
+  .cat-feat{list-style:none;display:grid;gap:11px;margin-bottom:12px}
+  .cat-feat li{font-size:16px;color:var(--ink-soft);display:flex;align-items:flex-start;gap:12px;line-height:1.7}
+  .cat-feat li::before{content:'';width:7px;height:7px;background:var(--accent);border-radius:50%;flex-shrink:0;margin-top:7px}
+  .cat-colors{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:16px;color:var(--ink-mute)}
+  .cat-color{width:26px;height:26px;border-radius:5px;flex-shrink:0;border:1px solid rgba(255,255,255,.15)}
   .cat-color.yellow{background:#E8A800}
   .cat-color.grey{background:#8A9597}
   .cat-color.red{background:#B83A2E}
   .cat-color.green{background:#2E8B57}
-  .cat-product-spec h4{font-family:var(--display);font-size:16px;font-weight:600;color:#fff;margin-bottom:12px}
-  .cat-spec-table{width:100%;border-collapse:collapse;font-size:14px}
-  .cat-spec-table th{background:var(--bg-3);color:#fff;font-weight:600;padding:10px 12px;text-align:left;border:1px solid var(--line);width:35%}
-  .cat-spec-table td{color:var(--ink-soft);padding:10px 12px;border:1px solid var(--line);line-height:1.5}
+  .cat-product-spec h4{font-family:var(--display);font-size:18px;font-weight:600;color:#fff;margin-bottom:14px}
+  .cat-spec-table{width:100%;border-collapse:collapse;font-size:16px}
+  .cat-spec-table th{background:var(--bg-3);color:#fff;font-weight:600;padding:12px 14px;text-align:left;border:1px solid var(--line);width:35%}
+  .cat-spec-table td{color:var(--ink-soft);padding:12px 14px;border:1px solid var(--line);line-height:1.6}
   .cat-footer{
     background:linear-gradient(135deg,var(--bg-3),var(--surface-dark));border:1px solid var(--accent);
-    border-radius:var(--radius-lg);padding:40px;display:flex;justify-content:space-between;
-    align-items:center;gap:28px;flex-wrap:wrap;margin-top:16px;
+    border-radius:var(--radius-lg);padding:48px;display:flex;justify-content:space-between;
+    align-items:center;gap:32px;flex-wrap:wrap;margin-top:20px;
   }
-  .cat-footer-left h3{font-family:var(--display);font-size:24px;font-weight:600;color:#fff;margin-bottom:10px}
-  .cat-footer-left p{color:var(--ink-soft);font-size:16px;max-width:520px;line-height:1.7}
-  .cat-footer-right{display:flex;flex-direction:column;gap:12px}
+  .cat-footer-left h3{font-family:var(--display);font-size:28px;font-weight:600;color:#fff;margin-bottom:12px}
+  .cat-footer-left p{color:var(--ink-soft);font-size:18px;max-width:560px;line-height:1.8}
+  .cat-footer-right{display:flex;flex-direction:column;gap:14px}
   @media (max-width:1024px){
     .cat-product-body{grid-template-columns:1fr 1fr}
     .cat-toc-grid{grid-template-columns:repeat(2,1fr)}
@@ -2887,35 +2889,35 @@
   /* ===== Download Centre 下载中心 ===== */
   .download-centre{
     background:var(--surface-dark);border:1px solid var(--line);border-radius:var(--radius-lg);
-    padding:48px;margin-bottom:32px;
+    padding:56px;margin-bottom:40px;
   }
-  .dc-head{text-align:center;margin-bottom:40px;max-width:700px;margin-left:auto;margin-right:auto}
-  .dc-eyebrow{font-family:var(--display);font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:12px}
-  .dc-head h3{font-family:var(--display);font-size:32px;font-weight:700;color:#fff;margin-bottom:14px;line-height:1.2}
-  .dc-head p{color:var(--ink-soft);font-size:16px;line-height:1.7}
-  .dc-list{display:grid;gap:18px}
+  .dc-head{text-align:center;margin-bottom:48px;max-width:800px;margin-left:auto;margin-right:auto}
+  .dc-eyebrow{font-family:var(--display);font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px}
+  .dc-head h3{font-family:var(--display);font-size:38px;font-weight:700;color:#fff;margin-bottom:16px;line-height:1.2}
+  .dc-head p{color:var(--ink-soft);font-size:18px;line-height:1.8}
+  .dc-list{display:grid;gap:22px}
   .dc-item{
-    display:grid;grid-template-columns:64px 1fr auto;gap:24px;align-items:center;
+    display:grid;grid-template-columns:72px 1fr auto;gap:28px;align-items:center;
     background:var(--bg-3);border:1px solid var(--line);border-radius:var(--radius);
-    padding:24px 28px;transition:.2s;
+    padding:30px 36px;transition:.2s;
   }
   .dc-item:hover{border-color:var(--accent);background:var(--surface-dark)}
   .dc-icon{
-    width:64px;height:64px;border-radius:8px;background:var(--accent-soft);
+    width:72px;height:72px;border-radius:10px;background:var(--accent-soft);
     display:flex;align-items:center;justify-content:center;flex-shrink:0;
   }
-  .dc-icon svg{width:32px;height:32px;stroke:var(--accent)}
-  .dc-info h4{font-family:var(--display);font-size:20px;font-weight:600;color:#fff;margin-bottom:8px;line-height:1.3}
-  .dc-info p{font-size:15px;color:var(--ink-soft);margin-bottom:10px;line-height:1.7}
-  .dc-meta{display:flex;gap:12px;font-size:13px;color:var(--ink-mute);flex-wrap:wrap}
+  .dc-icon svg{width:36px;height:36px;stroke:var(--accent)}
+  .dc-info h4{font-family:var(--display);font-size:24px;font-weight:600;color:#fff;margin-bottom:10px;line-height:1.3}
+  .dc-info p{font-size:17px;color:var(--ink-soft);margin-bottom:12px;line-height:1.8}
+  .dc-meta{display:flex;gap:14px;font-size:15px;color:var(--ink-mute);flex-wrap:wrap}
   .dc-meta span{
-    background:var(--bg-3);border:1px solid var(--line);padding:4px 10px;border-radius:4px;
+    background:var(--bg-3);border:1px solid var(--line);padding:6px 14px;border-radius:5px;
     font-family:var(--display);letter-spacing:.04em;font-weight:500;
   }
-  .dc-actions{display:flex;gap:12px;flex-shrink:0}
+  .dc-actions{display:flex;gap:14px;flex-shrink:0}
   .dc-btn{
-    font-family:var(--display);font-size:14px;font-weight:600;letter-spacing:.06em;
-    text-transform:uppercase;padding:12px 22px;border-radius:var(--radius);
+    font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:.06em;
+    text-transform:uppercase;padding:14px 28px;border-radius:var(--radius);
     border:1px solid transparent;cursor:pointer;transition:.2s;
   }
   .dc-btn.preview{background:transparent;border-color:var(--accent);color:var(--accent)}
@@ -3380,9 +3382,9 @@
           <div class="cat-eyebrow" data-i18n="catalogue.eyebrow">ZEALL FRP GRATING MASTER</div>
           <h2 data-i18n="catalogue.coverTitle">FRP Grating & Composite Solutions Catalogue</h2>
           <p data-i18n="catalogue.edition">Edition 2026 · Volume 1 · Nantong, Jiangsu, China</p>
-          <div style="margin-top:8px;padding-top:12px;border-top:1px solid rgba(255,255,255,.1)">
-            <div style="font-family:var(--display);font-size:13px;font-weight:600;color:#fff;letter-spacing:.03em">NANTONG ZEALL NEW MATERIALS CO., LTD.</div>
-            <div style="font-size:12px;color:var(--ink-mute);margin-top:4px">Tel: +86 513 6681 9918</div>
+          <div style="margin-top:12px;padding-top:16px;border-top:1px solid rgba(255,255,255,.15)">
+            <div class="cat-company-name">NANTONG ZEALL NEW MATERIALS CO., LTD.</div>
+            <div class="cat-company-tel">Tel: +86 513 6681 9918</div>
           </div>
           <div class="cat-contact">
             <div><strong data-i18n="catalogue.email">Email:</strong> sales@gratingfrp.com</div>
