@@ -1661,6 +1661,63 @@
   .pcard .more svg{transition:transform .2s}
   .pcard:hover .more svg{transform:translateX(3px)}
 
+  /* Related Products 去除外部框架，文字紧凑排列 */
+  .related-products .pcard{
+    background:transparent !important;
+    border:none !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+  }
+  .related-products .pcard:hover{
+    transform:none !important;
+    box-shadow:none !important;
+  }
+  .related-products .pcard .thumb{
+    border-bottom:none !important;
+    border-radius:var(--radius) !important;
+    aspect-ratio:16/10 !important;
+  }
+  .related-products .pcard .body{
+    padding:14px 4px 16px !important;
+    gap:6px !important;
+  }
+  .related-products .pcard h3{
+    font-size:16px !important;
+    line-height:1.35 !important;
+    white-space:nowrap !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+  }
+  .related-products .pcard p{
+    font-size:13.5px !important;
+    line-height:1.55 !important;
+    display:-webkit-box !important;
+    -webkit-line-clamp:2 !important;
+    -webkit-box-orient:vertical !important;
+    overflow:hidden !important;
+  }
+  .related-products .pcard .more{
+    border-top:none !important;
+    padding-top:4px !important;
+    margin-top:0 !important;
+    font-size:11px !important;
+  }
+  .related-products .pcard .cat-label{
+    font-size:10px !important;
+  }
+
+  /* 手机端 Related Products 适配 */
+  @media (max-width:768px){
+    .related-products .pcard h3{
+      font-size:14px !important;
+      white-space:normal !important;
+    }
+    .related-products .pcard p{
+      font-size:12.5px !important;
+      -webkit-line-clamp:2 !important;
+    }
+  }
+
   /* ===== 技术能力模块 ===== */
   .tech-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
   .tech-card{
@@ -1823,6 +1880,20 @@
   .spec-table th,.spec-table td{border:1px solid var(--line);padding:13px 16px;text-align:left}
   .spec-table th{background:var(--bg-3);font-weight:600;color:#fff;font-family:var(--display);letter-spacing:.04em}
   .spec-table td{color:var(--ink-soft);line-height:1.65}
+
+  /* 无框规格列表（替代表格，视觉更清爽） */
+  .spec-list{display:grid;gap:0;margin-top:8px}
+  .spec-item{display:grid;grid-template-columns:180px 1fr;gap:20px;padding:14px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .spec-item:last-child{border-bottom:none}
+  .spec-label{font-family:var(--display);font-weight:600;color:#fff;font-size:15px;letter-spacing:.03em}
+  .spec-value{color:var(--ink-soft);font-size:15px;line-height:1.65}
+
+  /* 手机端规格列表适配 */
+  @media (max-width:768px){
+    .spec-item{grid-template-columns:1fr;gap:6px;padding:12px 0}
+    .spec-label{font-size:14px}
+    .spec-value{font-size:14px}
+  }
 
   /* ===== 详情区块 ===== */
   .block{
@@ -5602,10 +5673,10 @@ const products = [
    specs_es:[['Espesor','25 / 30 / 38 / 50 mm'],['Tamaño de Panel','1220×3660 mm (personalizado)'],['Tamaño de Malla','38×38 / 40×40 mm'],['Resina','Poliéster / Isiftálico / Éster Vinílico'],['Colores','Amarillo / Gris / Verde / Rojo']],
    specs_de:[['Dicke','25 / 30 / 38 / 50 mm'],['Panelgröße','1220×3660 mm (kundenspezifisch)'],['Maschenweite','38×38 / 40×40 mm'],['Harz','Polyester / Isophthalisch / Vinylester'],['Farben','Gelb / Grau / Grün / Rot']],
    specs_fr:[['Épaisseur','25 / 30 / 38 / 50 mm'],['Taille du Panneau','1220×3660 mm (personnalisé)'],['Taille de Maille','38×38 / 40×40 mm'],['Résine','Polyester / Isophtalique / Ester Vinylique'],['Couleurs','Jaune / Gris / Vert / Rouge']],
-   applications:['Wastewater treatment plant','Chemical factory platform','Marine jetty deck','Car wash floor','Aquaculture tank walkway'],
-   applications_es:['Planta de tratamiento de aguas residuales','Plataforma de fábrica química','Cubierta de muelle marino','Suelo de lavado de coches','Pasarela de tanque de acuicultura'],
-   applications_de:['Kläranlage','Chemiefabrikplattform','Marine Stegdeck','Autowaschboden','Aquakultur Tank Gehweg'],
-   applications_fr:['Station de traitement des eaux usées','Plateforme d\'usine chimique','Ponton de quai maritime','Sol de lavage de voiture','Passerelle de réservoir d\'aquaculture']},
+   applications:['Wastewater treatment plant','Chemical factory platform','Marine jetty deck','Car wash floor','Aquaculture tank walkway','Mining walkways','Ship & marine access','Municipal engineering','Power plants','Railway platforms'],
+   applications_es:['Planta de tratamiento de aguas residuales','Plataforma de fábrica química','Cubierta de muelle marino','Suelo de lavado de coches','Pasarela de tanque de acuicultura','Pasarelas de minería','Acceso marino y naval','Ingeniería municipal','Centrales eléctricas','Plataformas ferroviarias'],
+   applications_de:['Kläranlage','Chemiefabrikplattform','Marine Stegdeck','Autowaschboden','Aquakultur Tank Gehweg','Bergbaugehwege','Schiffs- und Marinezugang','Städtebau','Kraftwerke','Bahnhofsplattformen'],
+   applications_fr:['Station de traitement des eaux usées','Plateforme d\'usine chimique','Ponton de quai maritime','Sol de lavage de voiture','Passerelle de réservoir d\'aquaculture','Passarelles minières','Accès maritime et naval','Ingénierie municipale','Centrales électriques','Plates-formes ferroviaires']},
   {id:'pultruded', name:'FRP Pultruded Grating', cat:'Pultruded Grating', color:'grey', img:'https://aka.doubaocdn.com/s/zw9ojZXVmN', short:'High-load pultruded grating with uniform cross-section strength for heavy-duty industrial application.',
    name_es:'Rejilla FRP Pultruida', short_es:'Rejilla pultruida de alta carga con resistencia de sección transversal uniforme para aplicación industrial de servicio pesado.',
    name_de:'FRP-Pultrudiertes Gitter', short_de:'Hochbelastbares pultrudiertes Gitter mit gleichmäßiger Querschnittsfestigkeit für industrielle Schwerlastanwendungen.',
@@ -5619,10 +5690,10 @@ const products = [
    specs_es:[['Espesor','25 / 38 / 50 mm'],['Perfil de Barra','Forma I / Forma T / personalizado'],['Tamaño de Malla','Espaciado personalizado'],['Resina','Isiftálico / Éster Vinílico'],['Superficie','Arena / liso']],
    specs_de:[['Dicke','25 / 38 / 50 mm'],['Stabprofil','I-Form / T-Form / kundenspezifisch'],['Maschenweite','Kundenspezifischer Abstand'],['Harz','Isophthalisch / Vinylester'],['Oberfläche','Schleif / glatt']],
    specs_fr:[['Épaisseur','25 / 38 / 50 mm'],['Profil de Barre','Forme I / Forme T / personnalisé'],['Taille de Maille','Espacement personnalisé'],['Résine','Isophtalique / Ester Vinylique'],['Surface','Granuleuse / lisse']],
-   applications:['Heavy-duty service platforms','Mining walkways','Chemical plants','Power plants'],
-   applications_es:['Plataformas de servicio pesado','Pasarelas de minería','Plantas químicas','Centrales eléctricas'],
-   applications_de:['Schwerlastplattformen','Bergbaugehwege','Chemische Anlagen','Kraftwerke'],
-   applications_fr:['Plates-formes lourdes','Passarelles minières','Usines chimiques','Centrales électriques']},
+   applications:['Heavy-duty service platforms','Mining walkways','Chemical plants','Power plants','Ship & marine access','Municipal engineering','Railway platforms'],
+   applications_es:['Plataformas de servicio pesado','Pasarelas de minería','Plantas químicas','Centrales eléctricas','Acceso marino y naval','Ingeniería municipal','Plataformas ferroviarias'],
+   applications_de:['Schwerlastplattformen','Bergbaugehwege','Chemische Anlagen','Kraftwerke','Schiffs- und Marinezugang','Städtebau','Bahnhofsplattformen'],
+   applications_fr:['Plates-formes lourdes','Passarelles minières','Usines chimiques','Centrales électriques','Accès maritime et naval','Ingénierie municipale','Plates-formes ferroviaires']},
   {id:'covers', name:'FRP Covers & Panels', cat:'Covers & Panels', color:'red', img:'https://aka.doubaocdn.com/s/b8zE2DLnHg', gallery:['https://aka.doubaocdn.com/s/b8zE2DLnHg','https://aka.doubaocdn.com/s/UMcUgA6hRZ','https://aka.doubaocdn.com/s/BFYWRocc0Q','https://aka.doubaocdn.com/s/Y3qkXZFfle'], short:'Solid and gritted FRP cover panels for trench covers, floor panels and equipment enclosures.',
    name_es:'Cubiertas y Paneles FRP', short_es:'Paneles de cubierta FRP sólidos y con superficie de arena para cubiertas de zanja, paneles de suelo y recintos de equipos.',
    name_de:'FRP-Abdeckungen und -Paneele', short_de:'Feste und gestreute FRP-Abdeckplatten für Grabenabdeckungen, Bodenplatten und Gerätegehäuse.',
@@ -5636,10 +5707,10 @@ const products = [
    specs_es:[['Espesor','25 / 38 / 50 mm'],['Superficie','Liso / con arena'],['Tamaño de Panel','Corte personalizado'],['Resina','Isiftálico / Éster Vinílico'],['Colores','Gris / Rojo / Amarillo / Verde']],
    specs_de:[['Dicke','25 / 38 / 50 mm'],['Oberfläche','Glatt / geschliffen'],['Panelgröße','Kundenspezifisch zugeschnitten'],['Harz','Isophthalisch / Vinylester'],['Farben','Grau / Rot / Gelb / Grün']],
    specs_fr:[['Épaisseur','25 / 38 / 50 mm'],['Surface','Lisse / granuleuse'],['Taille du Panneau','Découpe personnalisée'],['Résine','Isophtalique / Ester Vinylique'],['Couleurs','Gris / Rouge / Jaune / Vert']],
-   applications:['Trench covers','Drain covers','Equipment platforms','Floor panels'],
-   applications_es:['Cubiertas de zanja','Cubiertas de desagüe','Plataformas de equipos','Paneles de suelo'],
-   applications_de:['Grabenabdeckungen','Abflussabdeckungen','Geräteplattformen','Bodenplatten'],
-   applications_fr:['Couvertures de tranchée','Couvertures de drain','Plates-formes d\'équipement','Panneaux de plancher']},
+   applications:['Trench covers','Drain covers','Equipment platforms','Floor panels','Mining walkways','Ship & marine access','Municipal engineering','Power plants','Railway platforms'],
+   applications_es:['Cubiertas de zanja','Cubiertas de desagüe','Plataformas de equipos','Paneles de suelo','Pasarelas de minería','Acceso marino y naval','Ingeniería municipal','Centrales eléctricas','Plataformas ferroviarias'],
+   applications_de:['Grabenabdeckungen','Abflussabdeckungen','Geräteplattformen','Bodenplatten','Bergbaugehwege','Schiffs- und Marinezugang','Städtebau','Kraftwerke','Bahnhofsplattformen'],
+   applications_fr:['Couvertures de tranchée','Couvertures de drain','Plates-formes d\'équipement','Panneaux de plancher','Passarelles minières','Accès maritime et naval','Ingénierie municipale','Centrales électriques','Plates-formes ferroviaires']},
   {id:'profiles', name:'FRP Pultruded Profiles', cat:'Structural Profiles', color:'green', img:'https://aka.doubaocdn.com/s/ip7v6iSAWO', short:'Custom fiberglass structural profiles, beams, tubes and angles for demanding composite structures.',
    name_es:'Perfiles FRP Pultruidos', short_es:'Perfiles estructurales de fibra de vidrio personalizados, vigas, tubos y ángulos para estructuras compuestas exigentes.',
    name_de:'FRP-Pultrudierte Profile', short_de:'Kundenspezifische Fiberglas-Strukturprofile, Träger, Rohre und Winkel für anspruchsvolle Verbundstrukturen.',
@@ -5653,10 +5724,10 @@ const products = [
    specs_es:[['Tipos','I / H / U / C / L / Tubo / Barra / Ángulo'],['Longitud','Personalizado (hasta 12m)'],['Resina','Poliéster / Éster Vinílico / Fenólico'],['Superficie','Liso / texturizado']],
    specs_de:[['Typen','I / H / U / C / L / Rohr / Stab / Winkel'],['Länge','Kundenspezifisch (bis zu 12m)'],['Harz','Polyester / Vinylester / Phenol'],['Oberfläche','Glatt / strukturiert']],
    specs_fr:[['Types','I / H / U / C / L / Tube / Barre / Angle'],['Longueur','Personnalisé (jusqu\'à 12m)'],['Résine','Polyester / Ester Vinylique / Phénolique'],['Surface','Lisse / texturée']],
-   applications:['Structural supports','Cable trays','Frames and housings','Handrail components'],
-   applications_es:['Soportes estructurales','Bandejas de cables','Marcos y carcasas','Componentes de pasamanos'],
-   applications_de:['Strukturträger','Kabeltrays','Rahmen und Gehäuse','Geländerkomponenten'],
-   applications_fr:['Supports structurels','Plateaux de câbles','Cadres et boîtiers','Composants de garde-corps']},
+   applications:['Structural supports','Cable trays','Frames and housings','Handrail components','Mining walkways','Ship & marine access','Municipal engineering','Power plants','Railway platforms'],
+   applications_es:['Soportes estructurales','Bandejas de cables','Marcos y carcasas','Componentes de pasamanos','Pasarelas de minería','Acceso marino y naval','Ingeniería municipal','Centrales eléctricas','Plataformas ferroviarias'],
+   applications_de:['Strukturträger','Kabeltrays','Rahmen und Gehäuse','Geländerkomponenten','Bergbaugehwege','Schiffs- und Marinezugang','Städtebau','Kraftwerke','Bahnhofsplattformen'],
+   applications_fr:['Supports structurels','Plateaux de câbles','Cadres et boîtiers','Composants de garde-corps','Passarelles minières','Accès maritime et naval','Ingénierie municipale','Centrales électriques','Plates-formes ferroviaires']},
   {id:'handrail', name:'FRP Handrail & Stair System', cat:'Safety Systems', color:'yellow', img:'https://aka.doubaocdn.com/s/Vk1TnbPiUR', short:'Complete non-corrosive FRP safety railing, handrail and stair systems for industrial platforms.',
    name_es:'Sistema de Pasamanos y Escaleras FRP', short_es:'Sistema completo de barandilla de seguridad FRP no corrosiva, pasamanos y escaleras para plataformas industriales.',
    name_de:'FRP-Geländer- und Treppensystem', short_de:'Komplettes nicht korrodierendes FRP-Sicherheitsgeländer-, Handlauf- und Treppensystem für Industrieplattformen.',
@@ -5670,10 +5741,10 @@ const products = [
    specs_es:[['Sistema','Pasamanos / Barandilla intermedia / Postes / Kits'],['Altura','900 / 1100 mm'],['Material','FRP Pultruido + herrajes SS'],['Colores','Amarillo / Gris / personalizado']],
    specs_de:[['System','Handlauf / Mittelgeländer / Pfosten / Kits'],['Höhe','900 / 1100 mm'],['Material','Pultrudiertes FRP + SS-Hardware'],['Farben','Gelb / Grau / kundenspezifisch']],
    specs_fr:[['Système','Main courante / Garde-corps intermédiaire / Poteaux / Kits'],['Hauteur','900 / 1100 mm'],['Matériau','FRP Pultrudé + quincaillerie SS'],['Couleurs','Jaune / Gris / personnalisé']],
-   applications:['Platforms and walkways','Jetties and pontoons','Water and chemical plants','Roof access'],
-   applications_es:['Plataformas y pasarelas','Muelles y pontones','Plantas de agua y químicas','Acceso a tejados'],
-   applications_de:['Plattformen und Gehwege','Stege und Pontons','Wasser- und Chemieanlagen','Dachzugang'],
-   applications_fr:['Plates-formes et passerelles','Jetées et pontons','Usines d\'eau et chimiques','Accès au toit']},
+   applications:['Platforms and walkways','Jetties and pontoons','Water and chemical plants','Roof access','Mining walkways','Ship & marine access','Municipal engineering','Power plants','Railway platforms'],
+   applications_es:['Plataformas y pasarelas','Muelles y pontones','Plantas de agua y químicas','Acceso a tejados','Pasarelas de minería','Acceso marino y naval','Ingeniería municipal','Centrales eléctricas','Plataformas ferroviarias'],
+   applications_de:['Plattformen und Gehwege','Stege und Pontons','Wasser- und Chemieanlagen','Dachzugang','Bergbaugehwege','Schiffs- und Marinezugang','Städtebau','Kraftwerke','Bahnhofsplattformen'],
+   applications_fr:['Plates-formes et passerelles','Jetées et pontons','Usines d\'eau et chimiques','Accès au toit','Passarelles minières','Accès maritime et naval','Ingénierie municipale','Centrales électriques','Plates-formes ferroviaires']},
   {id:'fabric', name:'Fiberglass Fabric', cat:'Fiberglass Materials', color:'green', img:'https://aka.doubaocdn.com/s/JpVCsETz8s', short:'High-quality C-glass & E-glass fiberglass fabric for FRP molding, marine composites, electrical insulation and industrial reinforcement.',
    name_es:'Tela de Fibra de Vidrio', short_es:'Tela de fibra de vidrio C-glass y E-glass de alta calidad para moldeo FRP, compuestos marinos, aislamiento eléctrico y refuerzo industrial.',
    name_de:'Fiberglasgewebe', short_de:'Hochwertiges C-Glas- und E-Glas-Fiberglasgewebe für FRP-Formung, Marineverbundwerkstoffe, elektrische Isolierung und industrielle Verstärkung.',
@@ -5687,10 +5758,10 @@ const products = [
    specs_es:[['Tipo de Vidrio','C-glass / E-glass'],['Peso','200 / 260 / 300 / 400 g/m²'],['Tejido','Liso / Cruzado / Satén'],['Ancho','1000 / 1270 / 1500 mm (personalizado)'],['Densidad','8×8 / 10×10 / 12×12 por pulgada'],['Longitud','50m / 100m por rollo']],
    specs_de:[['Glastyp','C-Glas / E-Glas'],['Gewicht','200 / 260 / 300 / 400 g/m²'],['Webart','Glatt / Köper / Satin'],['Breite','1000 / 1270 / 1500 mm (kundenspezifisch)'],['Dichte','8×8 / 10×10 / 12×12 pro Zoll'],['Länge','50m / 100m pro Rolle']],
    specs_fr:[['Type de Verre','C-glass / E-glass'],['Poids','200 / 260 / 300 / 400 g/m²'],['Tissage','Uni / Croisé / Satin'],['Largeur','1000 / 1270 / 1500 mm (personnalisé)'],['Densité','8×8 / 10×10 / 12×12 par pouce'],['Longueur','50m / 100m par rouleau']],
-   applications:['FRP molding & pultrusion reinforcement','Marine boatbuilding & composites','Electrical insulation materials','Construction & infrastructure','Automotive & transport parts','Sports equipment & consumer goods'],
-   applications_es:['Refuerzo de moldeo y pultrusión FRP','Construcción naval y compuestos marinos','Materiales de aislamiento eléctrico','Construcción e infraestructura','Piezas de automoción y transporte','Equipamiento deportivo y bienes de consumo'],
-   applications_de:['FRP-Form- und Pultrusionsverstärkung','Bootsbau und Marineverbundwerkstoffe','Elektrische Isolationsmaterialien','Bau und Infrastruktur','Automobil- und Transportteile','Sportausrüstung und Konsumgüter'],
-   applications_fr:['Renfort de moulage et pultrusion FRP','Construction navale et composites marins','Matériaux d\'isolation électrique','Construction et infrastructure','Pièces automobiles et de transport','Équipements sportifs et biens de consommation']},
+   applications:['FRP molding & pultrusion reinforcement','Marine boatbuilding & composites','Electrical insulation materials','Construction & infrastructure','Automotive & transport parts','Sports equipment & consumer goods','Mining walkways','Ship & marine access','Municipal engineering','Power plants','Railway platforms'],
+   applications_es:['Refuerzo de moldeo y pultrusión FRP','Construcción naval y compuestos marinos','Materiales de aislamiento eléctrico','Construcción e infraestructura','Piezas de automoción y transporte','Equipamiento deportivo y bienes de consumo','Pasarelas de minería','Acceso marino y naval','Ingeniería municipal','Centrales eléctricas','Plataformas ferroviarias'],
+   applications_de:['FRP-Form- und Pultrusionsverstärkung','Bootsbau und Marineverbundwerkstoffe','Elektrische Isolationsmaterialien','Bau und Infrastruktur','Automobil- und Transportteile','Sportausrüstung und Konsumgüter','Bergbaugehwege','Schiffs- und Marinezugang','Städtebau','Kraftwerke','Bahnhofsplattformen'],
+   applications_fr:['Renfort de moulage et pultrusion FRP','Construction navale et composites marins','Matériaux d\'isolation électrique','Construction et infrastructure','Pièces automobiles et de transport','Équipements sportifs et biens de consommation','Passarelles minières','Accès maritime et naval','Ingénierie municipale','Centrales électriques','Plates-formes ferroviaires']},
   {id:'clips', name:'Grating Clips', cat:'Grating Accessories', color:'yellow', img:'https://aka.doubaocdn.com/s/1PMVJCnXoj', gallery:['https://aka.doubaocdn.com/s/1PMVJCnXoj','https://aka.doubaocdn.com/s/bRJp7EMFja','https://aka.doubaocdn.com/s/7ZDRM9IWz6','https://aka.doubaocdn.com/s/nJKedTr0VG'], short:'Stainless steel & FRP grating clips and fasteners for secure installation of FRP grating to support structures.',
    name_es:'Clips de Rejilla', short_es:'Clips y sujetadores de rejilla de acero inoxidable y FRP para instalación segura de rejilla FRP a estructuras de soporte.',
    name_de:'Gitterclips', short_de:'Edelstahl- und FRP-Gitterclips und -befestigungen für die sichere Installation von FRP-Gittern an Tragstrukturen.',
@@ -5704,10 +5775,10 @@ const products = [
    specs_es:[['Material','Acero Inoxidable SS304 / SS316 / FRP'],['Tipo de Clip','M-clip / C-clip / G-clip / personalizado'],['Rejilla Ajustable','25 / 30 / 38 / 50 mm de espesor'],['Superficie','Pulido / pasivado / recubierto'],['Herrajes','Perno y tuerca incluidos (SS316)'],['Embalaje','100 uds / bolsa o personalizado']],
    specs_de:[['Material','SS304 / SS316 Edelstahl / FRP'],['Clip-Typ','M-Clip / C-Clip / G-Clip / kundenspezifisch'],['Passendes Gitter','25 / 30 / 38 / 50 mm Dicke'],['Oberfläche','Poliert / passiviert / beschichtet'],['Hardware','Schraube und Mutter enthalten (SS316)'],['Verpackung','100 Stk / Beutel oder kundenspezifisch']],
    specs_fr:[['Matériau','Acier Inoxydable SS304 / SS316 / FRP'],['Type de Clip','M-clip / C-clip / G-clip / personnalisé'],['Grille Adaptable','25 / 30 / 38 / 50 mm d\'épaisseur'],['Surface','Poli / passivé / revêtu'],['Quincaillerie','Boulon et écrou inclus (SS316)'],['Emballage','100 pcs / sac ou personnalisé']],
-   applications:['FRP grating installation & fastening','Walkway & platform grating fixation','Trench cover & drain fixation','Marine jetty & offshore platform','Chemical plant & wastewater installation'],
-   applications_es:['Instalación y fijación de rejilla FRP','Fijación de rejilla de pasarela y plataforma','Fijación de cubierta de zanja y desagüe','Muelle marino y plataforma offshore','Planta química e instalación de aguas residuales'],
-   applications_de:['FRP-Gitterinstallation und -befestigung','Gehweg- und Plattformgitterbefestigung','Grabenabdeckung und Abflussbefestigung','Marine Steg und Offshore-Plattform','Chemische Anlage und Kläranlage'],
-   applications_fr:['Installation et fixation de grille FRP','Fixation de grille de passerelle et de plate-forme','Fixation de couverture de tranchée et de drain','Jetée maritime et plate-forme offshore','Usine chimique et station de traitement des eaux usées']},
+   applications:['FRP grating installation & fastening','Walkway & platform grating fixation','Trench cover & drain fixation','Marine jetty & offshore platform','Chemical plant & wastewater installation','Mining walkways','Ship & marine access','Municipal engineering','Power plants','Railway platforms'],
+   applications_es:['Instalación y fijación de rejilla FRP','Fijación de rejilla de pasarela y plataforma','Fijación de cubierta de zanja y desagüe','Muelle marino y plataforma offshore','Planta química e instalación de aguas residuales','Pasarelas de minería','Acceso marino y naval','Ingeniería municipal','Centrales eléctricas','Plataformas ferroviarias'],
+   applications_de:['FRP-Gitterinstallation und -befestigung','Gehweg- und Plattformgitterbefestigung','Grabenabdeckung und Abflussbefestigung','Marine Steg und Offshore-Plattform','Chemische Anlage und Kläranlage','Bergbaugehwege','Schiffs- und Marinezugang','Städtebau','Kraftwerke','Bahnhofsplattformen'],
+   applications_fr:['Installation et fixation de grille FRP','Fixation de grille de passerelle et de plate-forme','Fixation de couverture de tranchée et de drain','Jetée maritime et plate-forme offshore','Usine chimique et station de traitement des eaux usées','Passarelles minières','Accès maritime et naval','Ingénierie municipale','Centrales électriques','Plates-formes ferroviaires']},
   {id:'custom', name:'Custom FRP Products', cat:'Custom Solutions', color:'green', img:'https://aka.doubaocdn.com/s/F38Vr4maCx', short:'OEM & ODM custom fiberglass composite parts — from design and tooling to full production.',
    name_es:'Productos FRP Personalizados', short_es:'Piezas de compuestos de fibra de vidrio personalizadas OEM y ODM — desde diseño y herramientas hasta producción completa.',
    name_de:'Kundenspezifische FRP-Produkte', short_de:'OEM- und ODM-kundenspezifische Fiberglas-Verbundteile — vom Design und Werkzeug bis zur Vollproduktion.',
@@ -5721,10 +5792,10 @@ const products = [
    specs_es:[['Servicio','OEM / ODM / Diseño Personalizado'],['Proceso','Moldeo / Pultrusión / Colocación Manual'],['Material','Selección personalizada de resina y fibra'],['Plazo de Entrega','7-25 días (según complejidad)']],
    specs_de:[['Service','OEM / ODM / Kundenspezifisches Design'],['Prozess','Formen / Pultrusion / Handauflegen'],['Material','Kundenspezifische Harz- und Faserauswahl'],['Lieferzeit','7-25 Tage (je nach Komplexität)']],
    specs_fr:[['Service','OEM / ODM / Conception Personnalisée'],['Processus','Moulage / Pultrusion / Pose Manuelle'],['Matériau','Sélection personnalisée de résine et de fibre'],['Délai de Livraison','7-25 jours (selon la complexité)']],
-   applications:['Custom structural parts','Industrial components','Equipment housings','Specialty composite parts'],
-   applications_es:['Piezas estructurales personalizadas','Componentes industriales','Carcasas de equipos','Piezas compuestas especiales'],
-   applications_de:['Kundenspezifische Strukturteile','Industrielle Komponenten','Gerätegehäuse','Spezielle Verbundteile'],
-   applications_fr:['Pièces structurelles personnalisées','Composants industriels','Boîtiers d\'équipement','Pièces composites spéciales']}
+   applications:['Custom structural parts','Industrial components','Equipment housings','Specialty composite parts','Mining walkways','Ship & marine access','Municipal engineering','Power plants','Railway platforms'],
+   applications_es:['Piezas estructurales personalizadas','Componentes industriales','Carcasas de equipos','Piezas compuestas especiales','Pasarelas de minería','Acceso marino y naval','Ingeniería municipal','Centrales eléctricas','Plataformas ferroviarias'],
+   applications_de:['Kundenspezifische Strukturteile','Industrielle Komponenten','Gerätegehäuse','Spezielle Verbundteile','Bergbaugehwege','Schiffs- und Marinezugang','Städtebau','Kraftwerke','Bahnhofsplattformen'],
+   applications_fr:['Pièces structurelles personnalisées','Composants industriels','Boîtiers d\'équipement','Pièces composites spéciales','Passarelles minières','Accès maritime et naval','Ingénierie municipale','Centrales électriques','Plates-formes ferroviaires']}
 ];
 
 // 根据当前产品智能推荐相关产品
@@ -6496,7 +6567,7 @@ function renderDetail(type, id){
       </div>
       <div class="block">
         <h3>${t('common.technicalSpecs')}</h3>
-        <table class="spec-table"><tbody>${getProductArray(p,'specs').map(s=>'<tr><th>'+s[0]+'</th><td>'+s[1]+'</td></tr>').join('')}</tbody></table>
+        <div class="spec-list">${getProductArray(p,'specs').map(s=>'<div class="spec-item"><span class="spec-label">'+s[0]+'</span><span class="spec-value">'+s[1]+'</span></div>').join('')}</div>
       </div>
       <div class="block">
         <h3>${t('common.applications')}</h3>
