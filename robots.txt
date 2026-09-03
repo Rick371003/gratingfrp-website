@@ -1,12 +1,27 @@
+# robots.txt for ZEALL FRP Grating - gratingfrp.com
+# Last Updated: 2026-09-03
+
+# 全局规则
 User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /cdn-cgi/
 
+# ============================================
 # 主要搜索引擎
+# ============================================
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-Video
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
 
 User-agent: Bingbot
 Allow: /
@@ -16,58 +31,175 @@ User-agent: Baiduspider
 Allow: /
 Crawl-delay: 1
 
+User-agent: Baiduspider-image
+Allow: /
+
 User-agent: Yandex
 Allow: /
 Crawl-delay: 1
 
-# AI爬虫
+User-agent: YandexBot
+Allow: /
+
+User-agent: YandexImages
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: 360Spider
+Allow: /
+
+User-agent: Sogou web spider
+Allow: /
+
+User-agent: Sosospider
+Allow: /
+
+User-agent: ia_archiver
+Allow: /
+
+# ============================================
+# AI搜索引擎和大模型爬虫（全部允许）
+# ============================================
+
+# OpenAI / ChatGPT
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic / Claude
 User-agent: ClaudeBot
 Allow: /
 
 User-agent: anthropic-ai
 Allow: /
 
-User-agent: PerplexityBot
-Allow: /
-
+# Google / Gemini
 User-agent: Google-Extended
 Allow: /
 
-User-agent: CCBot
+User-agent: GeminiBot
 Allow: /
 
-User-agent: Bytespider
-Allow: /
-
-# DeepSeek AI爬虫
+# DeepSeek
 User-agent: DeepSeekBot
 Allow: /
 
 User-agent: deepseek-crawler
 Allow: /
 
-# 其他AI爬虫
-User-agent: YouBot
+# 字节跳动 / 豆包
+User-agent: Bytespider
 Allow: /
 
-User-agent: Applebot
+User-agent: DoubaoBot
 Allow: /
 
-User-agent: Amazonbot
+User-agent: Doubao-SearchBot
 Allow: /
 
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-Renderer
+Allow: /
+
+# Common Crawl
+User-agent: CCBot
+Allow: /
+
+# Meta / Llama
 User-agent: meta-llama
 Allow: /
 
 User-agent: FacebookBot
 Allow: /
 
+# Apple / Apple Intelligence
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Amazon
+User-agent: Amazonbot
+Allow: /
+
+# Microsoft
+User-agent: MicrosoftPreview
+Allow: /
+
+User-agent: Microsoft-Read-Aloud
+Allow: /
+
+# You.com
+User-agent: YouBot
+Allow: /
+
+# Mojeek
+User-agent: MojeekBot
+Allow: /
+
+# Seekport
+User-agent: SeekportBot
+Allow: /
+
+# MegaIndex
+User-agent: MegaIndex
+Allow: /
+
+# BLEXBot
+User-agent: BLEXBot
+Allow: /
+
+# PetalBot (华为)
+User-agent: PetalBot
+Allow: /
+
+# ============================================
+# SEO工具爬虫
+# ============================================
+User-agent: AhrefsBot
+Allow: /
+
+User-agent: SemrushBot
+Allow: /
+
+User-agent: MJ12bot
+Allow: /
+
+User-agent: DotBot
+Allow: /
+
+User-agent: Rogerbot
+Allow: /
+
+User-agent: SearchmetricsBot
+Allow: /
+
+User-agent: SeznamBot
+Allow: /
+
+User-agent: EtaoSpider
+Allow: /
+
+User-agent: EasouSpider
+Allow: /
+
+User-agent: JikeSpider
+Allow: /
+
+# ============================================
+# 社交媒体爬虫
+# ============================================
 User-agent: Twitterbot
 Allow: /
 
@@ -101,105 +233,7 @@ Allow: /
 User-agent: FeishuBot
 Allow: /
 
-User-agent: DingTalkBot
-Allow: /
-
-User-agent: 360Spider
-Allow: /
-
-User-agent: Sogou web spider
-Allow: /
-
-User-agent: Sosospider
-Allow: /
-
-User-agent: ia_archiver
-Allow: /
-
-User-agent: AhrefsBot
-Allow: /
-
-User-agent: SemrushBot
-Allow: /
-
-User-agent: MJ12bot
-Allow: /
-
-User-agent: DotBot
-Allow: /
-
-User-agent: Rogerbot
-Allow: /
-
-User-agent: PetalBot
-Allow: /
-
-User-agent: SearchmetricsBot
-Allow: /
-
-User-agent: SeznamBot
-Allow: /
-
-User-agent: EtaoSpider
-Allow: /
-
-User-agent: EasouSpider
-Allow: /
-
-User-agent: JikeSpider
-Allow: /
-
-User-agent: JikeSpider
-Allow: /
-
-User-agent: MojeekBot
-Allow: /
-
-User-agent: SeekportBot
-Allow: /
-
-User-agent: MegaIndex
-Allow: /
-
-User-agent: BLEXBot
-Allow: /
-
-User-agent: DotBot
-Allow: /
-
-User-agent: rogerbot
-Allow: /
-
-User-agent: PetalBot
-Allow: /
-
-User-agent: SearchmetricsBot
-Allow: /
-
-User-agent: SeznamBot
-Allow: /
-
-User-agent: EtaoSpider
-Allow: /
-
-User-agent: EasouSpider
-Allow: /
-
-User-agent: JikeSpider
-Allow: /
-
-User-agent: MojeekBot
-Allow: /
-
-User-agent: SeekportBot
-Allow: /
-
-User-agent: MegaIndex
-Allow: /
-
-User-agent: BLEXBot
-Allow: /
-
+# ============================================
 # 站点地图
+# ============================================
 Sitemap: https://gratingfrp.com/sitemap.xml
-Sitemap: https://www.gratingfrp.com/sitemap.xml
