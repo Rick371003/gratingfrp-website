@@ -1091,7 +1091,7 @@
   .nav-bar{display:flex;align-items:center;justify-content:space-between;height:110px;gap:20px}
   .logo{display:flex;align-items:center;gap:12px;flex-shrink:0;min-width:0}
   .logo-img{
-    height:68px;width:auto;max-width:220px;display:block;object-fit:contain;
+    height:72px;width:auto;max-width:200px;display:block;object-fit:contain;
     filter: drop-shadow(0 6px 10px rgba(0,0,0,.5)) saturate(1.35) contrast(1.08);
     transform: perspective(800px) rotateX(3deg);
     transition: transform .25s ease, filter .25s ease;
@@ -1201,7 +1201,7 @@
   /* 大屏幕（1400px以下）：稍微减小间距 */
   @media (max-width:1400px){
     .nav-bar{height:100px;gap:16px}
-    .logo-img{height:62px;max-width:200px}
+    .logo-img{height:66px;max-width:190px}
     nav.desktop{gap:16px}
     nav.desktop a.navlink{font-size:11px;letter-spacing:.04em}
     .nav-tools{gap:6px;margin-left:4px}
@@ -1211,7 +1211,7 @@
   /* 中等屏幕（1200px以下）：进一步优化，隐藏部分不常用链接 */
   @media (max-width:1200px){
     .nav-bar{height:92px;gap:12px}
-    .logo-img{height:56px;max-width:180px}
+    .logo-img{height:60px;max-width:180px}
     nav.desktop{gap:12px}
     nav.desktop a.navlink{font-size:10.5px;padding:6px 0}
     .nav-tools{gap:4px}
@@ -1222,7 +1222,7 @@
   /* 较小屏幕（1024px以下）：切换到汉堡菜单 */
   @media (max-width:1024px){
     .nav-bar{height:80px}
-    .logo-img{height:52px;max-width:170px}
+    .logo-img{height:56px;max-width:170px}
     nav.desktop{display:none}
     .hamburger{display:block}
   }
