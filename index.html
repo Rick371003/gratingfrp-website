@@ -1257,7 +1257,7 @@
   }
   .kicker::before{content:'';width:36px;height:3px;background:var(--accent)}
   .section-head h2{font-family:var(--display);font-size:clamp(26px,3.4vw,38px);font-weight:700;line-height:1.12;letter-spacing:.005em;text-align:center}
-  .section-head p{color:var(--ink-soft);margin-top:14px;font-size:19px;white-space:nowrap;line-height:1.7}
+  .section-head p{color:var(--ink-soft);margin-top:14px;font-size:19px;line-height:1.7;max-width:700px;margin-left:auto;margin-right:auto}
 
   /* ===== 产品卡片（升级） ===== */
   .grid-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
@@ -3635,13 +3635,77 @@
   #view-home .kicker{font-size:14px !important;font-weight:700 !important;}
   #view-home .btn{font-size:16px !important;font-weight:600 !important;}
 
-  /* 电脑端页脚tagline保持一行 */
-  @media (min-width: 768px){
-    .foot-tagline br{display:none !important;}
-    .foot-tagline{white-space:nowrap !important;}
-  }
 
   body.light-mode .footer-logo{background:transparent !important;filter:none !important;}
+
+  /* 电脑端：分隔符加大加粗 */
+  @media (min-width: 768px){
+    .foot-tagline br{display:none !important;}
+    .tagline-sep{
+      display:inline-block !important;
+      font-size:28px !important;
+      font-weight:900 !important;
+      color:var(--accent) !important;
+      margin:0 10px !important;
+      line-height:1 !important;
+      vertical-align:baseline !important;
+      position:relative !important;
+      top:3px !important;
+    }
+  }
+  /* 手机端：隐藏分隔符，保持换行 */
+  @media (max-width: 767px){
+    .tagline-sep{display:none !important;}
+  }
+
+  /* 手机端顶部LOGO与底部LOGO同大小 */
+  @media (max-width:768px){
+    .logo-img{
+      height:80px !important;
+      max-width:220px !important;
+    }
+    .nav-bar{
+      height:92px !important;
+    }
+  }
+
+  /* 博客图片加载优化 */
+  .blog-card img, .blog-item img, .article-card img{
+    background:var(--bg-soft) !important;
+    min-height:160px !important;
+    object-fit:cover !important;
+  }
+  @media (max-width:768px){
+    .blog-card img, .blog-item img, .article-card img{
+      min-height:140px !important;
+    }
+  }
+
+  /* 手机端Hero和流程部分减少上下空白 */
+  @media (max-width:768px){
+    .hero{
+      padding:40px 0 50px !important;
+      min-height:auto !important;
+    }
+    .hero .container{
+      padding-top:20px !important;
+      padding-bottom:20px !important;
+    }
+    .section{
+      padding:40px 0 !important;
+    }
+    .section-head{
+      margin-bottom:24px !important;
+    }
+    .process-grid{
+      gap:16px !important;
+    }
+    .lead{
+      font-size:15px !important;
+      line-height:1.6 !important;
+      margin-bottom:20px !important;
+    }
+  }
 </style>
 
 <!-- AI Engine Optimization: Additional Meta Tags -->
@@ -19648,7 +19712,7 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
         <span>Email: <a href="mailto:sales@gratingfrp.com" style="color:inherit;text-decoration:underline">sales@gratingfrp.com</a></span>
       </div>
       <div class="foot-tagline-row">
-        <span class="foot-tagline" data-i18n-html="footer.tagline">FRP Grating · Custom Fiberglass Composite Solutions<br>Global Export to 45+ Countries</span>
+        <span class="foot-tagline" data-i18n-html="footer.tagline">FRP Grating · Custom Fiberglass Composite Solutions<br><span class="tagline-sep">·</span> Global Export to 45+ Countries</span>
       </div>
     </div>
   </div>
@@ -19887,7 +19951,7 @@ const I18N = {
       blogInsights: 'Blog & Insights',
       contact: 'Contact',
       copyright: '© NANTONG ZEALL NEW MATERIALS CO., LTD. All rights reserved.',
-      tagline: 'FRP Grating · Custom Fiberglass Composite Solutions<br>Global Export to 45+ Countries'
+      tagline: 'FRP Grating · Custom Fiberglass Composite Solutions<br><span class="tagline-sep">·</span> Global Export to 45+ Countries'
     }
   },
   es: {
@@ -20091,7 +20155,7 @@ const I18N = {
       blogInsights: 'Blog e Información',
       contact: 'Contacto',
       copyright: '© NANTONG ZEALL NEW MATERIALS CO., LTD. Todos los derechos reservados.',
-      tagline: 'Rejillas FRP · Soluciones Compuestas de Fibra de Vidrio Personalizadas<br>Exportación Global a más de 45 Países'
+      tagline: 'Rejillas FRP · Soluciones Compuestas de Fibra de Vidrio Personalizadas<br><span class="tagline-sep">·</span> Exportación Global a más de 45 Países'
     }
   },
   de: {
@@ -20272,7 +20336,7 @@ const I18N = {
       blogInsights: 'Blog & Erkenntnisse',
       contact: 'Kontakt',
       copyright: '© NANTONG ZEALL NEW MATERIALS CO., LTD. Alle Rechte vorbehalten.',
-      tagline: 'FRP-Gitter · Kundenspezifische Fiberglas-Verbundlösungen<br>Globaler Export in über 45 Länder'
+      tagline: 'FRP-Gitter · Kundenspezifische Fiberglas-Verbundlösungen<br><span class="tagline-sep">·</span> Globaler Export in über 45 Länder'
     }
   },
   fr: {
@@ -20453,7 +20517,7 @@ const I18N = {
       blogInsights: 'Blog & Actualités',
       contact: 'Contact',
       copyright: '© NANTONG ZEALL NEW MATERIALS CO., LTD. Tous droits réservés.',
-      tagline: 'Grilles FRP · Solutions Composites en Fibre de Verre Personnalisées<br>Exportation Mondiale vers plus de 45 Pays'
+      tagline: 'Grilles FRP · Solutions Composites en Fibre de Verre Personnalisées<br><span class="tagline-sep">·</span> Exportation Mondiale vers plus de 45 Pays'
     }
   }
 };
