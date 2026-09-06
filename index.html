@@ -20168,7 +20168,7 @@ function submitDownloadForm(e){
     return;
   }
   
-  // 构建邮件内容
+  // 构建邮件内容并发送到sales@gratingfrp.com
   var subject = 'FRP Document Download Request - ' + currentDownloadFile;
   var body = 'New Document Download Request%0D%0A%0D%0A';
   body += 'Document: ' + currentDownloadFile + '%0D%0A';
@@ -20176,39 +20176,15 @@ function submitDownloadForm(e){
   body += 'Email: ' + email + '%0D%0A';
   body += 'Name: ' + (name || 'N/A') + '%0D%0A';
   body += 'Country: ' + (country || 'N/A') + '%0D%0A';
-  body += 'Date: ' + new Date().toLocaleString() + '%0D%0A';
+  body += 'Date: ' + new Date().toLocaleString() + '%0D%0A%0D%0A';
+  body += 'Please contact this customer within 30 minutes to provide the document and support.';
   
-  // 打开邮件客户端
-  window.location.href = 'mailto:sales@gratingfrp.com?subject=' + subject + '&body=' + body;
+  // 打开邮件客户端发送
+  window.location.href = 'mailto:sales@gratingfrp.com?subject=' + encodeURIComponent(subject) + '&body=' + body;
   
-  // 显示成功界面和下载链接
+  // 显示成功界面（不下载）
   document.getElementById('downloadForm').style.display = 'none';
   document.getElementById('dlSuccess').style.display = 'block';
-  
-  // 设置下载链接
-  var pdfUrl = '';
-  for(var title in pdfUrls){
-    if(title + '.pdf' === currentDownloadFile){
-      pdfUrl = pdfUrls[title];
-      break;
-    }
-  }
-  
-  if(pdfUrl){
-    var downloadLink = document.getElementById('dlDownloadLink');
-    downloadLink.href = pdfUrl;
-    downloadLink.download = currentDownloadFile;
-    
-    // 自动开始下载
-    setTimeout(function(){
-      var a = document.createElement('a');
-      a.href = pdfUrl;
-      a.download = currentDownloadFile;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }, 500);
-  }
 }
 
 // 点击modal外部关闭
@@ -20226,7 +20202,7 @@ document.getElementById('downloadModal').addEventListener('click', function(e){
     <button class="dl-modal-close" onclick="closeDownloadModal()">&times;</button>
     <div class="dl-modal-header">
       <h3>Download Document</h3>
-      <p>Please fill in your information to receive the download link. We'll also send a copy to your email.</p>
+      <p>Thank you for your interest. Please fill in your email and company name. Our technical and sales team will contact you within 30 minutes (during working hours) to provide support!</p>
     </div>
     <div class="dl-modal-body">
       <form id="downloadForm" onsubmit="submitDownloadForm(event)">
@@ -20249,15 +20225,15 @@ document.getElementById('downloadModal').addEventListener('click', function(e){
           <input type="text" id="dlName" placeholder="Your full name">
         </div>
         <p class="dl-form-note">📧 Your information will be sent to sales@gratingfrp.com. We respect your privacy and will never share your data.</p>
-        <button type="submit" class="dl-submit-btn">Get Download Link</button>
+        <button type="submit" class="dl-submit-btn">Submit Request</button>
       </form>
       <div class="dl-success" id="dlSuccess">
         <div class="icon">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5b800" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
         </div>
         <h4>Thank You!</h4>
-        <p>Your request has been sent. Your download will start automatically.</p>
-        <a href="#" class="dl-download-btn" id="dlDownloadLink" download>Download Now</a>
+        <p>Your request has been received successfully.<br><br>Our technical and sales team will contact you within <strong>30 minutes</strong> (during working hours) to provide the document and professional support!</p>
+        <p style="font-size:13px;color:var(--ink-mute);margin-top:16px">If you need urgent assistance, please email: <a href="mailto:sales@gratingfrp.com" style="color:var(--accent)">sales@gratingfrp.com</a></p>
       </div>
     </div>
   </div>
