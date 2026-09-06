@@ -16461,6 +16461,10 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
 <script>
 // 图片预解码优化
 document.addEventListener('DOMContentLoaded', () => {
+  // 确保FAQ内容渲染
+  if(typeof renderFaqs === 'function'){
+    try{renderFaqs();}catch(e){console.error('FAQ render error:',e);}
+  }
   const images = document.querySelectorAll('img[loading="lazy"]');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -18597,11 +18601,15 @@ function getFaqText(f, field){
   return f[field + '_' + lang] || f[field];
 }
 function renderFaqs(){
-  document.getElementById('faq-list').innerHTML = faqs.map((f,i)=>
-    `<div class="faq-item">
-      <button class="faq-q" data-faq="${i}">${getFaqText(f,'q')}<span class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span></button>
-      <div class="faq-a"><div class="in">${getFaqText(f,'a')}</div></div>
-    </div>`).join('');
+  try{
+    const el = document.getElementById('faq-list');
+    if(!el){console.warn('faq-list not found');return;}
+    el.innerHTML = faqs.map((f,i)=>
+      `<div class="faq-item">
+        <button class="faq-q" data-faq="${i}">${getFaqText(f,'q')}<span class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span></button>
+        <div class="faq-a"><div class="in">${getFaqText(f,'a')}</div></div>
+      </div>`).join('');
+  }catch(e){console.error('renderFaqs error:',e);}
 }
 /* ===== 详情渲染 ===== */
 function renderDetail(type, id){
@@ -19296,14 +19304,14 @@ function renderProductFAQs(productId) {
 }
 function toggleFAQ(item) {
   item.classList.toggle('open');
-  const answer = item.querySelector('.faq-answer');
-  const icon = item.querySelector('.faq-icon');
+  const answer = item.querySelector('.faq-a');
+  const arrow = item.querySelector('.arrow');
   if (item.classList.contains('open')) {
-    answer.style.display = 'block';
-    icon.textContent = '−';
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+    if(arrow) arrow.style.transform = 'rotate(180deg)';
   } else {
-    answer.style.display = 'none';
-    icon.textContent = '+';
+    answer.style.maxHeight = '0';
+    if(arrow) arrow.style.transform = 'rotate(0deg)';
   }
 }
 // 事件委托：点击FAQ问题时展开/收起
