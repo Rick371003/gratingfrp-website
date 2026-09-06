@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
 <title>FRP Grating Manufacturer | Molded & Pultruded Grating - ZEALL</title>
 <meta http-equiv="X-DNS-Prefetch-Control" content="on">
 <meta name="turbolinks-cache-control" content="no-cache">
@@ -220,6 +220,223 @@
 .dl-download-btn{display:inline-block;padding:12px 32px;background:var(--accent);color:var(--ink-dark);text-decoration:none;border-radius:8px;font-weight:700;font-size:15px;transition:all .2s}
 .dl-download-btn:hover{opacity:.9}
 @media(max-width:600px){.dl-modal-box{max-width:100%}.dl-modal-header{padding:24px 20px 16px}.dl-modal-body{padding:20px}.dl-form-row{grid-template-columns:1fr}}
+
+/* ===== 手机端顶级适配优化 ===== */
+@media (max-width: 768px){
+  /* 全局触摸优化 */
+  *{
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    touch-action: manipulation;
+  }
+  
+  /* 最小触摸目标 44x44px (苹果标准) */
+  .btn, button, a.btn, .navlink, .lang-btn, .dc-actions button,
+  .faq-item, .ccard, .pcard, .app-card, .video-card, .blog-card{
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* 手机端最小字体14px */
+  body, p, span, li, td, th, label, input, select, textarea{
+    font-size: max(14px, 1em) !important;
+    line-height: 1.6 !important;
+  }
+  
+  /* 标题适当调整 */
+  h1{font-size: 28px !important; line-height: 1.3 !important;}
+  h2{font-size: 22px !important; line-height: 1.35 !important;}
+  h3{font-size: 18px !important; line-height: 1.4 !important;}
+  h4{font-size: 16px !important;}
+  
+  /* 输入框最小16px (防止iOS自动缩放) */
+  input, select, textarea{
+    font-size: 16px !important;
+    padding: 14px !important;
+  }
+  
+  /* 按钮增大 */
+  .btn, button{
+    padding: 14px 24px !important;
+    font-size: 16px !important;
+  }
+  
+  /* 容器边距优化 */
+  .container{
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  
+  /* Section间距优化 */
+  .section{
+    padding: 40px 0 !important;
+  }
+  
+  /* 卡片间距 */
+  .pcard, .ccard, .app-card, .video-card, .blog-card, .value-card, .stat-card{
+    margin-bottom: 16px !important;
+  }
+  
+  /* 表格横向滚动 */
+  table{
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* 图片优化 */
+  img{
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* Hero区域优化 */
+  .hero{
+    padding: 60px 0 !important;
+    min-height: auto !important;
+  }
+  .hero h1{
+    font-size: 26px !important;
+  }
+  .hero p{
+    font-size: 15px !important;
+  }
+  
+  /* 页面标题优化 */
+  .page-head{
+    padding: 40px 0 !important;
+  }
+  .page-head h1{
+    font-size: 26px !important;
+  }
+  .page-sub{
+    font-size: 15px !important;
+  }
+  
+  /* 下载中心优化 */
+  .dc-item{
+    padding: 16px !important;
+    flex-direction: column !important;
+  }
+  .dc-actions{
+    width: 100% !important;
+    margin-top: 12px !important;
+  }
+  .dc-actions button{
+    width: 100% !important;
+    margin-bottom: 8px !important;
+  }
+  
+  /* 表单优化 */
+  .form-group, .dl-form-group{
+    margin-bottom: 16px !important;
+  }
+  
+  /* 底部优化 */
+  footer{
+    padding: 40px 0 20px !important;
+  }
+  .footer-grid{
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  
+  /* 联系页面两列改单列 */
+  #view-contact .container > div > div{
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  
+  /* About页面两列改单列 */
+  #view-about .container > div > div{
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  
+  /* 计算器优化 */
+  #calculator-container{
+    padding: 20px !important;
+  }
+  #calculator-container > div{
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* FAQ优化 */
+  .faq-item{
+    padding: 16px !important;
+  }
+  .faq-q{
+    font-size: 16px !important;
+  }
+  .faq-a{
+    font-size: 15px !important;
+  }
+  
+  /* 产品卡片文字优化 */
+  .pcard .body h3{
+    font-size: 17px !important;
+  }
+  .pcard .body p{
+    font-size: 14px !important;
+  }
+  
+  /* 项目卡片优化 */
+  .ccard .body h3{
+    font-size: 16px !important;
+  }
+  
+  /* 面包屑优化 */
+  .breadcrumb{
+    font-size: 13px !important;
+    flex-wrap: wrap;
+  }
+  
+  /* 标签/徽章优化 */
+  .tag, .badge, .case-tag, .color-tag, .cat-label{
+    font-size: 12px !important;
+    padding: 4px 10px !important;
+  }
+  
+  /* 统计数字优化 */
+  .stat-number{
+    font-size: 32px !important;
+  }
+  
+  /* 平滑滚动 */
+  html{
+    scroll-behavior: smooth;
+  }
+  
+  /* 防止文字溢出 */
+  h1, h2, h3, h4, h5, h6, p{
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+}
+
+/* iPhone安全区域适配 */
+@supports(padding: max(0px)){
+  .page-head, .section, footer{
+    padding-left: max(16px, env(safe-area-inset-left)) !important;
+    padding-right: max(16px, env(safe-area-inset-right)) !important;
+  }
+  header{
+    padding-top: env(safe-area-inset-top) !important;
+  }
+  footer{
+    padding-bottom: max(20px, env(safe-area-inset-bottom)) !important;
+  }
+}
+
+/* 小屏手机 (375px以下) */
+@media (max-width: 375px){
+  h1{font-size: 24px !important;}
+  h2{font-size: 20px !important;}
+  .hero h1{font-size: 22px !important;}
+  .btn, button{padding: 12px 20px !important; font-size: 15px !important;}
+  .stat-number{font-size: 28px !important;}
+}
+
 </style>
 <meta name="AI:description" content="Professional FRP grating manufacturer in China. 20+ years experience in molded and pultruded fiberglass grating, covers, profiles, handrail systems. OEM/ODM, global export.">
 <meta name="AI:keywords" content="FRP grating manufacturer, fiberglass grating factory, molded FRP grating, pultruded grating, China FRP supplier">
