@@ -15006,6 +15006,68 @@ body.light-mode #view-detail .block h3{
   color:var(--text) !important;
 }
 
+
+/* 产品详情页白天模式 - 应用板块 */
+body.light-mode #view-detail .app-chip,
+body.light-mode #view-detail .product-app-chip{
+  background:#f8f9fa !important;
+  border:1px solid #e0e0e0 !important;
+}
+body.light-mode #view-detail .app-chip strong,
+body.light-mode #view-detail .product-app-chip strong,
+body.light-mode #view-detail .app-chip .nm strong{
+  color:#1a1a2e !important;
+}
+body.light-mode #view-detail .app-chip span,
+body.light-mode #view-detail .product-app-chip span{
+  color:#3a3a4a !important;
+}
+body.light-mode #view-detail .app-icon{
+  color:var(--accent) !important;
+}
+
+/* 产品详情页白天模式 - 相关产品卡片 */
+body.light-mode #view-detail .related-products .card,
+body.light-mode #view-detail .related-products .pcard{
+  background:#fff !important;
+  border:1px solid #e0e0e0 !important;
+}
+body.light-mode #view-detail .related-products .card h3,
+body.light-mode #view-detail .related-products .pcard h3{
+  color:#1a1a2e !important;
+}
+body.light-mode #view-detail .related-products .card p,
+body.light-mode #view-detail .related-products .pcard p{
+  color:#3a3a4a !important;
+}
+
+/* 产品详情页白天模式 - CTA区域 */
+body.light-mode #view-detail .cta-band,
+body.light-mode #view-detail .cta-band *{
+  color:#1a1a2e !important;
+}
+body.light-mode #view-detail .cta-band h2{
+  color:#1a1a2e !important;
+}
+
+/* 产品详情页白天模式 - 所有block标题 */
+body.light-mode #view-detail .block h3{
+  color:#1a1a2e !important;
+}
+
+/* 产品详情页白天模式 - 技术规格 */
+body.light-mode #view-detail .spec-label,
+body.light-mode #view-detail .spec-value,
+body.light-mode #view-detail .spec-item{
+  color:#1a1a2e !important;
+}
+
+/* 产品详情页白天模式 - Key Features */
+body.light-mode #view-detail .feat-list li,
+body.light-mode #view-detail .detail-info li{
+  color:#1a1a2e !important;
+}
+
 </style>
 <header class="site-header">
   <div class="container nav-bar">
@@ -18859,7 +18921,7 @@ function renderDetail(type, id){
         <div class="detail-side">
           <h2>${pName}</h2>
           <p class="short">${pShort}</p>
-          <h3 style="font-family:var(--display);font-size:18px;font-weight:700;color:#fff;margin-top:20px;margin-bottom:12px">${t('common.features')}</h3>
+          <h3 style="font-family:var(--display);font-size:18px;font-weight:700;color:var(--text);margin-top:20px;margin-bottom:12px">${t('common.features')}</h3>
           <ul class="feat-list" style="font-size:17px;line-height:2">${getProductArray(p,'features').map(f=>'<li style="font-size:17px;padding:6px 0">'+iconCheck+'<span style="font-size:17px;font-weight:500">'+f+'</span></li>').join('')}</ul>
           <a class="btn btn-primary" href="#/contact" data-nav>${t('common.requestThisQuote')} <span class="arrow">→</span></a>
         </div>
@@ -18914,7 +18976,7 @@ function renderDetail(type, id){
             const parts = a.split(' - ');
             const title = parts[0] || a;
             const desc = parts[1] || '';
-            return '<div class="app-chip product-app-chip" style="cursor:default;align-items:flex-start;padding:14px 16px"><div class="app-icon" style="margin-top:2px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div><div class="nm" style="line-height:1.5"><strong style="color:#fff;font-size:13.5px;display:block;margin-bottom:4px">'+title+'</strong>'+(desc?'<span style="color:var(--ink-soft);font-size:15px;line-height:1.65">'+desc+'</span>':'')+'</div></div>';
+            return '<div class="app-chip product-app-chip" style="cursor:default;align-items:flex-start;padding:14px 16px"><div class="app-icon" style="margin-top:2px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div><div class="nm" style="line-height:1.5"><strong style="color:var(--text);font-size:13.5px;display:block;margin-bottom:4px">'+title+'</strong>'+(desc?'<span style="color:var(--ink-soft);font-size:15px;line-height:1.65">'+desc+'</span>':'')+'</div></div>';
           }).join('')}
         </div>
       </div>
@@ -19166,7 +19228,7 @@ function renderDetail(type, id){
       <div class="detail-wrap">
         <div>
           <div class="detail-gallery">
-            ${p.video ? '<div style="position:relative;width:100%;height:100%;background:#000;display:flex;align-items:center;justify-content:center;border-radius:var(--radius)"><div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,18,26,.5),rgba(10,18,26,.7))"></div><div style="position:relative;z-index:2;text-align:center"><div style="width:72px;height:72px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 12px"><svg width="32" height="32" viewBox="0 0 24 24" fill="#0a1218"><path d="M8 5v14l11-7z"/></svg></div><div style="color:#fff;font-family:var(--display);font-size:14px;font-weight:600">Project Video</div></div></div>' : (p.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:cover;display:block">' : '<div class="frp-swatch '+p.color+'"></div>')}
+            ${p.video ? '<div style="position:relative;width:100%;height:100%;background:#000;display:flex;align-items:center;justify-content:center;border-radius:var(--radius)"><div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,18,26,.5),rgba(10,18,26,.7))"></div><div style="position:relative;z-index:2;text-align:center"><div style="width:72px;height:72px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 12px"><svg width="32" height="32" viewBox="0 0 24 24" fill="#0a1218"><path d="M8 5v14l11-7z"/></svg></div><div style="color:var(--text);font-family:var(--display);font-size:14px;font-weight:600">Project Video</div></div></div>' : (p.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:cover;display:block">' : '<div class="frp-swatch '+p.color+'"></div>')}
           </div>
           ${p.gallery && p.gallery.length>1 ? '<div style="display:grid;grid-template-columns:repeat('+Math.min(p.gallery.length,3)+',1fr);gap:8px;margin-top:12px">'+p.gallery.map(g=>'<div style="aspect-ratio:4/3;background:var(--bg-3);border-radius:var(--radius);overflow:hidden"><img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+g+'" alt="Project gallery" style="width:100%;height:100%;object-fit:cover"></div>').join('')+'</div>' : ''}
         </div>
@@ -19174,7 +19236,7 @@ function renderDetail(type, id){
           <div class="cat-label" style="font-family:var(--display);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:10px">${p.tag}</div>
           <h2>Project Overview</h2>
           <p class="short">${p.description}</p>
-          <h3 style="font-family:var(--display);font-size:16px;font-weight:600;color:#fff;margin-top:20px">Project Details</h3>
+          <h3 style="font-family:var(--display);font-size:16px;font-weight:600;color:var(--text);margin-top:20px">Project Details</h3>
           <table class="cat-spec-table" style="margin-top:12px">
             <tr><th style="width:40%">Location</th><td>${p.location}</td></tr>
             <tr><th>Client</th><td>${p.client}</td></tr>
