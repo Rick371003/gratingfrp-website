@@ -222,7 +222,7 @@
 @media(max-width:600px){.dl-modal-box{max-width:100%}.dl-modal-header{padding:24px 20px 16px}.dl-modal-body{padding:20px}.dl-form-row{grid-template-columns:1fr}}
 
 /* FAQ展开样式修复 */
-.faq-item.open .faq-a{max-height:500px !important}
+
 .faq-item.open .arrow{transform:rotate(180deg) !important;transition:transform .3s ease}
 .faq-a{transition:max-height .3s ease, padding .3s ease}
 .arrow{transition:transform .3s ease}
@@ -16225,25 +16225,25 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
     <div class="container">
       <div class="faq-list" id="faq-list"><div class="faq-item">
       <button class="faq-q">Are you a factory or a trading company?<span class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span></button>
-      <div class="faq-a"><div class="in">We are a direct FRP composite manufacturer with full in-house production workshops for molded and pultruded grating, structural profiles, covers and handrail systems. We also provide engineering design and custom tooling support.</div></div>
+      <div class="faq-a" style="display:none"><div class="in">We are a direct FRP composite manufacturer with full in-house production workshops for molded and pultruded grating, structural profiles, covers and handrail systems. We also provide engineering design and custom tooling support.</div></div>
     </div><div class="faq-item">
       <button class="faq-q">What is your minimum order quantity?<span class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span></button>
-      <div class="faq-a"><div class="in">Our MOQ is 1 piece. We welcome both small trial orders and large container shipments. Custom sizes and fabrications are available with no minimum penalty.</div></div>
+      <div class="faq-a" style="display:none"><div class="in">Our MOQ is 1 piece. We welcome both small trial orders and large container shipments. Custom sizes and fabrications are available with no minimum penalty.</div></div>
     </div><div class="faq-item">
       <button class="faq-q">What resin systems do you offer?<span class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span></button>
-      <div class="faq-a"><div class="in">We offer Orthophthalic Polyester (general purpose), Isophthalic Polyester (wastewater/moderate corrosion), Vinyl Ester (heavy acid-alkali/marine/salt spray), and Phenolic (flame retardant/high-voltage insulation). Our engineering team recommends the right resin based on your environment.</div></div>
+      <div class="faq-a" style="display:none"><div class="in">We offer Orthophthalic Polyester (general purpose), Isophthalic Polyester (wastewater/moderate corrosion), Vinyl Ester (heavy acid-alkali/marine/salt spray), and Phenolic (flame retardant/high-voltage insulation). Our engineering team recommends the right resin based on your environment.</div></div>
     </div><div class="faq-item">
       <button class="faq-q">What is the lead time?<span class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span></button>
-      <div class="faq-a"><div class="in">Standard panels: 7-15 working days. Custom fabrication and tooling: 15-25 working days. We keep common sizes in stock for urgent orders. We provide production updates and photos throughout manufacturing.</div></div>
+      <div class="faq-a" style="display:none"><div class="in">Standard panels: 7-15 working days. Custom fabrication and tooling: 15-25 working days. We keep common sizes in stock for urgent orders. We provide production updates and photos throughout manufacturing.</div></div>
     </div><div class="faq-item">
       <button class="faq-q">Do you provide samples?<span class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span></button>
-      <div class="faq-a"><div class="in">Yes, we provide free samples (customer pays courier cost). Sample panels are typically 100x100mm or 200x200mm. Custom sample sizes available. Samples ship within 3-5 working days.</div></div>
+      <div class="faq-a" style="display:none"><div class="in">Yes, we provide free samples (customer pays courier cost). Sample panels are typically 100x100mm or 200x200mm. Custom sample sizes available. Samples ship within 3-5 working days.</div></div>
     </div><div class="faq-item">
       <button class="faq-q">What certifications do you have?<span class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span></button>
-      <div class="faq-a"><div class="in">We are ISO 9001 certified. Our products meet ASTM E-84 fire standards, and we provide third-party test reports for load, flame spread, chemical resistance, and glass content. CE/EN compliance documentation available on request.</div></div>
+      <div class="faq-a" style="display:none"><div class="in">We are ISO 9001 certified. Our products meet ASTM E-84 fire standards, and we provide third-party test reports for load, flame spread, chemical resistance, and glass content. CE/EN compliance documentation available on request.</div></div>
     </div><div class="faq-item">
       <button class="faq-q">What is your warranty?<span class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span></button>
-      <div class="faq-a"><div class="in">We offer a 20+ year limited warranty against manufacturing defects under normal use and proper resin selection. This exceeds the industry standard of 10-15 years. Full warranty terms provided with every quotation.</div></div>
+      <div class="faq-a" style="display:none"><div class="in">We offer a 20+ year limited warranty against manufacturing defects under normal use and proper resin selection. This exceeds the industry standard of 10-15 years. Full warranty terms provided with every quotation.</div></div>
     </div></div>
     </div>
   </div>
@@ -18635,7 +18635,7 @@ function renderFaqs(){
     el.innerHTML = faqs.map((f,i)=>
       `<div class="faq-item">
         <button class="faq-q" data-faq="${i}">${getFaqText(f,'q')}<span class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span></button>
-        <div class="faq-a"><div class="in">${getFaqText(f,'a')}</div></div>
+        <div class="faq-a" style="display:none"><div class="in">${getFaqText(f,'a')}</div></div>
       </div>`).join('');
   }catch(e){console.error('renderFaqs error:',e);}
 }
@@ -19335,10 +19335,10 @@ function toggleFAQ(item) {
   const answer = item.querySelector('.faq-a');
   const arrow = item.querySelector('.arrow');
   if (item.classList.contains('open')) {
-    answer.style.maxHeight = answer.scrollHeight + 'px';
+    answer.style.display = 'block';
     if(arrow) arrow.style.transform = 'rotate(180deg)';
   } else {
-    answer.style.maxHeight = '0';
+    answer.style.display = 'none';
     if(arrow) arrow.style.transform = 'rotate(0deg)';
   }
 }
