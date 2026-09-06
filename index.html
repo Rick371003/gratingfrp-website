@@ -18579,41 +18579,10 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
 <link rel="preload" as="image" href="https://gratingfrp.com/assets/images/Ev8WySDiGe.webp" fetchpriority="low">
 <link rel="preload" as="image" href="https://gratingfrp.com/assets/images/c2qtydeAtv.webp" fetchpriority="low">
 
-<!-- ===== 首屏关键CSS内联（消除渲染阻塞） ===== -->
-<style>
-  /* 首屏关键样式 - 立即渲染 */
-  #view-home{display:block !important;}
-  .hero{min-height:60vh;display:flex;align-items:center;}
-  .hero h1{font-size:clamp(32px,5vw,56px);font-weight:800;line-height:1.1;margin:0 0 16px;}
-  .hero .lead{font-size:16px;line-height:1.6;margin-bottom:24px;}
-  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:8px;font-weight:600;text-decoration:none;transition:.2s;cursor:pointer;}
-  .btn-primary{background:var(--accent);color:#000;}
-  .btn-outline{border:2px solid var(--accent);color:var(--accent);}
-  .site-header{position:sticky;top:0;z-index:100;background:rgba(10,18,26,.95);backdrop-filter:blur(12px);}
-  .nav-bar{display:flex;align-items:center;justify-content:space-between;height:80px;}
-  .logo-img{height:60px;width:auto;}
-  .container{max-width:1200px;margin:0 auto;padding:0 20px;}
-  /* 变量定义 */
-  :root{
-    --accent:#f5b800;
-    --bg:#0a121a;
-    --bg-soft:#131e2a;
-    --ink:#fff;
-    --ink-soft:rgba(255,255,255,.7);
-    --line:rgba(255,255,255,.1);
-    --radius-lg:16px;
-    --display:'Segoe UI',system-ui,-apple-system,sans-serif;
-  }
-</style>
+<!-- ===== 内联首屏CSS已移除（避免样式冲突） ===== -->
 </head>
 <body>
-<!-- 首屏关键内容提示 -->
-<style>
-  /* 首屏立即显示，防止白屏 */
-  #view-home{display:block !important;}
-  .hero{min-height:60vh;}
-</style>
+<!-- 首屏防白屏CSS已移除 -->
 
 
 <!-- ===== 顶部导航 ===== -->
