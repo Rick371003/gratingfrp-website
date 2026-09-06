@@ -19018,10 +19018,10 @@ function renderDetail(type, id){
           </div>
         </div>
         <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
-          <a class="btn btn-outline" href="javascript:void(0)" onclick="openEmailModal('Technical Datasheet - ${p.name}')" style="font-size:13px;padding:10px 18px">📄 Technical Datasheet</a>
-          <a class="btn btn-outline" href="javascript:void(0)" onclick="openEmailModal('CAD Drawings - ${p.name}')" style="font-size:13px;padding:10px 18px">📐 CAD Drawings</a>
-          <a class="btn btn-outline" href="javascript:void(0)" onclick="openEmailModal('Test Report - ${p.name}')" style="font-size:13px;padding:10px 18px">📋 Test Report</a>
-          <a class="btn btn-outline" href="javascript:void(0)" onclick="openEmailModal('Installation Guide - ${p.name}')" style="font-size:13px;padding:10px 18px">🔧 Installation Guide</a>
+          <a class="btn btn-outline" href="javascript:void(0)" onclick="downloadFile('Technical Datasheet - ' + pName)" style="font-size:13px;padding:10px 18px">📄 Technical Datasheet</a>
+          <a class="btn btn-outline" href="javascript:void(0)" onclick="downloadFile('CAD Drawings - ' + pName)" style="font-size:13px;padding:10px 18px">📐 CAD Drawings</a>
+          <a class="btn btn-outline" href="javascript:void(0)" onclick="downloadFile('Test Report - ' + pName)" style="font-size:13px;padding:10px 18px">📋 Test Report</a>
+          <a class="btn btn-outline" href="javascript:void(0)" onclick="downloadFile('Installation Guide - ' + pName)" style="font-size:13px;padding:10px 18px">🔧 Installation Guide</a>
         </div>
       </div>
       <div class="block product-block">
