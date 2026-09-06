@@ -20215,12 +20215,12 @@ window.addEventListener('load', () => {
 })();
 /* ===== PDF预览与下载 ===== */
 const pdfUrls = {
-  'FRP Molded Grating Product Catalogue': 'https://gratingfrp.com/assets/images/E9zEClnbC3.webp',
-  'Molded FRP Grating Technical Manual': 'https://gratingfrp.com/assets/images/cJp8fOhrgU.webp',
-  'FRP Pultruded Grating Product Catalogue': 'https://gratingfrp.com/assets/images/xqiNZrDXop.webp',
-  'FRP Pultruded Profiles & Structural Shapes Catalogue': 'https://gratingfrp.com/assets/images/IKLNZV6yGx.webp',
-  'FRP Handrail System Installation Guide': 'https://gratingfrp.com/assets/images/3U0UczAQCC.webp',
-  'Company Profile & Capability Brochure': 'https://gratingfrp.com/assets/images/ewuAiPVuUD.webp'
+  'FRP Molded Grating Product Catalogue': 'https://gratingfrp.com/assets/pdf/frp-molded-grating-catalogue.pdf',
+  'Molded FRP Grating Technical Manual': 'https://gratingfrp.com/assets/pdf/molded-frp-grating-technical-manual.pdf',
+  'FRP Pultruded Grating Product Catalogue': 'https://gratingfrp.com/assets/pdf/frp-pultruded-grating-catalogue.pdf',
+  'FRP Pultruded Profiles & Structural Shapes Catalogue': 'https://gratingfrp.com/assets/pdf/frp-pultruded-profiles-catalogue.pdf',
+  'FRP Handrail System Installation Guide': 'https://gratingfrp.com/assets/pdf/frp-handrail-installation-guide.pdf',
+  'Company Profile & Capability Brochure': 'https://gratingfrp.com/assets/pdf/company-profile-brochure.pdf'
 };
 let currentPreviewFile = '';
 function openPreview(title){
@@ -20310,16 +20310,27 @@ function closePreview(){
   document.body.style.overflow = '';
 }
 function downloadFile(filename){
-  // 检查用户是否已提交邮箱（仅下载时要求，浏览不要求）
-  const savedEmail = localStorage.getItem('download_email');
-  if(!savedEmail){
-    // 未提交邮箱，弹出收集表单
-    pendingDownloadFile = filename;
-    openEmailModal();
-    return;
+  // 从pdfUrls查找对应的URL
+  let pdfUrl = '';
+  const title = filename.replace('.pdf','');
+  if(pdfUrls[title]){
+    pdfUrl = pdfUrls[title];
+  } else {
+    // 尝试直接用文件名
+    pdfUrl = 'https://gratingfrp.com/assets/pdf/' + filename.toLowerCase().replace(/\s+/g,'-');
   }
-  // 已提交邮箱，直接下载
-  doDownload(filename);
+  if(pdfUrl){
+    // 创建下载链接
+    const a = document.createElement('a');
+    a.href = pdfUrl;
+    a.download = filename;
+    a.target = '_blank';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  } else {
+    alert('PDF file not available. Please contact sales@gratingfrp.com');
+  }
 }
 // 实际执行下载
 function doDownload(filename){
