@@ -19361,7 +19361,8 @@ function renderProductFAQs(productId) {
         const lang = I18N[currentLang] ? currentLang : 'en';
         const q = (faq.q && faq.q[lang]) || (faq.q && faq.q.en) || 'Question ' + (index+1);
         const a = (faq.a && faq.a[lang]) || (faq.a && faq.a.en) || 'Answer ' + (index+1);
-        html += '<div class="faq-item" + (index === 0 ? " open" : "") + "><div class="faq-question"><span class="faq-icon">' + (index === 0 ? '−' : '+') + '</span><span>' + q + '</span></div><div class="faq-answer" style="' + (index === 0 ? 'display:block' : 'display:none') + '">' + a + '</div></div>';
+        const isOpen = index === 0;
+        html += '<div class="faq-item' + (isOpen ? ' open' : '') + '" onclick="var ans=this.querySelector(\'.faq-answer\');var ic=this.querySelector(\'.faq-icon\');if(ans.style.display==\'block\'){ans.style.display=\'none\';ic.textContent=\'+\';this.classList.remove(\'open\');}else{ans.style.display=\'block\';ic.textContent=\'−\';this.classList.add(\'open\');}"><div class="faq-question"><span class="faq-icon">' + (isOpen ? '−' : '+') + '</span><span>' + q + '</span></div><div class="faq-answer" style="' + (isOpen ? 'display:block' : 'display:none') + '">' + a + '</div></div>';
       } catch(e) {
         html += '<div class="faq-item"><div class="faq-question"><span class="faq-icon">+</span><span>Error in FAQ ' + index + '</span></div><div class="faq-answer">' + e.message + '</div></div>';
       }
@@ -19374,14 +19375,14 @@ function renderProductFAQs(productId) {
 }
 function toggleFAQ(item) {
   item.classList.toggle('open');
-  const answer = item.querySelector('.faq-a');
-  const arrow = item.querySelector('.arrow');
+  const answer = item.querySelector('.faq-answer');
+  const icon = item.querySelector('.faq-icon');
   if (item.classList.contains('open')) {
     answer.style.display = 'block';
-    if(arrow) arrow.style.transform = 'rotate(180deg)';
+    if(icon) icon.textContent = '−';
   } else {
     answer.style.display = 'none';
-    if(arrow) arrow.style.transform = 'rotate(0deg)';
+    if(icon) icon.textContent = '+';
   }
 }
 // 事件委托：点击FAQ问题时展开/收起
