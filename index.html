@@ -20168,23 +20168,44 @@ function submitDownloadForm(e){
     return;
   }
   
-  // 构建邮件内容并发送到sales@gratingfrp.com
-  var subject = 'FRP Document Download Request - ' + currentDownloadFile;
-  var body = 'New Document Download Request%0D%0A%0D%0A';
-  body += 'Document: ' + currentDownloadFile + '%0D%0A';
-  body += 'Company: ' + company + '%0D%0A';
-  body += 'Email: ' + email + '%0D%0A';
-  body += 'Name: ' + (name || 'N/A') + '%0D%0A';
-  body += 'Country: ' + (country || 'N/A') + '%0D%0A';
-  body += 'Date: ' + new Date().toLocaleString() + '%0D%0A%0D%0A';
-  body += 'Please contact this customer within 30 minutes to provide the document and support.';
+  var submitBtn = document.querySelector('#downloadForm .dl-submit-btn');
+  var originalText = submitBtn.innerHTML;
+  submitBtn.innerHTML = 'Sending...';
+  submitBtn.disabled = true;
   
-  // 打开邮件客户端发送
-  window.location.href = 'mailto:sales@gratingfrp.com?subject=' + encodeURIComponent(subject) + '&body=' + body;
-  
-  // 显示成功界面（不下载）
-  document.getElementById('downloadForm').style.display = 'none';
-  document.getElementById('dlSuccess').style.display = 'block';
+  // 使用Formspree自动发送邮件
+  fetch('https://formspree.io/f/mgaevpkj', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      company: company,
+      email: email,
+      name: name,
+      country: country,
+      document: currentDownloadFile,
+      _subject: 'FRP Document Download Request - ' + currentDownloadFile,
+      _template: 'table'
+    })
+  })
+  .then(function(response){
+    if(response.ok){
+      return response.json();
+    }
+    throw new Error('Form submission failed');
+  })
+  .then(function(data){
+    // 成功：显示感谢界面
+    document.getElementById('downloadForm').style.display = 'none';
+    document.getElementById('dlSuccess').style.display = 'block';
+  })
+  .catch(function(error){
+    alert('Submission failed. Please try again or email sales@gratingfrp.com directly.');
+    submitBtn.innerHTML = originalText;
+    submitBtn.disabled = false;
+  });
 }
 
 // 点击modal外部关闭
@@ -20209,20 +20230,20 @@ document.getElementById('downloadModal').addEventListener('click', function(e){
         <div class="dl-form-row">
           <div class="dl-form-group">
             <label>Company Name<span class="required">*</span></label>
-            <input type="text" id="dlCompany" placeholder="Your company name" required>
+            <input type="text" id="dlCompany" name="company" placeholder="Your company name" required>
           </div>
           <div class="dl-form-group">
             <label>Country</label>
-            <input type="text" id="dlCountry" placeholder="Your country">
+            <input type="text" id="dlCountry" name="country" placeholder="Your country">
           </div>
         </div>
         <div class="dl-form-group">
           <label>Email Address<span class="required">*</span></label>
-          <input type="email" id="dlEmail" placeholder="your@email.com" required>
+          <input type="email" id="dlEmail" name="email" placeholder="your@email.com" required>
         </div>
         <div class="dl-form-group">
           <label>Your Name</label>
-          <input type="text" id="dlName" placeholder="Your full name">
+          <input type="text" id="dlName" name="name" placeholder="Your full name">
         </div>
         <p class="dl-form-note">📧 Your information will be sent to sales@gratingfrp.com. We respect your privacy and will never share your data.</p>
         <button type="submit" class="dl-submit-btn">Submit Request</button>
