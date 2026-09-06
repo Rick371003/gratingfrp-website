@@ -17429,6 +17429,43 @@ const applications = [
    name_de:'Kommunal- und öffentliche Arbeiten', short_de:'Langlebige FRP-Infrastruktur für kommunale Versorgung, Brücken und öffentliche Einrichtungen',
    name_fr:'Travaux Municipaux et Publics', short_fr:'Infrastructure FRP durable pour les services publics municipaux, ponts et installations publiques'}
 ];
+
+/* ===== 产品列表（首页展示用） ===== */
+const productList = [
+  {id:'molded', name:'FRP Molded Grating', name_es:'Rejilla Moldeada FRP', name_de:'FRP Formgitter', name_fr:'Grille Moulée FRP',
+   cat:'Molded Grating', cat_es:'Rejilla Moldeada', cat_de:'Formgitter', cat_fr:'Grille Moulée',
+   short:'Bidirectional strength, corrosion resistant, customizable sizes', short_es:'Resistencia bidireccional, resistente a la corrosión', short_de:'Bidirektionale Festigkeit, korrosionsbeständig', short_fr:'Résistance bidirectionnelle, résistant à la corrosion',
+   color:'yellow', img:'https://gratingfrp.com/assets/images/0fmkAXNc5Y.webp'},
+  {id:'pultruded', name:'FRP Pultruded Grating', name_es:'Rejilla Pultrusionada FRP', name_de:'FRP Pultrusionsgitter', name_fr:'Grille Pultrudée FRP',
+   cat:'Pultruded Grating', cat_es:'Rejilla Pultrusionada', cat_de:'Pultrusionsgitter', cat_fr:'Grille Pultrudée',
+   short:'Heavy-duty load bearing, large span capability', short_es:'Carga pesada, gran capacidad de vano', short_de:'Schwere Traglast, große Spannweite', short_fr:'Charge lourde, grande portée',
+   color:'grey', img:'https://gratingfrp.com/assets/images/zw9ojZXVmN.webp'},
+  {id:'covers', name:'FRP Covers & Panels', name_es:'Cubiertas y Paneles FRP', name_de:'FRP Abdeckungen', name_fr:'Couvercles et Panneaux FRP',
+   cat:'Covers & Panels', cat_es:'Cubiertas', cat_de:'Abdeckungen', cat_fr:'Couvercles',
+   short:'Solid covers, anti-slip, full coverage', short_es:'Cubiertas sólidas, antideslizantes', short_de:'Feste Abdeckungen, rutschfest', short_fr:'Couvercles solides, antidérapants',
+   color:'red', img:'https://gratingfrp.com/assets/images/b8zE2DLnHg.webp'},
+  {id:'profiles', name:'FRP Pultruded Profiles', name_es:'Perfiles Pultrusionados FRP', name_de:'FRP Pultrusionsprofile', name_fr:'Profils Pultrudés FRP',
+   cat:'Structural Profiles', cat_es:'Perfiles Estructurales', cat_de:'Strukturprofile', cat_fr:'Profils Structuraux',
+   short:'I-beam, channel, angle, tube - steel replacement', short_es:'Viga I, canal, ángulo, tubo', short_de:'I-Träger, Kanal, Winkel, Rohr', short_fr:'Poutre I, canal, angle, tube',
+   color:'green', img:'https://gratingfrp.com/assets/images/ip7v6iSAWO.webp'},
+  {id:'handrail', name:'FRP Handrail & Stair', name_es:'Barandilla y Escalera FRP', name_de:'FRP Geländer und Treppe', name_fr:'Garde-Corps et Escalier FRP',
+   cat:'Safety Systems', cat_es:'Sistemas de Seguridad', cat_de:'Sicherheitssysteme', cat_fr:'Systèmes de Sécurité',
+   short:'OSHA compliant handrail, ladders, stair treads', short_es:'Barandilla OSHA, escaleras, peldaños', short_de:'OSHA-konforme Geländer, Leitern', short_fr:'Garde-corps OSHA, échelles, marches',
+   color:'yellow', img:'https://gratingfrp.com/assets/images/Vk1TnbPiUR.webp'},
+  {id:'fabrication', name:'Custom FRP Fabrication', name_es:'Fabricación FRP Personalizada', name_de:'FRP Sonderanfertigung', name_fr:'Fabrication FRP Sur Mesure',
+   cat:'Custom Fabrication', cat_es:'Fabricación Personalizada', cat_de:'Sonderanfertigung', cat_fr:'Fabrication Sur Mesure',
+   short:'Custom sizes, CNC cutting, engineering support', short_es:'Tamaños personalizados, corte CNC', short_de:'Sondergrößen, CNC-Zuschnitt', short_fr:'Tailles sur mesure, découpe CNC',
+   color:'blue', img:'https://gratingfrp.com/assets/images/JIcsodJoUX.webp'},
+  {id:'clips', name:'Grating Clips & Fasteners', name_es:'Soportes y Fijaciones', name_de:'Gitterklammern', name_fr:'Agrafes et Fixations',
+   cat:'Fasteners', cat_es:'Fijaciones', cat_de:'Befestigungen', cat_fr:'Fixations',
+   short:'M/C/L/Z clips, SS304/SS316/HDG', short_es:'Soportes M/C/L/Z, SS304/SS316', short_de:'M/C/L/Z Klammern, SS304/SS316', short_fr:'Agrafes M/C/L/Z, SS304/SS316',
+   color:'orange', img:'https://gratingfrp.com/assets/images/GHVIFYalwg.webp'},
+  {id:'custom', name:'Custom FRP Products', name_es:'Productos FRP Personalizados', name_de:'FRP Sonderprodukte', name_fr:'Produits FRP Personnalisés',
+   cat:'Custom Products', cat_es:'Productos Personalizados', cat_de:'Sonderprodukte', cat_fr:'Produits Personnalisés',
+   short:'Fiberglass mesh, tape, custom composite solutions', short_es:'Malla de fibra, cinta, soluciones compuestas', short_de:'Glasfasernetz, Klebeband', short_fr:'Maille fibre, ruban, solutions composites',
+   color:'purple', img:'https://gratingfrp.com/assets/images/HPDcB5ZsIi.webp'}
+];
+
 const projects = [
   {id:'wastewater-germany', name:'Wastewater Treatment Plant — Germany', place:'Export Project', tag:'Wastewater', alt:'FRP molded grating walkway wastewater treatment plant Germany vinyl ester resin 1850 sqm', color:'yellow', img:'https://gratingfrp.com/assets/images/hsL5PRl3IR.webp', video:'',
    location:'Germany · 2025', client:'Municipal Water Authority (EU)', scope:'FRP molded grating walkway, covers & handrail system',
@@ -17752,12 +17789,11 @@ function productCard(p){
   </div>`;
 }
 function renderHomeProducts(){
-  document.getElementById('home-products').innerHTML = products.slice(0,8).map(productCard).join('');
+  document.getElementById('home-products').innerHTML = productList.slice(0,8).map(productCard).join('');
 }
 function renderProductsList(){
-  const frag = document.createDocumentFragment();
   const container = document.getElementById('products-list');
-  container.innerHTML = products.map(productCard).join('');
+  container.innerHTML = productList.map(productCard).join('');
 }
 /* ===== 应用渲染 ===== */
 function getAppText(a, field){
@@ -19929,11 +19965,11 @@ async function refreshBlogPosts(){
 /* ===== 初始化 ===== */
 // 先渲染静态内容
 try{
+  renderHomeProjects();
   renderHomeProducts();
   renderProductsList();
   renderHomeApps();
   renderAppsList();
-  renderHomeProjects();
   renderHomeBlog();
   renderBlogList();
   renderVideoList(videos);
