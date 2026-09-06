@@ -191,6 +191,35 @@
   .app-chip img{
     cursor:pointer;
   }
+
+/* Download Form Modal */
+.dl-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1200;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.dl-modal.active{display:flex}
+.dl-modal-box{position:relative;width:100%;max-width:480px;background:var(--surface-dark);border:1px solid var(--line);border-radius:16px;overflow:hidden;animation:dlFadeIn .3s ease}
+@keyframes dlFadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.dl-modal-header{padding:28px 32px 20px;background:linear-gradient(135deg,rgba(245,184,0,.15),rgba(245,184,0,.05));border-bottom:1px solid var(--line)}
+.dl-modal-header h3{font-family:var(--display);font-size:22px;font-weight:800;color:#fff;margin:0 0 6px}
+.dl-modal-header p{font-size:14px;color:var(--ink-soft);margin:0;line-height:1.5}
+.dl-modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--ink-mute);font-size:28px;cursor:pointer;line-height:1;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .2s}
+.dl-modal-close:hover{color:#fff;background:rgba(255,255,255,.1)}
+.dl-modal-body{padding:24px 32px 28px}
+.dl-form-group{margin-bottom:16px}
+.dl-form-group label{display:block;font-size:13px;font-weight:600;color:var(--ink-soft);margin-bottom:6px}
+.dl-form-group label .required{color:#e74c3c;margin-left:2px}
+.dl-form-group input{width:100%;padding:12px 14px;font-size:15px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:#fff;outline:none;transition:border-color .2s;font-family:inherit;box-sizing:border-box}
+.dl-form-group input:focus{border-color:var(--accent)}
+.dl-form-group input::placeholder{color:var(--ink-mute)}
+.dl-form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dl-form-note{font-size:12px;color:var(--ink-mute);margin-top:8px;line-height:1.5}
+.dl-submit-btn{width:100%;padding:14px;font-size:16px;font-weight:700;background:var(--accent);color:var(--ink-dark);border:none;border-radius:8px;cursor:pointer;font-family:var(--display);letter-spacing:.05em;transition:all .2s;margin-top:8px}
+.dl-submit-btn:hover{opacity:.9;transform:translateY(-1px)}
+.dl-success{display:none;text-align:center;padding:20px 0}
+.dl-success .icon{width:64px;height:64px;background:var(--accent-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.dl-success h4{font-family:var(--display);font-size:20px;color:#fff;margin:0 0 8px}
+.dl-success p{font-size:14px;color:var(--ink-soft);margin:0 0 20px;line-height:1.5}
+.dl-download-btn{display:inline-block;padding:12px 32px;background:var(--accent);color:var(--ink-dark);text-decoration:none;border-radius:8px;font-weight:700;font-size:15px;transition:all .2s}
+.dl-download-btn:hover{opacity:.9}
+@media(max-width:600px){.dl-modal-box{max-width:100%}.dl-modal-header{padding:24px 20px 16px}.dl-modal-body{padding:20px}.dl-form-row{grid-template-columns:1fr}}
 </style>
 <meta name="AI:description" content="Professional FRP grating manufacturer in China. 20+ years experience in molded and pultruded fiberglass grating, covers, profiles, handrail systems. OEM/ODM, global export.">
 <meta name="AI:keywords" content="FRP grating manufacturer, fiberglass grating factory, molded FRP grating, pultruded grating, China FRP supplier">
@@ -19999,27 +20028,14 @@ function closePreview(){
   document.body.style.overflow = '';
 }
 function downloadFile(filename){
-  // 从pdfUrls查找对应的URL
-  let pdfUrl = '';
-  const title = filename.replace('.pdf','');
-  if(pdfUrls[title]){
-    pdfUrl = pdfUrls[title];
-  } else {
-    // 尝试直接用文件名
-    pdfUrl = 'https://gratingfrp.com/assets/pdf/' + filename.toLowerCase().replace(/\s+/g,'-');
-  }
-  if(pdfUrl){
-    // 创建下载链接
-    const a = document.createElement('a');
-    a.href = pdfUrl;
-    a.download = filename;
-    a.target = '_blank';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  } else {
-    alert('PDF file not available. Please contact sales@gratingfrp.com');
-  }
+  currentDownloadFile = filename;
+  document.getElementById('downloadModal').classList.add('active');
+  document.getElementById('downloadForm').style.display = 'block';
+  document.getElementById('dlSuccess').style.display = 'none';
+  document.getElementById('dlCompany').value = '';
+  document.getElementById('dlEmail').value = '';
+  document.getElementById('dlName').value = '';
+  document.getElementById('dlCountry').value = '';
 }
 // 实际执行下载
 function doDownload(filename){
@@ -20132,6 +20148,119 @@ document.getElementById('previewModal').addEventListener('click', function(e){
 document.addEventListener('keydown', function(e){
   if(e.key === 'Escape'){ closePreview(); }
 });
+
+// Download Form Functions
+var currentDownloadFile = '';
+
+function closeDownloadModal(){
+  document.getElementById('downloadModal').classList.remove('active');
+}
+
+function submitDownloadForm(e){
+  e.preventDefault();
+  var company = document.getElementById('dlCompany').value.trim();
+  var email = document.getElementById('dlEmail').value.trim();
+  var name = document.getElementById('dlName').value.trim();
+  var country = document.getElementById('dlCountry').value.trim();
+  
+  if(!company || !email){
+    alert('Please fill in Company Name and Email Address.');
+    return;
+  }
+  
+  // 构建邮件内容
+  var subject = 'FRP Document Download Request - ' + currentDownloadFile;
+  var body = 'New Document Download Request%0D%0A%0D%0A';
+  body += 'Document: ' + currentDownloadFile + '%0D%0A';
+  body += 'Company: ' + company + '%0D%0A';
+  body += 'Email: ' + email + '%0D%0A';
+  body += 'Name: ' + (name || 'N/A') + '%0D%0A';
+  body += 'Country: ' + (country || 'N/A') + '%0D%0A';
+  body += 'Date: ' + new Date().toLocaleString() + '%0D%0A';
+  
+  // 打开邮件客户端
+  window.location.href = 'mailto:sales@gratingfrp.com?subject=' + subject + '&body=' + body;
+  
+  // 显示成功界面和下载链接
+  document.getElementById('downloadForm').style.display = 'none';
+  document.getElementById('dlSuccess').style.display = 'block';
+  
+  // 设置下载链接
+  var pdfUrl = '';
+  for(var title in pdfUrls){
+    if(title + '.pdf' === currentDownloadFile){
+      pdfUrl = pdfUrls[title];
+      break;
+    }
+  }
+  
+  if(pdfUrl){
+    var downloadLink = document.getElementById('dlDownloadLink');
+    downloadLink.href = pdfUrl;
+    downloadLink.download = currentDownloadFile;
+    
+    // 自动开始下载
+    setTimeout(function(){
+      var a = document.createElement('a');
+      a.href = pdfUrl;
+      a.download = currentDownloadFile;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }, 500);
+  }
+}
+
+// 点击modal外部关闭
+document.getElementById('downloadModal').addEventListener('click', function(e){
+  if(e.target === this){
+    closeDownloadModal();
+  }
+});
+
 </script>
+
+<!-- Download Form Modal -->
+<div class="dl-modal" id="downloadModal">
+  <div class="dl-modal-box">
+    <button class="dl-modal-close" onclick="closeDownloadModal()">&times;</button>
+    <div class="dl-modal-header">
+      <h3>Download Document</h3>
+      <p>Please fill in your information to receive the download link. We'll also send a copy to your email.</p>
+    </div>
+    <div class="dl-modal-body">
+      <form id="downloadForm" onsubmit="submitDownloadForm(event)">
+        <div class="dl-form-row">
+          <div class="dl-form-group">
+            <label>Company Name<span class="required">*</span></label>
+            <input type="text" id="dlCompany" placeholder="Your company name" required>
+          </div>
+          <div class="dl-form-group">
+            <label>Country</label>
+            <input type="text" id="dlCountry" placeholder="Your country">
+          </div>
+        </div>
+        <div class="dl-form-group">
+          <label>Email Address<span class="required">*</span></label>
+          <input type="email" id="dlEmail" placeholder="your@email.com" required>
+        </div>
+        <div class="dl-form-group">
+          <label>Your Name</label>
+          <input type="text" id="dlName" placeholder="Your full name">
+        </div>
+        <p class="dl-form-note">📧 Your information will be sent to sales@gratingfrp.com. We respect your privacy and will never share your data.</p>
+        <button type="submit" class="dl-submit-btn">Get Download Link</button>
+      </form>
+      <div class="dl-success" id="dlSuccess">
+        <div class="icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5b800" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <h4>Thank You!</h4>
+        <p>Your request has been sent. Your download will start automatically.</p>
+        <a href="#" class="dl-download-btn" id="dlDownloadLink" download>Download Now</a>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
