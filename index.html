@@ -19018,10 +19018,10 @@ function renderDetail(type, id){
           </div>
         </div>
         <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
-          <a class="btn btn-outline" href="#/contact" data-nav style="font-size:13px;padding:10px 18px">📄 Technical Datasheet</a>
-          <a class="btn btn-outline" href="#/contact" data-nav style="font-size:13px;padding:10px 18px">📐 CAD Drawings</a>
-          <a class="btn btn-outline" href="#/contact" data-nav style="font-size:13px;padding:10px 18px">📋 Test Report</a>
-          <a class="btn btn-outline" href="#/contact" data-nav style="font-size:13px;padding:10px 18px">🔧 Installation Guide</a>
+          <a class="btn btn-outline" href="javascript:void(0)" onclick="openEmailModal('Technical Datasheet - ' + (p?p.name:'Product'))" style="font-size:13px;padding:10px 18px">📄 Technical Datasheet</a>
+          <a class="btn btn-outline" href="javascript:void(0)" onclick="openEmailModal('CAD Drawings - ' + (p?p.name:'Product'))" style="font-size:13px;padding:10px 18px">📐 CAD Drawings</a>
+          <a class="btn btn-outline" href="javascript:void(0)" onclick="openEmailModal('Test Report - ' + (p?p.name:'Product'))" style="font-size:13px;padding:10px 18px">📋 Test Report</a>
+          <a class="btn btn-outline" href="javascript:void(0)" onclick="openEmailModal('Installation Guide - ' + (p?p.name:'Product'))" style="font-size:13px;padding:10px 18px">🔧 Installation Guide</a>
         </div>
       </div>
       <div class="block product-block">
@@ -20871,7 +20871,10 @@ function doDownload(filename){
 // 待下载的文件名（邮箱提交后使用）
 let pendingDownloadFile = null;
 // 打开邮箱收集模态框
-function openEmailModal(){
+function openEmailModal(fileName){
+  if(fileName){
+    pendingDownloadFile = fileName;
+  }
   const modal = document.getElementById('email-modal');
   modal.style.display = 'flex';
   document.body.style.overflow = 'hidden';
