@@ -19554,6 +19554,10 @@ function navigate(){
   if(activeView === 'calculator'){
     setTimeout(calculateCost, 200);
   }
+  // 如果是FAQ页面，渲染FAQ内容
+  if(activeView === 'faq'){
+    setTimeout(renderFaqs, 100);
+  }
   // 如果点击了Get a Quote，滚动到询价表单
   if(activeView === 'catalogue' && location.hash.includes('quote')){
     setTimeout(()=>{
