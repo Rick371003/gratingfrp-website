@@ -16381,7 +16381,7 @@ function renderHomeProjects(){
 function renderHomeBlog(){
   document.getElementById('home-blog').innerHTML = posts.slice(0,3).map(p=>
     `<div class="bcard" data-go="blog|${p.id}"><div class="thumb"><span class="cat">${p.category}</span>
-        ${p.img ? '<img width="800" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+p.title+'" decoding="async" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
+        
       </div><div class="body"><div class="cat">${p.category}</div><h3>${p.title}</h3><span class="more">Read Article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div></div>`).join('');
 }
 /* ===== 视频教程渲染 ===== */
@@ -16582,7 +16582,7 @@ function renderBlogList(){
     const wordCount = pContent ? pContent.replace(/<[^>]*>/g, '').split(/\s+/).length : 200;
     const readTime = Math.max(1, Math.ceil(wordCount / 200));
     return `<div class="bcard" data-go="blog|${p.id}"><div class="thumb">
-        ${p.img ? '<img width="800" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+pTitle+'" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:60%;height:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)"></div>'}
+        
       </div><div class="body"><div class="cat" id="blog-list-cat-${idx}">${pCategory}</div><h3 id="blog-list-title-${idx}">${pTitle}</h3><p id="blog-list-excerpt-${idx}">${pExcerpt}</p><div class="blog-meta-row"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> ${p.date}</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> ${readTime} min read</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> ${p.author || 'ZEALL Team'}</span></div><span class="more">Read Article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div></div>`;
   }).join('');
   // 自动翻译博客列表（如果当前语言不是英文且没有手动翻译）
