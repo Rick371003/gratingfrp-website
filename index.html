@@ -3835,6 +3835,115 @@
   .hamburger span, .tool-btn, .navlink{
     transform:translateZ(0);
   }
+
+  /* ===== 产品专项性能优化 ===== */
+  /* 产品卡片GPU加速 */
+  .pcard{
+    transform:translateZ(0);
+    will-change:transform;
+    contain:layout paint style;
+    content-visibility:auto;
+    contain-intrinsic-size:350px;
+  }
+  .pcard .pimg{
+    aspect-ratio:4/3;
+    overflow:hidden;
+    contain:layout paint;
+  }
+  .pcard .pimg img{
+    transition:transform .4s ease;
+    transform:translateZ(0);
+  }
+  /* 产品详情页优化 */
+  #view-detail{
+    content-visibility:auto;
+    contain-intrinsic-size:1500px;
+  }
+  .product-gallery, .spec-table, .app-grid, .faq-list{
+    content-visibility:auto;
+    contain-intrinsic-size:400px;
+  }
+  /* 产品规格表优化 */
+  .spec-table{
+    contain:layout style;
+  }
+  .spec-table tr{
+    contain:layout paint;
+  }
+  /* 产品应用场景优化 */
+  .product-app-chip{
+    transform:translateZ(0);
+    contain:layout paint;
+  }
+  /* 相关产品优化 */
+  .related-products{
+    content-visibility:auto;
+    contain-intrinsic-size:300px;
+  }
+  /* 产品图片加载骨架 */
+  .pimg{
+    background:linear-gradient(90deg, var(--bg-soft) 25%, var(--bg) 50%, var(--bg-soft) 75%);
+    background-size:200% 100%;
+    animation:skeleton 1.5s infinite;
+  }
+  .pimg img[src]{
+    animation:none;
+  }
+
+  /* ===== 反物质级CSS优化 ===== */
+  /* 避免昂贵的CSS选择器 */
+  .pcard > .pimg > img,
+  .bcard > .thumb > img,
+  .ccard > .thumb > img{
+    will-change:transform;
+  }
+  /* 优化:nth-child选择器 */
+  .grid-cards > .pcard,
+  .blog-grid > .bcard{
+    contain:layout paint style;
+  }
+  /* 强制合成层 */
+  .hero h1, .hero .lead, .hero-cta{
+    transform:translateZ(0);
+    backface-visibility:hidden;
+  }
+  /* 优化阴影性能 */
+  .pcard, .bcard, .ccard{
+    box-shadow:0 4px 20px rgba(0,0,0,.3);
+  }
+  /* 避免box-shadow动画（昂贵） */
+  .pcard:hover, .bcard:hover{
+    transform:translateY(-4px);
+  }
+  /* 优化渐变性能 */
+  .page-head-overlay{
+    will-change:opacity;
+  }
+  /* 文本渲染优化 */
+  .spec-label, .spec-value{
+    text-rendering:optimizeSpeed;
+  }
+  /* 滚动性能：固定定位元素优化 */
+  .back-to-top, .site-header{
+    transform:translateZ(0);
+    will-change:transform;
+  }
+  /* 优化表单性能 */
+  input, select, textarea{
+    contain:layout style;
+  }
+  /* 优化表格性能 */
+  table{
+    table-layout:fixed;
+  }
+  /* 优化动画 */
+  @keyframes fadeInUp{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  .fade-in-up{
+    animation:fadeInUp .6s ease forwards;
+  }
 </style>
 
 <!-- AI Engine Optimization: Additional Meta Tags -->
@@ -18463,6 +18572,40 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
 <meta http-equiv="Cache-Control" content="public, max-age=31536000, immutable">
 <link rel="preload" as="image" href="https://gratingfrp.com/assets/images/0fmkAXNc5Y.webp" fetchpriority="low">
 <link rel="preload" as="image" href="https://gratingfrp.com/assets/images/zw9ojZXVmN.webp" fetchpriority="low">
+
+<!-- ===== 产品图片预加载 ===== -->
+<link rel="preload" as="image" href="https://gratingfrp.com/assets/images/T3810_DKGREY-768x576.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="https://gratingfrp.com/assets/images/hsL5PRl3IR.webp" fetchpriority="low">
+<link rel="preload" as="image" href="https://gratingfrp.com/assets/images/Ev8WySDiGe.webp" fetchpriority="low">
+<link rel="preload" as="image" href="https://gratingfrp.com/assets/images/c2qtydeAtv.webp" fetchpriority="low">
+
+<!-- ===== 首屏关键CSS内联（消除渲染阻塞） ===== -->
+<style>
+  /* 首屏关键样式 - 立即渲染 */
+  #view-home{display:block !important;}
+  .hero{min-height:60vh;display:flex;align-items:center;}
+  .hero h1{font-size:clamp(32px,5vw,56px);font-weight:800;line-height:1.1;margin:0 0 16px;}
+  .hero .lead{font-size:16px;line-height:1.6;margin-bottom:24px;}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:8px;font-weight:600;text-decoration:none;transition:.2s;cursor:pointer;}
+  .btn-primary{background:var(--accent);color:#000;}
+  .btn-outline{border:2px solid var(--accent);color:var(--accent);}
+  .site-header{position:sticky;top:0;z-index:100;background:rgba(10,18,26,.95);backdrop-filter:blur(12px);}
+  .nav-bar{display:flex;align-items:center;justify-content:space-between;height:80px;}
+  .logo-img{height:60px;width:auto;}
+  .container{max-width:1200px;margin:0 auto;padding:0 20px;}
+  /* 变量定义 */
+  :root{
+    --accent:#f5b800;
+    --bg:#0a121a;
+    --bg-soft:#131e2a;
+    --ink:#fff;
+    --ink-soft:rgba(255,255,255,.7);
+    --line:rgba(255,255,255,.1);
+    --radius-lg:16px;
+    --display:'Segoe UI',system-ui,-apple-system,sans-serif;
+  }
+</style>
 </head>
 <body>
 <!-- 首屏关键内容提示 -->
@@ -18776,7 +18919,7 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
           </div>
         </div>
         <div class="factory-visual">
-          <img loading="lazy" src="https://gratingfrp.com/assets/images/NxfbRqz6wR.webp" alt="FRP fiberglass grating factory production line manufacturing facility China molded pultruded grating" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">
+          <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/NxfbRqz6wR.webp" alt="FRP fiberglass grating factory production line manufacturing facility China molded pultruded grating" decoding="async" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">
           <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(8,16,24,.7) 100%);pointer-events:none"></div>
           <div style="position:absolute;bottom:16px;left:16px;font-family:var(--display);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#fff;z-index:4" data-i18n="home.factoryVisualLabel">Factory Production Line</div>
           <div style="position:absolute;top:12px;left:12px;width:24px;height:24px;border-top:2px solid var(--accent);border-left:2px solid var(--accent);z-index:4"></div>
@@ -18887,7 +19030,7 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
         </div>
         <div class="cat-cover-right" style="display:flex;flex-direction:column;gap:12px">
           <div style="position:relative;aspect-ratio:16/10;background:var(--bg-3);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line)">
-            <img loading="lazy" src="https://gratingfrp.com/assets/images/0fmkAXNc5Y.webp" alt="FRP molded grating product catalogue cover" style="width:100%;height:100%;object-fit:cover;display:block">
+            <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/0fmkAXNc5Y.webp" alt="FRP molded grating product catalogue cover" style="width:100%;height:100%;object-fit:cover;display:block">
             <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(10,18,26,.85))"></div>
             <div style="position:absolute;bottom:12px;left:14px;right:14px">
               <div style="font-family:var(--display);font-size:13px;font-weight:600;color:#fff;letter-spacing:.05em">FRP Molded Grating</div>
@@ -18897,12 +19040,12 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
             <div style="position:relative;aspect-ratio:4/3;background:var(--bg-3);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line)">
-              <img loading="lazy" src="https://gratingfrp.com/assets/images/zw9ojZXVmN.webp" alt="FRP pultruded grating product" style="width:100%;height:100%;object-fit:cover;display:block">
+              <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/zw9ojZXVmN.webp" alt="FRP pultruded grating product" style="width:100%;height:100%;object-fit:cover;display:block">
               <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(10,18,26,.8))"></div>
               <div style="position:absolute;bottom:8px;left:10px;font-family:var(--display);font-size:10px;font-weight:600;color:#fff">Pultruded</div>
             </div>
             <div style="position:relative;aspect-ratio:4/3;background:var(--bg-3);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line)">
-              <img loading="lazy" src="https://gratingfrp.com/assets/images/b8zE2DLnHg.webp" alt="FRP covers and panels product" style="width:100%;height:100%;object-fit:cover;display:block">
+              <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/b8zE2DLnHg.webp" alt="FRP covers and panels product" style="width:100%;height:100%;object-fit:cover;display:block">
               <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(10,18,26,.8))"></div>
               <div style="position:absolute;bottom:8px;left:10px;font-family:var(--display);font-size:10px;font-weight:600;color:#fff">Covers & Panels</div>
             </div>
@@ -18945,7 +19088,7 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
         </div>
         <div class="cat-product-body">
           <div class="cat-product-img">
-            <img loading="lazy" src="https://gratingfrp.com/assets/images/0fmkAXNc5Y.webp" alt="FRP molded grating 38mm 1220x3660mm corrosion resistant fiberglass grating" style="width:100%;height:100%;object-fit:cover;display:block">
+            <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/0fmkAXNc5Y.webp" alt="FRP molded grating 38mm 1220x3660mm corrosion resistant fiberglass grating" style="width:100%;height:100%;object-fit:cover;display:block">
           </div>
           <div class="cat-product-info">
             <h4 data-i18n="catalogue.keyFeatures">Key Features</h4>
@@ -18988,7 +19131,7 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
         </div>
         <div class="cat-product-body">
           <div class="cat-product-img">
-            <img loading="lazy" src="https://gratingfrp.com/assets/images/zw9ojZXVmN.webp" alt="High load pultruded FRP grating I-bar heavy duty fiberglass grating" style="width:100%;height:100%;object-fit:cover;display:block">
+            <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/zw9ojZXVmN.webp" alt="High load pultruded FRP grating I-bar heavy duty fiberglass grating" style="width:100%;height:100%;object-fit:cover;display:block">
           </div>
           <div class="cat-product-info">
             <h4 data-i18n="catalogue.keyFeatures">Key Features</h4>
@@ -19030,7 +19173,7 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
         </div>
         <div class="cat-product-body">
           <div class="cat-product-img">
-            <img loading="lazy" src="https://gratingfrp.com/assets/images/b8zE2DLnHg.webp" alt="FRP solid cover panels gritted surface trench cover drain cover floor panel" style="width:100%;height:100%;object-fit:cover;display:block">
+            <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/b8zE2DLnHg.webp" alt="FRP solid cover panels gritted surface trench cover drain cover floor panel" style="width:100%;height:100%;object-fit:cover;display:block">
           </div>
           <div class="cat-product-info">
             <h4 data-i18n="catalogue.keyFeatures">Key Features</h4>
@@ -19073,7 +19216,7 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
         </div>
         <div class="cat-product-body">
           <div class="cat-product-img">
-            <img loading="lazy" src="https://gratingfrp.com/assets/images/ip7v6iSAWO.webp" alt="Custom FRP pultruded profiles I-beam H-beam channel angle tube fiberglass structural shapes" style="width:100%;height:100%;object-fit:cover;display:block">
+            <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/ip7v6iSAWO.webp" alt="Custom FRP pultruded profiles I-beam H-beam channel angle tube fiberglass structural shapes" style="width:100%;height:100%;object-fit:cover;display:block">
           </div>
           <div class="cat-product-info">
             <h4 data-i18n="catalogue.keyFeatures">Key Features</h4>
@@ -19115,7 +19258,7 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
         </div>
         <div class="cat-product-body">
           <div class="cat-product-img">
-            <img loading="lazy" src="https://gratingfrp.com/assets/images/Vk1TnbPiUR.webp" alt="FRP fiberglass safety handrail stair system industrial platform railing corrosion resistant" style="width:100%;height:100%;object-fit:cover;display:block">
+            <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/Vk1TnbPiUR.webp" alt="FRP fiberglass safety handrail stair system industrial platform railing corrosion resistant" style="width:100%;height:100%;object-fit:cover;display:block">
           </div>
           <div class="cat-product-info">
             <h4 data-i18n="catalogue.keyFeatures">Key Features</h4>
@@ -19157,7 +19300,7 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
         </div>
         <div class="cat-product-body">
           <div class="cat-product-img">
-            <img loading="lazy" src="https://gratingfrp.com/assets/images/JpVCsETz8s.webp" alt="C-glass fiberglass fabric 260g sqm plain weave" style="width:100%;height:100%;object-fit:cover;display:block">
+            <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/JpVCsETz8s.webp" alt="C-glass fiberglass fabric 260g sqm plain weave" style="width:100%;height:100%;object-fit:cover;display:block">
           </div>
           <div class="cat-product-info">
             <h4 data-i18n="catalogue.keyFeatures">Key Features</h4>
@@ -19200,11 +19343,11 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
         <div class="cat-product-body">
           <div class="cat-product-img">
             <div class="gallery-grid" style="width:100%;height:100%">
-              <div class="gallery-main"><img loading="lazy" src="https://gratingfrp.com/assets/images/1PMVJCnXoj.webp" alt="Grating clips main" style="width:100%;height:100%;object-fit:cover"></div>
+              <div class="gallery-main"><img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/1PMVJCnXoj.webp" alt="Grating clips main" style="width:100%;height:100%;object-fit:cover"></div>
               <div class="gallery-thumbs">
-                <img loading="lazy" src="https://gratingfrp.com/assets/images/bRJp7EMFja.webp" alt="Grating clip type 1" style="width:100%;height:100%;object-fit:cover">
-                <img loading="lazy" src="https://gratingfrp.com/assets/images/7ZDRM9IWz6.webp" alt="Grating clip type 2" style="width:100%;height:100%;object-fit:cover">
-                <img loading="lazy" src="https://gratingfrp.com/assets/images/nJKedTr0VG.webp" alt="Grating clip type 3" style="width:100%;height:100%;object-fit:cover">
+                <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/bRJp7EMFja.webp" alt="Grating clip type 1" style="width:100%;height:100%;object-fit:cover">
+                <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/7ZDRM9IWz6.webp" alt="Grating clip type 2" style="width:100%;height:100%;object-fit:cover">
+                <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/nJKedTr0VG.webp" alt="Grating clip type 3" style="width:100%;height:100%;object-fit:cover">
               </div>
             </div>
           </div>
@@ -19249,7 +19392,7 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
         </div>
         <div class="cat-product-body">
           <div class="cat-product-img">
-            <img loading="lazy" src="https://gratingfrp.com/assets/images/F38Vr4maCx.webp" alt="Custom FRP Products OEM ODM custom fiberglass composite parts" style="width:100%;height:100%;object-fit:cover;display:block">
+            <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/F38Vr4maCx.webp" alt="Custom FRP Products OEM ODM custom fiberglass composite parts" style="width:100%;height:100%;object-fit:cover;display:block">
           </div>
           <div class="cat-product-info">
             <h4 data-i18n="catalogue.customCapabilities">Custom Capabilities</h4>
@@ -19647,29 +19790,29 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
         </div>
         <div class="factory-gallery">
           <div class="factory-hero-img">
-            <img loading="lazy" src="https://gratingfrp.com/assets/images/HPDcB5ZsIi.webp" alt="Full scale FRP fiberglass grating production workshop panoramic view manufacturing facility" style="width:100%;height:100%;object-fit:cover;display:block">
+            <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/HPDcB5ZsIi.webp" alt="Full scale FRP fiberglass grating production workshop panoramic view manufacturing facility" style="width:100%;height:100%;object-fit:cover;display:block">
             <div style="position:absolute;bottom:0;left:0;right:0;padding:20px;background:linear-gradient(transparent,rgba(10,18,26,.85))">
               <div style="font-family:var(--display);font-size:16px;font-weight:600;color:#fff" data-i18n="about.fullScaleWorkshop">Full-Scale FRP Production Workshop</div>
               <div style="font-size:12px;color:var(--ink-mute);margin-top:4px" data-i18n="about.integratedManufacturing">Integrated manufacturing from molding to pultrusion</div>
             </div>
           </div>
           <div class="factory-img-item">
-            <img loading="lazy" src="https://gratingfrp.com/assets/images/QjbIgEI7fP.webp" alt="Hydraulic press machine for FRP molded grating production fiberglass composite manufacturing equipment" style="width:100%;height:100%;object-fit:cover;display:block">
+            <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/QjbIgEI7fP.webp" alt="Hydraulic press machine for FRP molded grating production fiberglass composite manufacturing equipment" style="width:100%;height:100%;object-fit:cover;display:block">
           </div>
           <div class="factory-img-item">
-            <img loading="lazy" src="https://gratingfrp.com/assets/images/PW4GT3HxFQ.webp" alt="FRP pultrusion production line fiberglass grating manufacturing equipment continuous pultrusion process" style="width:100%;height:100%;object-fit:cover;display:block">
+            <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/PW4GT3HxFQ.webp" alt="FRP pultrusion production line fiberglass grating manufacturing equipment continuous pultrusion process" style="width:100%;height:100%;object-fit:cover;display:block">
           </div>
           <div class="factory-img-item">
-            <img loading="lazy" src="https://gratingfrp.com/assets/images/Rj2QULuVmW.webp" alt="FRP fiberglass manufacturing workshop overview production facility factory interior grating production" style="width:100%;height:100%;object-fit:cover;display:block">
+            <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/Rj2QULuVmW.webp" alt="FRP fiberglass manufacturing workshop overview production facility factory interior grating production" style="width:100%;height:100%;object-fit:cover;display:block">
           </div>
           <div class="factory-img-item">
-            <img loading="lazy" src="https://gratingfrp.com/assets/images/WPvR7twbKv.webp" alt="FRP pultrusion equipment production line fiberglass composite manufacturing factory workshop" style="width:100%;height:100%;object-fit:cover;display:block">
+            <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/WPvR7twbKv.webp" alt="FRP pultrusion equipment production line fiberglass composite manufacturing factory workshop" style="width:100%;height:100%;object-fit:cover;display:block">
           </div>
           <div class="factory-img-item">
-            <img loading="lazy" src="https://gratingfrp.com/assets/images/Oishu1TCji.webp" alt="Finished FRP fiberglass grating products warehouse yellow grey green molded grating stock" style="width:100%;height:100%;object-fit:cover;display:block">
+            <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/Oishu1TCji.webp" alt="Finished FRP fiberglass grating products warehouse yellow grey green molded grating stock" style="width:100%;height:100%;object-fit:cover;display:block">
           </div>
           <div class="factory-img-item">
-            <img loading="lazy" src="https://gratingfrp.com/assets/images/0qqZQiVLtW.webp" alt="FRP fiberglass grating production quality control factory manufacturing inspection" style="width:100%;height:100%;object-fit:cover;display:block">
+            <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="https://gratingfrp.com/assets/images/0qqZQiVLtW.webp" alt="FRP fiberglass grating production quality control factory manufacturing inspection" style="width:100%;height:100%;object-fit:cover;display:block">
           </div>
         </div>
       </div>
@@ -21082,6 +21225,7 @@ observer.observe(document.body, {childList:true, subtree:true});
 /* ===== 数据 ===== */
 const iconCheck = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>';
 
+// 产品数据缓存（内存级）
 const products = [
   {id:'molded', name:'FRP Molded Grating', cat:'Molded Grating', color:'yellow', img:'https://gratingfrp.com/assets/images/0fmkAXNc5Y.webp', short:'Bidirectional equal strength, on-site cutting, corrosion resistant, anti-slip, lightweight, maintenance-free. Concave/Smooth/Grit-top/Covered surfaces. 25-50mm thickness. Factory direct, 20+ year warranty.',
    name_es:'Rejilla FRP Moldeada', short_es:'Rejilla FRP moldeada: roving de fibra de vidrio continuo en moldes, inyeccion de resina, prensado en caliente una pieza. Resistencia bidireccional igual, corte en sitio sin romperse. Caracteristicas: resistencia acido-alcali, antideslizante, aislamiento, ignifugo, ligero, sin mantenimiento, antirrobo. Fijada con Clips de Rejilla, pasarela FRP mas comun para condiciones corrosivas.',
@@ -21624,7 +21768,7 @@ function productCard(p){
   return `<div class="pcard" data-go="product|${p.id}">
     <div class="thumb">
       <span class="color-tag">${p.cat}</span>
-      ${p.img ? '<img loading="lazy" src="'+p.img+'" alt="'+pName+'" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">' : '<div class="frp-swatch '+p.color+'"></div>'}
+      ${p.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+pName+'" decoding="async" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">' : '<div class="frp-swatch '+p.color+'"></div>'}
     </div>
     <div class="body">
       <div class="cat-label">${p.cat}</div>
@@ -21639,7 +21783,9 @@ function renderHomeProducts(){
   document.getElementById('home-products').innerHTML = products.slice(0,8).map(productCard).join('');
 }
 function renderProductsList(){
-  document.getElementById('products-list').innerHTML = products.map(productCard).join('');
+  const frag = document.createDocumentFragment();
+  const container = document.getElementById('products-list');
+  container.innerHTML = products.map(productCard).join('');
 }
 
 /* ===== 应用渲染 ===== */
@@ -21653,7 +21799,7 @@ function appChip(a){
   const aShort = getAppText(a, 'short');
   return `<div class="app-chip" data-go="app|${a.id}" style="overflow:hidden">
     <div style="aspect-ratio:16/10;background:var(--bg-3);position:relative;overflow:hidden">
-      ${a.img ? '<img loading="lazy" src="'+a.img+'" alt="'+a.imgAlt+'" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
+      ${a.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+a.img+'" alt="'+a.imgAlt+'" decoding="async" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
       <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(10,18,26,.7))"></div>
     </div>
     <div style="padding:20px"><div class="nm">${aName}</div><div class="ds">${aShort}</div></div>
@@ -21672,7 +21818,7 @@ function renderHomeProjects(){
     `<div class="ccard" data-go="project|${p.id}">
       <div class="thumb">
         <span class="case-tag">${p.tag}</span>
-        ${p.img ? '<img loading="lazy" src="'+p.img+'" alt="'+p.alt+'" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">' : '<div class="frp-swatch '+p.color+'"></div>'}
+        ${p.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+p.alt+'" decoding="async" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">' : '<div class="frp-swatch '+p.color+'"></div>'}
         ${p.video ? '<div class="video-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><span>Video</span></div>' : ''}
       </div>
       <div class="body"><div class="place">${p.place}</div><h3>${p.name}</h3></div>
@@ -21685,7 +21831,7 @@ function renderHomeBlog(){
     `<div class="bcard" data-go="blog|${p.id}">
       <div class="thumb">
         <span class="cat">${p.category}</span>
-        ${p.img ? '<img loading="lazy" src="'+p.img+'" alt="'+p.title+'" decoding="async" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
+        ${p.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+p.title+'" decoding="async" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
       </div>
       <div class="body"><div class="cat">${p.category}</div><h3>${p.title}</h3><span class="more">Read Article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
     </div>`).join('');
@@ -21702,7 +21848,7 @@ function renderVideoList(videoList){
   grid.innerHTML = videoList.map(v=>
     `<div class="video-card" onclick="openVideoModal('${v.id}')" style="cursor:pointer">
       <div class="video-thumb">
-        <img loading="lazy" src="${v.thumbnail}" alt="${v.title}" style="width:100%;height:100%;object-fit:cover;display:block">
+        <img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="${v.thumbnail}" alt="${v.title}" style="width:100%;height:100%;object-fit:cover;display:block">
         <div class="video-overlay">
           <div class="play-btn">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -21930,7 +22076,7 @@ function renderBlogList(){
     const readTime = Math.max(1, Math.ceil(wordCount / 200));
     return `<div class="bcard" data-go="blog|${p.id}">
       <div class="thumb">
-        ${p.img ? '<img loading="lazy" src="'+p.img+'" alt="'+pTitle+'" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:60%;height:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)"></div>'}
+        ${p.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+pTitle+'" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:60%;height:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)"></div>'}
       </div>
       <div class="body">
         <div class="cat" id="blog-list-cat-${idx}">${pCategory}</div>
@@ -22003,7 +22149,7 @@ function searchBlogPosts(keyword){
       `<div class="bcard" data-go="blog|${p.id}">
         <div class="thumb">
           <span class="cat">${p.category}</span>
-          ${p.img ? '<img loading="lazy" src="'+p.img+'" alt="'+p.title+'" decoding="async" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
+          ${p.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+p.title+'" decoding="async" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
         </div>
         <div class="body"><div class="cat">${p.category} · ${p.date}</div><h3>${p.title}</h3><p style="font-size:13px;color:var(--ink-soft);margin:8px 0;line-height:1.6">${p.excerpt}</p><span class="more">Read Article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
       </div>`).join('');
@@ -22076,7 +22222,7 @@ function renderDetail(type, id){
       <div class="detail-wrap">
         <div>
           <div class="detail-gallery">
-            ${p.gallery ? '<div class="gallery-grid"><div class="gallery-main"><img loading="lazy" src="'+p.gallery[0]+'" alt="'+p.name+' main view"></div><div class="gallery-thumbs">'+p.gallery.slice(1).map((g,i)=>'<img loading="lazy" src="'+g+'" alt="'+p.name+' view '+(i+2)+'">').join('')+'</div></div>' : (p.img ? '<img loading="lazy" src="'+p.img+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:cover;display:block">' : '<div class="frp-swatch '+p.color+'"></div>')}
+            ${p.gallery ? '<div class="gallery-grid"><div class="gallery-main"><img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+p.gallery[0]+'" alt="'+p.name+' main view"></div><div class="gallery-thumbs">'+p.gallery.slice(1).map((g,i)=>'<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+g+'" alt="'+p.name+' view '+(i+2)+'">').join('')+'</div></div>' : (p.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:cover;display:block">' : '<div class="frp-swatch '+p.color+'"></div>')}
           </div>
         </div>
         <div class="detail-side">
@@ -22154,7 +22300,7 @@ function renderDetail(type, id){
     
     content.innerHTML = `
       <div class="detail-wrap">
-        <div class="detail-gallery">${a.img ? '<img loading="lazy" src="'+a.img+'" alt="'+a.imgAlt+'" style="width:100%;height:100%;object-fit:cover;display:block">' : '<div class="frp-swatch grey"></div>'}</div>
+        <div class="detail-gallery">${a.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+a.img+'" alt="'+a.imgAlt+'" style="width:100%;height:100%;object-fit:cover;display:block">' : '<div class="frp-swatch grey"></div>'}</div>
         <div class="detail-side">
           <h2>Why FRP Grating for ${a.name}</h2>
           <p class="short">FRP composite solutions deliver superior performance in ${a.name.toLowerCase()} environments where corrosion, load and safety are critical factors.</p>
@@ -22379,9 +22525,9 @@ function renderDetail(type, id){
       <div class="detail-wrap">
         <div>
           <div class="detail-gallery">
-            ${p.video ? '<div style="position:relative;width:100%;height:100%;background:#000;display:flex;align-items:center;justify-content:center;border-radius:var(--radius)"><div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,18,26,.5),rgba(10,18,26,.7))"></div><div style="position:relative;z-index:2;text-align:center"><div style="width:72px;height:72px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 12px"><svg width="32" height="32" viewBox="0 0 24 24" fill="#0a1218"><path d="M8 5v14l11-7z"/></svg></div><div style="color:#fff;font-family:var(--display);font-size:14px;font-weight:600">Project Video</div></div></div>' : (p.img ? '<img loading="lazy" src="'+p.img+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:cover;display:block">' : '<div class="frp-swatch '+p.color+'"></div>')}
+            ${p.video ? '<div style="position:relative;width:100%;height:100%;background:#000;display:flex;align-items:center;justify-content:center;border-radius:var(--radius)"><div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,18,26,.5),rgba(10,18,26,.7))"></div><div style="position:relative;z-index:2;text-align:center"><div style="width:72px;height:72px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 12px"><svg width="32" height="32" viewBox="0 0 24 24" fill="#0a1218"><path d="M8 5v14l11-7z"/></svg></div><div style="color:#fff;font-family:var(--display);font-size:14px;font-weight:600">Project Video</div></div></div>' : (p.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:cover;display:block">' : '<div class="frp-swatch '+p.color+'"></div>')}
           </div>
-          ${p.gallery && p.gallery.length>1 ? '<div style="display:grid;grid-template-columns:repeat('+Math.min(p.gallery.length,3)+',1fr);gap:8px;margin-top:12px">'+p.gallery.map(g=>'<div style="aspect-ratio:4/3;background:var(--bg-3);border-radius:var(--radius);overflow:hidden"><img loading="lazy" src="'+g+'" alt="Project gallery" style="width:100%;height:100%;object-fit:cover"></div>').join('')+'</div>' : ''}
+          ${p.gallery && p.gallery.length>1 ? '<div style="display:grid;grid-template-columns:repeat('+Math.min(p.gallery.length,3)+',1fr);gap:8px;margin-top:12px">'+p.gallery.map(g=>'<div style="aspect-ratio:4/3;background:var(--bg-3);border-radius:var(--radius);overflow:hidden"><img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+g+'" alt="Project gallery" style="width:100%;height:100%;object-fit:cover"></div>').join('')+'</div>' : ''}
         </div>
         <div class="detail-side">
           <div class="cat-label" style="font-family:var(--display);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:10px">${p.tag}</div>
@@ -23145,7 +23291,7 @@ function processInline(text){
   let html = text;
   
   // 图片
-  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img loading="lazy" src="$2" alt="$1" style="max-width:100%;height:auto;border-radius:8px;margin:16px 0">');
+  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="$2" alt="$1" style="max-width:100%;height:auto;border-radius:8px;margin:16px 0">');
   
   // 链接
   html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline">$1</a>');
@@ -23520,7 +23666,7 @@ function renderRelatedPosts(currentId, category){
         ${related.map(p => `
           <div class="related-card" data-go="blog|${p.id}">
             <div class="thumb">
-              ${p.img ? '<img loading="lazy" src="'+p.img+'" alt="'+p.title+'">' : '<div style="width:100%;height:100%;background:var(--bg-3);display:flex;align-items:center;justify-content:center;color:var(--ink-mute);font-size:14px">FRP Grating</div>'}
+              ${p.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+p.title+'">' : '<div style="width:100%;height:100%;background:var(--bg-3);display:flex;align-items:center;justify-content:center;color:var(--ink-mute);font-size:14px">FRP Grating</div>'}
             </div>
             <div class="body">
               <div class="cat">${p.category}</div>
@@ -23895,6 +24041,9 @@ setInterval(() => {
 
 // 页面从后台切换到前台时检查新文章
 document.addEventListener('visibilitychange', () => {
+  if(document.hidden){
+    document.querySelectorAll('img').forEach(img => { if(img.loading === 'lazy') img.setAttribute('loading', 'lazy'); });
+  }
   if(!document.hidden){
     setTimeout(loadBlogPosts, 500);
   }
@@ -23928,7 +24077,7 @@ try{
   renderFaqs();
   const aboutThumbEl = document.getElementById('about-thumb');
   if(aboutThumbEl){
-    aboutThumbEl.innerHTML = '<img loading="lazy" decoding="async" src="https://gratingfrp.com/assets/images/HPDcB5ZsIi.webp" alt="FRP fiberglass grating manufacturing factory panoramic view China production facility" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">';
+    aboutThumbEl.innerHTML = '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" decoding="async" src="https://gratingfrp.com/assets/images/HPDcB5ZsIi.webp" alt="FRP fiberglass grating manufacturing factory panoramic view China production facility" decoding="async" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">';
   }
 }catch(e){
   console.error('Render error:', e);
