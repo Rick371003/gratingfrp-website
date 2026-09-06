@@ -14890,6 +14890,57 @@ body.light-mode .calc-btn,body.light-mode .calculate-btn,body.light-mode .result
 body.light-mode button{color:inherit}
 body.light-mode .nav-tools button{color:#1a1a2e !important}
 
+
+/* 白天模式强制文字颜色 - 覆盖所有硬编码白色 */
+body.light-mode #view-calculator h3,
+body.light-mode #view-calculator h4,
+body.light-mode #view-calculator label,
+body.light-mode #view-calculator p,
+body.light-mode #view-calculator span,
+body.light-mode #view-calculator div,
+body.light-mode #view-calculator select,
+body.light-mode #view-calculator input,
+body.light-mode #view-calculator button,
+body.light-mode #view-calculator option{color:#1a1a2e !important}
+
+body.light-mode #view-calculator .calc-result,
+body.light-mode #view-calculator .result-card{color:#1a1a2e !important}
+
+/* 白天模式导航工具按钮 */
+body.light-mode .nav-tools .lang-btn,
+body.light-mode .nav-tools .tool-btn,
+body.light-mode .lang-switcher button,
+body.light-mode .font-size-control button{
+  color:#1a1a2e !important;
+  background:rgba(0,0,0,.06) !important;
+  border:1px solid rgba(0,0,0,.12) !important;
+}
+body.light-mode .nav-tools .lang-btn.active,
+body.light-mode .lang-switcher button.active{
+  color:#fff !important;
+  background:var(--accent) !important;
+  border-color:var(--accent) !important;
+}
+
+/* 白天模式所有按钮文字 */
+body.light-mode button,
+body.light-mode .btn,
+body.light-mode .btn-primary,
+body.light-mode .calc-btn,
+body.light-mode .calculate-btn{
+  color:#1a1a2e !important;
+}
+body.light-mode .btn-primary{
+  color:#0a121a !important;
+}
+
+/* 白天模式下拉框 */
+body.light-mode select,
+body.light-mode input,
+body.light-mode textarea{
+  color:#1a1a2e !important;
+}
+
 </style>
 <header class="site-header">
   <div class="container nav-bar">
@@ -16035,12 +16086,12 @@ body.light-mode .nav-tools button{color:#1a1a2e !important}
       <div class="calc-layout">
         <!-- 左侧：输入表单 -->
         <div class="calc-form">
-          <h3 style="font-family:var(--display);font-size:22px;margin-bottom:24px;color:#fff" data-i18n="calculator.projectParams">Project Parameters</h3>
+          <h3 style="font-family:var(--display);font-size:22px;margin-bottom:24px;color:var(--text)" data-i18n="calculator.projectParams">Project Parameters</h3>
           
           <!-- 工程选择：应用场景 -->
           <div style="margin-bottom:20px;background:var(--bg-soft);padding:16px;border-radius:12px;border:1px solid var(--line)">
             <label style="display:block;font-size:14px;font-weight:600;color:var(--accent);margin-bottom:8px">🎯 Step 1: Application Type</label>
-            <select id="calc-application" style="width:100%;padding:12px 16px;font-size:16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--bg);color:#fff;outline:none;cursor:pointer" onchange="recommendProduct()">
+            <select id="calc-application" style="width:100%;padding:12px 16px;font-size:16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--bg);color:var(--text);outline:none;cursor:pointer" onchange="recommendProduct()">
               <option value="walkway">Walkway / Pedestrian</option>
               <option value="platform">Industrial Platform</option>
               <option value="drain">Drain / Trench Cover</option>
@@ -16060,7 +16111,7 @@ body.light-mode .nav-tools button{color:#1a1a2e !important}
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
               <div>
                 <label style="display:block;font-size:12px;color:var(--ink-soft);margin-bottom:4px">Span (mm)</label>
-                <select id="calc-span" style="width:100%;padding:10px;font-size:14px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:#fff" onchange="recommendProduct()">
+                <select id="calc-span" style="width:100%;padding:10px;font-size:14px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text)" onchange="recommendProduct()">
                   <option value="600">≤ 600 mm</option>
                   <option value="900" selected>600-900 mm</option>
                   <option value="1200">900-1200 mm</option>
@@ -16070,7 +16121,7 @@ body.light-mode .nav-tools button{color:#1a1a2e !important}
               </div>
               <div>
                 <label style="display:block;font-size:12px;color:var(--ink-soft);margin-bottom:4px">Load (kN/m²)</label>
-                <select id="calc-load" style="width:100%;padding:10px;font-size:14px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:#fff" onchange="recommendProduct()">
+                <select id="calc-load" style="width:100%;padding:10px;font-size:14px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text)" onchange="recommendProduct()">
                   <option value="2">≤ 2 (Light)</option>
                   <option value="5" selected>2-5 (Medium)</option>
                   <option value="10">5-10 (Heavy)</option>
@@ -16089,12 +16140,12 @@ body.light-mode .nav-tools button{color:#1a1a2e !important}
           
           <div style="margin-bottom:20px">
             <label style="display:block;font-size:14px;font-weight:600;color:var(--ink-soft);margin-bottom:8px" data-i18n="calculator.area">Total Area (m²)</label>
-            <input type="number" id="calc-area" value="100" min="1" style="width:100%;padding:12px 16px;font-size:16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--bg);color:#fff;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--line)'" oninput="calculateCost()">
+            <input type="number" id="calc-area" value="100" min="1" style="width:100%;padding:12px 16px;font-size:16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--bg);color:var(--text);outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--line)'" oninput="calculateCost()">
           </div>
           
           <div style="margin-bottom:20px">
             <label style="display:block;font-size:14px;font-weight:600;color:var(--ink-soft);margin-bottom:8px" data-i18n="calculator.productType">Product Type</label>
-            <select id="calc-type" style="width:100%;padding:12px 16px;font-size:16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--bg);color:#fff;outline:none;cursor:pointer" onchange="calculateCost()">
+            <select id="calc-type" style="width:100%;padding:12px 16px;font-size:16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--bg);color:var(--text);outline:none;cursor:pointer" onchange="calculateCost()">
               <option value="molded" data-i18n="calculator.moldedGrating">Molded FRP Grating</option>
               <option value="pultruded" data-i18n="calculator.pultrudedGrating">Pultruded FRP Grating</option>
             </select>
@@ -16102,7 +16153,7 @@ body.light-mode .nav-tools button{color:#1a1a2e !important}
           
           <div style="margin-bottom:20px">
             <label style="display:block;font-size:14px;font-weight:600;color:var(--ink-soft);margin-bottom:8px" data-i18n="calculator.thickness">Thickness</label>
-            <select id="calc-thickness" style="width:100%;padding:12px 16px;font-size:16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--bg);color:#fff;outline:none;cursor:pointer" onchange="calculateCost()">
+            <select id="calc-thickness" style="width:100%;padding:12px 16px;font-size:16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--bg);color:var(--text);outline:none;cursor:pointer" onchange="calculateCost()">
               <option value="25" data-i18n="calculator.lightDuty">25mm (Light Duty)</option>
               <option value="30" data-i18n="calculator.mediumDuty">30mm (Medium Duty)</option>
               <option value="38" selected data-i18n="calculator.standardDuty">38mm (Standard Duty)</option>
@@ -16112,7 +16163,7 @@ body.light-mode .nav-tools button{color:#1a1a2e !important}
           
           <div style="margin-bottom:20px">
             <label style="display:block;font-size:14px;font-weight:600;color:var(--ink-soft);margin-bottom:8px" data-i18n="calculator.resin">Resin System</label>
-            <select id="calc-resin" style="width:100%;padding:12px 16px;font-size:16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--bg);color:#fff;outline:none;cursor:pointer" onchange="calculateCost()">
+            <select id="calc-resin" style="width:100%;padding:12px 16px;font-size:16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--bg);color:var(--text);outline:none;cursor:pointer" onchange="calculateCost()">
               <option value="polyester" data-i18n="calculator.generalPolyester">General Purpose Polyester</option>
               <option value="isophthalic" selected data-i18n="calculator.isophthalicPolyester">Isophthalic Polyester</option>
               <option value="vinyl" data-i18n="calculator.vinylEster">Vinyl Ester (High Corrosion)</option>
@@ -16121,7 +16172,7 @@ body.light-mode .nav-tools button{color:#1a1a2e !important}
           
           <div style="margin-bottom:20px">
             <label style="display:block;font-size:14px;font-weight:600;color:var(--ink-soft);margin-bottom:8px" data-i18n="calculator.env">Environment</label>
-            <select id="calc-env" style="width:100%;padding:12px 16px;font-size:16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--bg);color:#fff;outline:none;cursor:pointer" onchange="calculateCost()">
+            <select id="calc-env" style="width:100%;padding:12px 16px;font-size:16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--bg);color:var(--text);outline:none;cursor:pointer" onchange="calculateCost()">
               <option value="mild" data-i18n="calculator.mildEnv">Mild (Indoor, Dry)</option>
               <option value="moderate" selected data-i18n="calculator.moderateEnv">Moderate (Chemical, Humid)</option>
               <option value="severe" data-i18n="calculator.severeEnv">Severe (Coastal, Strong Chemical)</option>
