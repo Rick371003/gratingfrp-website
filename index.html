@@ -222,7 +222,28 @@
 .dl-success p{font-size:17px;color:var(--ink-soft);margin:0 0 20px;line-height:1.6}
 .dl-download-btn{display:inline-block;padding:12px 32px;background:var(--accent);color:var(--ink-dark);text-decoration:none;border-radius:8px;font-weight:700;font-size:15px;transition:all .2s}
 .dl-download-btn:hover{opacity:.9}
-@media(max-width:600px){.dl-modal-box{max-width:100%}.dl-modal-header{padding:24px 20px 16px}.dl-modal-body{padding:20px}.dl-form-row{grid-template-columns:1fr}}
+@media(max-width:600px){
+  .dl-modal{padding:0 !important}
+  .dl-modal-box{max-width:100% !important;width:100% !important;height:100vh !important;border-radius:0 !important;overflow-y:auto !important}
+  .dl-modal-close{
+    top:12px !important;right:12px !important;
+    width:48px !important;height:48px !important;
+    font-size:32px !important;
+    background:rgba(255,255,255,.15) !important;
+    color:#fff !important;
+    z-index:10 !important;
+  }
+  .dl-modal-close:hover{background:rgba(255,255,255,.25) !important}
+  .dl-modal-header{padding:50px 20px 16px !important}
+  .dl-modal-header h3{font-size:22px !important}
+  .dl-modal-header p{font-size:15px !important;line-height:1.6 !important}
+  .dl-modal-body{padding:20px !important}
+  .dl-form-row{grid-template-columns:1fr !important}
+  .dl-form-group label{font-size:15px !important}
+  .dl-form-group input{font-size:16px !important;padding:14px !important}
+  .dl-submit-btn{font-size:17px !important;padding:16px !important}
+  .dl-form-note{font-size:13px !important}
+}
 
 /* FAQ展开样式修复 */
 
