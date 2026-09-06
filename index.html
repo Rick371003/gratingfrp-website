@@ -18731,8 +18731,8 @@ function renderDetail(type, id){
         <div class="detail-side">
           <h2>${pName}</h2>
           <p class="short">${pShort}</p>
-          <h3 style="font-family:var(--display);font-size:16px;font-weight:600;color:#fff;margin-top:20px">${t('common.features')}</h3>
-          <ul class="feat-list">${getProductArray(p,'features').map(f=>'<li>'+iconCheck+'<span>'+f+'</span></li>').join('')}</ul>
+          <h3 style="font-family:var(--display);font-size:18px;font-weight:700;color:#fff;margin-top:20px;margin-bottom:12px">${t('common.features')}</h3>
+          <ul class="feat-list" style="font-size:17px;line-height:2">${getProductArray(p,'features').map(f=>'<li style="font-size:17px;padding:6px 0">'+iconCheck+'<span style="font-size:17px;font-weight:500">'+f+'</span></li>').join('')}</ul>
           <a class="btn btn-primary" href="#/contact" data-nav>${t('common.requestThisQuote')} <span class="arrow">→</span></a>
         </div>
       </div>
