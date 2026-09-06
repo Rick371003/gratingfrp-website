@@ -3715,6 +3715,25 @@
   .bcard .thumb img{
     background:var(--bg-soft) !important;
   }
+
+  /* 图片性能优化 */
+  img{
+    content-visibility:auto;
+    contain-intrinsic-size:200px;
+  }
+  .bcard .thumb img, .pcard img, .ccard .thumb img{
+    content-visibility:auto;
+    contain-intrinsic-size:180px;
+  }
+  /* 防止图片布局偏移 */
+  .thumb{
+    aspect-ratio:16/10;
+    overflow:hidden;
+  }
+  .pcard .pimg{
+    aspect-ratio:4/3;
+    overflow:hidden;
+  }
 </style>
 
 <!-- AI Engine Optimization: Additional Meta Tags -->
@@ -21553,7 +21572,7 @@ function renderHomeBlog(){
     `<div class="bcard" data-go="blog|${p.id}">
       <div class="thumb">
         <span class="cat">${p.category}</span>
-        ${p.img ? '<img loading="lazy" src="'+p.img+'" alt="'+p.title+'" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
+        ${p.img ? '<img loading="lazy" src="'+p.img+'" alt="'+p.title+'" decoding="async" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
       </div>
       <div class="body"><div class="cat">${p.category}</div><h3>${p.title}</h3><span class="more">Read Article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
     </div>`).join('');
@@ -21871,7 +21890,7 @@ function searchBlogPosts(keyword){
       `<div class="bcard" data-go="blog|${p.id}">
         <div class="thumb">
           <span class="cat">${p.category}</span>
-          ${p.img ? '<img loading="lazy" src="'+p.img+'" alt="'+p.title+'" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
+          ${p.img ? '<img loading="lazy" src="'+p.img+'" alt="'+p.title+'" decoding="async" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
         </div>
         <div class="body"><div class="cat">${p.category} · ${p.date}</div><h3>${p.title}</h3><p style="font-size:13px;color:var(--ink-soft);margin:8px 0;line-height:1.6">${p.excerpt}</p><span class="more">Read Article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
       </div>`).join('');
