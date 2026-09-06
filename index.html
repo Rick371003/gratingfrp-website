@@ -3757,10 +3757,8 @@
     will-change:transform;
   }
   /* 卡片优化 */
-  .pcard, .bcard, .ccard, .advantage-card, .tech-card{
-    contain:layout paint style;
-    content-visibility:auto;
-    contain-intrinsic-size:300px;
+  .pcard, .bcard, .ccard, .tech-card{
+    contain:layout paint;
   }
   /* 图片容器优化 */
   .pimg, .thumb{
@@ -3841,14 +3839,12 @@
   .pcard{
     transform:translateZ(0);
     will-change:transform;
-    contain:layout paint style;
-    content-visibility:auto;
-    contain-intrinsic-size:350px;
+    contain:layout paint;
   }
   .pcard .pimg{
     aspect-ratio:4/3;
     overflow:hidden;
-    contain:layout paint;
+    position:relative;
   }
   .pcard .pimg img{
     transition:transform .4s ease;
@@ -3886,8 +3882,9 @@
     background-size:200% 100%;
     animation:skeleton 1.5s infinite;
   }
-  .pimg img[src]{
-    animation:none;
+  .pimg img{
+    animation:none !important;
+    background:transparent !important;
   }
 
   /* ===== 反物质级CSS优化 ===== */
@@ -3946,12 +3943,8 @@
   }
 
   /* ===== 极限性能CSS ===== */
-  /* 强制所有动画使用GPU */
-  *{
-    -webkit-transform:translateZ(0);
-    -moz-transform:translateZ(0);
-    -ms-transform:translateZ(0);
-    -o-transform:translateZ(0);
+  /* 关键元素GPU加速（避免全局*选择器导致问题） */
+  .hero, .site-header, .btn, .navlink, .pcard, .bcard{
     transform:translateZ(0);
   }
   /* 优化所有过渡动画 */
@@ -3959,7 +3952,7 @@
     transition:transform .2s ease, opacity .2s ease;
   }
   /* 避免重排 */
-  .pcard, .bcard, .ccard, .advantage-card, .tech-card{
+  .pcard, .bcard, .ccard, .tech-card{
     contain:strict;
   }
   /* 图片极限优化 */
@@ -3978,11 +3971,11 @@
   html{
     scroll-behavior:auto;
   }
-  /* 优化选择器 */
+  /* 优化选择器（温和containment，避免布局问题） */
   .grid-cards .pcard,
   .blog-grid .bcard,
   .case-grid .ccard{
-    contain:strict;
+    contain:layout paint;
   }
   /* 极限合成层 */
   .hero, .site-header, .section-head, .btn, .navlink{
