@@ -18418,12 +18418,13 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
     <div class="container">
       <div class="hero-grid">
         <div>
-          <div class="eyebrow" data-i18n="home.heroEyebrow" style="display:inline-flex;margin:0 auto 20px auto;">China Factory · Engineering Support · Custom Manufacturing</div>
-          <h1 data-i18n-html="home.heroTitleHtml">Professional <span class="accent">FRP Grating</span> <span class="line2">&amp; Custom Composite Solutions</span></h1>
-          <p class="lead" data-i18n="home.heroSub">From molded and pultruded grating to covers, profiles and handrail systems — we engineer corrosion-resistant fiberglass products for the world's most demanding industrial environments.</p>
+          <div class="eyebrow" data-i18n="home.heroEyebrow" style="display:inline-flex;margin:0 auto 20px auto;">Direct Manufacturer · Nantong, China · Engineering Support</div>
+          <h1 data-i18n-html="home.heroTitleHtml">FRP Grating Manufacturer for <span class="accent">Corrosive</span> <span class="line2">&amp; Heavy-Duty Applications</span></h1>
+          <p class="lead" data-i18n="home.heroSub">Molded &amp; Pultruded GRP Grating · Vinyl Ester · Custom Sizes · Engineering Support — ISO 9001 certified factory with 20+ years experience.</p>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="#/contact" data-nav data-i18n="home.heroBtn1">Request Free Quote <span class="arrow">→</span></a>
-            <a class="btn btn-outline" href="#/products" data-nav data-i18n="home.heroBtn2">Explore Products</a>
+            <a class="btn btn-primary" href="#/contact" data-nav data-i18n="home.heroBtn1">Get RFQ <span class="arrow">→</span></a>
+            <a class="btn btn-outline" href="#/catalogue" data-nav data-i18n="home.heroBtn2">Download Catalogue</a>
+            <a class="btn btn-outline" href="#/products" data-nav style="display:none" data-i18n="home.heroBtn3">Explore Products</a>
           </div>
           <div class="hero-badges">
             <div class="badge-item"><span class="dot"></span><span data-i18n="home.badge1">ISO 9001 Certified</span></div>
@@ -19626,7 +19627,9 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
             <div class="field"><label><span data-i18n="contact.companyName">Company Name</span> <span class="req">*</span></label><input type="text" name="company" required></div>
             <div class="field"><label><span data-i18n="contact.emailAddress">Email Address</span> <span class="req">*</span></label><input type="email" name="email" required></div>
             <div class="field"><label data-i18n="contact.whatsapp">WhatsApp / Phone</label><input type="text" name="phone"></div>
-            <div class="field full"><label data-i18n="contact.targetIndustry">Target Industry / Application</label><input type="text" name="industry" placeholder="e.g. Wastewater treatment plant, marine jetty..."></div>
+            <div class="field"><label data-i18n="contact.destinationCountry">Destination Country</label><input type="text" name="country" placeholder="e.g. Germany, UAE..."></div>
+            <div class="field"><label data-i18n="contact.destinationPort">Destination Port</label><input type="text" name="port" placeholder="e.g. Hamburg, Jebel Ali..."></div>
+            <div class="field full"><label data-i18n="contact.targetIndustry">Target Industry / Application</label><input type="text" name="industry" placeholder="e.g. Wastewater treatment plant, offshore platform, chemical plant..."></div>
             <div class="field full"><label data-i18n="contact.productType">Product Type</label>
               <select name="product">
                 <option value="">-- Select Product --</option>
@@ -19640,10 +19643,59 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
                 <option value="Fiberglass Mesh & Tape">Fiberglass Mesh & Tape</option>
               </select>
             </div>
-            <div class="field full"><label data-i18n="contact.specsQuantity">Specs & Quantity</label><textarea name="spec" placeholder="Size, thickness, resin grade, mesh size, quantity..."></textarea></div>
-            <div class="field full"><label data-i18n="contact.projectDetails">Project Details</label><textarea name="message" placeholder="Tell us about your project, environment, load requirements..."></textarea></div>
+            <div class="field"><label data-i18n="contact.thickness">Thickness</label>
+              <select name="thickness">
+                <option value="">-- Select --</option>
+                <option value="25mm">25 mm</option>
+                <option value="30mm">30 mm</option>
+                <option value="38mm">38 mm</option>
+                <option value="50mm">50 mm</option>
+                <option value="custom">Custom</option>
+              </select>
+            </div>
+            <div class="field"><label data-i18n="contact.meshSize">Mesh Size</label>
+              <select name="mesh">
+                <option value="">-- Select --</option>
+                <option value="19x19">19×19 mm</option>
+                <option value="38x38">38×38 mm</option>
+                <option value="40x40">40×40 mm</option>
+                <option value="50x50">50×50 mm</option>
+                <option value="custom">Custom</option>
+              </select>
+            </div>
+            <div class="field"><label data-i18n="contact.resinGrade">Resin Grade</label>
+              <select name="resin">
+                <option value="">-- Select --</option>
+                <option value="Orthophthalic Polyester">Orthophthalic Polyester</option>
+                <option value="Isophthalic Polyester">Isophthalic Polyester</option>
+                <option value="Vinyl Ester">Vinyl Ester</option>
+                <option value="Phenolic (Fire Retardant)">Phenolic (Fire Retardant)</option>
+              </select>
+            </div>
+            <div class="field"><label data-i18n="contact.surfaceType">Surface Type</label>
+              <select name="surface">
+                <option value="">-- Select --</option>
+                <option value="Concave (Meniscus)">Concave / Meniscus Top</option>
+                <option value="Grit Top">Grit Top (Anti-slip)</option>
+                <option value="Smooth">Smooth</option>
+                <option value="Covered Solid">Covered Solid</option>
+              </select>
+            </div>
+            <div class="field"><label data-i18n="contact.quantity">Quantity</label><input type="text" name="quantity" placeholder="e.g. 500"></div>
+            <div class="field"><label data-i18n="contact.quantityUnit">Unit</label>
+              <select name="unit">
+                <option value="m2">m²</option>
+                <option value="panels">Panels</option>
+                <option value="containers">Containers</option>
+                <option value="tons">Tons</option>
+                <option value="meters">Meters</option>
+              </select>
+            </div>
+            <div class="field full"><label data-i18n="contact.panelSize">Panel Size (optional)</label><input type="text" name="panelsize" placeholder="e.g. 1220×3660 mm, 1000×3000 mm..."></div>
+            <div class="field full"><label data-i18n="contact.uploadDrawing">Upload Drawing / BOQ / Specification (optional)</label><input type="file" name="drawing" accept=".pdf,.dwg,.dxf,.xls,.xlsx,.jpg,.png" style="padding:8px"></div>
+            <div class="field full"><label data-i18n="contact.projectDetails">Project Details / Special Requirements</label><textarea name="message" placeholder="Load requirements, environment, fire rating, color, delivery timeline..."></textarea></div>
           </div>
-          <button class="btn btn-primary" type="submit" style="justify-content:center"><span data-i18n="contact.submitInquiry">Submit Inquiry</span> <span class="arrow">→</span></button>
+          <button class="btn btn-primary" type="submit" style="justify-content:center"><span data-i18n="contact.submitInquiry">Get Quotation within 24 Hours</span> <span class="arrow">→</span></button>
           <p class="form-note" data-i18n="contact.formNoteSimple">We'll reply within 24 working hours. Your information is kept confidential.</p>
         </form>
       </div>
@@ -19771,12 +19823,12 @@ const I18N = {
         adv8Title: 'Trusted by 541+ Global Customers',
         adv8Desc: '4.9/5 rating, 65%+ repurchase rate, exported to 40+ countries worldwide.',
         
-      heroEyebrow: 'China Factory · Engineering Support · Custom Manufacturing',
+      heroEyebrow: 'Direct Manufacturer · Nantong, China · Engineering Support',
       heroTitle: 'Professional FRP Grating Manufacturer',
-      heroTitleHtml: 'Professional <span class="accent">FRP Grating</span> <span class="line2">&amp; Custom Composite Solutions</span>',
-      heroSub: 'From molded and pultruded grating to covers, profiles and handrail systems — we engineer corrosion-resistant fiberglass products for the world\'s most demanding industrial environments.',
-      heroBtn1: 'Request Free Quote →',
-      heroBtn2: 'Explore Products',
+      heroTitleHtml: 'FRP Grating Manufacturer for <span class="accent">Corrosive</span> <span class="line2">&amp; Heavy-Duty Applications</span>',
+      heroSub: 'Molded & Pultruded GRP Grating · Vinyl Ester · Custom Sizes · Engineering Support — ISO 9001 certified factory with 20+ years experience.',
+      heroBtn1: 'Get RFQ →',
+      heroBtn2: 'Download Catalogue',
       featuresTitle: 'Why Choose ZEALL FRP Grating?',
       productsTitle: 'Our Products',
       viewAll: 'View All Products',
@@ -19918,7 +19970,7 @@ const I18N = {
     // FAQ
     faq: { title: 'Frequently Asked Questions', sub: 'Everything you need to know about FRP grating' },
     // 联系
-    contact: { title: 'Contact Us', sub: 'Submit your project requirement — our engineering and sales team replies within 24 working hours to sales@gratingfrp.com.', requestQuote: 'Request a Quote', formDesc: 'Fields marked * are required. Our engineering team will review your requirement.', yourName: 'Your Name', companyName: 'Company Name', emailAddress: 'Email Address', whatsapp: 'WhatsApp / Phone', targetIndustry: 'Target Industry / Application', productType: 'Product Type', specsQuantity: 'Specs & Quantity', projectDetails: 'Project Details', submitInquiry: 'Submit Inquiry', formNoteSimple: "We'll reply within 24 working hours. Your information is kept confidential.", salesInfo: 'Sales & Support', headOffice: 'Head Office & Factory', workingHours: 'Working Hours', reliablePartner: 'YOUR RELIABLE PARTNER', inFrpIndustry: 'IN FRP GRATING INDUSTRY', name: 'Name', email: 'Email', company: 'Company', country: 'Country', phone: 'Phone', message: 'Message', send: 'Send Message', info: 'Contact Information', address: 'Address', tel: 'Tel', emailLabel: 'Email', hours: 'Working Hours' },
+    contact: { title: 'Contact Us', sub: 'Submit your project requirement — our engineering and sales team replies within 24 working hours to sales@gratingfrp.com.', requestQuote: 'Request a Quote', formDesc: 'Fields marked * are required. Our engineering team will review your requirement.', yourName: 'Your Name', companyName: 'Company Name', emailAddress: 'Email Address', whatsapp: 'WhatsApp / Phone', targetIndustry: 'Target Industry / Application', productType: 'Product Type', specsQuantity: 'Specs & Quantity', projectDetails: 'Project Details', submitInquiry: 'Get Quotation within 24 Hours', formNoteSimple: "We'll reply within 24 working hours. Your information is kept confidential.", salesInfo: 'Sales & Support', headOffice: 'Head Office & Factory', workingHours: 'Working Hours', reliablePartner: 'YOUR RELIABLE PARTNER', inFrpIndustry: 'IN FRP GRATING INDUSTRY', name: 'Name', email: 'Email', company: 'Company', country: 'Country', phone: 'Phone', message: 'Message', send: 'Send Message', info: 'Contact Information', address: 'Address', tel: 'Tel', emailLabel: 'Email', hours: 'Working Hours' },
     // 目录
     catalogue: { title: 'Product Catalogue', sub: 'Download our comprehensive product catalogs and technical documents', preview: 'Preview', download: 'Download', size: 'Size', pages: 'Pages', eyebrow: 'ZEALL FRP GRATING MASTER', coverTitle: 'FRP Grating & Composite Solutions Catalogue', edition: 'Edition 2026 · Volume 1 · Nantong, Jiangsu, China', email: 'Email:', factory: 'Factory:', website: 'Website:', flagship: 'FLAGSHIP', availableColors: 'Available Colors', catalogueContents: 'Catalogue Contents', keyFeatures: 'Key Features', technicalSpecs: 'Technical Specifications', moldedTitle: 'FRP Molded Grating', moldedDesc: 'High corrosion-resistance molded fiberglass grating for walkways, platforms and flooring.', pultrudedTitle: 'FRP Pultruded Grating', pultrudedDesc: 'FRP Pultruded Grating: continuous pultrusion with uniform cross-section strength, high load capacity, I-bar/T-bar profiles. Acid-alkali corrosion resistant, lightweight, non-conductive, anti-slip gritted surface. Ideal for heavy-duty platforms, solar PV walkways, power plants, mining & marine. Direct steel replacement.', coversTitle: 'FRP Covers & Panels', coversDesc: 'Solid and gritted FRP cover panels for trench covers, floor panels and equipment enclosures.', profilesTitle: 'FRP Pultruded Profiles', profilesDesc: 'Structural pultruded profiles including angles, channels, tubes, rods and custom shapes.', handrailTitle: 'Handrail & Stair System', handrailDesc: 'Complete FRP handrail, stair tread and safety railing systems for industrial environments.', fabricTitle: 'Fiberglass Fabric', fabricDesc: 'Woven roving, chopped strand mat and surface veil for composite reinforcement.', clipsTitle: 'Grating Clips & Fasteners', clipsDesc: 'Stainless steel and FRP grating clips, fasteners and installation accessories.', customTitle: 'Fiberglass Mesh & Tape', customDesc: 'Fiberglass mesh & fiberglass tape for wall reinforcement, anti-corrosion, FRP composite reinforcement, pipe repair. Alkali-resistant mesh, self-adhesive tape, dry woven tape.' },
     // 通用
@@ -21184,21 +21236,21 @@ const applications = [
 ];
 
 const projects = [
-  {id:'wastewater', name:'Wastewater Plant Walkway — Southeast Asia', place:'Export Project', tag:'Wastewater', alt:'FRP molded grating walkway wastewater treatment plant project Southeast Asia vinyl ester resin', color:'yellow', img:'https://gratingfrp.com/assets/images/hsL5PRl3IR.webp', video:'',
-   location:'Southeast Asia · 2025', client:'Municipal Water Authority', scope:'FRP molded grating walkway & platform system',
-   description:'A complete FRP molded grating walkway system installed at a municipal wastewater treatment plant. The project required corrosion-resistant flooring for chemical processing areas, with custom cut-outs for equipment access and integrated handrail systems.',
+  {id:'wastewater-germany', name:'Wastewater Treatment Plant — Germany', place:'Export Project', tag:'Wastewater', alt:'FRP molded grating walkway wastewater treatment plant Germany vinyl ester resin 1850 sqm', color:'yellow', img:'https://gratingfrp.com/assets/images/hsL5PRl3IR.webp', video:'',
+   location:'Germany · 2025', client:'Municipal Water Authority (EU)', scope:'FRP molded grating walkway, covers & handrail system',
+   description:'Complete FRP molded grating walkway and sealing cover system for a municipal wastewater treatment plant in Germany. Supplied 1,850 m² of 38mm vinyl ester grating with gritted anti-slip surface, integrated SS316 handrail system, and custom cut-outs for aeration basin equipment access. Engineered for H2S corrosion resistance with EN 13706 compliance.',
    gallery:['https://gratingfrp.com/assets/images/hsL5PRl3IR.webp'],
-   specs:[['Product','FRP Molded Grating 38mm'],['Resin','Vinyl Ester'],['Color','Grey'],['Area','2,400 m²'],['Installation','6 weeks']]},
-  {id:'chemical', name:'Chemical Platform Deck — Middle East', place:'Export Project', tag:'Petrochemical', alt:'FRP pultruded grating platform deck petrochemical plant project Middle East fire retardant vinyl ester', color:'grey', img:'https://gratingfrp.com/assets/images/Ev8WySDiGe.webp', video:'',
-   location:'Middle East · 2024', client:'Petrochemical Group', scope:'Pultruded grating platform & stair system',
-   description:'High-load pultruded FRP grating platform and stair system for a petrochemical facility. Engineered for heavy equipment loads and extreme heat, with fire-retardant resin and anti-slip gritted surface.',
+   specs:[['Product','FRP Molded Grating 38mm'],['Resin','Vinyl Ester'],['Surface','Grit Top (Anti-slip)'],['Color','Yellow'],['Area','1,850 m²'],['Mesh','38×38 mm'],['Fasteners','SS316 Clips'],['Lead Time','4 weeks']]},
+  {id:'offshore-norway', name:'Offshore Platform Walkway — Norway', place:'Export Project', tag:'Marine / Offshore', alt:'FRP pultruded grating offshore platform Norway fire retardant vinyl ester salt spray resistant', color:'grey', img:'https://gratingfrp.com/assets/images/Ev8WySDiGe.webp', video:'',
+   location:'Norway · 2024', client:'Offshore Energy Contractor', scope:'Pultruded grating platform, stair & handrail system',
+   description:'Heavy-duty pultruded FRP grating platform and stair system for a North Sea offshore auxiliary platform. Supplied 1,200 m² of 50mm fire-retardant vinyl ester pultruded grating with phenolic handrail system, full SS316 grating clips, and salt-spray resistant surface treatment. Certified to ASTM E-84 Class A fire rating and NORSOK compliance for offshore applications.',
    gallery:[],
-   specs:[['Product','FRP Pultruded Grating 50mm'],['Resin','Fire-retardant Vinyl Ester'],['Color','Grey'],['Area','1,800 m²'],['Load Rating','Heavy-duty']]},
-  {id:'solar', name:'Solar Farm O&M Walkway — Australia', place:'Export Project', tag:'Solar PV', alt:'FRP fiberglass grating O&M walkway solar farm project Australia UV stabilized non-conductive', color:'green', img:'https://gratingfrp.com/assets/images/c2qtydeAtv.webp', gallery:['https://gratingfrp.com/assets/images/c2qtydeAtv.webp','https://gratingfrp.com/assets/images/TVeP8hRuUv.webp','https://gratingfrp.com/assets/images/aRcUqRknOk.webp'], video:'',
-   location:'Australia · 2025', client:'Solar Energy Developer', scope:'Lightweight FRP maintenance walkway',
-   description:'Lightweight FRP maintenance walkway system for a utility-scale solar farm. The non-conductive FRP grating provides safe access between panel arrays, with UV-stabilized resin for long-term outdoor performance.',
+   specs:[['Product','FRP Pultruded Grating 50mm'],['Resin','Fire-retardant Vinyl Ester'],['Fire Rating','ASTM E-84 Class A'],['Color','Grey'],['Area','1,200 m²'],['Load Rating','Heavy-duty (H-20)'],['Fasteners','SS316 Full Set'],['Handrail','Phenolic FRP']]},
+  {id:'chemical-netherlands', name:'Chemical Plant Platform — Netherlands', place:'Export Project', tag:'Chemical / Petrochemical', alt:'FRP pultruded grating chemical plant Netherlands heavy duty vinyl ester isophthalic acid alkali corrosion', color:'green', img:'https://gratingfrp.com/assets/images/c2qtydeAtv.webp', gallery:['https://gratingfrp.com/assets/images/c2qtydeAtv.webp','https://gratingfrp.com/assets/images/TVeP8hRuUv.webp','https://gratingfrp.com/assets/images/aRcUqRknOk.webp'], video:'',
+   location:'Netherlands · 2025', client:'European Chemical Manufacturer', scope:'Heavy-duty pultruded grating platform & trench covers',
+   description:'Heavy-duty pultruded FRP grating platform and trench cover system for a specialty chemical plant in the Netherlands. Supplied 2,100 m² of 50mm pultruded grating with mixed isophthalic/vinyl ester resin for concentrated acid-alkali exposure, custom-fabricated trench covers, and structural support beams. Load-tested to 5 kN/m² with full structural calculations provided.',
    gallery:[],
-   specs:[['Product','FRP Molded Grating 25mm'],['Resin','UV-stabilized Polyester'],['Color','Grey'],['Area','5,200 m²'],['Feature','Non-conductive & lightweight']]}
+   specs:[['Product','FRP Pultruded Grating 50mm'],['Resin','Isophthalic / Vinyl Ester'],['Color','Grey'],['Area','2,100 m²'],['Load Rating','5 kN/m²'],['Trench Covers','Custom Fabricated'],['Structural Calc','Provided'],['Lead Time','5 weeks']]}
 ];
 
 /* ===== 视频教程数据（默认数据，会被JSON文件覆盖） ===== */
