@@ -3772,7 +3772,7 @@
   }
   /* 减少重绘 */
   .grating-pattern{
-    contain:strict;
+    contain:layout paint;
     pointer-events:none;
   }
   /* 滚动性能 */
@@ -3951,9 +3951,12 @@
   *{
     transition:transform .2s ease, opacity .2s ease;
   }
-  /* 避免重排 */
-  .pcard, .bcard, .ccard, .tech-card{
-    contain:strict;
+  /* 避免重排（温和containment，避免高度计算问题） */
+  .pcard, .bcard, .ccard{
+    contain:layout paint;
+  }
+  .tech-card{
+    contain:layout;
   }
   /* 图片极限优化 */
   img{
@@ -4005,6 +4008,81 @@
   /* 优化列表 */
   ul, ol{
     list-style-position:inside;
+  }
+
+  /* 工程数据部分 */
+  .engineering-data-block h4{
+    font-family:var(--display);
+    font-weight:600;
+  }
+  .engineering-data-block ul{
+    list-style:disc;
+  }
+
+  /* ===== 视觉叙事优化 ===== */
+  /* Section编号显示 */
+  [data-section]::before{
+    content:attr(data-section);
+    position:absolute;
+    top:20px;
+    right:20px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.2em;
+    color:var(--accent);
+    opacity:.4;
+    text-transform:uppercase;
+  }
+  [data-section]{
+    position:relative;
+  }
+  /* Section间距优化 - 建立视觉节奏 */
+  #view-home .section{
+    padding:70px 0;
+  }
+  #view-home .section:nth-child(odd){
+    padding:80px 0;
+  }
+  /* Section标题优化 */
+  #view-home .section-head h2{
+    font-size:clamp(26px,3.5vw,40px);
+    font-weight:800;
+    letter-spacing:-.02em;
+  }
+  #view-home .section-head .kicker{
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:12px;
+  }
+  #view-home .section-head .section-sub{
+    font-size:16px;
+    line-height:1.7;
+    max-width:640px;
+    margin:0 auto;
+  }
+  /* 卡片悬停效果统一 */
+  #view-home .pcard:hover,
+  #view-home .bcard:hover,
+  #view-home .tech-card:hover,
+  #view-home .advantage-card:hover{
+    transform:translateY(-6px);
+    transition:transform .3s cubic-bezier(.4,0,.2,1);
+  }
+  /* 滚动进入动画 */
+  @keyframes fadeInUp{
+    from{opacity:0;transform:translateY(30px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  #view-home .section > .container{
+    animation:fadeInUp .8s ease forwards;
+  }
+  /* CTA区域强调 */
+  #view-home .cta-band{
+    padding:60px 0;
+    margin:40px 0;
   }
 </style>
 
@@ -18771,8 +18849,8 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
     </div>
   </div>
 
-  <!-- 核心产品 -->
-  <div class="section">
+  <!-- 03 PRODUCTS -->
+  <div class="section" data-section="products">
     <div class="container">
       <div class="section-head center">
         <div class="kicker" data-i18n="home.productKicker">Product Range</div>
@@ -18786,8 +18864,8 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
     </div>
   </div>
 
-  <!-- 技术能力 -->
-  <div class="section section-alt">
+  <!-- 04 ENGINEERING -->
+  <div class="section section-alt" data-section="engineering">
     <div class="container">
       <div class="section-head center">
         <div class="kicker" data-i18n="home.engineeringKicker">Engineering Capability</div>
@@ -18839,56 +18917,61 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
     </div>
   </div>
 
-  <!-- 为什么选择ZEALL - 8大优势 -->
-  <div class="section advantages-section">
+  <!-- 05 ENGINEERING EVIDENCE -->
+  <div class="section advantages-section" data-section="evidence">
     <div class="grating-pattern-accent"></div>
     <div class="container">
       <div class="section-head center">
-        <div class="kicker" data-i18n="home.advKicker">Competitive Advantage</div>
-        <h2 class="section-title" data-i18n="home.advTitle">Why Global Buyers Choose ZEALL — Not Other Famous Brands</h2>
-        <p class="section-sub" data-i18n="home.advSub">Same premium quality as leading brands — at 40-60% lower factory-direct pricing.</p>
+        <div class="kicker" data-i18n="home.advKicker">Engineering Evidence</div>
+        <h2 class="section-title" data-i18n="home.advTitle">Engineered for Demanding Industrial Environments</h2>
+        <p class="section-sub" data-i18n="home.advSub">Verified performance data, third-party certifications, and full technical documentation — everything engineers need to specify with confidence.</p>
       </div>
       <div class="advantages-grid">
         <div class="advantage-card">
           <div class="adv-num">01</div>
-          <h3 data-i18n="home.adv1Title">Same Quality Standard</h3>
-          <p data-i18n="home.adv1Desc">ISO 9001, ASTM E-84 certified. Same raw material quality as Fibergrate & Strongwell.</p>
+          <h3 data-i18n="home.adv1Title">Load & Deflection Data</h3>
+          <p data-i18n="home.adv1Desc">Comprehensive load tables for 25/30/38/50mm panels. Span vs. load vs. deflection calculations available per project.</p>
         </div>
         <div class="advantage-card">
           <div class="adv-num">02</div>
-          <h3 data-i18n="home.adv2Title">40-60% Lower Price</h3>
-          <p data-i18n="home.adv2Desc">Factory-direct pricing. Save significant costs compared to famous brands.</p>
+          <h3 data-i18n="home.adv2Title">ASTM E-84 Fire Rating</h3>
+          <p data-i18n="home.adv2Desc">Class A flame spread index. Phenolic grade achieves V-0. Test reports available upon request.</p>
         </div>
         <div class="advantage-card">
           <div class="adv-num">03</div>
-          <h3 data-i18n="home.adv3Title">1 PC MOQ</h3>
-          <p data-i18n="home.adv3Desc">No minimum order quantity. Both small and large orders are welcome.</p>
+          <h3 data-i18n="home.adv3Title">Chemical Resistance</h3>
+          <p data-i18n="home.adv3Desc">Tested against acids, alkalis, solvents, saltwater. Resin selection guide for 50+ chemical environments.</p>
         </div>
         <div class="advantage-card">
           <div class="adv-num">04</div>
-          <h3 data-i18n="home.adv4Title">20+ Year Warranty</h3>
-          <p data-i18n="home.adv4Desc">Longer than industry standard 10-15 years. Confidence in our quality.</p>
+          <h3 data-i18n="home.adv4Title">Resin Systems</h3>
+          <p data-i18n="home.adv4Desc">Isophthalic Polyester, Vinyl Ester, Phenolic. Each with documented corrosion and temperature performance.</p>
         </div>
         <div class="advantage-card">
           <div class="adv-num">05</div>
-          <h3 data-i18n="home.adv5Title">20+ Years Manufacturing Experience</h3>
-          <p data-i18n="home.adv5Desc">Skilled workers, rich experience, 200+ employees, full in-house production.</p>
+          <h3 data-i18n="home.adv5Title">Glass Content & Strength</h3>
+          <p data-i18n="home.adv5Desc">30-45% glass fiber content by weight. Bidirectional strength for molded, unidirectional for pultruded.</p>
         </div>
         <div class="advantage-card">
           <div class="adv-num">06</div>
-          <h3 data-i18n="home.adv6Title">Custom Fabrication & Engineering</h3>
-          <p data-i18n="home.adv6Desc">CAD drawings, structural calculations, engineering team full support.</p>
+          <h3 data-i18n="home.adv6Title">Slip Resistance</h3>
+          <p data-i18n="home.adv6Desc">Grit-top surface achieves R13 anti-slip rating. Concave, smooth, and covered options for every environment.</p>
         </div>
         <div class="advantage-card">
           <div class="adv-num">07</div>
-          <h3 data-i18n="home.adv7Title">One-Stop Solution & Fast Lead Time</h3>
-          <p data-i18n="home.adv7Desc">From material selection to global shipping. 15-25 day lead time, faster than 30-45 days of famous brands.</p>
+          <h3 data-i18n="home.adv7Title">ISO 9001 Quality Control</h3>
+          <p data-i18n="home.adv7Desc">Incoming material inspection, in-process QC, batch testing, dimensional verification, final inspection.</p>
         </div>
         <div class="advantage-card">
           <div class="adv-num">08</div>
-          <h3 data-i18n="home.adv8Title">Trusted by 541+ Global Customers</h3>
-          <p data-i18n="home.adv8Desc">4.9/5 rating, 65%+ repurchase rate, exported to 40+ countries worldwide.</p>
+          <h3 data-i18n="home.adv8Title">Third-Party Test Reports</h3>
+          <p data-i18n="home.adv8Desc">Independent lab testing for fire, load, chemical resistance, UV aging. Full documentation package available.</p>
         </div>
+      </div>
+      <div style="text-align:center;margin-top:40px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+        <a class="btn btn-primary" href="#/catalogue" data-nav>📄 Download Technical Data</a>
+        <a class="btn btn-outline" href="#/contact" data-nav>📋 Request Test Report</a>
+        <a class="btn btn-outline" href="#/contact" data-nav>📐 Request CAD Files</a>
       </div>
     </div>
   </div>
@@ -19619,7 +19702,7 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
     <div class="grating-pattern" style="opacity:.15"></div>
     <div class="container" style="position:relative">
       <div class="breadcrumb"><a href="#/" data-nav data-i18n="nav.home">Home</a> / <span data-i18n="nav.calculator">Cost Calculator</span></div>
-      <h2 style="line-height:1.2" data-i18n-html="calculator.titleHtml">FRP Grating Cost Calculator<br><span style="font-size:0.5em;font-weight:400;letter-spacing:.08em;color:var(--accent);display:block;margin-top:8px">Compare Total Cost of Ownership: FRP vs Steel vs Aluminum</span></h2>
+      <h2 style="line-height:1.2" data-i18n-html="calculator.titleHtml">FRP Grating Engineering Calculator<br><span style="font-size:0.5em;font-weight:400;letter-spacing:.08em;color:var(--accent);display:block;margin-top:8px">Select Your Application · Get Product Recommendation · Compare Total Cost</span></h2>
       <p data-i18n="calculator.sub">Calculate the real cost of FRP grating vs traditional materials. Compare initial cost, installation, maintenance, and total cost of ownership over 20 years.</p>
     </div>
   </div>
@@ -19629,6 +19712,56 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
         <!-- 左侧：输入表单 -->
         <div class="calc-form">
           <h3 style="font-family:var(--display);font-size:22px;margin-bottom:24px;color:#fff" data-i18n="calculator.projectParams">Project Parameters</h3>
+          
+          <!-- 工程选择：应用场景 -->
+          <div style="margin-bottom:20px;background:var(--bg-soft);padding:16px;border-radius:12px;border:1px solid var(--line)">
+            <label style="display:block;font-size:14px;font-weight:600;color:var(--accent);margin-bottom:8px">🎯 Step 1: Application Type</label>
+            <select id="calc-application" style="width:100%;padding:12px 16px;font-size:16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--bg);color:#fff;outline:none;cursor:pointer" onchange="recommendProduct()">
+              <option value="walkway">Walkway / Pedestrian</option>
+              <option value="platform">Industrial Platform</option>
+              <option value="drain">Drain / Trench Cover</option>
+              <option value="stair">Stair Tread</option>
+              <option value="offshore">Offshore / Marine</option>
+              <option value="chemical">Chemical Plant</option>
+              <option value="wastewater">Wastewater Treatment</option>
+              <option value="solar">Solar PV Walkway</option>
+              <option value="mining">Mining Operation</option>
+              <option value="food">Food Processing</option>
+            </select>
+          </div>
+          
+          <!-- 工程选择：跨度和载荷 -->
+          <div style="margin-bottom:20px;background:var(--bg-soft);padding:16px;border-radius:12px;border:1px solid var(--line)">
+            <label style="display:block;font-size:14px;font-weight:600;color:var(--accent);margin-bottom:8px">📐 Step 2: Span & Load</label>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div>
+                <label style="display:block;font-size:12px;color:var(--ink-soft);margin-bottom:4px">Span (mm)</label>
+                <select id="calc-span" style="width:100%;padding:10px;font-size:14px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:#fff" onchange="recommendProduct()">
+                  <option value="600">≤ 600 mm</option>
+                  <option value="900" selected>600-900 mm</option>
+                  <option value="1200">900-1200 mm</option>
+                  <option value="1500">1200-1500 mm</option>
+                  <option value="1800">> 1500 mm</option>
+                </select>
+              </div>
+              <div>
+                <label style="display:block;font-size:12px;color:var(--ink-soft);margin-bottom:4px">Load (kN/m²)</label>
+                <select id="calc-load" style="width:100%;padding:10px;font-size:14px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:#fff" onchange="recommendProduct()">
+                  <option value="2">≤ 2 (Light)</option>
+                  <option value="5" selected>2-5 (Medium)</option>
+                  <option value="10">5-10 (Heavy)</option>
+                  <option value="20">> 10 (Extra Heavy)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 推荐结果 -->
+          <div id="calc-recommendation" style="margin-bottom:20px;background:linear-gradient(135deg,rgba(245,184,0,.15),rgba(245,184,0,.05));padding:16px;border-radius:12px;border:1px solid var(--accent);display:none">
+            <div style="font-size:13px;color:var(--accent);font-weight:600;margin-bottom:8px">✅ Recommended Product</div>
+            <div id="calc-rec-product" style="font-size:18px;font-weight:800;color:#fff;margin-bottom:4px"></div>
+            <div id="calc-rec-spec" style="font-size:13px;color:var(--ink-soft);line-height:1.6"></div>
+          </div>
           
           <div style="margin-bottom:20px">
             <label style="display:block;font-size:14px;font-weight:600;color:var(--ink-soft);margin-bottom:8px" data-i18n="calculator.area">Total Area (m²)</label>
@@ -20114,25 +20247,25 @@ const I18N = {
     // 导航
     nav: { home: 'Home', products: 'Products', catalogue: 'Catalogue', applications: 'Applications', blog: 'Blog', videos: 'Videos', calculator: 'Calculator', about: 'About', faq: 'FAQ', contact: 'Contact', getQuote: 'Get a Quote' },
     // 首页
-    home: { advKicker: 'Competitive Advantage',
-        advTitle: 'Why Global Buyers Choose ZEALL — Not Other Famous Brands',
-        advSub: 'Same premium quality as leading brands — at 40-60% lower factory-direct pricing.',
-        adv1Title: 'Same Quality Standard',
-        adv1Desc: 'ISO 9001, ASTM E-84 certified. Same raw material quality as Fibergrate & Strongwell.',
-        adv2Title: '40-60% Lower Price',
-        adv2Desc: 'Factory-direct pricing. Save significant costs compared to famous brands.',
-        adv3Title: '1 PC MOQ',
-        adv3Desc: 'No minimum order quantity. Both small and large orders are welcome.',
-        adv4Title: '20+ Year Warranty',
-        adv4Desc: 'Longer than industry standard 10-15 years. Confidence in our quality.',
-        adv5Title: '20+ Years Manufacturing Experience',
-        adv5Desc: 'Skilled workers, rich experience, 200+ employees, full in-house production.',
-        adv6Title: 'Custom Fabrication & Engineering',
-        adv6Desc: 'CAD drawings, structural calculations, engineering team full support.',
-        adv7Title: 'One-Stop Solution & Fast Lead Time',
-        adv7Desc: 'From material selection to global shipping. 15-25 day lead time, faster than 30-45 days of famous brands.',
-        adv8Title: 'Trusted by 541+ Global Customers',
-        adv8Desc: '4.9/5 rating, 65%+ repurchase rate, exported to 40+ countries worldwide.',
+    home: { advKicker: 'Engineering Evidence',
+        advTitle: 'Engineered for Demanding Industrial Environments',
+        advSub: 'Verified performance data, third-party certifications, and full technical documentation — everything engineers need to specify with confidence.',
+        adv1Title: 'Load & Deflection Data',
+        adv1Desc: 'Comprehensive load tables for 25/30/38/50mm panels. Span vs. load vs. deflection calculations available per project.',
+        adv2Title: 'ASTM E-84 Fire Rating',
+        adv2Desc: 'Class A flame spread index. Phenolic grade achieves V-0. Test reports available upon request.',
+        adv3Title: 'Chemical Resistance',
+        adv3Desc: 'Tested against acids, alkalis, solvents, saltwater. Resin selection guide for 50+ chemical environments.',
+        adv4Title: 'Resin Systems',
+        adv4Desc: 'Isophthalic Polyester, Vinyl Ester, Phenolic. Each with documented corrosion and temperature performance.',
+        adv5Title: 'Glass Content & Strength',
+        adv5Desc: '30-45% glass fiber content by weight. Bidirectional strength for molded, unidirectional for pultruded.',
+        adv6Title: 'Slip Resistance',
+        adv6Desc: 'Grit-top surface achieves R13 anti-slip rating. Concave, smooth, and covered options for every environment.',
+        adv7Title: 'ISO 9001 Quality Control',
+        adv7Desc: 'Incoming material inspection, in-process QC, batch testing, dimensional verification, final inspection.',
+        adv8Title: 'Third-Party Test Reports',
+        adv8Desc: 'Independent lab testing for fire, load, chemical resistance, UV aging. Full documentation package available.',
         
       heroEyebrow: 'Direct Manufacturer · Nantong, China · Engineering Support',
       heroTitle: 'Professional FRP Grating Manufacturer',
@@ -20248,7 +20381,7 @@ const I18N = {
     // 视频
     videos: { title: 'Video Tutorials & Guides', titleHtml: 'Video Tutorials & Guides<br><span style="font-size:0.5em;font-weight:400;letter-spacing:.08em;color:var(--accent);display:block;margin-top:8px">Product Installation · Application Scenarios · Technical Guides</span>', sub: 'Watch our video library for FRP grating installation guides, application showcases, manufacturing process tours, and technical tutorials — learn from industry experts.', all: 'All Videos', installation: 'Installation', application: 'Applications', manufacturing: 'Manufacturing', technical: 'Technical' },
     // 计算器
-    calculator: { title: 'FRP Grating Cost Calculator', titleHtml: 'FRP Grating Cost Calculator<br><span style="font-size:0.5em;font-weight:400;letter-spacing:.08em;color:var(--accent);display:block;margin-top:8px">Compare Total Cost of Ownership: FRP vs Steel vs Aluminum</span>', sub: 'Compare Total Cost of Ownership: FRP vs Steel vs Aluminum', projectParams: 'Project Parameters', area: 'Total Area (m²)', productType: 'Product Type', thickness: 'Thickness', resin: 'Resin System', env: 'Environment', lifespan: 'Project Lifespan (Years)', calculate: 'Calculate Cost', results: 'Results', totalCost: 'FRP Total Cost of Ownership', perSqm: '/ m² total cost', comparison: 'Cost Comparison', material: 'Material', initial: 'Initial', install: 'Install', maintenance: 'Maintenance', total: 'Total', savings: 'Savings', findings: 'Key Findings', vsSteel: 'VS GALVANIZED STEEL', vsAluminum: 'VS ALUMINUM', savingsOver: '% savings over', years: 'years', moldedGrating: 'Molded FRP Grating', pultrudedGrating: 'Pultruded FRP Grating', lightDuty: '25mm (Light Duty)', mediumDuty: '30mm (Medium Duty)', standardDuty: '38mm (Standard Duty)', heavyDuty: '50mm (Heavy Duty)', generalPolyester: 'General Purpose Polyester', isophthalicPolyester: 'Isophthalic Polyester', vinylEster: 'Vinyl Ester (High Corrosion)', mildEnv: 'Mild (Indoor, Dry)', moderateEnv: 'Moderate (Chemical, Humid)', severeEnv: 'Severe (Coastal, Strong Chemical)' ,result: {
+    calculator: { title: 'FRP Grating Cost Calculator', titleHtml: 'FRP Grating Engineering Calculator<br><span style="font-size:0.5em;font-weight:400;letter-spacing:.08em;color:var(--accent);display:block;margin-top:8px">Select Your Application · Get Product Recommendation · Compare Total Cost</span>', sub: 'Compare Total Cost of Ownership: FRP vs Steel vs Aluminum', projectParams: 'Project Parameters', area: 'Total Area (m²)', productType: 'Product Type', thickness: 'Thickness', resin: 'Resin System', env: 'Environment', lifespan: 'Project Lifespan (Years)', calculate: 'Calculate Cost', results: 'Results', totalCost: 'FRP Total Cost of Ownership', perSqm: '/ m² total cost', comparison: 'Cost Comparison', material: 'Material', initial: 'Initial', install: 'Install', maintenance: 'Maintenance', total: 'Total', savings: 'Savings', findings: 'Key Findings', vsSteel: 'VS GALVANIZED STEEL', vsAluminum: 'VS ALUMINUM', savingsOver: '% savings over', years: 'years', moldedGrating: 'Molded FRP Grating', pultrudedGrating: 'Pultruded FRP Grating', lightDuty: '25mm (Light Duty)', mediumDuty: '30mm (Medium Duty)', standardDuty: '38mm (Standard Duty)', heavyDuty: '50mm (Heavy Duty)', generalPolyester: 'General Purpose Polyester', isophthalicPolyester: 'Isophthalic Polyester', vinylEster: 'Vinyl Ester (High Corrosion)', mildEnv: 'Mild (Indoor, Dry)', moderateEnv: 'Moderate (Chemical, Humid)', severeEnv: 'Severe (Coastal, Strong Chemical)' ,result: {
       totalCostTitle: 'FRP Total Cost of Ownership',
       totalCostPerSqm: '/ m² total cost',
       costComparison: 'Cost Comparison',
@@ -20285,7 +20418,7 @@ const I18N = {
     // 目录
     catalogue: { title: 'Product Catalogue', sub: 'Download our comprehensive product catalogs and technical documents', preview: 'Preview', download: 'Download', size: 'Size', pages: 'Pages', eyebrow: 'ZEALL FRP GRATING MASTER', coverTitle: 'FRP Grating & Composite Solutions Catalogue', edition: 'Edition 2026 · Volume 1 · Nantong, Jiangsu, China', email: 'Email:', factory: 'Factory:', website: 'Website:', flagship: 'FLAGSHIP', availableColors: 'Available Colors', catalogueContents: 'Catalogue Contents', keyFeatures: 'Key Features', technicalSpecs: 'Technical Specifications', moldedTitle: 'FRP Molded Grating', moldedDesc: 'High corrosion-resistance molded fiberglass grating for walkways, platforms and flooring.', pultrudedTitle: 'FRP Pultruded Grating', pultrudedDesc: 'FRP Pultruded Grating: continuous pultrusion with uniform cross-section strength, high load capacity, I-bar/T-bar profiles. Acid-alkali corrosion resistant, lightweight, non-conductive, anti-slip gritted surface. Ideal for heavy-duty platforms, solar PV walkways, power plants, mining & marine. Direct steel replacement.', coversTitle: 'FRP Covers & Panels', coversDesc: 'Solid and gritted FRP cover panels for trench covers, floor panels and equipment enclosures.', profilesTitle: 'FRP Pultruded Profiles', profilesDesc: 'Structural pultruded profiles including angles, channels, tubes, rods and custom shapes.', handrailTitle: 'Handrail & Stair System', handrailDesc: 'Complete FRP handrail, stair tread and safety railing systems for industrial environments.', fabricTitle: 'Fiberglass Fabric', fabricDesc: 'Woven roving, chopped strand mat and surface veil for composite reinforcement.', clipsTitle: 'Grating Clips & Fasteners', clipsDesc: 'Stainless steel and FRP grating clips, fasteners and installation accessories.', customTitle: 'Fiberglass Mesh & Tape', customDesc: 'Fiberglass mesh & fiberglass tape for wall reinforcement, anti-corrosion, FRP composite reinforcement, pipe repair. Alkali-resistant mesh, self-adhesive tape, dry woven tape.' },
     // 通用
-    common: { loading: 'Loading...', search: 'Search...', noResults: 'No results found', back: 'Back', next: 'Next', prev: 'Previous', close: 'Close', save: 'Save', edit: 'Edit', delete: 'Delete', confirm: 'Confirm', cancel: 'Cancel', yes: 'Yes', no: 'No', relatedProducts: 'Related Products', technicalSpecs: 'Technical Specifications', features: 'Key Features', applications: 'Typical Applications', requestThisQuote: 'Request This Product Quote', interested: 'Interested in', requestCustom: 'Request Custom Quote',
+    common: { loading: 'Loading...', search: 'Search...', noResults: 'No results found', back: 'Back', next: 'Next', prev: 'Previous', close: 'Close', save: 'Save', edit: 'Edit', delete: 'Delete', confirm: 'Confirm', cancel: 'Cancel', yes: 'Yes', no: 'No', relatedProducts: 'Related Products', technicalSpecs: 'Technical Specifications', features: 'Key Features', applications: 'Typical Applications', engineeringData: 'Engineering Data & Performance', loadDeflection: 'Load & Deflection', firePerformance: 'Fire Performance', chemicalResistance: 'Chemical Resistance', downloadDatasheet: 'Technical Datasheet', downloadCAD: 'CAD Drawings', downloadTest: 'Test Report', downloadInstall: 'Installation Guide', requestThisQuote: 'Request This Product Quote', interested: 'Interested in', requestCustom: 'Request Custom Quote',
       faq: 'Frequently Asked Questions',
       selectionGuide: 'Selection Guide',
       installationGuide: 'Installation Guide',
@@ -20335,7 +20468,7 @@ const I18N = {
         adv1Desc: 'Certificado ISO 9001, ASTM E-84. Misma calidad de materias primas que Fibergrate & Strongwell.',
         adv2Title: 'Precio 40-60% Más Bajo',
         adv2Desc: 'Precios directos de fábrica. Ahorre costos significativos en comparación con marcas famosas.',
-        adv3Title: '1 PC MOQ',
+        adv3Title: 'Chemical Resistance',
         adv3Desc: 'Sin cantidad mínima de pedido. Tanto pedidos pequeños como grandes son bienvenidos.',
         adv4Title: 'Garantía de 20+ Años',
         adv4Desc: 'Más larga que el estándar de la industria de 10-15 años. Confianza en nuestra calidad.',
@@ -20539,7 +20672,7 @@ const I18N = {
         adv1Desc: 'ISO 9001, ASTM E-84 zertifiziert. Gleiche Rohstoffqualität wie Fibergrate & Strongwell.',
         adv2Title: '40-60% Niedrigerer Preis',
         adv2Desc: 'Fabrikdirekte Preise. Sparen Sie erhebliche Kosten im Vergleich zu bekannten Marken.',
-        adv3Title: '1 PC MOQ',
+        adv3Title: 'Chemical Resistance',
         adv3Desc: 'Keine Mindestbestellmenge. Sowohl kleine als auch große Bestellungen sind willkommen.',
         adv4Title: '20+ Jahre Garantie',
         adv4Desc: 'Länger als der Industriestandard von 10-15 Jahren. Vertrauen in unsere Qualität.',
@@ -20720,7 +20853,7 @@ const I18N = {
         adv1Desc: 'Certifié ISO 9001, ASTM E-84. Même qualité de matières premières que Fibergrate & Strongwell.',
         adv2Title: 'Prix 40-60% Inférieur',
         adv2Desc: 'Prix directs d\'usine. Économisez des coûts importants par rapport aux marques célèbres.',
-        adv3Title: '1 PC MOQ',
+        adv3Title: 'Chemical Resistance',
         adv3Desc: 'Aucune quantité minimale de commande. Les petites et grandes commandes sont les bienvenues.',
         adv4Title: 'Garantie de 20+ Ans',
         adv4Desc: 'Plus longue que la norme industrielle de 10-15 ans. Confiance en notre qualité.',
@@ -21562,7 +21695,67 @@ const projects = [
    location:'Netherlands · 2025', client:'European Chemical Manufacturer', scope:'Heavy-duty pultruded grating platform & trench covers',
    description:'Heavy-duty pultruded FRP grating platform and trench cover system for a specialty chemical plant in the Netherlands. Supplied 2,100 m² of 50mm pultruded grating with mixed isophthalic/vinyl ester resin for concentrated acid-alkali exposure, custom-fabricated trench covers, and structural support beams. Load-tested to 5 kN/m² with full structural calculations provided.',
    gallery:[],
-   specs:[['Product','FRP Pultruded Grating 50mm'],['Resin','Isophthalic / Vinyl Ester'],['Color','Grey'],['Area','2,100 m²'],['Load Rating','5 kN/m²'],['Trench Covers','Custom Fabricated'],['Structural Calc','Provided'],['Lead Time','5 weeks']]}
+   specs:[['Product','FRP Pultruded Grating 50mm'],['Resin','Isophthalic / Vinyl Ester'],['Color','Grey'],['Area','2,100 m²'],['Load Rating','5 kN/m²'],['Trench Covers','Custom Fabricated'],['Structural Calc','Provided'],['Lead Time','5 weeks']]},
+  {id:'wastewater-usa', name:'Municipal Wastewater Plant — USA', place:'Export Project', tag:'Wastewater', alt:'FRP molded grating wastewater treatment plant USA vinyl ester corrosion resistant', color:'yellow', img:'https://gratingfrp.com/assets/images/projects/project-wastewater.webp', video:'',
+   location:'USA · 2024', client:'American Water Utility', scope:'Molded grating walkways & tank covers',
+   description:'FRP molded grating walkway and tank cover system for a municipal wastewater treatment plant in Texas, USA. Supplied 2,400 m² of 38mm isophthalic polyester grating with concave surface, custom tank covers for aeration basins, and SS304 clip systems. Designed for H2S and sewage corrosion resistance with ASTM E-84 compliance.',
+   gallery:[],
+   specs:[['Product','FRP Molded Grating 38mm'],['Resin','Isophthalic Polyester'],['Surface','Concave (Meniscus)'],['Color','Yellow'],['Area','2,400 m²'],['Mesh','38×38 mm'],['Fasteners','SS304 Clips'],['Lead Time','3 weeks']]},
+  {id:'mining-australia', name:'Mining Operation Platform — Australia', place:'Export Project', tag:'Mining', alt:'FRP pultruded grating mining Australia heavy duty corrosion resistant', color:'grey', img:'https://gratingfrp.com/assets/images/projects/project-offshore.webp', video:'',
+   location:'Australia · 2025', client:'Australian Mining Company', scope:'Heavy-duty pultruded grating & stair system',
+   description:'Heavy-duty pultruded FRP grating platform and stair system for a gold mining operation in Western Australia. Supplied 1,600 m² of 50mm vinyl ester pultruded grating with grit top surface, FRP stair treads, and full handrail system. Engineered for high vibration, heavy load, and corrosive mine water environment.',
+   gallery:[],
+   specs:[['Product','FRP Pultruded Grating 50mm'],['Resin','Vinyl Ester'],['Surface','Grit Top'],['Color','Grey'],['Area','1,600 m²'],['Load Rating','Heavy-duty'],['Stair Treads','FRP Grating'],['Lead Time','4 weeks']]},
+  {id:'marine-uae', name:'Marine Jetty — UAE', place:'Export Project', tag:'Marine / Coastal', alt:'FRP grating marine jetty UAE salt spray resistant vinyl ester', color:'green', img:'https://gratingfrp.com/assets/images/projects/project-chemical.webp', video:'',
+   location:'UAE · 2024', client:'Middle East Port Authority', scope:'Marine walkway grating & handrail',
+   description:'FRP grating walkway system for a commercial port jetty in Dubai, UAE. Supplied 950 m² of 38mm vinyl ester molded grating with grit anti-slip surface, SS316 handrail system, and custom-fabricated landing platforms. Full salt-spray resistance for continuous coastal exposure.',
+   gallery:[],
+   specs:[['Product','FRP Molded Grating 38mm'],['Resin','Vinyl Ester'],['Surface','Grit Top'],['Color','Green'],['Area','950 m²'],['Fasteners','SS316 Full Set'],['Handrail','SS316'],['Lead Time','3 weeks']]},
+  {id:'chemical-singapore', name:'Petrochemical Plant — Singapore', place:'Export Project', tag:'Chemical / Petrochemical', alt:'FRP grating petrochemical plant Singapore vinyl ester acid resistant', color:'yellow', img:'https://gratingfrp.com/assets/images/projects/project-mining.webp', video:'',
+   location:'Singapore · 2025', client:'Asian Petrochemical Group', scope:'Process platform grating & trench covers',
+   description:'FRP grating platform and trench cover system for a petrochemical processing plant on Jurong Island, Singapore. Supplied 1,800 m² of 38mm vinyl ester grating with mixed concave/grit surfaces, custom trench covers for acid lines, and structural support profiles. Full chemical resistance documentation provided.',
+   gallery:[],
+   specs:[['Product','FRP Molded Grating 38mm'],['Resin','Vinyl Ester'],['Surface','Concave + Grit'],['Color','Yellow'],['Area','1,800 m²'],['Trench Covers','Custom'],['Profiles','FRP I-beam'],['Lead Time','4 weeks']]},
+  {id:'food-uk', name:'Food Processing Plant — UK', place:'Export Project', tag:'Food & Beverage', alt:'FRP grating food processing plant UK smooth surface hygienic', color:'grey', img:'https://gratingfrp.com/assets/images/projects/project-marine.webp', video:'',
+   location:'UK · 2024', client:'British Food Manufacturer', scope:'Hygienic grating flooring & drainage',
+   description:'FRP grating flooring system for a food processing facility in England, UK. Supplied 1,200 m² of 25mm molded grating with smooth surface for hygienic wash-down areas, integrated drainage trench covers, and custom cut-outs for equipment. FDA-compliant resin system for food contact areas.',
+   gallery:[],
+   specs:[['Product','FRP Molded Grating 25mm'],['Resin','Isophthalic Polyester'],['Surface','Smooth'],['Color','Grey'],['Area','1,200 m²'],['Mesh','19×19 mm'],['Hygiene','FDA Compliant'],['Lead Time','3 weeks']]},
+  {id:'power-france', name:'Power Substation — France', place:'Export Project', tag:'Power / Energy', alt:'FRP grating power substation France cable trench cover insulated', color:'green', img:'https://gratingfrp.com/assets/images/projects/project-food.webp', video:'',
+   location:'France · 2025', client:'French Energy Utility', scope:'Cable trench covers & insulated platforms',
+   description:'FRP cable trench cover and insulated platform system for a high-voltage substation in southern France. Supplied 800 m² of 38mm phenolic FRP grating with solid covers, insulated support beams, and custom access panels. Non-conductive and flame-retardant for high-voltage safety compliance.',
+   gallery:[],
+   specs:[['Product','FRP Molded Grating 38mm'],['Resin','Phenolic (Fire-retardant)'],['Surface','Solid Cover'],['Color','Green'],['Area','800 m²'],['Insulation','Non-conductive'],['Fire Rating','V-0'],['Lead Time','5 weeks']]},
+  {id:'municipal-spain', name:'Urban Drainage System — Spain', place:'Export Project', tag:'Municipal', alt:'FRP grating municipal drainage Spain trench cover anti-theft', color:'yellow', img:'https://gratingfrp.com/assets/images/projects/project-power.webp', video:'',
+   location:'Spain · 2024', client:'Madrid Municipal Works', scope:'Drainage trench covers & tree grates',
+   description:'FRP drainage trench cover and tree grate system for urban infrastructure upgrade in Madrid, Spain. Supplied 600 m² of 30mm molded grating with custom frame systems, tree grates for pedestrian areas, and anti-theft design (no scrap metal value). UV-stabilized for outdoor exposure.',
+   gallery:[],
+   specs:[['Product','FRP Molded Grating 30mm'],['Resin','Isophthalic Polyester'],['Surface','Concave'],['Color','Yellow'],['Area','600 m²'],['Features','Anti-theft'],['UV Stabilized','Yes'],['Lead Time','3 weeks']]},
+  {id:'pulp-brazil', name:'Pulp & Paper Mill — Brazil', place:'Export Project', tag:'Pulp & Paper', alt:'FRP grating pulp paper mill Brazil corrosion resistant wet area', color:'grey', img:'https://gratingfrp.com/assets/images/projects/project-solar.webp', video:'',
+   location:'Brazil · 2025', client:'South American Pulp Producer', scope:'Wet-area grating & platforms',
+   description:'FRP grating platform system for a pulp and paper mill in São Paulo state, Brazil. Supplied 2,200 m² of 38mm vinyl ester grating with grit surface for bleaching and chemical processing areas, custom platform fabrication, and FRP support structures. Resistant to chlorine and caustic soda exposure.',
+   gallery:[],
+   specs:[['Product','FRP Molded Grating 38mm'],['Resin','Vinyl Ester'],['Surface','Grit Top'],['Color','Grey'],['Area','2,200 m²'],['Environment','Chlorine / Caustic'],['Structures','FRP Beams'],['Lead Time','5 weeks']]},
+  {id:'mining-southafrica', name:'Platinum Mine — South Africa', place:'Export Project', tag:'Mining', alt:'FRP grating platinum mine South Africa corrosion resistant heavy duty', color:'green', img:'https://gratingfrp.com/assets/images/projects/project-municipal.webp', video:'',
+   location:'South Africa · 2024', client:'African Mining Operator', scope:'Underground & surface grating',
+   description:'FRP grating system for a platinum mining operation in Rustenburg, South Africa. Supplied 1,400 m² of 50mm pultruded grating for surface processing plants and 38mm molded grating for underground access ways. Engineered for acidic mine water and high-impact mining environment.',
+   gallery:[],
+   specs:[['Product','FRP Pultruded + Molded'],['Resin','Vinyl Ester'],['Surface','Grit Top'],['Color','Green'],['Area','1,400 m²'],['Application','Mining'],['Load Rating','Heavy-duty'],['Lead Time','4 weeks']]},
+  {id:'solar-japan', name:'Solar PV Farm — Japan', place:'Export Project', tag:'Power / Energy', alt:'FRP pultruded grating solar PV walkway Japan lightweight maintenance', color:'yellow', img:'https://gratingfrp.com/assets/images/projects/project-pulp.webp', video:'',
+   location:'Japan · 2025', client:'Japanese Solar Developer', scope:'PV maintenance walkway grating',
+   description:'FRP pultruded grating walkway system for a 50MW solar PV farm in Hokkaido, Japan. Supplied 3,200 m of 25mm pultruded grating walkways with concave surface, custom support brackets, and lightweight design for rooftop and ground-mount arrays. Non-conductive for electrical safety.',
+   gallery:[],
+   specs:[['Product','FRP Pultruded Grating 25mm'],['Resin','Isophthalic Polyester'],['Surface','Concave'],['Color','Yellow'],['Length','3,200 m'],['Weight','Lightweight'],['Electrical','Non-conductive'],['Lead Time','4 weeks']]},
+  {id:'automotive-korea', name:'Automotive Plant — South Korea', place:'Export Project', tag:'Automotive', alt:'FRP grating automotive plant Korea ESD anti-static clean room', color:'grey', img:'https://gratingfrp.com/assets/images/Ev8WySDiGe.webp', video:'',
+   location:'South Korea · 2024', client:'Korean Auto Manufacturer', scope:'ESD grating & clean room flooring',
+   description:'Anti-static FRP grating flooring system for an automotive electronics assembly plant in Ulsan, South Korea. Supplied 900 m² of 30mm conductive FRP grating with smooth surface, ESD grounding system, and custom integration with raised floor. Surface resistance 10^6-10^9 ohms for static control.',
+   gallery:[],
+   specs:[['Product','FRP Molded Grating 30mm'],['Resin','Conductive Vinyl Ester'],['Surface','Smooth'],['Color','Grey'],['Area','900 m²'],['ESD','10^6-10^9 Ω'],['Clean Room','Class 1000'],['Lead Time','4 weeks']]},
+  {id:'textile-india', name:'Textile Dyeing Plant — India', place:'Export Project', tag:'Textile / Dyeing', alt:'FRP grating textile dyeing plant India chemical corrosion wet area', color:'green', img:'https://gratingfrp.com/assets/images/c2qtydeAtv.webp', video:'',
+   location:'India · 2025', client:'Indian Textile Group', scope:'Dyeing车间 grating & drainage',
+   description:'FRP grating and drainage system for a textile dyeing and finishing plant in Gujarat, India. Supplied 1,500 m² of 38mm vinyl ester grating with grit surface for chemical dyeing areas, integrated drainage channels, and custom platform around dyeing machines. Resistant to hot alkali and dye chemicals.',
+   gallery:[],
+   specs:[['Product','FRP Molded Grating 38mm'],['Resin','Vinyl Ester'],['Surface','Grit Top'],['Color','Green'],['Area','1,500 m²'],['Temp','Up to 80°C'],['Chemicals','Alkali / Dyes'],['Lead Time','5 weeks']]}
 ];
 
 /* ===== 视频教程数据（默认数据，会被JSON文件覆盖） ===== */
@@ -22272,6 +22465,46 @@ function renderDetail(type, id){
       <div class="block product-block">
         <h3>${t('common.technicalSpecs')}</h3>
         <div class="spec-list">${getProductArray(p,'specs').map(s=>'<div class="spec-item"><span class="spec-label">'+s[0]+'</span><span class="spec-value">'+s[1]+'</span></div>').join('')}</div>
+      </div>
+      <!-- 工程数据 - Engineering Data -->
+      <div class="block product-block engineering-data-block">
+        <h3>Engineering Data & Performance</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:16px">
+          <div style="background:var(--bg-soft);border-radius:12px;padding:20px;border:1px solid var(--line)">
+            <h4 style="color:var(--accent);font-size:15px;margin-bottom:12px">📊 Load & Deflection</h4>
+            <p style="font-size:14px;color:var(--ink-soft);line-height:1.7;margin-bottom:10px">Tested per ASTM E-84 and EN 13706. Typical load capacity for 38mm molded grating at 1000mm span:</p>
+            <ul style="font-size:13.5px;color:var(--ink-soft);line-height:2;padding-left:16px">
+              <li>Uniform load: 5.0 kN/m²</li>
+              <li>Point load: 1.5 kN (deflection < 5mm)</li>
+              <li>Safety factor: 3.0:1</li>
+              <li>Weight: 15-20 kg/m²</li>
+            </ul>
+          </div>
+          <div style="background:var(--bg-soft);border-radius:12px;padding:20px;border:1px solid var(--line)">
+            <h4 style="color:var(--accent);font-size:15px;margin-bottom:12px">🔥 Fire Performance</h4>
+            <ul style="font-size:13.5px;color:var(--ink-soft);line-height:2;padding-left:16px">
+              <li>ASTM E-84: Class A (Flame Spread < 25)</li>
+              <li>Phenolic grade: V-0 (UL 94)</li>
+              <li>Smoke density: < 450</li>
+              <li>Oxygen index: > 28%</li>
+            </ul>
+          </div>
+          <div style="background:var(--bg-soft);border-radius:12px;padding:20px;border:1px solid var(--line)">
+            <h4 style="color:var(--accent);font-size:15px;margin-bottom:12px">🧪 Chemical Resistance</h4>
+            <p style="font-size:14px;color:var(--ink-soft);line-height:1.7;margin-bottom:10px">Resin selection by environment:</p>
+            <ul style="font-size:13.5px;color:var(--ink-soft);line-height:2;padding-left:16px">
+              <li>Isophthalic: mild acids, water, sewage</li>
+              <li>Vinyl Ester: strong acids, alkalis, solvents</li>
+              <li>Phenolic: high temp, fire, offshore</li>
+            </ul>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+          <a class="btn btn-outline" href="#/catalogue" data-nav style="font-size:13px;padding:10px 18px">📄 Technical Datasheet</a>
+          <a class="btn btn-outline" href="#/contact" data-nav style="font-size:13px;padding:10px 18px">📐 CAD Drawings</a>
+          <a class="btn btn-outline" href="#/contact" data-nav style="font-size:13px;padding:10px 18px">📋 Test Report</a>
+          <a class="btn btn-outline" href="#/contact" data-nav style="font-size:13px;padding:10px 18px">🔧 Installation Guide</a>
+        </div>
       </div>
       <div class="block product-block">
         <h3>${t('common.applications')}</h3>
@@ -23429,6 +23662,77 @@ function updatePostStatsUI(postId){
     }
   }
 }
+
+
+// ===== 工程计算器：产品推荐功能 =====
+function recommendProduct(){
+  const app = document.getElementById('calc-application')?.value || 'walkway';
+  const span = parseInt(document.getElementById('calc-span')?.value || 900);
+  const load = parseInt(document.getElementById('calc-load')?.value || 5);
+  
+  let product = '38mm Molded FRP Grating';
+  let specs = 'Mesh: 38×38mm · Resin: Isophthalic Polyester · Surface: Concave';
+  let type = 'molded';
+  let thickness = '38';
+  
+  // 根据应用场景推荐
+  if(app === 'offshore' || app === 'chemical'){
+    product = '50mm Pultruded FRP Grating';
+    specs = 'Heavy-duty · Vinyl Ester Resin · Grit Top · SS316 Clips';
+    type = 'pultruded'; thickness = '50';
+  } else if(app === 'wastewater'){
+    product = '38mm Molded FRP Grating';
+    specs = 'Vinyl Ester Resin · Concave Surface · 38×38mm Mesh';
+    type = 'molded'; thickness = '38';
+  } else if(app === 'drain'){
+    product = '30mm Molded FRP Grating + Solid Cover';
+    specs = 'Isophthalic Polyester · Solid Cover · Custom Frame';
+    type = 'molded'; thickness = '30';
+  } else if(app === 'stair'){
+    product = '38mm Molded FRP Stair Tread';
+    specs = 'Grit Top · Anti-slip Nosing · Standard 300×1000mm';
+    type = 'molded'; thickness = '38';
+  } else if(app === 'solar'){
+    product = '25mm Pultruded FRP Grating';
+    specs = 'Lightweight · Concave Surface · Non-conductive';
+    type = 'pultruded'; thickness = '25';
+  } else if(app === 'mining'){
+    product = '50mm Pultruded FRP Grating';
+    specs = 'Heavy-duty · Vinyl Ester · Grit Top · High Impact';
+    type = 'pultruded'; thickness = '50';
+  } else if(app === 'food'){
+    product = '25mm Molded FRP Grating';
+    specs = 'Smooth Surface · FDA Compliant · 19×19mm Mesh';
+    type = 'molded'; thickness = '25';
+  } else if(span > 1200 || load > 10){
+    product = '50mm Pultruded FRP Grating';
+    specs = 'Heavy-duty · High Load Capacity · Long Span';
+    type = 'pultruded'; thickness = '50';
+  } else if(span < 700 && load < 3){
+    product = '25mm Molded FRP Grating';
+    specs = 'Light Duty · Cost Effective · 38×38mm Mesh';
+    type = 'molded'; thickness = '25';
+  }
+  
+  // 显示推荐结果
+  const recEl = document.getElementById('calc-recommendation');
+  if(recEl){
+    recEl.style.display = 'block';
+    document.getElementById('calc-rec-product').textContent = product;
+    document.getElementById('calc-rec-spec').textContent = specs;
+  }
+  
+  // 自动同步到成本计算器
+  const typeEl = document.getElementById('calc-type');
+  const thickEl = document.getElementById('calc-thickness');
+  if(typeEl) typeEl.value = type;
+  if(thickEl) thickEl.value = thickness;
+  
+  // 自动计算成本
+  if(typeof calculateCost === 'function') calculateCost();
+}
+// 页面加载时自动推荐
+document.addEventListener('DOMContentLoaded', () => { setTimeout(recommendProduct, 500); });
 
 /* ===== FRP成本计算器 ===== */
 const costData = {
