@@ -4172,6 +4172,24 @@
   img[loading="lazy"]{
     content-visibility:auto;
   }
+
+  /* ===== 图片渐进式加载 ===== */
+  img{
+    filter:blur(0px);
+    transition:filter .3s ease;
+  }
+  img[data-src]{
+    filter:blur(8px);
+    transform:scale(1.02);
+  }
+  img.loaded{
+    filter:blur(0);
+    transform:scale(1);
+  }
+  /* 图片容器背景 */
+  .ccard .thumb, .pcard .pimg, .bcard .bimg{
+    background:linear-gradient(135deg, var(--bg-soft), var(--bg));
+  }
 </style>
 
 <!-- AI Engine Optimization: Additional Meta Tags -->
@@ -20342,6 +20360,41 @@ ckness","value":"25mm, 30mm, 38mm, 50mm"},{"@type":"PropertyValue","name":"Mesh 
 
 <script>
 
+// ===== 图片渐进式懒加载 =====
+function initProgressiveImages(){
+  const images = document.querySelectorAll('img[data-src]');
+  const imageObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const img = entry.target;
+        const src = img.getAttribute('data-src');
+        if(src){
+          img.src = src;
+          img.onload = () => {
+            img.classList.add('loaded');
+            img.removeAttribute('data-src');
+          };
+        }
+        observer.unobserve(img);
+      }
+    });
+  }, {rootMargin: '300px 0px', threshold: 0.01});
+  
+  images.forEach(img => imageObserver.observe(img));
+}
+// 页面加载后初始化
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initProgressiveImages);
+} else {
+  initProgressiveImages();
+}
+// 路由切换后重新初始化
+document.addEventListener('viewChanged', () => {
+  setTimeout(initProgressiveImages, 100);
+});
+
+
+
 // 图片加载失败回退
 document.addEventListener('error', function(e){
   if(e.target.tagName === 'IMG'){
@@ -22126,7 +22179,7 @@ function productCard(p){
   return `<div class="pcard" data-go="product|${p.id}">
     <div class="thumb">
       <span class="color-tag">${p.cat}</span>
-      ${p.img ? '<img loading="lazy" decoding="async" loading="lazy" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+pName+'" decoding="async" loading="lazy" decoding="async" importance="low" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">' : '<div class="frp-swatch '+p.color+'"></div>'}
+      ${p.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" data-src="'+p.img+'" alt="'+pName+'" decoding="async" loading="lazy" decoding="async" importance="low" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">' : '<div class="frp-swatch '+p.color+'"></div>'}
     </div>
     <div class="body">
       <div class="cat-label">${p.cat}</div>
@@ -22176,7 +22229,7 @@ function renderHomeProjects(){
     `<div class="ccard" data-go="project|${p.id}">
       <div class="thumb">
         <span class="case-tag">${p.tag}</span>
-        ${p.img ? '<img loading="lazy" decoding="async" loading="lazy" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+p.alt+'" decoding="async" loading="lazy" decoding="async" importance="low" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">' : '<div class="frp-swatch '+p.color+'"></div>'}
+        ${p.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" data-src="'+p.img+'" alt="'+p.alt+'" decoding="async" loading="lazy" decoding="async" importance="low" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">' : '<div class="frp-swatch '+p.color+'"></div>'}
         ${p.video ? '<div class="video-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><span>Video</span></div>' : ''}
       </div>
       <div class="body"><div class="place">${p.place}</div><h3>${p.name}</h3></div>
@@ -22189,7 +22242,7 @@ function renderHomeBlog(){
     `<div class="bcard" data-go="blog|${p.id}">
       <div class="thumb">
         <span class="cat">${p.category}</span>
-        ${p.img ? '<img loading="lazy" decoding="async" loading="lazy" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+p.title+'" decoding="async" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
+        ${p.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" data-src="'+p.img+'" alt="'+p.title+'" decoding="async" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
       </div>
       <div class="body"><div class="cat">${p.category}</div><h3>${p.title}</h3><span class="more">Read Article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
     </div>`).join('');
@@ -22434,7 +22487,7 @@ function renderBlogList(){
     const readTime = Math.max(1, Math.ceil(wordCount / 200));
     return `<div class="bcard" data-go="blog|${p.id}">
       <div class="thumb">
-        ${p.img ? '<img loading="lazy" decoding="async" loading="lazy" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+pTitle+'" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:60%;height:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)"></div>'}
+        ${p.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" data-src="'+p.img+'" alt="'+pTitle+'" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:60%;height:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)"></div>'}
       </div>
       <div class="body">
         <div class="cat" id="blog-list-cat-${idx}">${pCategory}</div>
@@ -22507,7 +22560,7 @@ function searchBlogPosts(keyword){
       `<div class="bcard" data-go="blog|${p.id}">
         <div class="thumb">
           <span class="cat">${p.category}</span>
-          ${p.img ? '<img loading="lazy" decoding="async" loading="lazy" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+p.title+'" decoding="async" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
+          ${p.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" data-src="'+p.img+'" alt="'+p.title+'" decoding="async" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
         </div>
         <div class="body"><div class="cat">${p.category} · ${p.date}</div><h3>${p.title}</h3><p style="font-size:13px;color:var(--ink-soft);margin:8px 0;line-height:1.6">${p.excerpt}</p><span class="more">Read Article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
       </div>`).join('');
@@ -24135,7 +24188,7 @@ function renderRelatedPosts(currentId, category){
         ${related.map(p => `
           <div class="related-card" data-go="blog|${p.id}">
             <div class="thumb">
-              ${p.img ? '<img loading="lazy" decoding="async" loading="lazy" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+p.title+'">' : '<div style="width:100%;height:100%;background:var(--bg-3);display:flex;align-items:center;justify-content:center;color:var(--ink-mute);font-size:14px">FRP Grating</div>'}
+              ${p.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" data-src="'+p.img+'" alt="'+p.title+'">' : '<div style="width:100%;height:100%;background:var(--bg-3);display:flex;align-items:center;justify-content:center;color:var(--ink-mute);font-size:14px">FRP Grating</div>'}
             </div>
             <div class="body">
               <div class="cat">${p.category}</div>
