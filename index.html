@@ -20228,81 +20228,11 @@ function openPreview(title){
   document.getElementById('previewTitle').textContent = title + ' — Online Preview';
   const body = document.getElementById('previewBody');
   const pdfUrl = pdfUrls[title];
-  
-  // 构建完整的预览内容（可滚动，多页）
-  let previewHTML = '<div style="max-height:70vh;overflow-y:auto;padding:20px;background:#fff;color:#000;border-radius:8px">';
-  
-  // 封面
-  previewHTML += '<div style="text-align:center;padding:40px 20px;border-bottom:2px solid #f5b800;margin-bottom:30px">';
-  previewHTML += '<div style="font-size:12px;letter-spacing:.2em;color:#f5b800;font-weight:700;margin-bottom:10px">ZEALL FRP GRATING</div>';
-  previewHTML += '<h1 style="font-size:28px;font-weight:800;color:#0a1218;margin:0 0 10px 0">'+title+'</h1>';
-  previewHTML += '<p style="font-size:14px;color:#666;margin:0">Edition 2026 · Nantong, China · www.gratingfrp.com</p>';
-  previewHTML += '</div>';
-  
-  // 如果有图片，显示图片
   if(pdfUrl){
-    previewHTML += '<div style="margin-bottom:30px;text-align:center"><img src="'+pdfUrl+'" style="max-width:100%;height:auto;border-radius:8px" alt="'+title+'"></div>';
+    body.innerHTML = '<iframe src="'+pdfUrl+'#toolbar=1&navpanes=0&scrollbar=1" style="width:100%;height:70vh;border:none;border-radius:8px;background:#fff" title="'+title+'"></iframe>';
+  } else {
+    body.innerHTML = '<div style="padding:40px;text-align:center;color:#999"><p>PDF not available for this document.</p><p>Please use the Download button or contact sales@gratingfrp.com</p></div>';
   }
-  
-  // 产品详细内容（根据标题显示对应产品）
-  const productData = {
-    'FRP Molded Grating Product Catalogue': {
-      specs: ['Thickness: 25/30/38/50mm', 'Mesh: 19×19 / 38×38 / 40×40 / 50×50mm', 'Panel: 1220×3660 / 1220×2440mm', 'Resin: Isophthalic / Vinyl Ester / Phenolic', 'Surface: Concave / Grit / Smooth / Covered'],
-      apps: ['Wastewater Treatment', 'Chemical Plant', 'Marine & Offshore', 'Power Substation', 'Food Processing', 'Mining']
-    },
-    'FRP Pultruded Grating Product Catalogue': {
-      specs: ['Thickness: 25/30/38/50mm', 'Bearing Bar: 30-75mm depth', 'Mesh: 38×38 / 40×40mm', 'Resin: Isophthalic / Vinyl Ester', 'Surface: Grit / Smooth'],
-      apps: ['Heavy-duty Platforms', 'Offshore Oil & Gas', 'Mining Operations', 'Industrial Walkways', 'Bridge Decks']
-    },
-    'FRP Pultruded Profiles & Structural Shapes Catalogue': {
-      specs: ['I-beam: 100×50 ~ 600×200mm', 'Channel: 50×25 ~ 300×90mm', 'Angle: 25×25 ~ 150×150mm', 'Square Tube: 25×25 ~ 200×200mm', 'Round Tube: OD20-300mm'],
-      apps: ['Platform Support Beams', 'Handrail Frames', 'Cable Tray', 'Equipment Supports', 'Structural Framing']
-    },
-    'FRP Handrail System Installation Guide': {
-      specs: ['Handrail Tube: OD42/48/60mm', 'Post: OD60-114mm', 'Height: 1000-1300mm', 'Material: Vinyl Ester / Isophthalic', 'Fasteners: SS316'],
-      apps: ['Industrial Platforms', 'Wastewater Plants', 'Chemical Facilities', 'Marine Jetties', 'Stair Systems']
-    },
-    'Company Profile & Capability Brochure': {
-      specs: ['20+ Years Experience', '10,000+ Tons/Year Capacity', 'ISO 9001 Certified', 'Export to 40+ Countries', '200+ Employees'],
-      apps: ['Custom Manufacturing', 'Engineering Support', 'Quality Control', 'Global Shipping', 'After-sales Service']
-    },
-    'Molded FRP Grating Technical Manual': {
-      specs: ['ASTM E-84 Fire Rating', 'EN 13706 Standard', 'Load/Deflection Data', 'Chemical Resistance Guide', 'Installation Instructions'],
-      apps: ['Engineering Reference', 'Specification Guide', 'Installation Manual', 'Quality Standards', 'Technical Support']
-    }
-  };
-  
-  const data = productData[title] || productData['FRP Molded Grating Product Catalogue'];
-  
-  // 规格部分
-  previewHTML += '<div style="margin-bottom:30px">';
-  previewHTML += '<h2 style="font-size:20px;font-weight:700;color:#0a1218;border-left:4px solid #f5b800;padding-left:12px;margin:0 0 15px 0">Technical Specifications</h2>';
-  previewHTML += '<table style="width:100%;border-collapse:collapse;font-size:14px">';
-  data.specs.forEach(spec => {
-    previewHTML += '<tr><td style="padding:10px 14px;border:1px solid #ddd;background:#f9f9f9;width:40%;font-weight:600">'+spec.split(':')[0]+'</td><td style="padding:10px 14px;border:1px solid #ddd">'+(spec.split(':')[1]||spec)+'</td></tr>';
-  });
-  previewHTML += '</table></div>';
-  
-  // 应用部分
-  previewHTML += '<div style="margin-bottom:30px">';
-  previewHTML += '<h2 style="font-size:20px;font-weight:700;color:#0a1218;border-left:4px solid #f5b800;padding-left:12px;margin:0 0 15px 0">Typical Applications</h2>';
-  previewHTML += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">';
-  data.apps.forEach(app => {
-    previewHTML += '<div style="padding:10px 14px;background:#f9f9f9;border:1px solid #ddd;border-radius:4px;font-size:14px">✓ '+app+'</div>';
-  });
-  previewHTML += '</div></div>';
-  
-  // 联系信息
-  previewHTML += '<div style="margin-top:30px;padding:20px;background:#0a1218;color:#fff;border-radius:8px;text-align:center">';
-  previewHTML += '<h3 style="margin:0 0 10px 0;font-size:18px">NANTONG ZEALL NEW MATERIALS CO., LTD.</h3>';
-  previewHTML += '<p style="margin:5px 0;font-size:13px;color:#aaa">Email: sales@gratingfrp.com</p>';
-  previewHTML += '<p style="margin:5px 0;font-size:13px;color:#aaa">Tel: +86 513 6681 9918</p>';
-  previewHTML += '<p style="margin:5px 0;font-size:13px;color:#aaa">Website: www.gratingfrp.com</p>';
-  previewHTML += '</div>';
-  
-  previewHTML += '</div>';
-  
-  body.innerHTML = previewHTML;
   document.getElementById('previewModal').classList.add('open');
 }
 function closePreview(){
