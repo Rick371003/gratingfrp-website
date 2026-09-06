@@ -139,6 +139,19 @@
   document.hidden{
     content-visibility:auto;
   }
+
+  /* 行业应用卡片可点击 */
+  .app-chip{
+    cursor:pointer;
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .app-chip:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 30px rgba(0,0,0,.3);
+  }
+  .app-chip img{
+    cursor:pointer;
+  }
 </style>
 <meta name="AI:description" content="Professional FRP grating manufacturer in China. 20+ years experience in molded and pultruded fiberglass grating, covers, profiles, handrail systems. OEM/ODM, global export.">
 <meta name="AI:keywords" content="FRP grating manufacturer, fiberglass grating factory, molded FRP grating, pultruded grating, China FRP supplier">
@@ -17938,7 +17951,7 @@ function appChip(a){
   const aShort = getAppText(a, 'short');
   return `<div class="app-chip" data-go="app|${a.id}" style="overflow:hidden">
     <div style="aspect-ratio:16/10;background:var(--bg-3);position:relative;overflow:hidden">
-      ${a.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+a.img+'" alt="'+a.imgAlt+'" decoding="async" loading="lazy" decoding="async" importance="low" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
+      ${a.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+a.img+'" alt="'+a.imgAlt+'" title="Click to view '+aName+' applications" decoding="async" loading="lazy" decoding="async" importance="low" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
       <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(10,18,26,.7))"></div>
     </div>
     <div style="padding:20px"><div class="nm">${aName}</div><div class="ds">${aShort}</div></div>
