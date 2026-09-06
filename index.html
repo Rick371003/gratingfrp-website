@@ -18287,7 +18287,7 @@ function getProductArray(p, field){
 function productCard(p){
   const pName = getProductText(p, 'name');
   const pShort = getProductText(p, 'short');
-  return `<div class="pcard" data-go="product|${p.id}">
+  return `<div class="pcard" data-go="product|${p.id}" onclick="location.hash='#/product/${p.id}'">
     <div class="thumb">
       <span class="color-tag">${p.cat}</span>
       ${p.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+pName+'" decoding="async" loading="lazy" decoding="async" importance="low" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">' : '<div class="frp-swatch '+p.color+'"></div>'}
@@ -18316,7 +18316,7 @@ function getAppText(a, field){
 function appChip(a){
   const aName = getAppText(a, 'name');
   const aShort = getAppText(a, 'short');
-  return `<div class="app-chip" data-go="app|${a.id}" style="overflow:hidden">
+  return `<div class="app-chip" data-go="app|${a.id}" style="overflow:hidden;cursor:pointer" onclick="location.hash='#/app/${a.id}'">
     <div style="aspect-ratio:16/10;background:var(--bg-3);position:relative;overflow:hidden">
       ${a.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+a.img+'" alt="'+a.imgAlt+'" title="Click to view '+aName+' applications" decoding="async" loading="lazy" decoding="async" importance="low" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
       <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(10,18,26,.7))"></div>
@@ -18813,10 +18813,10 @@ function renderDetail(type, id){
     let faqHtml = '';
     let guideHtml = '';
     let installHtml = '';
-    try { faqHtml = renderProductFAQs(p.id); } catch(e) { faqHtml = '<div style="padding:20px;color:#f00">FAQ Error: ' + e.message + '</div>'; }
+    try { faqHtml = renderProductFAQs(a.id); } catch(e) { faqHtml = '<div style="padding:20px;color:#f00">FAQ Error: ' + e.message + '</div>'; }
     try { guideHtml = renderSelectionGuide(); } catch(e) { guideHtml = '<div style="padding:20px;color:#f00">Guide Error: ' + e.message + '</div>'; }
     try { installHtml = renderInstallationGuide(); } catch(e) { installHtml = '<div style="padding:20px;color:#f00">Install Error: ' + e.message + '</div>'; }
-    injectProductSchemas(p.id);
+    injectProductSchemas(a.id);
     content.innerHTML = `
       <div class="detail-wrap">
         <div class="detail-gallery">${a.img ? '<img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+a.img+'" alt="'+a.imgAlt+'" style="width:100%;height:100%;object-fit:cover;display:block">' : '<div class="frp-swatch grey"></div>'}</div>
