@@ -21501,7 +21501,7 @@ function renderHomeBlog(){
     `<div class="bcard" data-go="blog|${p.id}">
       <div class="thumb">
         <span class="cat">${p.category}</span>
-        ${p.img ? '<img loading="lazy" src="'+p.img+'" alt="'+p.title+'" onerror="this.onerror=null;this.src='https://gratingfrp.com/assets/images/GHVIFYalwg.webp'" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
+        ${p.img ? '<img loading="lazy" src="'+p.img+'" alt="'+p.title+'" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
       </div>
       <div class="body"><div class="cat">${p.category}</div><h3>${p.title}</h3><span class="more">Read Article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
     </div>`).join('');
@@ -21746,7 +21746,7 @@ function renderBlogList(){
     const readTime = Math.max(1, Math.ceil(wordCount / 200));
     return `<div class="bcard" data-go="blog|${p.id}">
       <div class="thumb">
-        ${p.img ? '<img loading="lazy" src="'+p.img+'" alt="'+pTitle+'" onerror="this.onerror=null;this.src='https://gratingfrp.com/assets/images/GHVIFYalwg.webp'" style="width:100%;height:100%;object-fit:cover;display:block;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:60%;height:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)"></div>'}
+        ${p.img ? '<img loading="lazy" src="'+p.img+'" alt="'+pTitle+'" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:60%;height:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)"></div>'}
       </div>
       <div class="body">
         <div class="cat" id="blog-list-cat-${idx}">${pCategory}</div>
@@ -21819,7 +21819,7 @@ function searchBlogPosts(keyword){
       `<div class="bcard" data-go="blog|${p.id}">
         <div class="thumb">
           <span class="cat">${p.category}</span>
-          ${p.img ? '<img loading="lazy" src="'+p.img+'" alt="'+p.title+'" onerror="this.onerror=null;this.src='https://gratingfrp.com/assets/images/GHVIFYalwg.webp'" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
+          ${p.img ? '<img loading="lazy" src="'+p.img+'" alt="'+p.title+'" onerror="this.onerror=null;this.src=&quot;https://gratingfrp.com/assets/images/GHVIFYalwg.webp&quot;" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;background:var(--bg-soft)">' : '<div class="frp-swatch grey" style="width:50%;height:45%"></div>'}
         </div>
         <div class="body"><div class="cat">${p.category} · ${p.date}</div><h3>${p.title}</h3><p style="font-size:13px;color:var(--ink-soft);margin:8px 0;line-height:1.6">${p.excerpt}</p><span class="more">Read Article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div>
       </div>`).join('');
