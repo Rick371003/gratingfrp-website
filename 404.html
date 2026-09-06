@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting... | ZEALL FRP Grating</title>
+    <script>
+        // 老网站URL重定向映射
+        const redirectMap = {
+            '/products/69.html': '/#/products',
+            '/products/70.html': '/#/products',
+            '/en/product/': '/#/products',
+            '/hangye/': '/#/applications',
+            '/?hangye/': '/#/applications',
+            '/?DOWNLOAD': '/#/catalogue',
+            '/gongsi/105.html': '/#/about',
+            '/?gongsi/105.html': '/#/about',
+            '/products/': '/#/products',
+            '/?products/': '/#/products',
+            '/products/70.html': '/#/products',
+            '/?products/70.html': '/#/products',
+        };
+        
+        // 获取当前路径
+        const path = window.location.pathname + window.location.search;
+        
+        // 查找重定向
+        let target = '/';
+        for (const [oldPath, newPath] of Object.entries(redirectMap)) {
+            if (path.includes(oldPath.replace('?', '')) || path === oldPath) {
+                target = newPath;
+                break;
+            }
+        }
+        
+        // 如果是.html文件，重定向到首页
+        if (path.endsWith('.html')) {
+            target = '/#/products';
+        }
+        
+        // 3秒后自动跳转
+        setTimeout(() => {
+            window.location.href = target;
+        }, 100);
+        
+        // 立即跳转
+        window.location.replace(target);
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: #0F1923;
+            color: #fff;
+        }
+        .redirect-box {
+            text-align: center;
+        }
+        h1 {
+            color: #F5B800;
+            font-size: 28px;
+        }
+        p {
+            color: #94a3b8;
+            font-size: 16px;
+        }
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #F5B800;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="redirect-box">
+        <h1>ZEALL FRP Grating</h1>
+        <div class="spinner"></div>
+        <p>Redirecting to new website...</p>
+        <p>If not redirected, <a href="/" style="color: #F5B800;">click here</a></p>
+    </div>
+</body>
+</html>
