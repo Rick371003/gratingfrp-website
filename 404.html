@@ -5,43 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting... | ZEALL FRP Grating</title>
     <script>
-        // 老网站URL重定向映射
+        // 老网站URL重定向映射（全部10个链接）
         const redirectMap = {
             '/products/69.html': '/#/products',
             '/products/70.html': '/#/products',
+            '/products/71.html': '/#/products',
+            '/products/': '/#/products',
             '/en/product/': '/#/products',
+            '/?products/70.html': '/#/products',
+            '/?products/71.html': '/#/products',
             '/hangye/': '/#/applications',
             '/?hangye/': '/#/applications',
             '/?DOWNLOAD': '/#/catalogue',
             '/gongsi/105.html': '/#/about',
             '/?gongsi/105.html': '/#/about',
-            '/products/': '/#/products',
-            '/?products/': '/#/products',
-            '/products/70.html': '/#/products',
-            '/?products/70.html': '/#/products',
         };
         
         // 获取当前路径
         const path = window.location.pathname + window.location.search;
         
-        // 查找重定向
-        let target = '/';
-        for (const [oldPath, newPath] of Object.entries(redirectMap)) {
-            if (path.includes(oldPath.replace('?', '')) || path === oldPath) {
-                target = newPath;
-                break;
+        // 精确匹配
+        let target = redirectMap[path];
+        
+        // 如果没精确匹配，尝试模糊匹配
+        if (!target) {
+            if (path.includes('/products/') || path.includes('products/')) {
+                target = '/#/products';
+            } else if (path.includes('hangye')) {
+                target = '/#/applications';
+            } else if (path.includes('DOWNLOAD')) {
+                target = '/#/catalogue';
+            } else if (path.includes('gongsi')) {
+                target = '/#/about';
+            } else if (path.endsWith('.html')) {
+                target = '/#/products';
+            } else {
+                target = '/';
             }
         }
-        
-        // 如果是.html文件，重定向到首页
-        if (path.endsWith('.html')) {
-            target = '/#/products';
-        }
-        
-        // 3秒后自动跳转
-        setTimeout(() => {
-            window.location.href = target;
-        }, 100);
         
         // 立即跳转
         window.location.replace(target);
