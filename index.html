@@ -866,15 +866,12 @@ a, button, .btn, [role="button"] {
   /* 图片不超宽 */
   img {
     max-width: 100% !important;
-    width: 100% !important;
     height: auto !important;
-    display: block !important;
   }
   
-  /* 防止任何元素横向溢出 */
+  /* 防止横向溢出 */
   .view,
-  section,
-  div {
+  section {
     max-width: 100% !important;
     overflow-x: hidden !important;
   }
@@ -918,6 +915,160 @@ a, button, .btn, [role="button"] {
   .card,
   .advantage-card {
     padding: 12px !important;
+  }
+}
+
+
+/* ===== 手机端底部精确修复 ===== */
+@media (max-width: 768px) {
+  /* 底部LOGO和顶部保持一致大小 */
+  .footer-logo {
+    height: 60px !important;
+    max-width: 180px !important;
+    width: auto !important;
+    margin-bottom: 12px !important;
+  }
+  
+  /* 底部公司名称不换行，大小正常 */
+  .foot-company-name {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+    display: block !important;
+    margin-bottom: 4px !important;
+  }
+  
+  .foot-rights {
+    font-size: 16px !important;
+    white-space: nowrap !important;
+    display: block !important;
+  }
+  
+  /* 底部联系信息大小正常，不换行 */
+  .foot-contact-row {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px 16px !important;
+    justify-content: flex-start !important;
+  }
+  
+  .foot-contact-row span {
+    font-size: 16px !important;
+    white-space: nowrap !important;
+  }
+  
+  /* 底部邮箱可点击 */
+  .foot-contact-row a[href^="mailto"] {
+    font-size: 16px !important;
+    color: var(--accent) !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+  }
+  
+  .foot-contact-row a[href^="mailto"]:hover {
+    text-decoration: underline !important;
+  }
+  
+  /* 底部电话号码可点击 */
+  .foot-contact-row a[href^="tel"] {
+    font-size: 16px !important;
+    color: var(--ink-soft) !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+  }
+  
+  /* 底部描述文字和其他列大小一致 */
+  .footer-about p,
+  .footer-desc {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    text-align: left !important;
+    margin-bottom: 8px !important;
+  }
+  
+  /* 底部三列标题大小一致 */
+  .footer-grid h4,
+  .footer-content h4 {
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    margin-bottom: 12px !important;
+    white-space: nowrap !important;
+  }
+  
+  /* 底部链接大小一致 */
+  .footer-grid a,
+  .footer-content a {
+    font-size: 16px !important;
+    line-height: 1.8 !important;
+    display: block !important;
+    white-space: nowrap !important;
+  }
+  
+  /* 底部布局 */
+  .footer-grid,
+  .footer-content {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  
+  .footer-about {
+    margin-bottom: 0 !important;
+  }
+  
+  /* 底部版权区域 */
+  .foot-bottom {
+    padding: 16px 0 !important;
+    border-top: 1px solid var(--line) !important;
+  }
+  
+  .foot-copyright {
+    margin-bottom: 8px !important;
+  }
+  
+  /* 手机端首页字体适当调小，避免超宽和换行 */
+  .hero h1 {
+    font-size: 24px !important;
+    line-height: 1.25 !important;
+    word-break: keep-all !important;
+  }
+  
+  .hero .lead {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+  }
+  
+  .section-title {
+    font-size: 20px !important;
+    line-height: 1.3 !important;
+    word-break: keep-all !important;
+  }
+  
+  /* 按钮不换行，大小适中 */
+  .btn,
+  .btn-primary,
+  .btn-outline {
+    font-size: 16px !important;
+    padding: 10px 16px !important;
+    white-space: nowrap !important;
+  }
+  
+  /* Engineering Evidence按钮和电脑端一致 */
+  .engineering-buttons,
+  .evidence-buttons {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    justify-content: center !important;
+  }
+  
+  .engineering-buttons .btn,
+  .evidence-buttons .btn {
+    flex: 1 1 auto !important;
+    text-align: center !important;
+    font-size: 16px !important;
+    padding: 10px 12px !important;
   }
 }
 
