@@ -15718,16 +15718,7 @@ img {
 }
 
 
-/* 只隐藏section里的kicker，不隐藏hero里的副标题 */
-section .kicker, .section .kicker, .block .kicker,
-section .section-kicker, .section .section-label {
-  display: none !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-}
+
 /* hero里的副标题正常显示 */
 .hero .kicker, .hero .hero-sub, .hero .subtitle, .hero .tagline {
   display: block !important;
@@ -15803,6 +15794,40 @@ section .section-kicker, .section .section-label {
   }
   .trust-grid {
     margin-top: 8px !important;
+  }
+}
+
+
+/* kicker正常显示，h2下移不重叠 */
+@media (max-width: 768px) {
+  .section-head .kicker,
+  .section-head.center .kicker,
+  section .kicker, .section .kicker, .block .kicker {
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: 2px !important;
+    color: #f5b800 !important;
+    margin-bottom: 8px !important;
+    margin-top: 0 !important;
+    text-transform: uppercase !important;
+  }
+  
+  /* h2下移，和kicker保持间距，不重叠 */
+  .section-head h2,
+  .section-head.center h2 {
+    margin-top: 4px !important;
+    padding-top: 0 !important;
+    position: relative !important;
+    top: 0 !important;
+  }
+  
+  /* section-head容器：保持正常流，不重叠 */
+  .section-head, .section-head.center {
+    position: relative !important;
+    overflow: visible !important;
   }
 }
 
