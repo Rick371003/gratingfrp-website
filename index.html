@@ -517,6 +517,222 @@ a, button, .btn, [role="button"] {
   }
 }
 
+
+/* ===== 手机端终极强制修复（最高优先级，只改手机端）===== */
+@media (max-width: 768px) {
+
+  /* ===== 1. 所有section标题强制一行，不换行，不截断 ===== */
+  html body .section-head h2,
+  html body .section-head.center h2,
+  html body .section-head .section-title,
+  html body .page-head h1,
+  html body .page-head .title,
+  html body h2.section-title,
+  html body div.section-head > h2 {
+    font-size: 17px !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left !important;
+  }
+
+  /* ===== 2. 所有section描述强制左对齐，平铺，不居中 ===== */
+  html body .section-head p,
+  html body .section-head.center p,
+  html body .section-head .section-sub,
+  html body .page-head p,
+  html body .page-head .lead,
+  html body .section-desc {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    text-align: left !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 8px 0 0 0 !important;
+    padding: 0 !important;
+  }
+
+  /* section-head强制左对齐，宽度100% */
+  html body .section-head,
+  html body .section-head.center {
+    text-align: left !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* ===== 3. 信任指标：去掉边框，2列，文字一行，不超界面 ===== */
+  html body .trust-grid,
+  html body .trust-items,
+  html body .home-trust,
+  html body div[class*="trust"] {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  html body .trust-item,
+  html body div[class*="trust-item"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 10px 8px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    border: none !important;
+    background: transparent !important;
+    overflow: visible !important;
+  }
+  html body .trust-item .t1,
+  html body .trust-item .number,
+  html body .trust-item .title {
+    font-size: 15px !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    display: block !important;
+    width: 100% !important;
+  }
+  html body .trust-item .t2,
+  html body .trust-item .label,
+  html body .trust-item .subtitle {
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    display: block !important;
+    width: 100% !important;
+  }
+
+  /* ===== 4. 工厂数据卡片：2列，不超界面 ===== */
+  html body .factory-stats,
+  html body .stats-grid,
+  html body .stat-grid,
+  html body div[class*="stat"] {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  html body .stat-card,
+  html body .factory-stat {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 14px 8px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+  }
+  html body .stat-card .num,
+  html body .factory-stat .num {
+    font-size: 20px !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+  }
+  html body .stat-card .label,
+  html body .factory-stat .label {
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+    white-space: normal !important;
+    overflow: visible !important;
+  }
+
+  /* ===== 5. 所有容器：宽度100%，平铺，不留空白 ===== */
+  html body .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+  }
+  html body .section,
+  html body .section-alt,
+  html body .block {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* ===== 6. 所有卡片网格：宽度100% ===== */
+  html body .product-grid,
+  html body .app-grid,
+  html body .case-grid,
+  html body .blog-grid,
+  html body .advantage-grid,
+  html body .features-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  html body .pcard,
+  html body .app-chip,
+  html body .ccard,
+  html body .bcard,
+  html body .advantage-card,
+  html body .feature-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+  }
+
+  /* ===== 7. 通用：所有文字不超出屏幕 ===== */
+  html body h1,
+  html body h2,
+  html body h3,
+  html body h4,
+  html body h5,
+  html body h6,
+  html body p,
+  html body span,
+  html body a,
+  html body li,
+  html body div {
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+  }
+
+  /* ===== 8. 产品卡片文字完整显示 ===== */
+  html body .pcard h3,
+  html body .ccard h3,
+  html body .bcard h3 {
+    font-size: 15px !important;
+    line-height: 1.3 !important;
+    white-space: normal !important;
+    overflow: visible !important;
+  }
+  html body .pcard p,
+  html body .ccard p,
+  html body .bcard p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    white-space: normal !important;
+    overflow: visible !important;
+  }
+}
+
 </style><meta name="AI:description" content="Professional FRP grating manufacturer in China. 20+ years experience in molded and pultruded fiberglass grating, covers, profiles, handrail systems. OEM/ODM, global export."><meta name="AI:keywords" content="FRP grating manufacturer, fiberglass grating factory, molded FRP grating, pultruded grating, China FRP supplier"><meta name="AI:type" content="Manufacturer"><meta name="AI:industry" content="Composite Materials, Industrial Flooring, Construction Materials"><meta name="AI:products" content="Molded FRP Grating, Pultruded FRP Grating, FRP Covers, FRP Profiles, Handrail Systems, Grating Clips, Fiberglass Fabric, Custom FRP Products"><meta name="AI:services" content="OEM Manufacturing, ODM Design, Custom Fabrication, Engineering Support, Global Export"><meta name="AI:location" content="Nantong, Jiangsu, China"><meta name="AI:founded" content="2004"><meta name="AI:employees" content="200+"><meta name="AI:export_countries" content="40+"><meta name="AI:certifications" content="ASTM F3059, ABS PDA, ISO 9001, Intertek Tested"><meta name="AI:resin_types" content="General Purpose Polyester, Isophthalic Polyester, Vinyl Ester, Phenolic"><meta name="AI:thickness_options" content="25mm, 30mm, 38mm, 50mm"><meta name="AI:panel_sizes" content="1220x3660mm, 1000x4000mm, Custom"><meta name="AI:lead_time" content="7-35 working days"><meta name="AI:minimum_order" content="10 square meters"><meta name="AI:price_range" content="USD 15-95 per square meter"><meta name="AI:contact_email" content="sales@gratingfrp.com"><meta name="AI:contact_phone" content="+86 513 6681 9918"><meta name="AI:website" content="https://www.gratingfrp.com/"><meta name="AI:languages_supported" content="English, Spanish, German, French, Chinese"><meta name="AI:language_codes" content="en, es, de, fr, zh"><meta name="AI:default_language" content="en"><meta name="AI:multilingual" content="true"><meta name="AI:language_switch_url" content="https://www.gratingfrp.com/?lang={language_code}"><meta property="og:article:author" content="NANTONG ZEALL NEW MATERIALS CO., LTD."><meta property="og:article:publisher" content="NANTONG ZEALL NEW MATERIALS CO., LTD."><meta property="og:article:published_time" content="2024-01-01T00:00:00+08:00"><meta property="og:article:modified_time" content="2026-09-01T00:00:00+08:00"><meta property="og:article:section" content="FRP Grating Manufacturing"><meta property="og:article:tag" content="FRP grating, fiberglass grating, molded grating, pultruded grating, composite materials"><meta property="og:determiner" content="the"><meta property="og:updated_time" content="2026-09-01T00:00:00+08:00"><meta name="twitter:site" content="@zeallfrp"><meta name="twitter:creator" content="@zeallfrp"><meta name="twitter:label1" content="Established"><meta name="twitter:data1" content="2004"><meta name="twitter:label2" content="Employees"><meta name="twitter:data2" content="200+"><meta name="p:domain_verify" content=""><meta property="og:image:alt" content="ZEALL FRP Grating - Professional Fiberglass Grating Manufacturer in China"><link rel="preload" as="image" href="https://gratingfrp.com/assets/images/0fmkAXNc5Y.webp"><link rel="preload" as="image" href="https://gratingfrp.com/assets/images/logo.webp"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"><meta name="theme-color" content="#0F1923"><meta name="color-scheme" content="dark light"><link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="dns-prefetch" href="https://gratingfrp.com"><link rel="preconnect" href="https://gratingfrp.com" crossorigin><link rel="dns-prefetch" href="https://formspree.io"><link rel="preload" as="image" href="https://gratingfrp.com/assets/images/logo.webp"><script type="application/ld+json">
 {
   "@context": "https://schema.org",
