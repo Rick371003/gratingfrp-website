@@ -18923,6 +18923,46 @@ function navigate(){
       if(form) form.scrollIntoView({behavior:'smooth', block:'start'});
     }, 300);
   }
+  // 强制修复kicker和h2的间距，不重叠
+  setTimeout(fixKickerH2Spacing, 50);
+}
+function fixKickerH2Spacing(){
+  if(window.innerWidth > 768) return;
+  document.querySelectorAll('.section-head, .section-head.center').forEach(function(head){
+    const kicker = head.querySelector('.kicker');
+    const h2 = head.querySelector('h2');
+    if(kicker){
+      kicker.style.display = 'block';
+      kicker.style.width = '100%';
+      kicker.style.float = 'none';
+      kicker.style.clear = 'both';
+      kicker.style.position = 'static';
+      kicker.style.marginBottom = '10px';
+      kicker.style.marginTop = '0';
+      kicker.style.fontSize = '12px';
+      kicker.style.fontWeight = '700';
+      kicker.style.letterSpacing = '2px';
+      kicker.style.color = '#f5b800';
+      kicker.style.textTransform = 'uppercase';
+      kicker.style.visibility = 'visible';
+      kicker.style.opacity = '1';
+      kicker.style.height = 'auto';
+      kicker.style.overflow = 'visible';
+    }
+    if(h2){
+      h2.style.display = 'block';
+      h2.style.width = '100%';
+      h2.style.float = 'none';
+      h2.style.clear = 'both';
+      h2.style.position = 'static';
+      h2.style.marginTop = '0';
+      h2.style.paddingTop = '0';
+      h2.style.transform = 'none';
+    }
+    head.style.position = 'relative';
+    head.style.overflow = 'visible';
+    head.style.display = 'block';
+  });
 }
 /* ===== 博客内容渲染（Markdown转HTML） ===== */
 function renderBlogContent(content){
