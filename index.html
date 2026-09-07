@@ -15507,9 +15507,15 @@ img {
     margin-bottom: 16px !important;
   }
   
-  /* 隐藏kicker小字 */
+  /* kicker正常显示 */
   .kicker {
-    display: none !important;
+    display: block !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: 2px !important;
+    color: #f5b800 !important;
+    margin-bottom: 10px !important;
+    text-transform: uppercase !important;
   }
   
   /* hero badges：横排，居中，紧凑 */
@@ -15828,6 +15834,55 @@ img {
   .section-head, .section-head.center {
     position: relative !important;
     overflow: visible !important;
+  }
+}
+
+
+  /* h2和kicker保持间距，不重叠 */
+  .section-head h2, .section-head.center h2 {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    position: static !important;
+    top: auto !important;
+  }
+
+
+/* ===== 全局：所有section的kicker显示，h2不重叠 ===== */
+@media (max-width: 768px) {
+  /* 所有kicker：显示，黄色，紧凑 */
+  .kicker, .section-kicker, .section-label, .eyebrow,
+  section .kicker, .section .kicker, .block .kicker {
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: 2px !important;
+    color: #f5b800 !important;
+    margin-bottom: 8px !important;
+    margin-top: 0 !important;
+    padding: 0 !important;
+    text-transform: uppercase !important;
+    position: static !important;
+    top: auto !important;
+  }
+  
+  /* 所有h2：static定位，和kicker保持间距 */
+  h2, .section-title, .section-head h2, .section-head.center h2,
+  section h2, .section h2, .block h2 {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    position: static !important;
+    top: auto !important;
+    transform: none !important;
+  }
+  
+  /* section-head：正常流，不重叠 */
+  .section-head, .section-head.center,
+  section .section-head, .section .section-head {
+    position: relative !important;
+    overflow: visible !important;
+    display: block !important;
   }
 }
 
