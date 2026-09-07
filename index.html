@@ -15621,15 +15621,7 @@ img {
 }
 
 
-/* 彻底隐藏所有kicker小字标题 */
-.kicker, .section-kicker, .section-label, .eyebrow {
-  display: none !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-}
+
 
 
 /* Hero Badges 强制横排，无圆点 */
@@ -15722,6 +15714,69 @@ img {
   footer a, footer li, footer span {
     word-break: keep-all !important;
     overflow-wrap: break-word !important;
+  }
+}
+
+
+/* 只隐藏section里的kicker，不隐藏hero里的副标题 */
+section .kicker, .section .kicker, .block .kicker,
+section .section-kicker, .section .section-label {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+/* hero里的副标题正常显示 */
+.hero .kicker, .hero .hero-sub, .hero .subtitle, .hero .tagline {
+  display: block !important;
+  visibility: visible !important;
+  height: auto !important;
+}
+
+
+/* 缩短顶部空隙：hero和导航栏之间 */
+@media (max-width: 768px) {
+  /* 导航栏：减少高度 */
+  .site-header, .nav-bar, header {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    min-height: auto !important;
+  }
+  
+  /* hero区域：紧贴导航栏，减少顶部空白 */
+  .hero {
+    padding-top: 20px !important;
+    margin-top: 0 !important;
+  }
+  .hero-content {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  
+  /* hero副标题：紧凑，显示完整 */
+  .hero .kicker, .hero .hero-sub, .hero .subtitle, .hero .tagline {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 12px !important;
+    margin-top: 0 !important;
+    display: block !important;
+    visibility: visible !important;
+    word-break: keep-all !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  /* hero大标题：紧贴副标题 */
+  .hero h1 {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  
+  /* LOGO：减少上下间距 */
+  .logo, .logo-img {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
   }
 }
 
