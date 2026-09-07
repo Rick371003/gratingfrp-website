@@ -19834,4 +19834,135 @@ if ('connection' in navigator) {
 })();
 </script>
 
+
+<script>
+// 手机端强制样式修复 - 页面加载后执行，100%覆盖所有CSS
+function forceMobileFix() {
+  var isMobile = window.innerWidth <= 768;
+  if (!isMobile) return; // 只在手机端执行，电脑端完全不动
+
+  // 1. 所有section标题强制一行
+  var titles = document.querySelectorAll('.section-head h2, .section-head.center h2, .page-head h1');
+  titles.forEach(function(el) {
+    el.style.fontSize = '16px';
+    el.style.fontWeight = '700';
+    el.style.lineHeight = '1.2';
+    el.style.whiteSpace = 'nowrap';
+    el.style.overflow = 'visible';
+    el.style.textOverflow = 'clip';
+    el.style.textAlign = 'left';
+    el.style.width = '100%';
+    el.style.maxWidth = '100%';
+    el.style.margin = '0';
+    el.style.padding = '0';
+    el.style.display = 'block';
+  });
+
+  // 2. 所有描述强制左对齐平铺
+  var descs = document.querySelectorAll('.section-head p, .section-head.center p, .page-head p, .page-head .lead');
+  descs.forEach(function(el) {
+    el.style.fontSize = '14px';
+    el.style.lineHeight = '1.6';
+    el.style.textAlign = 'left';
+    el.style.whiteSpace = 'normal';
+    el.style.overflow = 'visible';
+    el.style.width = '100%';
+    el.style.maxWidth = '100%';
+    el.style.margin = '8px 0 0 0';
+    el.style.padding = '0';
+    el.style.display = 'block';
+  });
+
+  // 3. section-head强制左对齐
+  var heads = document.querySelectorAll('.section-head, .section-head.center');
+  heads.forEach(function(el) {
+    el.style.textAlign = 'left';
+    el.style.width = '100%';
+    el.style.maxWidth = '100%';
+    el.style.margin = '0 0 20px 0';
+    el.style.padding = '0';
+  });
+
+  // 4. 信任指标强制2列，去掉边框
+  var trustGrids = document.querySelectorAll('.trust-grid, .trust-items');
+  trustGrids.forEach(function(el) {
+    el.style.display = 'grid';
+    el.style.gridTemplateColumns = 'repeat(2, 1fr)';
+    el.style.gap = '6px';
+    el.style.width = '100%';
+    el.style.maxWidth = '100%';
+    el.style.margin = '0';
+    el.style.padding = '0';
+  });
+  var trustItems = document.querySelectorAll('.trust-item');
+  trustItems.forEach(function(el) {
+    el.style.width = '100%';
+    el.style.maxWidth = '100%';
+    el.style.padding = '8px 6px';
+    el.style.margin = '0';
+    el.style.boxSizing = 'border-box';
+    el.style.border = 'none';
+    el.style.background = 'transparent';
+    el.style.overflow = 'visible';
+  });
+  var trustT1 = document.querySelectorAll('.trust-item .t1');
+  trustT1.forEach(function(el) {
+    el.style.fontSize = '14px';
+    el.style.lineHeight = '1.2';
+    el.style.whiteSpace = 'nowrap';
+    el.style.overflow = 'visible';
+    el.style.width = '100%';
+  });
+  var trustT2 = document.querySelectorAll('.trust-item .t2');
+  trustT2.forEach(function(el) {
+    el.style.fontSize = '11px';
+    el.style.lineHeight = '1.3';
+    el.style.whiteSpace = 'normal';
+    el.style.overflow = 'visible';
+    el.style.width = '100%';
+  });
+
+  // 5. 工厂数据强制2列
+  var statGrids = document.querySelectorAll('.factory-stats, .stats-grid, .stat-grid');
+  statGrids.forEach(function(el) {
+    el.style.display = 'grid';
+    el.style.gridTemplateColumns = 'repeat(2, 1fr)';
+    el.style.gap = '8px';
+    el.style.width = '100%';
+    el.style.maxWidth = '100%';
+  });
+  var statCards = document.querySelectorAll('.stat-card, .factory-stat');
+  statCards.forEach(function(el) {
+    el.style.width = '100%';
+    el.style.maxWidth = '100%';
+    el.style.padding = '12px 6px';
+    el.style.boxSizing = 'border-box';
+  });
+
+  // 6. 容器强制宽度100%
+  var containers = document.querySelectorAll('.container');
+  containers.forEach(function(el) {
+    el.style.width = '100%';
+    el.style.maxWidth = '100%';
+    el.style.paddingLeft = '12px';
+    el.style.paddingRight = '12px';
+    el.style.boxSizing = 'border-box';
+  });
+
+  console.log('✅ 手机端强制样式修复已执行');
+}
+
+// 页面加载后执行
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', forceMobileFix);
+} else {
+  forceMobileFix();
+}
+// 窗口大小改变时重新执行
+window.addEventListener('resize', forceMobileFix);
+// 延迟再执行一次，确保动态内容也被修复
+setTimeout(forceMobileFix, 500);
+setTimeout(forceMobileFix, 1500);
+</script>
+
 </body></html>
