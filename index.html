@@ -191,6 +191,346 @@ a, button, .btn, [role="button"] {
   }
 }
 
+
+/* ===== 手机端全面优化：平铺、宽度足够、不换行、整齐美观 ===== */
+@media (max-width: 768px) {
+  /* 容器宽度铺满 */
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  /* 所有section内边距优化 */
+  .section {
+    padding: 30px 0 !important;
+  }
+  
+  /* 网格布局全部单列，宽度铺满 */
+  .grid-cards,
+  .products-grid,
+  .advantages-grid,
+  .projects-grid,
+  .blog-grid,
+  .app-grid,
+  .specs-grid,
+  .features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* 卡片宽度铺满 */
+  .pcard,
+  .card,
+  .advantage-card,
+  .project-card,
+  .blog-card,
+  .bcard,
+  .app-card,
+  .spec-card {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 18px !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* 标题不换行 */
+  .section-title,
+  .section-sub,
+  h1, h2, h3, h4 {
+    white-space: normal !important;
+    word-break: keep-all !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  /* 按钮宽度合适，不换行 */
+  .btn,
+  .btn-primary,
+  .btn-outline,
+  .calc-btn,
+  .calculate-btn {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* 输入框和下拉框宽度铺满 */
+  input, select, textarea {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+  }
+  
+  /* 表格横向滚动，不挤压 */
+  table {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  /* 产品详情页布局 */
+  .detail-layout,
+  .product-detail-layout,
+  .calc-layout {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  
+  /* 图片宽度铺满 */
+  .detail-image,
+  .product-image,
+  .hero img,
+  .project-image {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+  }
+  
+  /* 导航栏优化 */
+  .nav-bar,
+  .site-header {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  
+  .navlink {
+    padding: 8px 10px !important;
+    white-space: nowrap !important;
+  }
+  
+  /* 底部三列变单列 */
+  .footer-grid,
+  .footer-content {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  
+  /* 信任指标横向排列 */
+  .trust-bar,
+  .trust-items {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-around !important;
+    gap: 12px !important;
+  }
+  
+  .trust-item {
+    flex: 1 1 45% !important;
+    text-align: center !important;
+    padding: 12px !important;
+  }
+  
+  /* FAQ和指南宽度铺满 */
+  .product-faq-section,
+  .selection-guide-section,
+  .installation-guide-section {
+    width: 100% !important;
+    padding: 16px !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* 规格表格优化 */
+  .spec-table,
+  .cat-spec-table {
+    width: 100% !important;
+    font-size: 16px !important;
+  }
+  
+  .spec-table th,
+  .spec-table td,
+  .cat-spec-table th,
+  .cat-spec-table td {
+    padding: 10px 8px !important;
+    word-break: break-word !important;
+  }
+  
+  /* 应用场景标签不换行 */
+  .app-chip,
+  .product-app-chip {
+    display: inline-flex !important;
+    align-items: center !important;
+    white-space: nowrap !important;
+    padding: 8px 12px !important;
+    margin: 4px !important;
+  }
+  
+  /* 联系表单宽度铺满 */
+  .contact-form,
+  .rfq-form,
+  .calc-form {
+    width: 100% !important;
+    padding: 0 !important;
+  }
+  
+  /* 两列布局手机端变单列 */
+  .two-col,
+  .three-col,
+  .four-col {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  
+  /* 页面标题区域 */
+  .page-head {
+    padding: 40px 0 !important;
+  }
+  
+  .page-head h2 {
+    font-size: 24px !important;
+    line-height: 1.3 !important;
+  }
+  
+  .page-head p {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+  }
+  
+  /* Hero区域 */
+  .hero {
+    padding: 50px 0 !important;
+    text-align: center !important;
+  }
+  
+  .hero h1 {
+    font-size: 28px !important;
+    line-height: 1.25 !important;
+  }
+  
+  .hero .lead {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+  }
+  
+  /* 面包屑 */
+  .breadcrumb {
+    font-size: 16px !important;
+    flex-wrap: wrap !important;
+  }
+  
+  /* 标签和分类 */
+  .tag,
+  .category,
+  .cat-label {
+    display: inline-block !important;
+    white-space: nowrap !important;
+  }
+  
+  /* 项目详情页 */
+  .project-detail-layout,
+  .detail-side {
+    width: 100% !important;
+  }
+  
+  /* 下载按钮横向排列 */
+  .download-buttons,
+  .action-buttons {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+  }
+  
+  .download-buttons .btn,
+  .action-buttons .btn {
+    flex: 1 1 auto !important;
+    text-align: center !important;
+  }
+  
+  /* 计算器结果区域 */
+  .calc-result,
+  .result-card {
+    width: 100% !important;
+    padding: 16px !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* 对比表格 */
+  .comparison-table {
+    display: block !important;
+    overflow-x: auto !important;
+  }
+  
+  /* 步骤指示器 */
+  .steps,
+  .install-steps {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  
+  /* 客户评价 */
+  .testimonials-grid,
+  .reviews-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  
+  /* 证书和认证 */
+  .certifications-grid,
+  .badges-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 12px !important;
+  }
+  
+  /* 底部版权信息 */
+  .footer-bottom,
+  .copyright {
+    text-align: center !important;
+    padding: 20px 12px !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+  }
+  
+  /* 确保所有元素不超出屏幕 */
+  * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* 图片不超出 */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* 视频不超出 */
+  video, iframe {
+    max-width: 100% !important;
+  }
+}
+
+/* 超小屏幕优化 */
+@media (max-width: 480px) {
+  .container {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+  
+  .hero h1 {
+    font-size: 24px !important;
+  }
+  
+  .section-title {
+    font-size: 22px !important;
+  }
+  
+  .btn,
+  .btn-primary,
+  .btn-outline {
+    padding: 12px 16px !important;
+    font-size: 16px !important;
+  }
+}
+
 </style><meta name="AI:description" content="Professional FRP grating manufacturer in China. 20+ years experience in molded and pultruded fiberglass grating, covers, profiles, handrail systems. OEM/ODM, global export."><meta name="AI:keywords" content="FRP grating manufacturer, fiberglass grating factory, molded FRP grating, pultruded grating, China FRP supplier"><meta name="AI:type" content="Manufacturer"><meta name="AI:industry" content="Composite Materials, Industrial Flooring, Construction Materials"><meta name="AI:products" content="Molded FRP Grating, Pultruded FRP Grating, FRP Covers, FRP Profiles, Handrail Systems, Grating Clips, Fiberglass Fabric, Custom FRP Products"><meta name="AI:services" content="OEM Manufacturing, ODM Design, Custom Fabrication, Engineering Support, Global Export"><meta name="AI:location" content="Nantong, Jiangsu, China"><meta name="AI:founded" content="2004"><meta name="AI:employees" content="200+"><meta name="AI:export_countries" content="40+"><meta name="AI:certifications" content="ASTM F3059, ABS PDA, ISO 9001, Intertek Tested"><meta name="AI:resin_types" content="General Purpose Polyester, Isophthalic Polyester, Vinyl Ester, Phenolic"><meta name="AI:thickness_options" content="25mm, 30mm, 38mm, 50mm"><meta name="AI:panel_sizes" content="1220x3660mm, 1000x4000mm, Custom"><meta name="AI:lead_time" content="7-35 working days"><meta name="AI:minimum_order" content="10 square meters"><meta name="AI:price_range" content="USD 15-95 per square meter"><meta name="AI:contact_email" content="sales@gratingfrp.com"><meta name="AI:contact_phone" content="+86 513 6681 9918"><meta name="AI:website" content="https://www.gratingfrp.com/"><meta name="AI:languages_supported" content="English, Spanish, German, French, Chinese"><meta name="AI:language_codes" content="en, es, de, fr, zh"><meta name="AI:default_language" content="en"><meta name="AI:multilingual" content="true"><meta name="AI:language_switch_url" content="https://www.gratingfrp.com/?lang={language_code}"><meta property="og:article:author" content="NANTONG ZEALL NEW MATERIALS CO., LTD."><meta property="og:article:publisher" content="NANTONG ZEALL NEW MATERIALS CO., LTD."><meta property="og:article:published_time" content="2024-01-01T00:00:00+08:00"><meta property="og:article:modified_time" content="2026-09-01T00:00:00+08:00"><meta property="og:article:section" content="FRP Grating Manufacturing"><meta property="og:article:tag" content="FRP grating, fiberglass grating, molded grating, pultruded grating, composite materials"><meta property="og:determiner" content="the"><meta property="og:updated_time" content="2026-09-01T00:00:00+08:00"><meta name="twitter:site" content="@zeallfrp"><meta name="twitter:creator" content="@zeallfrp"><meta name="twitter:label1" content="Established"><meta name="twitter:data1" content="2004"><meta name="twitter:label2" content="Employees"><meta name="twitter:data2" content="200+"><meta name="p:domain_verify" content=""><meta property="og:image:alt" content="ZEALL FRP Grating - Professional Fiberglass Grating Manufacturer in China"><link rel="preload" as="image" href="https://gratingfrp.com/assets/images/0fmkAXNc5Y.webp"><link rel="preload" as="image" href="https://gratingfrp.com/assets/images/logo.webp"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"><meta name="theme-color" content="#0F1923"><meta name="color-scheme" content="dark light"><link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="dns-prefetch" href="https://gratingfrp.com"><link rel="preconnect" href="https://gratingfrp.com" crossorigin><link rel="dns-prefetch" href="https://formspree.io"><link rel="preload" as="image" href="https://gratingfrp.com/assets/images/logo.webp"><script type="application/ld+json">
 {
   "@context": "https://schema.org",
