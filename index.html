@@ -255,9 +255,8 @@ a, button, .btn, [role="button"] {
   .btn-outline,
   .calc-btn,
   .calculate-btn {
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
+    white-space: normal !important;
+    overflow: visible !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
   }
@@ -534,6 +533,20 @@ a, button, .btn, [role="button"] {
 
 /* ===== 手机端精细调整：不超宽、不换行、空白紧凑 ===== */
 @media (max-width: 768px) {
+  
+/* 回到顶部按钮调整，避免遮挡内容 */
+.back-to-top,
+#backToTop,
+.scroll-top {
+  width: 44px !important;
+  height: 44px !important;
+  right: 12px !important;
+  bottom: 20px !important;
+  font-size: 18px !important;
+  z-index: 999 !important;
+  opacity: 0.9 !important;
+}
+
   /* 确保所有元素box-sizing，防止padding导致超宽 */
   *, *::before, *::after {
     box-sizing: border-box !important;
