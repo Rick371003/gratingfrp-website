@@ -15484,7 +15484,7 @@ img {
     white-space: normal !important;
     overflow: visible !important;
     text-align: left !important;
-    word-break: break-word !important;
+    overflow-wrap: break-word !important;word-break: keep-all !important;
   }
   
   /* 所有描述：14px，左对齐，宽度100%，允许换行 */
@@ -15496,7 +15496,7 @@ img {
     max-width: 100% !important;
     white-space: normal !important;
     overflow: visible !important;
-    word-break: break-word !important;
+    overflow-wrap: break-word !important;word-break: keep-all !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
@@ -15545,12 +15545,12 @@ img {
   .trust-item .t1 {
     font-size: 14px !important;
     white-space: normal !important;
-    word-break: break-word !important;
+    overflow-wrap: break-word !important;word-break: keep-all !important;
   }
   .trust-item .t2 {
     font-size: 11px !important;
     white-space: normal !important;
-    word-break: break-word !important;
+    overflow-wrap: break-word !important;word-break: keep-all !important;
   }
   
   /* 工厂数据：2列，紧凑 */
@@ -15572,7 +15572,7 @@ img {
     font-size: 11px !important;
     line-height: 1.3 !important;
     white-space: normal !important;
-    word-break: break-word !important;
+    overflow-wrap: break-word !important;word-break: keep-all !important;
   }
   
   /* 项目卡片：紧凑，文字不跑出 */
@@ -15583,14 +15583,14 @@ img {
     font-size: 15px !important;
     line-height: 1.3 !important;
     white-space: normal !important;
-    word-break: break-word !important;
+    overflow-wrap: break-word !important;word-break: keep-all !important;
     overflow: visible !important;
   }
   .project-card p, .pcard p {
     font-size: 13px !important;
     line-height: 1.5 !important;
     white-space: normal !important;
-    word-break: break-word !important;
+    overflow-wrap: break-word !important;word-break: keep-all !important;
     overflow: visible !important;
   }
   
@@ -15615,7 +15615,112 @@ img {
     box-sizing: border-box !important;
   }
   h1, h2, h3, h4, h5, h6, p, span, div, li, a {
-    word-break: break-word !important;
+    overflow-wrap: break-word !important;word-break: keep-all !important;
+    overflow-wrap: break-word !important;
+  }
+}
+
+
+/* 彻底隐藏所有kicker小字标题 */
+.kicker, .section-kicker, .section-label, .eyebrow {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+
+/* Hero Badges 强制横排，无圆点 */
+.hero-badges {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 6px !important;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 12px 0 0 0 !important;
+}
+.hero-badges::before,
+.hero-badges span::before {
+  display: none !important;
+  content: none !important;
+}
+.hero-badges span {
+  display: inline-block !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  padding: 4px 10px !important;
+  border-radius: 14px !important;
+  background: rgba(245,184,0,0.12) !important;
+  border: 1px solid rgba(245,184,0,0.35) !important;
+  color: #f5b800 !important;
+  white-space: nowrap !important;
+  list-style: none !important;
+}
+
+
+/* 减少空隙：更紧凑 */
+@media (max-width: 768px) {
+  /* hero区域：减少顶部空白 */
+  .hero {
+    padding-top: 60px !important;
+    padding-bottom: 30px !important;
+  }
+  .hero-content {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  
+  /* hero副标题：紧凑，不拆分 */
+  .hero-sub, .hero .subtitle, .hero .tagline {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 10px !important;
+    word-break: keep-all !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  /* hero大标题：紧凑 */
+  .hero h1 {
+    font-size: 32px !important;
+    line-height: 1.15 !important;
+    margin-bottom: 10px !important;
+    word-break: keep-all !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  /* section间距：进一步减少 */
+  section, .section, .block {
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+  }
+  
+  /* section-head：更紧凑 */
+  .section-head, .section-head.center {
+    margin-bottom: 14px !important;
+  }
+  .section-head h2, .section-head.center h2 {
+    margin-bottom: 6px !important;
+  }
+  
+  /* 信任指标和badges之间的间距 */
+  .hero-badges + * {
+    margin-top: 14px !important;
+  }
+  
+  /* 全局：不拆分单词 */
+  h1, h2, h3, h4, h5, h6, p, span, div, li, a {
+    word-break: keep-all !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  /* 页脚链接：不拆分单词 */
+  footer a, footer li, footer span {
+    word-break: keep-all !important;
     overflow-wrap: break-word !important;
   }
 }
