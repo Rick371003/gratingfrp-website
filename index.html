@@ -491,8 +491,8 @@ a, button, .btn, [role="button"] {
   }
   
   /* 确保所有元素不超出屏幕 */
+  /* 全局box-sizing确保不超宽 */
   * {
-    max-width: 100% !important;
     box-sizing: border-box !important;
   }
   
@@ -528,6 +528,396 @@ a, button, .btn, [role="button"] {
   .btn-outline {
     padding: 12px 16px !important;
     font-size: 16px !important;
+  }
+}
+
+
+/* ===== 手机端精细调整：不超宽、不换行、空白紧凑 ===== */
+@media (max-width: 768px) {
+  /* 确保所有元素box-sizing，防止padding导致超宽 */
+  *, *::before, *::after {
+    box-sizing: border-box !important;
+  }
+  
+  /* html和body不超宽 */
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+  
+  /* 容器精确控制，不超宽 */
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    overflow: hidden !important;
+  }
+  
+  /* section紧凑 */
+  .section {
+    padding: 24px 0 !important;
+    margin: 0 !important;
+  }
+  
+  /* 网格紧凑，不超宽 */
+  .grid-cards,
+  .products-grid,
+  .advantages-grid,
+  .projects-grid,
+  .blog-grid,
+  .app-grid,
+  .specs-grid,
+  .features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+  
+  /* 卡片紧凑，不超宽 */
+  .pcard,
+  .card,
+  .advantage-card,
+  .project-card,
+  .blog-card,
+  .bcard,
+  .app-card,
+  .spec-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 14px !important;
+    overflow: hidden !important;
+  }
+  
+  /* 卡片内边距紧凑 */
+  .pcard h3,
+  .card h3,
+  .advantage-card h3 {
+    margin-bottom: 6px !important;
+    line-height: 1.3 !important;
+  }
+  
+  .pcard p,
+  .card p,
+  .advantage-card p {
+    margin-bottom: 0 !important;
+    line-height: 1.5 !important;
+  }
+  
+  /* 标题紧凑，不换行 */
+  .section-title {
+    font-size: 22px !important;
+    line-height: 1.25 !important;
+    margin-bottom: 8px !important;
+    padding: 0 !important;
+  }
+  
+  .section-sub {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 16px !important;
+    padding: 0 !important;
+  }
+  
+  /* Hero区域紧凑 */
+  .hero {
+    padding: 36px 0 !important;
+  }
+  
+  .hero h1 {
+    font-size: 26px !important;
+    line-height: 1.2 !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .hero .lead {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 16px !important;
+  }
+  
+  /* 按钮紧凑，不换行 */
+  .btn,
+  .btn-primary,
+  .btn-outline {
+    padding: 10px 16px !important;
+    font-size: 16px !important;
+    line-height: 1.3 !important;
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  /* 按钮组紧凑 */
+  .hero-buttons,
+  .cta-buttons,
+  .action-buttons {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    justify-content: center !important;
+  }
+  
+  /* 输入框紧凑 */
+  input, select, textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 10px 12px !important;
+    font-size: 16px !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* 表单间距紧凑 */
+  .form-group,
+  .calc-form > div {
+    margin-bottom: 12px !important;
+  }
+  
+  /* 页面标题紧凑 */
+  .page-head {
+    padding: 30px 0 !important;
+  }
+  
+  .page-head h2 {
+    font-size: 22px !important;
+    line-height: 1.25 !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .page-head p {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* 面包屑紧凑 */
+  .breadcrumb {
+    margin-bottom: 10px !important;
+    font-size: 16px !important;
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+  }
+  
+  /* 底部紧凑 */
+  .footer-grid,
+  .footer-content {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    padding: 0 !important;
+  }
+  
+  .footer-bottom,
+  .copyright {
+    padding: 16px 10px !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+  }
+  
+  /* 信任指标紧凑 */
+  .trust-bar,
+  .trust-items {
+    gap: 8px !important;
+    padding: 16px 0 !important;
+  }
+  
+  .trust-item {
+    padding: 8px !important;
+  }
+  
+  .trust-item .t1 {
+    font-size: 20px !important;
+    margin-bottom: 2px !important;
+  }
+  
+  .trust-item .t2 {
+    font-size: 16px !important;
+  }
+  
+  /* FAQ紧凑 */
+  .product-faq-section,
+  .selection-guide-section,
+  .installation-guide-section {
+    padding: 14px !important;
+    margin-top: 16px !important;
+  }
+  
+  .faq-item,
+  .guide-card,
+  .install-step {
+    padding: 10px 0 !important;
+    margin-bottom: 0 !important;
+  }
+  
+  .faq-question,
+  .guide-card h4,
+  .install-step h4 {
+    font-size: 16px !important;
+    line-height: 1.4 !important;
+    padding: 8px 0 !important;
+  }
+  
+  .faq-answer,
+  .guide-card p,
+  .install-step p {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    padding: 8px 0 !important;
+  }
+  
+  /* 规格表格紧凑 */
+  .spec-table,
+  .cat-spec-table {
+    font-size: 16px !important;
+  }
+  
+  .spec-table th,
+  .spec-table td,
+  .cat-spec-table th,
+  .cat-spec-table td {
+    padding: 8px 6px !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* 应用标签紧凑 */
+  .app-chip,
+  .product-app-chip {
+    padding: 6px 10px !important;
+    margin: 3px !important;
+    font-size: 16px !important;
+  }
+  
+  /* 产品详情紧凑 */
+  .detail-layout,
+  .product-detail-layout,
+  .calc-layout {
+    gap: 16px !important;
+  }
+  
+  .detail-side,
+  .calc-form,
+  .calc-result {
+    padding: 0 !important;
+  }
+  
+  /* 项目详情紧凑 */
+  .project-detail-layout {
+    gap: 16px !important;
+  }
+  
+  /* 博客卡片紧凑 */
+  .blog-card,
+  .bcard {
+    padding: 14px !important;
+  }
+  
+  .blog-card h3,
+  .bcard h3 {
+    font-size: 17px !important;
+    margin-bottom: 6px !important;
+    line-height: 1.35 !important;
+  }
+  
+  .blog-card p,
+  .bcard p {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 8px !important;
+  }
+  
+  /* 相关文章紧凑 */
+  .related-card {
+    padding: 12px 14px 12px 18px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .related-card h4 {
+    font-size: 16px !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* 下载按钮紧凑 */
+  .download-buttons {
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+  }
+  
+  .download-buttons .btn {
+    flex: 1 1 calc(50% - 4px) !important;
+    padding: 8px 10px !important;
+    font-size: 16px !important;
+  }
+  
+  /* 导航栏紧凑 */
+  .nav-bar,
+  .site-header {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+  
+  /* 图片不超宽 */
+  img {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+  }
+  
+  /* 防止任何元素横向溢出 */
+  .view,
+  section,
+  div {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+  
+  /* 表格容器 */
+  .table-container {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  table {
+    min-width: 100% !important;
+    width: auto !important;
+  }
+}
+
+/* 超小屏幕更紧凑 */
+@media (max-width: 480px) {
+  .container {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+  
+  .hero h1 {
+    font-size: 22px !important;
+  }
+  
+  .section-title {
+    font-size: 20px !important;
+  }
+  
+  .btn,
+  .btn-primary,
+  .btn-outline {
+    padding: 10px 14px !important;
+    font-size: 16px !important;
+  }
+  
+  .pcard,
+  .card,
+  .advantage-card {
+    padding: 12px !important;
   }
 }
 
