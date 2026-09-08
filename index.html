@@ -89,6 +89,17 @@ img {
 
 
 
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .related-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
 .related-card {
     position: relative;
     overflow: hidden;
@@ -140,7 +151,18 @@ img {
 }
 
 @media (max-width: 768px) {
-    .related-card {
+    .related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .related-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+.related-card {
         padding: 16px 18px 16px 22px;
     }
     .related-card h4 {
@@ -14831,6 +14853,17 @@ img {
 
 
 
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .related-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
 .related-card {
     position: relative;
     overflow: hidden;
@@ -14882,7 +14915,18 @@ img {
 }
 
 @media (max-width: 768px) {
-    .related-card {
+    .related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .related-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+.related-card {
         padding: 16px 18px 16px 22px;
     }
     .related-card h4 {
@@ -20066,9 +20110,9 @@ function updateTOCActive(headings){
 function renderRelatedPosts(currentId, category){
   // 优先找同分类的文章，其次找其他文章
   let related = posts.filter(p => p.id !== currentId && p.category === category);
-  if(related.length < 3){
+  if(related.length < 6){
     const others = posts.filter(p => p.id !== currentId && p.category !== category);
-    related = related.concat(others).slice(0, 3);
+    related = related.concat(others).slice(0, 6);
   }
   if(related.length === 0) return '';
   return `
