@@ -20361,6 +20361,12 @@ document.addEventListener('mousedown', e=>{
   _mouseDownY = e.clientY;
   _mouseDownTime = Date.now();
 });
+document.addEventListener('touchstart', e=>{
+  const t = e.touches[0];
+  _mouseDownX = t.clientX;
+  _mouseDownY = t.clientY;
+  _mouseDownTime = Date.now();
+}, {passive:true});
 document.addEventListener('click', e=>{
   const anchor = e.target.closest('[data-anchor]');
   if(anchor){
