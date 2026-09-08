@@ -20408,14 +20408,14 @@ function showToast(msg){
 /* ===== 动态加载Blog文章（从blog文件夹JSON文件） ===== */
 let lastPostCount = 0; // 记录上次加载的文章数量，用于检测新文章
 let hasNewPosts = false; // 是否有新文章
-const BLOG_CACHE_KEY = 'frp_blog_posts_cache';
+const BLOG_CACHE_KEY = 'frp_blog_posts_cache_v3';
 // 从localStorage读取缓存的文章并立即渲染（第二次访问时秒开）
 function loadBlogFromCache(){
   try{
     const cached = localStorage.getItem(BLOG_CACHE_KEY);
     if(cached){
       const cachedPosts = JSON.parse(cached);
-      if(Array.isArray(cachedPosts) && cachedPosts.length > 0){
+      if(Array.isArray(cachedPosts) && cachedPosts.length > 0 && cachedPosts.length >= posts.length){
         // 关键：把内联文章的多语言翻译字段合并到缓存文章中
         const translatableFields = ['title_es','title_de','title_fr','excerpt_es','excerpt_de','excerpt_fr','category_es','category_de','category_fr','content_es','content_de','content_fr'];
         for (const cachedPost of cachedPosts) {
@@ -20428,7 +20428,9 @@ function loadBlogFromCache(){
             }
           }
         }
-        posts = cachedPosts;
+        if(cachedPosts.length >= posts.length){
+          posts = cachedPosts;
+        }
         renderHomeBlog();
         renderBlogList();
         lastPostCount = posts.length;
