@@ -3,96 +3,430 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://gratingfrp.com/</loc>
+    <lastmod>2026-09-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/?lang=en"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/?lang=es"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/?lang=de"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gratingfrp.com/"/>
   </url>
   <url>
     <loc>https://gratingfrp.com/#/products</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://gratingfrp.com/#/product/molded</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://gratingfrp.com/#/product/pultruded</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://gratingfrp.com/#/product/covers</loc>
+    <lastmod>2026-09-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://gratingfrp.com/#/product/profiles</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://gratingfrp.com/#/product/handrail</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://gratingfrp.com/#/product/fabric</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://gratingfrp.com/#/product/clips</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://gratingfrp.com/#/product/custom</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/products?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/products?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/products?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/products?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gratingfrp.com/#/products"/>
   </url>
   <url>
     <loc>https://gratingfrp.com/#/catalogue</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/catalogue?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/catalogue?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/catalogue?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/catalogue?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gratingfrp.com/#/catalogue"/>
   </url>
   <url>
     <loc>https://gratingfrp.com/#/applications</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://gratingfrp.com/#/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/applications?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/applications?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/applications?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/applications?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gratingfrp.com/#/applications"/>
   </url>
   <url>
     <loc>https://gratingfrp.com/#/blog</loc>
+    <lastmod>2026-09-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/blog?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/blog?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/blog?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/blog?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gratingfrp.com/#/blog"/>
   </url>
   <url>
-    <loc>https://gratingfrp.com/#/blog/what-is-frp-grating</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://gratingfrp.com/#/blog/frp-grating-maintenance</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://gratingfrp.com/#/contact</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://gratingfrp.com/#/videos</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/videos?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/videos?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/videos?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/videos?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gratingfrp.com/#/videos"/>
   </url>
   <url>
     <loc>https://gratingfrp.com/#/calculator</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/calculator?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/calculator?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/calculator?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/calculator?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gratingfrp.com/#/calculator"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/about</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/about?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/about?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/about?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/about?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gratingfrp.com/#/about"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/faq</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/faq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/faq?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/faq?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/faq?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gratingfrp.com/#/faq"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/contact</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/contact?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/contact?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/contact?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/contact?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gratingfrp.com/#/contact"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/product/molded-frp-grating</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/product/molded-frp-grating?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/product/molded-frp-grating?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/product/molded-frp-grating?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/product/molded-frp-grating?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/product/pultruded-frp-grating</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/product/pultruded-frp-grating?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/product/pultruded-frp-grating?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/product/pultruded-frp-grating?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/product/pultruded-frp-grating?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/product/frp-covers</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/product/frp-covers?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/product/frp-covers?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/product/frp-covers?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/product/frp-covers?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/product/frp-pultruded-profiles</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/product/frp-pultruded-profiles?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/product/frp-pultruded-profiles?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/product/frp-pultruded-profiles?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/product/frp-pultruded-profiles?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/product/frp-handrail-system</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/product/frp-handrail-system?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/product/frp-handrail-system?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/product/frp-handrail-system?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/product/frp-handrail-system?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/product/fiberglass-fabric</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/product/fiberglass-fabric?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/product/fiberglass-fabric?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/product/fiberglass-fabric?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/product/fiberglass-fabric?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/product/grating-clips</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/product/grating-clips?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/product/grating-clips?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/product/grating-clips?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/product/grating-clips?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/product/custom-frp-solutions</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/product/custom-frp-solutions?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/product/custom-frp-solutions?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/product/custom-frp-solutions?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/product/custom-frp-solutions?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/app/wastewater-treatment</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/app/chemical-processing</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/app/oil-gas</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/app/marine-offshore</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/app/power-generation</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/app/mining</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/app/food-beverage</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/app/transportation</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/blog/us-frp-grating-market-analysis-2025</loc>
+    <lastmod>Aug 31, 2026</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/blog/us-frp-grating-market-analysis-2025?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/blog/us-frp-grating-market-analysis-2025?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/blog/us-frp-grating-market-analysis-2025?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/blog/us-frp-grating-market-analysis-2025?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/blog/molded-grating-guide</loc>
+    <lastmod>Aug 25, 2026</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/blog/molded-grating-guide?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/blog/molded-grating-guide?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/blog/molded-grating-guide?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/blog/molded-grating-guide?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/blog/pultruded-grating-engineering</loc>
+    <lastmod>Aug 20, 2026</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/blog/pultruded-grating-engineering?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/blog/pultruded-grating-engineering?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/blog/pultruded-grating-engineering?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/blog/pultruded-grating-engineering?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/blog/pultruded-profiles-handbook</loc>
+    <lastmod>Aug 15, 2026</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/blog/pultruded-profiles-handbook?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/blog/pultruded-profiles-handbook?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/blog/pultruded-profiles-handbook?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/blog/pultruded-profiles-handbook?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/blog/fiberglass-fabric-guide</loc>
+    <lastmod>Aug 10, 2026</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/blog/fiberglass-fabric-guide?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/blog/fiberglass-fabric-guide?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/blog/fiberglass-fabric-guide?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/blog/fiberglass-fabric-guide?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/blog/cost-benefit-analysis-2026</loc>
+    <lastmod>Aug 5, 2026</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/blog/cost-benefit-analysis-2026?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/blog/cost-benefit-analysis-2026?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/blog/cost-benefit-analysis-2026?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/blog/cost-benefit-analysis-2026?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/blog/global-market-report-2026</loc>
+    <lastmod>Jul 28, 2026</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/blog/global-market-report-2026?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/blog/global-market-report-2026?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/blog/global-market-report-2026?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/blog/global-market-report-2026?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/blog/resin-selection-comprehensive</loc>
+    <lastmod>Jul 20, 2026</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/blog/resin-selection-comprehensive?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/blog/resin-selection-comprehensive?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/blog/resin-selection-comprehensive?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/blog/resin-selection-comprehensive?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/blog/manufacturing-technologies</loc>
+    <lastmod>Jul 12, 2026</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/blog/manufacturing-technologies?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/blog/manufacturing-technologies?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/blog/manufacturing-technologies?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/blog/manufacturing-technologies?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/blog/frp-grating-installation-guide</loc>
+    <lastmod>Sep 8, 2026</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/blog/frp-grating-installation-guide?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/blog/frp-grating-installation-guide?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/blog/frp-grating-installation-guide?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/blog/frp-grating-installation-guide?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/blog/frp-grating-vs-steel-cost-analysis</loc>
+    <lastmod>Sep 8, 2026</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/blog/frp-grating-vs-steel-cost-analysis?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/blog/frp-grating-vs-steel-cost-analysis?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/blog/frp-grating-vs-steel-cost-analysis?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/blog/frp-grating-vs-steel-cost-analysis?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/blog/vinyl-ester-frp-grating-chemical-resistance</loc>
+    <lastmod>Sep 8, 2026</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/blog/vinyl-ester-frp-grating-chemical-resistance?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/blog/vinyl-ester-frp-grating-chemical-resistance?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/blog/vinyl-ester-frp-grating-chemical-resistance?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/blog/vinyl-ester-frp-grating-chemical-resistance?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/blog/frp-grating-load-table-span-calculator</loc>
+    <lastmod>Sep 8, 2026</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/blog/frp-grating-load-table-span-calculator?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/blog/frp-grating-load-table-span-calculator?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/blog/frp-grating-load-table-span-calculator?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/blog/frp-grating-load-table-span-calculator?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/blog/frp-grating-wastewater-treatment</loc>
+    <lastmod>Sep 8, 2026</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/blog/frp-grating-wastewater-treatment?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/blog/frp-grating-wastewater-treatment?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/blog/frp-grating-wastewater-treatment?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/blog/frp-grating-wastewater-treatment?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/blog/frp-grating-chemical-plant-applications</loc>
+    <lastmod>Sep 8, 2026</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/blog/frp-grating-chemical-plant-applications?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/blog/frp-grating-chemical-plant-applications?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/blog/frp-grating-chemical-plant-applications?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/blog/frp-grating-chemical-plant-applications?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/blog/frp-grating-offshore-marine-applications</loc>
+    <lastmod>Sep 8, 2026</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/blog/frp-grating-offshore-marine-applications?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/blog/frp-grating-offshore-marine-applications?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/blog/frp-grating-offshore-marine-applications?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/blog/frp-grating-offshore-marine-applications?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/blog/frp-grating-solar-rooftop-walkway</loc>
+    <lastmod>Sep 8, 2026</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/blog/frp-grating-solar-rooftop-walkway?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/blog/frp-grating-solar-rooftop-walkway?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/blog/frp-grating-solar-rooftop-walkway?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/blog/frp-grating-solar-rooftop-walkway?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/blog/frp-grating-surface-options-guide</loc>
+    <lastmod>Sep 8, 2026</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/blog/frp-grating-surface-options-guide?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/blog/frp-grating-surface-options-guide?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/blog/frp-grating-surface-options-guide?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/blog/frp-grating-surface-options-guide?lang=fr"/>
+  </url>
+  <url>
+    <loc>https://gratingfrp.com/#/blog/frp-grating-maintenance-cleaning-guide</loc>
+    <lastmod>Sep 8, 2026</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gratingfrp.com/#/blog/frp-grating-maintenance-cleaning-guide?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gratingfrp.com/#/blog/frp-grating-maintenance-cleaning-guide?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gratingfrp.com/#/blog/frp-grating-maintenance-cleaning-guide?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gratingfrp.com/#/blog/frp-grating-maintenance-cleaning-guide?lang=fr"/>
   </url>
 </urlset>
