@@ -18933,6 +18933,27 @@ function renderDetail(type, id){
       restoreTOCState();
       generateBlogTOC();
       incrementPostViews(p.id);
+      // JS强制修复博客详情页手机端布局
+      if(window.innerWidth <= 768){
+        var sidebar = document.getElementById('blog-toc-sidebar');
+        if(sidebar) sidebar.style.display = 'none';
+        var layout = document.querySelector('.blog-detail-layout');
+        if(layout){ layout.style.display = 'block'; layout.style.gridTemplateColumns = '1fr'; layout.style.padding = '0'; layout.style.gap = '0'; }
+        var article = document.querySelector('.blog-article-main');
+        if(article){ article.style.width = '100%'; article.style.maxWidth = '100%'; }
+        var header = document.querySelector('.blog-article-header');
+        if(header) header.style.padding = '20px 16px 16px';
+        var content = document.getElementById('blog-content');
+        if(content){ content.style.padding = '0 16px'; content.style.maxWidth = '100%'; }
+        var detailContent = document.getElementById('blog-detail-content');
+        if(detailContent){ detailContent.style.maxWidth = '100%'; detailContent.style.width = '100%'; }
+        document.querySelectorAll('#blog-detail-content h1, #blog-detail-content h2, #blog-detail-content h3, #blog-detail-content h4').forEach(function(el){
+          el.style.fontSize = '17px'; el.style.lineHeight = '1.4'; el.style.margin = '20px 0 10px';
+        });
+        document.querySelectorAll('#blog-detail-content p, #blog-detail-content li').forEach(function(el){
+          el.style.fontSize = '15px'; el.style.lineHeight = '1.7'; el.style.marginBottom = '12px';
+        });
+      }
       // 自动翻译（如果当前语言不是英文且没有手动翻译）
       if (currentLang !== 'en') {
         // 翻译标题
