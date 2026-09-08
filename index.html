@@ -20367,6 +20367,8 @@ document.addEventListener('touchstart', e=>{
   _mouseDownY = t.clientY;
   _mouseDownTime = Date.now();
 }, {passive:true});
+// 检测是否为触摸设备
+const _isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 document.addEventListener('click', e=>{
   const anchor = e.target.closest('[data-anchor]');
   if(anchor){
@@ -20381,14 +20383,18 @@ document.addEventListener('click', e=>{
   }
   const card = e.target.closest('[data-go]');
   if(card){
-    // 防误触：滚动后300ms内、文本选择、鼠标移动超过5px、点击时间<50ms或>500ms都不触发
+    // 防误触：滚动后300ms内、文本选择不触发
     const justScrolled = (Date.now() - _lastScrollTime) < 300;
     const hasSelection = window.getSelection && window.getSelection().toString().length > 0;
-    const moved = Math.abs(e.clientX - _mouseDownX) > 5 || Math.abs(e.clientY - _mouseDownY) > 5;
-    const clickDuration = Date.now() - _mouseDownTime;
-    const tooFast = clickDuration < 50;
-    const tooSlow = clickDuration > 500;
-    if(justScrolled || hasSelection || moved || tooFast || tooSlow) return;
+    if(justScrolled || hasSelection) return;
+    // 桌面端额外检查移动距离和点击时长（触摸设备放宽，避免误杀正常点击）
+    if(!_isTouchDevice){
+      const moved = Math.abs(e.clientX - _mouseDownX) > 5 || Math.abs(e.clientY - _mouseDownY) > 5;
+      const clickDuration = Date.now() - _mouseDownTime;
+      const tooFast = clickDuration < 50;
+      const tooSlow = clickDuration > 500;
+      if(moved || tooFast || tooSlow) return;
+    }
     const [type,id] = card.getAttribute('data-go').split('|');
     location.hash = '#/'+type+'/'+id;
     return;
@@ -20397,8 +20403,12 @@ document.addEventListener('click', e=>{
   if(link){
     const justScrolled = (Date.now() - _lastScrollTime) < 300;
     const hasSelection = window.getSelection && window.getSelection().toString().length > 0;
-    const moved = Math.abs(e.clientX - _mouseDownX) > 5 || Math.abs(e.clientY - _mouseDownY) > 5;
-    if(justScrolled || hasSelection || moved) return;
+    if(justScrolled || hasSelection) return;
+    // 桌面端额外检查移动距离
+    if(!_isTouchDevice){
+      const moved = Math.abs(e.clientX - _mouseDownX) > 5 || Math.abs(e.clientY - _mouseDownY) > 5;
+      if(moved) return;
+    }
     e.preventDefault();
     location.hash = link.getAttribute('href').replace('#','');
     return;
