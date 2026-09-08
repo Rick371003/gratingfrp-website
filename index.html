@@ -18250,7 +18250,7 @@ function renderRelatedPosts(currentId, category){
   }
   if(related.length === 0) return '';
   return `
-    <div class="related-posts"><h3>Related Articles</h3><div class="related-grid">
+    <div class="related-posts"><h3>${t('blog.relatedArticles')}</h3><div class="related-grid">
         ${related.map(p => `
           <div class="related-card" data-go="blog|${p.id}"><div class="body"><div class="cat">${p.category}</div><h4>${p.title}</h4></div></div>
         `).join('')}
