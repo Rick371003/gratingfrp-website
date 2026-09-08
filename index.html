@@ -18610,6 +18610,7 @@ let posts = [
     "readTime": "10 min"
   }
 ];
+const originalInlinePosts = JSON.parse(JSON.stringify(posts)); // 保存原始内联文章，防止被缓存/外部加载覆盖丢失
 const faqs = [
   {q:'Are you a factory or a trading company?', a:'We are a direct FRP composite manufacturer with full in-house production workshops for molded and pultruded grating, structural profiles, covers and handrail systems. We also provide engineering design and custom tooling support.',
    q_es:'¿Es usted una fábrica o una empresa comercial?', a_es:'Somos un fabricante directo de compuestos FRP con talleres de producción internos completos para rejillas moldeadas y pultrudidas, perfiles estructurales, cubiertas y sistemas de pasamanos. También proporcionamos diseño de ingeniería y soporte de herramientas personalizadas.',
@@ -20428,9 +20429,10 @@ function loadBlogFromCache(){
             }
           }
         }
-        if(cachedPosts.length >= posts.length){
-          posts = cachedPosts;
-        }
+        // 缓存只用于加速，以内联文章为基准合并
+        const cacheIds = new Set(cachedPosts.map(p => p.id));
+        const inlineOnly = originalInlinePosts.filter(p => !cacheIds.has(p.id));
+        posts = [...cachedPosts, ...inlineOnly];
         renderHomeBlog();
         renderBlogList();
         lastPostCount = posts.length;
@@ -20494,21 +20496,22 @@ async function loadBlogPosts(){
       // 按日期排序（最新的在前）
       loadedPosts.sort((a,b) => new Date(b.date) - new Date(a.date));
       // 合并硬编码文章和动态加载文章（按id去重，动态加载的优先，但保留硬编码的翻译字段）
-      const existingIds = new Set(loadedPosts.map(p => p.id));
-      const hardcodedPosts = posts.filter(p => !existingIds.has(p.id));
-      // 关键：把硬编码文章的多语言翻译字段合并到外部加载的文章中
+      // 以内联文章为基准，外部加载的文章只作为补充
+      const inlineIds = new Set(posts.map(p => p.id));
+      const externalOnlyPosts = loadedPosts.filter(p => !inlineIds.has(p.id));
+      // 把外部文章的多语言翻译字段合并到内联文章中（如果内联没有的话）
       const translatableFields = ['title_es','title_de','title_fr','excerpt_es','excerpt_de','excerpt_fr','category_es','category_de','category_fr','content_es','content_de','content_fr'];
-      for (const loadedPost of loadedPosts) {
-        const hardcoded = posts.find(p => p.id === loadedPost.id);
-        if (hardcoded) {
+      for (const inlinePost of posts) {
+        const external = loadedPosts.find(p => p.id === inlinePost.id);
+        if (external) {
           for (const field of translatableFields) {
-            if (hardcoded[field] && !loadedPost[field]) {
-              loadedPost[field] = hardcoded[field];
+            if (external[field] && !inlinePost[field]) {
+              inlinePost[field] = external[field];
             }
           }
         }
       }
-      posts = [...loadedPosts, ...hardcodedPosts];
+      posts = [...posts, ...externalOnlyPosts];
       // 重新按日期排序
       posts.sort((a,b) => new Date(b.date) - new Date(a.date));
       console.log('[Blog] Total posts after merge:', posts.length, 'IDs:', posts.map(p=>p.id));
@@ -20524,7 +20527,8 @@ async function loadBlogPosts(){
     console.log('[Blog] Blog list rendered, total posts:', posts.length);
   }catch(e){
     console.error('[Blog] loadBlogPosts error:', e);
-    // 出错时也重新渲染硬编码文章
+    // 出错时恢复原始内联文章，确保不丢失新增文章
+    posts = JSON.parse(JSON.stringify(originalInlinePosts));
     renderHomeBlog();
     renderBlogList();
   }
