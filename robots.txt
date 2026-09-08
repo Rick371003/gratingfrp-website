@@ -1,4 +1,21 @@
 User-agent: *
 Allow: /
+Disallow: /assets/
 
 Sitemap: https://gratingfrp.com/sitemap.xml
+
+# AI Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
