@@ -21312,9 +21312,6 @@ function updateBlogPostingSchema(post){
   // 8. 控制台反调试（持续输出debugger，干扰调试）
   // 仅在开发者工具打开时生效，不影响正常用户
   function antiDebug(){
-    function debugger(){
-      return false;
-    }
     // 每3秒检查一次，如果开发者工具打开则触发debugger
     setInterval(function(){
       if(devtoolsOpen){
