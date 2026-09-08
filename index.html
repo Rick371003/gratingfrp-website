@@ -20277,6 +20277,12 @@ function initFAQAccordion(){
   // 这个功能可以后续扩展，目前先保留基础结构
 }
 /* ===== 事件绑定 ===== */
+// 防误触：记录mousedown位置
+let _mouseDownX = 0, _mouseDownY = 0;
+document.addEventListener('mousedown', e=>{
+  _mouseDownX = e.clientX;
+  _mouseDownY = e.clientY;
+});
 document.addEventListener('click', e=>{
   const anchor = e.target.closest('[data-anchor]');
   if(anchor){
@@ -20291,12 +20297,19 @@ document.addEventListener('click', e=>{
   }
   const card = e.target.closest('[data-go]');
   if(card){
+    // 防误触：如果有文本选择，或者鼠标移动超过5px（拖动选择），不触发跳转
+    const hasSelection = window.getSelection && window.getSelection().toString().length > 0;
+    const moved = Math.abs(e.clientX - _mouseDownX) > 5 || Math.abs(e.clientY - _mouseDownY) > 5;
+    if(hasSelection || moved) return;
     const [type,id] = card.getAttribute('data-go').split('|');
     location.hash = '#/'+type+'/'+id;
     return;
   }
   const link = e.target.closest('[data-nav]');
   if(link){
+    const hasSelection = window.getSelection && window.getSelection().toString().length > 0;
+    const moved = Math.abs(e.clientX - _mouseDownX) > 5 || Math.abs(e.clientY - _mouseDownY) > 5;
+    if(hasSelection || moved) return;
     e.preventDefault();
     location.hash = link.getAttribute('href').replace('#','');
     return;
