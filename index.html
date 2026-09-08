@@ -18685,6 +18685,18 @@ function loadBlogFromCache(){
     if(cached){
       const cachedPosts = JSON.parse(cached);
       if(Array.isArray(cachedPosts) && cachedPosts.length > 0){
+        // 关键：把内联文章的多语言翻译字段合并到缓存文章中
+        const translatableFields = ['title_es','title_de','title_fr','excerpt_es','excerpt_de','excerpt_fr','category_es','category_de','category_fr','content_es','content_de','content_fr'];
+        for (const cachedPost of cachedPosts) {
+          const hardcoded = posts.find(p => p.id === cachedPost.id);
+          if (hardcoded) {
+            for (const field of translatableFields) {
+              if (hardcoded[field] && !cachedPost[field]) {
+                cachedPost[field] = hardcoded[field];
+              }
+            }
+          }
+        }
         posts = cachedPosts;
         renderHomeBlog();
         renderBlogList();
@@ -18748,9 +18760,21 @@ async function loadBlogPosts(){
     if(loadedPosts.length > 0){
       // 按日期排序（最新的在前）
       loadedPosts.sort((a,b) => new Date(b.date) - new Date(a.date));
-      // 合并硬编码文章和动态加载文章（按id去重，动态加载的优先）
+      // 合并硬编码文章和动态加载文章（按id去重，动态加载的优先，但保留硬编码的翻译字段）
       const existingIds = new Set(loadedPosts.map(p => p.id));
       const hardcodedPosts = posts.filter(p => !existingIds.has(p.id));
+      // 关键：把硬编码文章的多语言翻译字段合并到外部加载的文章中
+      const translatableFields = ['title_es','title_de','title_fr','excerpt_es','excerpt_de','excerpt_fr','category_es','category_de','category_fr','content_es','content_de','content_fr'];
+      for (const loadedPost of loadedPosts) {
+        const hardcoded = posts.find(p => p.id === loadedPost.id);
+        if (hardcoded) {
+          for (const field of translatableFields) {
+            if (hardcoded[field] && !loadedPost[field]) {
+              loadedPost[field] = hardcoded[field];
+            }
+          }
+        }
+      }
       posts = [...loadedPosts, ...hardcodedPosts];
       // 重新按日期排序
       posts.sort((a,b) => new Date(b.date) - new Date(a.date));
