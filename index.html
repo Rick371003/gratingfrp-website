@@ -22336,6 +22336,66 @@ img{
   }
 }
 
+
+/* ===== 作者卡片终极版：字体加大+空白完全取消 ===== */
+@media (min-width: 769px) {
+  .author-card {
+    padding: 16px 24px !important;
+    margin: 16px 0 0 0 !important;
+    gap: 20px !important;
+  }
+  .author-card .author-avatar {
+    flex: 0 0 72px !important;
+    width: 72px !important;
+    height: 72px !important;
+  }
+  .author-card h4 {
+    font-size: 23px !important;
+    margin-bottom: 8px !important;
+  }
+  .author-card p {
+    font-size: 17px !important;
+    line-height: 1.6 !important;
+  }
+}
+/* 后面所有空白完全取消 */
+.author-card {
+  margin-bottom: 0 !important;
+  padding-bottom: 8px !important;
+}
+.author-card + * {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  border-top: none !important;
+}
+.author-card ~ * {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+.author-card ~ .blog-meta-bottom {
+  margin-top: 0 !important;
+  padding-top: 4px !important;
+  border-top: none !important;
+}
+.author-card ~ .post-nav {
+  margin-top: 8px !important;
+  padding-top: 8px !important;
+}
+.author-card ~ .related-posts {
+  margin-top: 12px !important;
+  padding-top: 10px !important;
+}
+@media (max-width: 768px) {
+  .author-card {
+    margin-bottom: 0 !important;
+    padding-bottom: 4px !important;
+  }
+  .author-card ~ .blog-meta-bottom {
+    margin-top: 0 !important;
+    padding-top: 2px !important;
+  }
+}
+
 </style>
 
 <script>
