@@ -21107,6 +21107,11 @@ function generateBlogTOC(){
     // 给标题添加id
     const level = heading.tagName.toLowerCase();
     const text = heading.textContent.trim();
+    // 过滤掉AI相关标题
+    if(/AI\\s|Assistants?|Asistentes?|Assistenten|KI-|Assistants IA/i.test(text)){
+      console.log('[TOC] Skipping AI-related heading:', text);
+      return;
+    }
     const id = 'blog-section-' + index;
     heading.id = id;
     heading.style.scrollMarginTop = '100px'; // 滚动时留出顶部空间
