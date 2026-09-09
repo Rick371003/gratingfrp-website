@@ -307,28 +307,38 @@ img {
 @media (max-width: 768px) {
   .author-card {
     padding: 10px 0;
-    gap: 10px;
+    gap: 8px;
     margin: 12px 0;
     background: transparent;
     border: none;
     align-items: flex-start;
   }
   .author-avatar {
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
-    margin-top: 2px;
+    width: 28px;
+    height: 28px;
+    font-size: 13px;
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+  .author-info {
+    display: inline;
+    flex: 1;
+    min-width: 0;
   }
   .author-info h4 {
+    display: inline;
     font-size: 12px;
-    margin-bottom: 2px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
+    font-weight: 700;
+  }
+  .author-info h4::after {
+    content: ": ";
   }
   .author-info p {
+    display: inline;
     font-size: 11px;
-    line-height: 1.4;
-    display: block;
+    line-height: 1.5;
     -webkit-line-clamp: unset;
     overflow: visible;
   }
