@@ -271,11 +271,16 @@ img {
     width: 15px;
     height: 15px;
   }
-  /* 博客内容CTA链接缩小，确保不跑出界外 */
+  /* 博客内容CTA链接缩小，确保一行显示 */
   .blog-article-content p a[href="#/contact"] {
-    font-size: 13px;
-    word-break: break-word;
-    display: inline;
+    font-size: 12px !important;
+    white-space: nowrap !important;
+    display: inline !important;
+    word-break: keep-all !important;
+  }
+  .blog-article-content p a[href="#/contact"] + br,
+  .blog-article-content p:has(a[href="#/contact"]) {
+    font-size: 12px !important;
   }
 }
 
