@@ -22630,6 +22630,57 @@ function updateBlogPostingSchema(post){
   console.log('%c本网站内容受版权保护，禁止复制、下载或未经授权使用。', 'color:red;font-size:14px');
   console.log('%c如需资料请联系: sales@gratingfrp.com', 'color:blue;font-size:14px');
 })();
+
+
+
 </script>
+<script>
+// 强制设置作者卡片样式（电脑端大字体，手机端铺满）
+function fixAuthorCard() {
+  var cards = document.querySelectorAll('.author-card');
+  cards.forEach(function(card) {
+    var isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      card.style.width = '100vw';
+      card.style.maxWidth = '100vw';
+      card.style.position = 'relative';
+      card.style.left = '50%';
+      card.style.transform = 'translateX(-50%)';
+      card.style.padding = '8px 16px';
+      card.style.margin = '8px 0 0 0';
+      var avatar = card.querySelector('.author-avatar');
+      if (avatar) { avatar.style.width = '48px'; avatar.style.height = '48px'; avatar.style.flex = '0 0 48px'; }
+      var h4 = card.querySelector('h4');
+      if (h4) { h4.style.fontSize = '15px'; }
+      var p = card.querySelector('p');
+      if (p) { p.style.fontSize = '12px'; }
+    } else {
+      card.style.width = '';
+      card.style.maxWidth = '';
+      card.style.position = '';
+      card.style.left = '';
+      card.style.transform = '';
+      card.style.padding = '16px 24px';
+      card.style.margin = '16px 0 0 0';
+      var avatar = card.querySelector('.author-avatar');
+      if (avatar) { avatar.style.width = '72px'; avatar.style.height = '72px'; avatar.style.flex = '0 0 72px'; }
+      var h4 = card.querySelector('h4');
+      if (h4) { h4.style.fontSize = '23px'; }
+      var p = card.querySelector('p');
+      if (p) { p.style.fontSize = '17px'; }
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(fixAuthorCard, 100);
+  setTimeout(fixAuthorCard, 500);
+  setTimeout(fixAuthorCard, 1000);
+});
+var origPushState = history.pushState;
+history.pushState = function() { origPushState.apply(this, arguments); setTimeout(fixAuthorCard, 300); };
+window.addEventListener('popstate', function() { setTimeout(fixAuthorCard, 300); });
+window.addEventListener('resize', fixAuthorCard);
+</script>
+
 
 </body></html>
