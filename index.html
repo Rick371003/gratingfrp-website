@@ -115,7 +115,7 @@ img {
 }
 @media (max-width: 768px) {
   .related-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 12px;
   }
 }
@@ -177,7 +177,7 @@ img {
 }
 @media (max-width: 768px) {
   .related-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 12px;
   }
 }
@@ -15030,7 +15030,7 @@ img {
 }
 @media (max-width: 768px) {
   .related-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 12px;
   }
 }
@@ -15092,7 +15092,7 @@ img {
 }
 @media (max-width: 768px) {
   .related-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 12px;
   }
 }
@@ -21168,9 +21168,9 @@ function updateTOCActive(headings){
 function renderRelatedPosts(currentId, category){
   // 优先找同分类的文章，其次找其他文章
   let related = posts.filter(p => p.id !== currentId && p.category === category);
-  if(related.length < 6){
+  if(related.length < 9){
     const others = posts.filter(p => p.id !== currentId && p.category !== category);
-    related = related.concat(others).slice(0, 6);
+    related = related.concat(others).slice(0, 9);
   }
   if(related.length === 0) return '';
   return `
