@@ -306,48 +306,57 @@ img {
 /* 手机端：作者卡片缩小，平铺，2行结束 */
 @media (max-width: 768px) {
   .author-card {
-    padding: 10px 0;
-    gap: 8px;
-    margin: 12px 0;
-    background: transparent;
-    border: none;
-    align-items: flex-start;
-    display: flex;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+    padding: 6px 0 !important;
+    gap: 6px !important;
+    margin: 8px 0 !important;
+    background: transparent !important;
+    border: none !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
   .author-avatar {
-    width: 28px;
-    height: 28px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 24px !important;
+    height: 24px !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
   .author-avatar svg {
-    width: 16px;
-    height: 16px;
+    width: 14px !important;
+    height: 14px !important;
   }
   .author-info {
-    flex: 1;
-    min-width: 0;
-    display: block;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    display: block !important;
+    line-height: 1.4 !important;
   }
   .author-info h4 {
-    display: inline;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    font-weight: 700;
-    line-height: 1.5;
+    display: inline !important;
+    font-size: 11px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.2px !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.4 !important;
   }
   .author-info h4::after {
-    content: ": ";
+    content: ": " !important;
   }
   .author-info p {
-    display: inline;
-    font-size: 11px;
-    line-height: 1.5;
-    -webkit-line-clamp: unset;
-    overflow: visible;
+    display: inline !important;
+    font-size: 10px !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-line-clamp: unset !important;
+    overflow: visible !important;
+    word-break: break-word !important;
   }
 }
 
