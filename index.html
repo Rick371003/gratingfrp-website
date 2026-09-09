@@ -224,8 +224,8 @@ img {
   flex-shrink: 0;
   border: 2px solid;
 }
-.share-x { border-color: #000; color: #000; }
-.share-x:hover { background: #000; color: #fff; }
+.share-x { border-color: var(--ink); color: var(--ink); }
+.share-x:hover { background: var(--ink); color: var(--bg); }
 .share-linkedin { border-color: #0077b5; color: #0077b5; }
 .share-linkedin:hover { background: #0077b5; color: #fff; }
 .share-facebook { border-color: #1877f2; color: #1877f2; }
@@ -254,10 +254,11 @@ img {
     width: 15px;
     height: 15px;
   }
-  /* 博客内容CTA链接不换行 */
+  /* 博客内容CTA链接缩小，确保不跑出界外 */
   .blog-article-content p a[href="#/contact"] {
-    white-space: nowrap;
-    display: inline-block;
+    font-size: 13px;
+    word-break: break-word;
+    display: inline;
   }
 }
 
@@ -305,26 +306,31 @@ img {
 /* 手机端：作者卡片缩小，平铺，2行结束 */
 @media (max-width: 768px) {
   .author-card {
-    padding: 12px 15px;
+    padding: 10px 0;
     gap: 10px;
-    margin: 15px 0;
+    margin: 12px 0;
+    background: transparent;
+    border: none;
+    align-items: flex-start;
   }
   .author-avatar {
-    width: 36px;
-    height: 36px;
-    font-size: 16px;
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    margin-top: 2px;
   }
   .author-info h4 {
-    font-size: 13px;
+    font-size: 12px;
     margin-bottom: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
   .author-info p {
     font-size: 11px;
-    line-height: 1.3;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    line-height: 1.4;
+    display: block;
+    -webkit-line-clamp: unset;
+    overflow: visible;
   }
 }
 
