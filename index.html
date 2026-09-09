@@ -22456,6 +22456,23 @@ img{
   }
 }
 
+
+/* ===== 手机端Applications强制1列 ===== */
+@media (max-width: 768px) {
+  .app-grid,
+  .applications .app-grid,
+  #applications .app-grid,
+  .applications .grid-cards,
+  #applications .grid-cards {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .applications .nm,
+  #applications .nm {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 </style>
 
 <script>
