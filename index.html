@@ -22177,6 +22177,48 @@ img{
   }
 }
 
+
+/* ===== 作者卡片终极铺满 ===== */
+@media (max-width: 768px) {
+  .author-card {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+    margin-right: calc(-50vw + 50%) !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    box-sizing: border-box !important;
+  }
+  .author-card .author-info {
+    width: calc(100% - 56px) !important;
+    max-width: calc(100% - 56px) !important;
+  }
+  .author-card .author-info p {
+    width: 100% !important;
+    max-width: 100% !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  /* 缩减作者卡片后面的空白 */
+  .author-card + * {
+    margin-top: 8px !important;
+  }
+  .author-card ~ .post-nav {
+    margin-top: 10px !important;
+    padding-top: 10px !important;
+  }
+  .author-card ~ .related-posts {
+    margin-top: 16px !important;
+    padding-top: 14px !important;
+  }
+}
+
 </style>
 
 <script>
