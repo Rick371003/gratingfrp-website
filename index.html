@@ -20897,6 +20897,8 @@ function navigate(){
   let activeView;
   if((root==='product'||root==='app'||root==='blog'||root==='project') && detailId){
     activeView='detail';
+    console.log('NAVIGATE DEBUG:', {hash: location.hash, root: root, detailId: detailId, activeView: activeView});
+    document.title = 'DEBUG: root=' + root + ' id=' + (detailId||'none') + ' | ' + document.title;
     renderDetail(root, detailId);
   } else {
     activeView = views.includes(root) ? root : 'home';
