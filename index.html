@@ -13000,40 +13000,6 @@ function renderDetail(type, id){
           ${renderPostNav(p.id)}
           ${renderRelatedPosts(p.id, p.category)}
         </article><aside class="blog-toc-sidebar" id="blog-toc-sidebar" style="order:2 !important;width:340px !important;max-width:340px !important"><div class="toc-sticky"><div class="toc-header" onclick="toggleTOC()"><div class="toc-title">${t('blog.tableOfContents')}</div><button class="toc-toggle" id="toc-toggle-btn" title="Toggle table of contents"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button></div><nav class="toc-nav" id="toc-nav"></nav></div></aside></div>`;
-    // 立即强制设置电脑端两栏布局（确保TOC在右侧）
-    const blogLayout = document.querySelector('.blog-detail-layout');
-    const tocSidebar = document.getElementById('blog-toc-sidebar');
-    const articleMain = document.querySelector('.blog-article-main');
-    if(blogLayout && window.innerWidth > 768) {
-      blogLayout.style.display = 'grid';
-      blogLayout.style.gridTemplateColumns = '1fr 340px';
-      blogLayout.style.gap = '40px';
-      blogLayout.style.width = '100%';
-      blogLayout.style.maxWidth = '100%';
-      console.log('[TOC] 电脑端布局已设置: grid 1fr 340px');
-    }
-    if(tocSidebar && window.innerWidth > 768) {
-      tocSidebar.style.order = '2';
-      tocSidebar.style.width = '340px';
-      tocSidebar.style.maxWidth = '340px';
-      tocSidebar.style.position = 'sticky';
-      tocSidebar.style.top = '80px';
-    }
-    if(articleMain && window.innerWidth > 768) {
-      articleMain.style.order = '1';
-      articleMain.style.minWidth = '0';
-    }
-    // 手机端重置为单列
-    if(blogLayout && window.innerWidth <= 768) {
-      blogLayout.style.display = 'block';
-      blogLayout.style.gridTemplateColumns = '1fr';
-    }
-    if(tocSidebar && window.innerWidth <= 768) {
-      tocSidebar.style.order = '-1';
-      tocSidebar.style.width = '100%';
-      tocSidebar.style.maxWidth = '100%';
-      tocSidebar.style.position = 'static';
-    }
     // 渲染完成后恢复目录折叠状态、生成目录、增加浏览量
     setTimeout(() => {
       restoreTOCState();
