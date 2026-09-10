@@ -14933,16 +14933,35 @@ img.footer-logo {
 <style>
 @media (max-width: 768px) {
   .eng-table-wrap {
-    margin: 0 -16px;
-    border-radius: 0 !important;
-    border-left: none !important;
-    border-right: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    margin: 0 !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--line) !important;
+    display: block !important;
   }
   .eng-data-table {
-    font-size: 13px !important;
+    font-size: 12px !important;
+    min-width: 500px !important;
+    width: auto !important;
+    display: table !important;
   }
   .eng-data-table th, .eng-data-table td {
-    padding: 10px 12px !important;
+    padding: 8px 10px !important;
+    white-space: nowrap !important;
+  }
+  .engineering-data-block {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  #engineering-data-container {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 20px !important;
   }
 }
 </style>
