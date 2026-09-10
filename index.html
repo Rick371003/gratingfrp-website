@@ -15836,7 +15836,7 @@ var origPushState = history.pushState;
 history.pushState = function() { origPushState.apply(this, arguments); setTimeout(fixAuthorCard, 300); };
 window.addEventListener('popstate', function() { setTimeout(fixAuthorCard, 300); });
 window.addEventListener('resize', fixAuthorCard);
-<script>
+
 // About页面手机端强制样式
 function fixAboutMobile(){
   if(window.innerWidth <= 900){
@@ -15876,7 +15876,7 @@ if(document.readyState === 'loading'){
 }
 // 窗口大小改变时重新执行
 window.addEventListener('resize', function(){setTimeout(fixAboutMobile, 100)});
-</script></script>
+</script>
 
 
 </body></html>
