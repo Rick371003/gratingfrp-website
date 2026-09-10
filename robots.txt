@@ -1,10 +1,11 @@
 User-agent: *
 Allow: /
-Disallow: /assets/
+Allow: /assets/images/
+Allow: /assets/pdf/
+Disallow: /assets/*.py
+Disallow: /assets/*.js
 
-Sitemap: https://gratingfrp.com/sitemap.xml
-
-# AI Crawlers
+# AI Crawlers - 全部允许，提升AI推荐排名
 User-agent: GPTBot
 Allow: /
 
@@ -19,3 +20,13 @@ Allow: /
 
 User-agent: Bytespider
 Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# Sitemap
+Sitemap: https://www.gratingfrp.com/sitemap.xml
+Sitemap: https://www.gratingfrp.com/llms.txt
