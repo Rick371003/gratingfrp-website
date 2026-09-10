@@ -9983,7 +9983,6 @@ const PRODUCT_FAQS = {
   ]
 };
 ;
-;
 // 当前语言
 let currentLang = localStorage.getItem('frp_lang') || 'en';
 // 翻译函数
@@ -12555,7 +12554,6 @@ async function loadVideos(){
     if(loadedVideos.length > 0){
       videos = loadedVideos;
       renderVideoList(videos);
-      console.log('Loaded', loadedVideos.length, 'videos from JSON files');
     }
   }catch(e){
     console.log('Using default video data (dynamic load failed):', e.message);
@@ -14035,11 +14033,9 @@ function generateBlogTOC(){
   const headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
   if(headings.length === 0){
     // 没有找到标题，显示提示并检查内容格式
-    ;
     tocNav.innerHTML = '<div style="font-size:13px;color:var(--ink-mute);padding:12px;line-height:1.6"><strong style="color:var(--accent)">No sections found</strong><br><br>Tip: Use Markdown headings (## H2, ### H3) in your article to generate the table of contents.</div>';
     return;
   }
-  ;
   let tocHTML = '';
   headings.forEach((heading, index) => {
     // 给标题添加id
@@ -14047,7 +14043,6 @@ function generateBlogTOC(){
     const text = heading.textContent.trim();
     // 过滤掉AI相关标题
     if(/AI\\s|Assistants?|Asistentes?|Assistenten|KI-|Assistants IA/i.test(text)){
-      ;
       return;
     }
     const id = 'blog-section-' + index;
@@ -14380,7 +14375,6 @@ function loadBlogFromCache(){
         renderHomeBlog();
         renderBlogList();
         lastPostCount = posts.length;
-        ;
         return true;
       }
     }
@@ -14403,7 +14397,6 @@ async function loadBlogPosts(){
     const cacheBuster = '?t=' + Date.now();
     // 使用绝对路径，确保在任何URL下都能正确加载
     const manifestUrl = '/blog/manifest.json' + cacheBuster;
-    ;
     // 加载manifest.json获取文章列表
     const manifestRes = await fetch(manifestUrl, {cache: 'no-store'});
     if(!manifestRes.ok) throw new Error('manifest not found: ' + manifestRes.status);
@@ -14463,7 +14456,6 @@ async function loadBlogPosts(){
     lastPostCount = posts.length;
     renderHomeBlog();
     renderBlogList();
-    ;
   }catch(e){
     console.error('[Blog] loadBlogPosts error:', e);
     // 出错时恢复原始内联文章，确保不丢失新增文章
@@ -15805,9 +15797,6 @@ function updateBlogPostingSchema(post){
     });
   });
   
-  console.log('%c⚠️ 警告', 'color:red;font-size:20px;font-weight:bold');
-  console.log('%c本网站内容受版权保护，禁止复制、下载或未经授权使用。', 'color:red;font-size:14px');
-  console.log('%c如需资料请联系: sales@gratingfrp.com', 'color:blue;font-size:14px');
 })();
 
 
