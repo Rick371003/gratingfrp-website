@@ -13000,6 +13000,39 @@ function renderDetail(type, id){
           ${renderPostNav(p.id)}
           ${renderRelatedPosts(p.id, p.category)}
         </article><aside class="blog-toc-sidebar" id="blog-toc-sidebar" style="order:2 !important;width:340px !important;max-width:340px !important"><div class="toc-sticky"><div class="toc-header" onclick="toggleTOC()"><div class="toc-title">${t('blog.tableOfContents')}</div><button class="toc-toggle" id="toc-toggle-btn" title="Toggle table of contents"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button></div><nav class="toc-nav" id="toc-nav"></nav></div></aside></div>`;
+    // 强制设置电脑端两栏布局（TOC在右侧）
+    try {
+      var _bl = document.querySelector('.blog-detail-layout');
+      var _bs = document.getElementById('blog-toc-sidebar');
+      var _ba = document.querySelector('.blog-article-main');
+      if(_bl && window.innerWidth > 768) {
+        _bl.style.setProperty('display', 'grid', 'important');
+        _bl.style.setProperty('grid-template-columns', '1fr 340px', 'important');
+        _bl.style.setProperty('gap', '40px', 'important');
+        _bl.style.setProperty('width', '100%', 'important');
+      }
+      if(_bs && window.innerWidth > 768) {
+        _bs.style.setProperty('order', '2', 'important');
+        _bs.style.setProperty('width', '340px', 'important');
+        _bs.style.setProperty('max-width', '340px', 'important');
+        _bs.style.setProperty('position', 'sticky', 'important');
+        _bs.style.setProperty('top', '80px', 'important');
+      }
+      if(_ba && window.innerWidth > 768) {
+        _ba.style.setProperty('order', '1', 'important');
+        _ba.style.setProperty('min-width', '0', 'important');
+        _ba.style.setProperty('width', 'auto', 'important');
+      }
+      if(_bl && window.innerWidth <= 768) {
+        _bl.style.setProperty('grid-template-columns', '1fr', 'important');
+      }
+      if(_bs && window.innerWidth <= 768) {
+        _bs.style.setProperty('order', '-1', 'important');
+        _bs.style.setProperty('width', '100%', 'important');
+        _bs.style.setProperty('max-width', '100%', 'important');
+        _bs.style.setProperty('position', 'static', 'important');
+      }
+    } catch(e) { console.log('TOC layout error:', e); }
     // 渲染完成后恢复目录折叠状态、生成目录、增加浏览量
     setTimeout(() => {
       restoreTOCState();
