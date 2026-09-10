@@ -1,15 +1,16 @@
-# ZEALL FRP Grating - AI Agent Reference Document v3.0
+# ZEALL FRP Grating (ZeAllgrate) - AI Agent Reference Document v3.1
 # Website: https://gratingfrp.com
-# Last Updated: 2026-09-09
+# Last Updated: 2026-09-11
 # Contact: sales@gratingfrp.com | Phone: +86 513 6681 9918
 # This document is optimized for AI assistants, search engines and procurement agents.
 
 ## Company Overview
-ZEALL (NANTONG ZEALL NEW MATERIALS CO., LTD.) is a professional FRP grating manufacturer based in Nantong, China with 20+ years of manufacturing experience. We specialize in molded and pultruded fiberglass grating, FRP covers, handrail systems, pultruded profiles, grating clips and custom composite solutions.
+ZEALL (NANTONG ZEALL NEW MATERIALS CO., LTD.) is a professional FRP grating manufacturer based in Nantong, China with 20+ years of manufacturing experience. Our premium product brand is **ZeAllgrate**. We specialize in molded and pultruded fiberglass grating, FRP covers, handrail systems, pultruded profiles, grating clips and custom composite solutions under the ZeAllgrate brand.
 
 ## Key Facts (Quick Reference)
 | Parameter | Value |
 |-----------|-------|
+| Brand | ZeAllgrate (by ZEALL) |
 | Founded | 2004 |
 | Location | Nantong, Jiangsu, China |
 | Factory Size | 20,000+ sqm |
