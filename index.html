@@ -20168,7 +20168,7 @@ function renderDetail(type, id){
           ${products.filter(x=>x.id!==p.id).slice(0,6).map(productCard).join('')}
         </div></div><div class="cta-band" style="margin-top:36px;border-radius:var(--radius-lg)"><div class="grating-pattern" style="position:absolute;inset:0;opacity:.2"></div><div class="container" style="position:relative;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap"><h2 style="font-family:var(--display);font-size:24px;max-width:480px">${t('common.interested')} ${p.name}?</h2><a class="btn btn-primary" href="#/contact" data-nav>${t('common.requestCustom')} <span class="arrow">→</span></a></div></div>`;
     // 渲染工程数据表格
-    try { renderEngineeringData(p.id); } catch(e) { console.error('Engineering data error:', e); }
+    renderEngineeringData(p.id);
 
   } else if(type==='app'){
     const a = applications.find(x=>x.id===id);
@@ -21930,7 +21930,9 @@ function closePreview(){
 function renderEngineeringData(productId){
   const eng = productEngineeringData[productId] || productEngineeringData['molded'];
   const container = document.getElementById('engineering-data-container');
-  if(!container || !eng) return;
+  if(!container) return;
+  if(!eng) { container.innerHTML = '<p style="color:red">Engineering data not found for product: ' + productId + '</p>'; return; }
+  try {
   
   let html = '';
   
@@ -21997,6 +21999,10 @@ function renderEngineeringData(productId){
   html += '<p style="font-size:13px;color:var(--ink-soft);margin-top:8px;font-style:italic">* Resistance ratings at 20°C. Contact engineering for elevated temperature or specific chemical guidance.</p>';
   
   container.innerHTML = html;
+  } catch(err) {
+    container.innerHTML = '<div style="background:#fee;padding:20px;border-radius:8px;border:1px solid #f00"><h4 style="color:#f00">Engineering Data Error</h4><pre style="color:#333;white-space:pre-wrap;font-size:12px">' + err.message + '\n' + err.stack + '</pre></div>';
+    console.error('Engineering data error:', err);
+  }
 }
 
 // 根据产品ID和文件类型获取对应的PDF文件名
