@@ -20134,7 +20134,7 @@ function renderDetail(type, id){
     let guideHtml = '';
     let installHtml = '';
     try { faqHtml = renderProductFAQs(p.id); } catch(e) { faqHtml = '<div style="padding:20px;color:#f00">FAQ Error: ' + e.message + '</div>'; }
-    try { guideHtml = renderSelectionGuide(); } catch(e) { guideHtml = '<div style="padding:20px;color:#f00">Guide Error: ' + e.message + '</div>'; }
+    try { guideHtml = renderSelectionGuide(); } catch(e) { guideHtml = '<div stycontent.innerHTML = `<div style="background:#ff0000;color:#fff;padding:10px;text-align:center;font-weight:bold;font-size:16px;z-index:9999;position:relative">DEBUG: Product Detail - type=product, id=${id}</div>uide Error: ' + e.message + '</div>'; }
     try { installHtml = renderInstallationGuide(); } catch(e) { installHtml = '<div style="padding:20px;color:#f00">Install Error: ' + e.message + '</div>'; }
     injectProductSchemas(p.id);
     content.innerHTML = `
