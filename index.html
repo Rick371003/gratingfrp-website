@@ -15138,15 +15138,7 @@ img{
     padding: 0 !important;
     margin: 0 !important;
   }
-    .blog-detail-layout {
-    grid-template-columns: 1fr 340px !important;
-    gap: 40px !important;
-  }
-.blog-toc-sidebar {
-    position: sticky !important;
-    top: 80px !important;
-    order: 2 !important;
-  }
+
 
   .toc-nav a, .blog-toc a {
     font-size: 13px !important;
@@ -15594,6 +15586,17 @@ img{
 @media (max-width:400px){
   html body #view-home .hero h1{font-size:20px !important}
   html body #view-home .hero p.lead{font-size:12px !important}
+}
+
+/* TOC右侧布局 - 全局生效 */
+.blog-detail-layout {
+    grid-template-columns: 1fr 340px !important;
+    gap: 40px !important;
+}
+.blog-toc-sidebar {
+    position: sticky !important;
+    top: 80px !important;
+    order: 2 !important;
 }
 </style>
 
