@@ -15587,6 +15587,27 @@ img{
   html body #view-home .hero h1{font-size:20px !important}
   html body #view-home .hero p.lead{font-size:12px !important}
 }
+
+/* ===== 强制电脑端TOC右侧显示（最高优先级）===== */
+@media (min-width: 901px) {
+  .blog-detail-layout {
+    display: grid !important;
+    grid-template-columns: 1fr 340px !important;
+    gap: 40px !important;
+  }
+  .blog-toc-sidebar {
+    display: block !important;
+    position: sticky !important;
+    top: 80px !important;
+    order: 2 !important;
+    width: 340px !important;
+    max-width: 340px !important;
+  }
+  .blog-article-main {
+    min-width: 0 !important;
+    order: 1 !important;
+  }
+}
 </style>
 
 <script>
