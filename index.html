@@ -9827,6 +9827,12 @@ function switchLanguage(lang) {
   if (!I18N[lang]) return;
   currentLang = lang;
   localStorage.setItem('frp_lang', lang);
+  // 更新URL中的lang参数（替换，不追加，避免重复参数）
+  try {
+    const url = new URL(window.location.href);
+    url.searchParams.set('lang', lang);
+    history.replaceState(null, '', url.toString());
+  } catch(e) {}
   // 更新按钮状态
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.textContent.trim() === lang.toUpperCase());
