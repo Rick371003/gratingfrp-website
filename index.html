@@ -14667,6 +14667,14 @@ function closePreview(){
 }
 // 渲染产品工程数据表格
 function renderEngineeringData(productId){
+  // 直接翻译映射，绕过t()函数任何问题
+  var TR = {
+    en: {fp:'Fire Performance', mp:'Material Properties', sd:'Smoke density', oi:'Oxygen index', tmp:'Temperature', gc:'Glass content', uv:'UV resistance', std:'Standards', q:'Quality: ISO 9001 Certified', ld:'Load & Deflection Table', chem:'Chemical Resistance Guide', chemCol:'Chemical', conc:'Concentration', iso:'Isophthalic', ve:'Vinyl Ester', ortho:'Ortho', note1:'* Typical values for reference only. Contact engineering for project-specific calculations.', note2:'* Resistance ratings at 20°C. Contact engineering for elevated temperature or specific chemical guidance.', thickness:'Thickness', span:'Span', uniform:'Uniform', point:'Point', deflection:'Deflection', weight:'Weight'},
+    es: {fp:'Resistencia al Fuego', mp:'Propiedades del Material', sd:'Densidad de humo', oi:'Indice de oxigeno', tmp:'Temperatura', gc:'Contenido de vidrio', uv:'Resistencia UV', std:'Normas', q:'Calidad: Certificado ISO 9001', ld:'Tabla de Carga y Flecha', chem:'Guia de Resistencia Quimica', chemCol:'Quimico', conc:'Concentracion', iso:'Isotalico', ve:'Vinil Ester', ortho:'Ortalico', note1:'* Valores tipicos solo para referencia.', note2:'* Clasificacion a 20C. Contacte con ingenieria.', thickness:'Espesor', span:'Luz', uniform:'Carga Uniforme', point:'Carga Puntual', deflection:'Flecha', weight:'Peso'},
+    de: {fp:'Brandverhalten', mp:'Materialeigenschaften', sd:'Rauchdichte', oi:'Sauerstoffindex', tmp:'Temperatur', gc:'Glasgehalt', uv:'UV-Bestandigkeit', std:'Normen', q:'Qualitat: ISO 9001 zertifiziert', ld:'Lasttabelle', chem:'Chemische Bestandigkeit', chemCol:'Chemikalie', conc:'Konzentration', iso:'Isophthal', ve:'Vinylester', ortho:'Orthogsaeure', note1:'* Typische Werte zur Referenz.', note2:'* Bewertung bei 20C.', thickness:'Dicke', span:'Spannweite', uniform:'Gleichlast', point:'Einzellast', deflection:'Durchbiegung', weight:'Gewicht'},
+    fr: {fp:'Comportement au Feu', mp:'Proprietes des Materiaux', sd:'Densite de fumee', oi:'Indice d\'oxygene', tmp:'Temperature', gc:'Teneur en verre', uv:'Resistance UV', std:'Normes', q:'Qualite: Certifie ISO 9001', ld:'Tableau Charge & Fleche', chem:'Guide de Resistance Chimique', chemCol:'Produit Chimique', conc:'Concentration', iso:'Isophtalique', ve:'Vinyl Ester', ortho:'Ortho', note1:'* Valeurs typiques a titre indicatif.', note2:'* Classement a 20C.', thickness:'Epaisseur', span:'Portee', uniform:'Charge Uniforme', point:'Charge Ponctuelle', deflection:'Fleche', weight:'Poids'}
+  };
+  var tr = TR[currentLang] || TR.en;
   const eng = productEngineeringData[productId] || productEngineeringData['molded'];
   const container = document.getElementById('engineering-data-container');
   if(!container) return;
@@ -14678,29 +14686,29 @@ function renderEngineeringData(productId){
   // Fire Performance & Material Properties
   html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:16px">';
   html += '<div style="background:var(--bg-soft);border-radius:12px;padding:20px;border:1px solid var(--line)">';
-  html += '<h4 style="color:var(--accent);font-size:19px;margin-bottom:12px">🔥 ' + t('common.firePerformance') + '</h4>';
+  html += '<h4 style="color:var(--accent);font-size:19px;margin-bottom:12px">🔥 ' + tr.fp + '</h4>';
   html += '<ul style="font-size:17.5px;color:var(--ink-soft);line-height:2;padding-left:16px">';
   html += '<li>' + eng.fireRating + '</li>';
-  html += '<li>' + t('common.smokeDensity') + ': ' + eng.smokeDensity + '</li>';
-  html += '<li>' + t('common.oxygenIndex') + ': ' + eng.oxygenIndex + '</li>';
-  html += '<li>' + t('common.temperature') + ': ' + eng.tempRange + '</li>';
+  html += '<li>' + tr.sd + ': ' + eng.smokeDensity + '</li>';
+  html += '<li>' + tr.oi + ': ' + eng.oxygenIndex + '</li>';
+  html += '<li>' + tr.tmp + ': ' + eng.tempRange + '</li>';
   html += '</ul></div>';
   html += '<div style="background:var(--bg-soft);border-radius:12px;padding:20px;border:1px solid var(--line)">';
-  html += '<h4 style="color:var(--accent);font-size:19px;margin-bottom:12px">⚙️ ' + t('common.materialProperties') + '</h4>';
+  html += '<h4 style="color:var(--accent);font-size:19px;margin-bottom:12px">⚙️ ' + tr.mp + '</h4>';
   html += '<ul style="font-size:17.5px;color:var(--ink-soft);line-height:2;padding-left:16px">';
-  html += '<li>' + t('common.glassContent') + ': ' + eng.glassContent + '</li>';
-  html += '<li>' + t('common.uvResistance') + ': ' + eng.uvResistance + '</li>';
-  html += '<li>' + t('common.standards') + ': ' + eng.standards.join(', ') + '</li>';
-  html += '<li>' + t('common.quality') + '</li>';
+  html += '<li>' + tr.gc + ': ' + eng.glassContent + '</li>';
+  html += '<li>' + tr.uv + ': ' + eng.uvResistance + '</li>';
+  html += '<li>' + tr.std + ': ' + eng.standards.join(', ') + '</li>';
+  html += '<li>' + tr.q + '</li>';
   html += '</ul></div></div>';
   
   // Load Table
-  html += '<h4 style="color:var(--accent);font-size:20px;margin:28px 0 12px;padding-top:8px">📊 ' + t('common.loadDeflection') + '</h4>';
+  html += '<h4 style="color:var(--accent);font-size:20px;margin:28px 0 12px;padding-top:8px">📊 ' + tr.ld + '</h4>';
   html += '<div class="eng-table-wrap" style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px;border:1px solid var(--line)">';
   html += '<table class="eng-data-table" style="width:100%;border-collapse:collapse;font-size:15px;min-width:500px"><thead><tr style="background:var(--accent);color:var(--ink-dark)">';
   const headers = Object.keys(eng.loadTable[0]);
   headers.forEach(function(h){
-    const lmap={thickness:t('common.thickness'),span:t('common.span'),uniform:t('common.uniform'),pointload:t('common.pointLoad'),deflection:t('common.deflection'),weight:t('common.weight')};const label=lmap[h.toLowerCase()]||(h.replace(/([A-Z])/g,' $1').trim().charAt(0).toUpperCase()+h.replace(/([A-Z])/g,' $1').trim().slice(1));
+    const lmap={thickness:tr.thickness,span:tr.span,uniform:tr.uniform,pointload:tr.point,deflection:tr.deflection,weight:tr.weight};const label=lmap[h.toLowerCase()]||(h.replace(/([A-Z])/g,' $1').trim().charAt(0).toUpperCase()+h.replace(/([A-Z])/g,' $1').trim().slice(1));
     html += '<th style="padding:12px 16px;text-align:left;font-weight:700;text-transform:capitalize;white-space:nowrap">' + label + '</th>';
   });
   html += '</tr></thead><tbody>';
@@ -14715,14 +14723,14 @@ function renderEngineeringData(productId){
   html += '<p style="font-size:13px;color:var(--ink-soft);margin-top:8px;font-style:italic">' + t('common.chemNoteDyn') + '</p>';
   
   // Chemical Resistance Table
-  html += '<h4 style="color:var(--accent);font-size:20px;margin:28px 0 12px">🧪 ' + t('common.chemGuideTitle') + '</h4>';
+  html += '<h4 style="color:var(--accent);font-size:20px;margin:28px 0 12px">🧪 ' + tr.chem + '</h4>';
   html += '<div class="eng-table-wrap" style="display:block !important;visibility:visible !important;opacity:1 !important;width:100% !important;max-width:100% !important;overflow-x:auto !important;-webkit-overflow-scrolling:touch !important;border-radius:12px;border:1px solid var(--line);margin:10px 0 !important;">';
   html += '<table class="eng-data-table" style="width:100%;border-collapse:collapse;font-size:15px;min-width:500px"><thead><tr style="background:var(--accent);color:var(--ink-dark)">';
-  html += '<th style="padding:12px 16px;text-align:left;font-weight:700;white-space:nowrap">' + t('common.chemCol') + '</th>';
-  html += '<th style="padding:12px 16px;text-align:left;font-weight:700">' + t('common.concCol') + '</th>';
-  html += '<th style="padding:12px 16px;text-align:center;font-weight:700">' + t('common.isoCol') + '</th>';
-  html += '<th style="padding:12px 16px;text-align:center;font-weight:700">' + t('common.veCol') + '</th>';
-  html += '<th style="padding:12px 16px;text-align:center;font-weight:700">' + t('common.orthoCol') + '</th>';
+  html += '<th style="padding:12px 16px;text-align:left;font-weight:700;white-space:nowrap">' + tr.chemCol + '</th>';
+  html += '<th style="padding:12px 16px;text-align:left;font-weight:700">' + tr.conc + '</th>';
+  html += '<th style="padding:12px 16px;text-align:center;font-weight:700">' + tr.iso + '</th>';
+  html += '<th style="padding:12px 16px;text-align:center;font-weight:700">' + tr.ve + '</th>';
+  html += '<th style="padding:12px 16px;text-align:center;font-weight:700">' + tr.ortho + '</th>';
   html += '</tr></thead><tbody>';
   eng.chemicalResistance.forEach(function(row, i){
     html += '<tr style="' + (i % 2 === 0 ? 'background:var(--bg)' : 'background:var(--bg-soft)') + '">';
