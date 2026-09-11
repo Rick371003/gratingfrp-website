@@ -15844,6 +15844,49 @@ footer{padding-bottom:8px !important}
 }
 
 #view-blog .bcard .thumb{display:none !important}
+
+/* ===== 统一产品卡片布局 ===== */
+.pcard .thumb{
+  aspect-ratio:16/10 !important;
+  width:100% !important;
+  flex-shrink:0 !important;
+}
+.pcard .thumb img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+}
+.pcard .body{
+  padding:16px 18px 18px !important;
+  flex:1 !important;
+  display:flex !important;
+  flex-direction:column !important;
+}
+.pcard .cat-label{
+  font-size:11px !important;
+  margin-bottom:6px !important;
+}
+.pcard h3{
+  font-size:17px !important;
+  margin-bottom:8px !important;
+  white-space:normal !important;
+  overflow:visible !important;
+}
+.pcard p{
+  font-size:13.5px !important;
+  line-height:1.55 !important;
+  display:-webkit-box !important;
+  -webkit-line-clamp:2 !important;
+  -webkit-box-orient:vertical !important;
+  overflow:hidden !important;
+  flex:1 !important;
+}
+.pcard .more{
+  margin-top:8px !important;
+  padding-top:8px !important;
+  border-top:1px solid var(--line) !important;
+  font-size:11.5px !important;
+}
 </style>
 
 <script data-cfasync="false">
