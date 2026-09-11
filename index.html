@@ -12548,16 +12548,23 @@ function renderAppsList(){
 }
 /* ===== 项目案例渲染 ===== */
 function renderHomeProjects(){
-  document.getElementById('home-cases').innerHTML = projects.map(p=>
-    `<div class="ccard" data-go="project|${p.id}"><div class="thumb"><span class="case-tag">${p.tag}</span>
-        ${p.img ? '<img width="800" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+p.alt+'" decoding="async" loading="lazy" decoding="async" importance="low" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">' : '<div class="frp-swatch '+p.color+'"></div>'}
+  const lang = currentLang || 'en';
+  document.getElementById('home-cases').innerHTML = projects.map(p=>{
+    const pName = (lang !== 'en' && p['name_'+lang]) ? p['name_'+lang] : p.name;
+    const pPlace = (lang !== 'en' && p['place_'+lang]) ? p['place_'+lang] : p.place;
+    const pTag = (lang !== 'en' && p['tag_'+lang]) ? p['tag_'+lang] : p.tag;
+    return `<div class="ccard" data-go="project|${p.id}"><div class="thumb"><span class="case-tag">${pTag}</span>
+        ${p.img ? '<img width="800" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+pName+'" decoding="async" loading="lazy" decoding="async" importance="low" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">' : '<div class="frp-swatch '+p.color+'"></div>'}
         ${p.video ? '<div class="video-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><span>Video</span></div>' : ''}
-      </div><div class="body"><div class="place">${p.place}</div><h3>${p.name}</h3></div></div>`).join('');
+      </div><div class="body"><div class="place">${pPlace}</div><h3>${pName}</h3></div></div>`}).join('');
 }
 /* ===== Blog渲染 ===== */
 function renderHomeBlog(){
-  document.getElementById('home-blog').innerHTML = posts.slice(0,6).map(p=>
-    `<div class="bcard" data-go="blog|${p.id}" draggable="false"><div class="thumb"><img src="${p.img}" alt="${p.title}" width="800" height="450" loading="lazy"><span class="cat">${p.category}</span></div><div class="body"><div class="cat">${p.category}</div><h3>${p.title}</h3><span class="more">Read Article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div></div>`).join('');
+  document.getElementById('home-blog').innerHTML = posts.slice(0,6).map(p=>{
+    const bTitle = getBlogText(p, 'title');
+    const bCat = getBlogText(p, 'category');
+    return `<div class="bcard" data-go="blog|${p.id}" draggable="false"><div class="thumb"><img src="${p.img}" alt="${bTitle}" width="800" height="450" loading="lazy"><span class="cat">${bCat}</span></div><div class="body"><div class="cat">${bCat}</div><h3>${bTitle}</h3><span class="more">${t('blog.readMore') || 'Read Article'} <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div></div>`;
+  }).join('');
 }
 /* ===== 视频教程渲染 ===== */
 function renderVideoList(videoList){
