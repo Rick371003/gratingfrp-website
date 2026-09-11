@@ -12787,8 +12787,16 @@ async function translateHtmlElement(element, targetLang) {
     generateBlogTOC();
   }, 100);
 }
+
+function loadMoreBlog(){
+  blogVisibleCount += 9;
+  renderBlogList();
+}
+var blogVisibleCount = 9;
 function renderBlogList(){
-  document.getElementById('blog-list').innerHTML = posts.map((p, idx)=>{
+  const allPosts = posts;
+  const visiblePosts = allPosts.slice(0, blogVisibleCount);
+  document.getElementById('blog-list').innerHTML = visiblePosts.map((p, idx)=>{
     const pTitle = getBlogText(p, 'title');
     const pExcerpt = getBlogText(p, 'excerpt');
     const pCategory = getBlogText(p, 'category');
@@ -12797,6 +12805,14 @@ function renderBlogList(){
     const readTime = Math.max(1, Math.ceil(wordCount / 200));
     return `<div class="bcard" data-go="blog|${p.id}" draggable="false"><div class="thumb"><img src="${p.img}" alt="${pTitle}" width="800" height="450" loading="lazy"></div><div class="body"><div class="cat" id="blog-list-cat-${idx}">${pCategory}</div><h3 id="blog-list-title-${idx}">${pTitle}</h3><p id="blog-list-excerpt-${idx}">${pExcerpt}</p><div class="blog-meta-row"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> ${p.date}</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> ${readTime} min read</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> ${p.author || 'ZEALL Team'}</span></div><span class="more">Read Article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div></div>`;
   }).join('');
+  // 添加加载更多按钮
+  const blogListEl = document.getElementById('blog-list');
+  if(blogVisibleCount < allPosts.length){
+    const btn = document.createElement('div');
+    btn.style.cssText = 'grid-column:1/-1;text-align:center;padding:20px';
+    btn.innerHTML = '<button onclick="loadMoreBlog()" style="padding:14px 40px;font-size:15px;font-weight:600;background:var(--accent);color:var(--ink-dark);border:none;border-radius:8px;cursor:pointer;transition:opacity .2s">Load More Articles ('+ (allPosts.length - blogVisibleCount) +' more)</button>';
+    blogListEl.appendChild(btn);
+  }
   // 自动翻译博客列表（如果当前语言不是英文且没有手动翻译）
   if (currentLang !== 'en') {
     posts.forEach((p, idx) => {
