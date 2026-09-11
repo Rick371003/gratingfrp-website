@@ -12733,7 +12733,7 @@ async function translateHtmlElement(element, targetLang) {
     generateBlogTOC();
   }, 100);
 }
-var _blogShown = 12;
+var _blogShown = 8;
 function renderBlogList(){
   const container = document.getElementById('blog-list');
   if(!container) return;
@@ -12749,7 +12749,7 @@ function renderBlogList(){
   }).join('');
   // 加载更多按钮
   if(_blogShown < posts.length){
-    container.insertAdjacentHTML('end', '<div style="grid-column:1/-1;text-align:center;margin:24px 0"><button onclick="_blogShown+=12;renderBlogList()" style="padding:12px 32px;background:var(--accent);color:#000;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px">Load More Articles</button></div>');
+    container.insertAdjacentHTML('end', '<div style="grid-column:1/-1;text-align:center;margin:24px 0"><button onclick="_blogShown+=8;renderBlogList();window.scrollTo({top:document.getElementById('blog-list').offsetTop,behavior:'smooth'})" style="padding:14px 40px;background:var(--accent);color:#000;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:15px;margin:20px 0;box-shadow:0 4px 12px rgba(240,165,0,.3)">LOAD MORE ARTICLES (16)</button></div>');
   }
   // 自动翻译博客列表（如果当前语言不是英文且没有手动翻译）
   if (currentLang !== 'en') {
