@@ -14839,9 +14839,9 @@ function renderEngineeringData(productId){
     html += '<td style="padding:12px 16px;border-top:1px solid var(--line);color:var(--ink-soft)">' + row.chemical + '</td>';
     html += '<td style="padding:12px 16px;border-top:1px solid var(--line);color:var(--ink-soft);text-align:center">' + row.conc + '</td>';
     const getColor = function(val){ return val === 'Excellent' ? '#27ae60' : val === 'Good' ? '#f39c12' : '#e74c3c'; };
-    html += '<td style="padding:12px 16px;border-top:1px solid var(--line);text-align:center;font-weight:600;color:' + getColor(row.iso) + '">' + t('product.' + row.iso.toLowerCase().replace(' ','')) + '</td>';
-    html += '<td style="padding:12px 16px;border-top:1px solid var(--line);text-align:center;font-weight:600;color:' + getColor(row.ve) + '">' + t('product.' + row.ve.toLowerCase().replace(' ','')) + '</td>';
-    html += '<td style="padding:12px 16px;border-top:1px solid var(--line);text-align:center;font-weight:600;color:' + getColor(row.ortho) + '">' + t('product.' + row.ortho.toLowerCase().replace(' ','')) + '</td>';
+    var isoVal = row.iso; var isoKey = isoVal.indexOf('Excellent')>=0?'excellent':isoVal.indexOf('Good')>=0?'good':isoVal.indexOf('Fair')>=0?'fair':isoVal; html += '<td style="padding:12px 16px;border-top:1px solid var(--line);text-align:center;font-weight:600;color:' + getColor(isoVal) + '">' + (t('product.'+isoKey) !== 'product.'+isoKey ? t('product.'+isoKey) : isoVal) + '</td>';
+    var veVal = row.ve; var veKey = veVal.indexOf('Excellent')>=0?'excellent':veVal.indexOf('Good')>=0?'good':veVal.indexOf('Fair')>=0?'fair':veVal; html += '<td style="padding:12px 16px;border-top:1px solid var(--line);text-align:center;font-weight:600;color:' + getColor(veVal) + '">' + (t('product.'+veKey) !== 'product.'+veKey ? t('product.'+veKey) : veVal) + '</td>';
+    var orthoVal = row.ortho; var orthoKey = orthoVal.indexOf('Excellent')>=0?'excellent':orthoVal.indexOf('Good')>=0?'good':orthoVal.indexOf('Fair')>=0?'fair':orthoVal; html += '<td style="padding:12px 16px;border-top:1px solid var(--line);text-align:center;font-weight:600;color:' + getColor(orthoVal) + '">' + (t('product.'+orthoKey) !== 'product.'+orthoKey ? t('product.'+orthoKey) : orthoVal) + '</td>';
     html += '</tr>';
   });
   html += '</tbody></table></div>';
