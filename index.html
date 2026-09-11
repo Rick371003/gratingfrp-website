@@ -12516,9 +12516,11 @@ function getProductArray(p, field){
 function productCard(p){
   const pName = getProductText(p, 'name');
   const pShort = getProductText(p, 'short');
-  return `<div class="pcard" data-go="product|${p.id}" ><div class="thumb"><span class="color-tag">${p.cat}</span>
+  const pCat = getProductText(p, 'cat');
+  const viewDetails = t('products.viewDetails') || 'View Details';
+  return `<div class="pcard" data-go="product|${p.id}" ><div class="thumb"><span class="color-tag">${pCat}</span>
       ${p.img ? '<img width="800" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer" src="'+p.img+'" alt="'+pName+'" decoding="async" loading="lazy" decoding="async" importance="low" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0">' : '<div class="frp-swatch '+p.color+'"></div>'}
-    </div><div class="body"><div class="cat-label">${p.cat}</div><h3>${pName}</h3><p>${pShort}</p><span class="more">View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div></div>`;
+    </div><div class="body"><div class="cat-label">${pCat}</div><h3>${pName}</h3><p>${pShort}</p><span class="more">${viewDetails} <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div></div>`;
 }
 function renderHomeProducts(){
   document.getElementById('home-products').innerHTML = productList.slice(0,8).map(productCard).join('');
