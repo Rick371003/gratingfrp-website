@@ -14749,12 +14749,12 @@ function renderEngineeringData(productId){
   html += '</tr></thead><tbody>';
   eng.chemicalResistance.forEach(function(row, i){
     html += '<tr style="' + (i % 2 === 0 ? 'background:var(--bg)' : 'background:var(--bg-soft)') + '">';
-    html += '<td style="padding:12px 16px;border-top:1px solid var(--line);color:var(--ink-soft)">' + row.chemical + '</td>';
+    html += '<td style="padding:12px 16px;border-top:1px solid var(--line);color:var(--ink-soft)">' + (tr.chemNames[row.chemical] || row.chemical) + '</td>';
     html += '<td style="padding:12px 16px;border-top:1px solid var(--line);color:var(--ink-soft);text-align:center">' + row.conc + '</td>';
     const getColor = function(val){ return val === 'Excellent' ? '#27ae60' : val === 'Good' ? '#f39c12' : '#e74c3c'; };
-    html += '<td style="padding:12px 16px;border-top:1px solid var(--line);text-align:center;font-weight:600;color:' + getColor(row.iso) + '">' + row.iso + '</td>';
-    html += '<td style="padding:12px 16px;border-top:1px solid var(--line);text-align:center;font-weight:600;color:' + getColor(row.ve) + '">' + row.ve + '</td>';
-    html += '<td style="padding:12px 16px;border-top:1px solid var(--line);text-align:center;font-weight:600;color:' + getColor(row.ortho) + '">' + row.ortho + '</td>';
+    html += '<td style="padding:12px 16px;border-top:1px solid var(--line);text-align:center;font-weight:600;color:' + getColor(row.iso) + '">' + (tr.ratings[row.iso] || row.iso) + '</td>';
+    html += '<td style="padding:12px 16px;border-top:1px solid var(--line);text-align:center;font-weight:600;color:' + getColor(row.ve) + '">' + (tr.ratings[row.ve] || row.ve) + '</td>';
+    html += '<td style="padding:12px 16px;border-top:1px solid var(--line);text-align:center;font-weight:600;color:' + getColor(row.ortho) + '">' + (tr.ratings[row.ortho] || row.ortho) + '</td>';
     html += '</tr>';
   });
   html += '</tbody></table></div>';
