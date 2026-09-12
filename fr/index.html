@@ -10710,10 +10710,14 @@ const productList = [
    cat:'Safety Systems', cat_es:'Sistemas de Seguridad', cat_de:'Sicherheitssysteme', cat_fr:'Systèmes de Sécurité',
    short:'OSHA compliant handrail, ladders, stair treads', short_es:'Barandilla OSHA, escaleras, peldaños', short_de:'OSHA-konforme Geländer, Leitern', short_fr:'Garde-corps OSHA, échelles, marches',
    color:'yellow', img:'https://gratingfrp.com/assets/images/Vk1TnbPiUR.webp'},
-  {id:'fabrication', name:'Custom FRP Fabrication', name_es:'Fabricación FRP Personalizada', name_de:'FRP Sonderanfertigung', name_fr:'Fabrication FRP Sur Mesure',
-   cat:'Custom Fabrication', cat_es:'Fabricación Personalizada', cat_de:'Sonderanfertigung', cat_fr:'Fabrication Sur Mesure',
-   short:'Custom sizes, CNC cutting, engineering support', short_es:'Tamaños personalizados, corte CNC', short_de:'Sondergrößen, CNC-Zuschnitt', short_fr:'Tailles sur mesure, découpe CNC',
+  {id:'fabric', name:'Fiberglass Fabric', name_es:'Tela de Fibra de Vidrio', name_de:'Fiberglasgewebe', name_fr:'Tissu de Fibre de Verre',
+   cat:'Fiberglass Materials', cat_es:'Materiales de Fibra de Vidrio', cat_de:'Glasfasermaterialien', cat_fr:'Matériaux en Fibre de Verre',
+   short:'E-Glass woven fabric 200-800 g/m2 for FRP reinforcement', short_es:'Tela E-Glass 200-800 g/m2 para refuerzo FRP', short_de:'E-Glas Gewebe 200-800 g/m2', short_fr:'Tissu E-Glass 200-800 g/m2',
    color:'blue', img:'https://gratingfrp.com/assets/images/JpVCsETz8s.webp'},
+  {id:'custom', name:'Fiberglass Mesh & Tape', name_es:'Malla y Cinta de Fibra de Vidrio', name_de:'Fiberglasnetz und -band', name_fr:'Maille et Ruban de Fibre de Verre',
+   cat:'Fiberglass Materials', cat_es:'Materiales de Fibra de Vidrio', cat_de:'Glasfasermaterialien', cat_fr:'Matériaux en Fibre de Verre',
+   short:'Alkali-resistant mesh & self-adhesive tape, 80-200 g/m2', short_es:'Malla resistente a álcalis y cinta autoadhesiva', short_de:'Alkalisbeständiges Netz & Klebeband', short_fr:'Maille résistante aux alcalis & ruban adhésif',
+   color:'purple', img:'https://gratingfrp.com/assets/images/g2QIVyyLiO.webp'},
   {id:'clips', name:'Grating Clips & Fasteners', name_es:'Soportes y Fijaciones', name_de:'Gitterklammern', name_fr:'Agrafes et Fixations',
    cat:'Fasteners', cat_es:'Fijaciones', cat_de:'Befestigungen', cat_fr:'Fixations',
    short:'M/C/L/Z clips, SS304/SS316/HDG', short_es:'Soportes M/C/L/Z, SS304/SS316', short_de:'M/C/L/Z Klammern, SS304/SS316', short_fr:'Agrafes M/C/L/Z, SS304/SS316',
@@ -13629,9 +13633,9 @@ function navigate(){
   if(detailId){
     try{
       detailId = decodeURIComponent(detailId);
-    }catch(e){
-      // 解码失败时保留原始值
-    }
+    }catch(e){}
+    const aliases={'fabrication':'fabric','Fiberglass-Fabric':'fabric'};
+    if(aliases[detailId]){detailId=aliases[detailId];}
   }
   let activeView;
   if((root==='product'||root==='app'||root==='blog'||root==='project') && detailId){
