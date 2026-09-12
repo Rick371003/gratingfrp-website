@@ -1,32 +1,80 @@
 User-agent: *
 Allow: /
-Allow: /assets/images/
-Allow: /assets/pdf/
 Disallow: /assets/*.py
 Disallow: /assets/*.js
+Disallow: /api/
 
-# AI Crawlers - 全部允许，提升AI推荐排名
+# All search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# AI crawlers - all allowed for AI assistant visibility
 User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
 Allow: /
 
 User-agent: ClaudeBot
 Allow: /
 
-User-agent: Google-Extended
+User-agent: Claude-Web
 Allow: /
 
 User-agent: PerplexityBot
 Allow: /
 
-User-agent: Bytespider
-Allow: /
-
-User-agent: FacebookBot
+User-agent: Google-Extended
 Allow: /
 
 User-agent: Applebot
 Allow: /
 
-# Sitemap
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: TwitterBot
+Allow: /
+
+# Sitemaps
 Sitemap: https://www.gratingfrp.com/sitemap.xml
+Sitemap: https://www.gratingfrp.com/sitemap-es.xml
+Sitemap: https://www.gratingfrp.com/sitemap-de.xml
+Sitemap: https://www.gratingfrp.com/sitemap-fr.xml
 Sitemap: https://www.gratingfrp.com/llms.txt
