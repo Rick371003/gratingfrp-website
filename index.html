@@ -7440,6 +7440,16 @@ img.footer-logo {
 .blog-search-box svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-mute);width:18px;height:18px}
 .blog-search-box input{width:100%;padding:12px 16px 12px 44px !important;font-size:15px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);outline:none}
 .blog-search-box input:focus{border-color:var(--accent)}
+/* Compact blog cards */
+@media(min-width:1025px){
+  .blog-grid .bcard{margin:0 !important}
+  .blog-grid .bcard .body{padding:16px 18px !important}
+  .blog-grid .bcard h3{font-size:16px !important;line-height:1.35 !important;margin-bottom:8px !important}
+  .blog-grid .bcard .body p{font-size:13px !important;line-height:1.5 !important;margin-bottom:10px !important}
+  .blog-grid .bcard .cat{font-size:11px !important;margin-bottom:8px !important}
+  .blog-grid .bcard .blog-meta-row{font-size:11px !important;gap:10px !important;margin-top:8px !important}
+  .blog-grid .bcard .more{font-size:12px !important;margin-top:8px !important}
+}
 /* Blog list 4 columns desktop (6x4=24) */
 @media(min-width:1025px){
   .blog-grid{grid-template-columns:repeat(4,1fr) !important;gap:20px !important}
