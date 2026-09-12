@@ -13914,7 +13914,9 @@ function restoreTOCState(){
   const sidebar = document.getElementById('blog-toc-sidebar');
   if(!sidebar) return;
   try{
-    if(localStorage.getItem('toc-collapsed') === 'true'){
+    const saved = localStorage.getItem('toc-collapsed');
+    const isMobile = window.matchMedia('(max-width:768px)').matches;
+    if(saved === 'true' || (saved === null && isMobile)){
       sidebar.classList.add('toc-collapsed');
     }
   }catch(e){}
@@ -15738,6 +15740,20 @@ html body .section:nth-child(odd){padding:48px 0 !important}
 html body .section-head{margin-bottom:20px !important}
 html body footer{padding-top:20px !important}
 html body .foot-bottom{padding-top:8px !important;margin-top:8px !important}
+
+/* === MOBILE BLOG TOC FLAT COMPACT === */
+@media (max-width:768px){
+  html body .blog-detail-layout{display:flex !important;flex-direction:column !important;gap:10px !important;padding:0 10px !important}
+  html body .blog-toc-sidebar{order:-1 !important;position:static !important;width:100% !important;max-width:100% !important;margin:0 0 6px 0 !important}
+  html body .toc-sticky{background:transparent !important;border:none !important;border-radius:0 !important;padding:0 !important;max-height:none !important;box-shadow:none !important}
+  html body .toc-header{margin-bottom:0 !important;padding:8px 12px !important;border-bottom:1px solid var(--line) !important;gap:8px !important;align-items:center !important}
+  html body .toc-title{font-size:13px !important;letter-spacing:.08em !important;white-space:nowrap !important;overflow:hidden !important;text-overflow:ellipsis !important;flex:1 !important;min-width:0 !important}
+  html body .toc-toggle{padding:2px !important;width:24px !important;height:24px !important;flex-shrink:0 !important}
+  html body .toc-nav{padding:2px 0 !important;gap:0 !important;max-height:300px !important}
+  html body .toc-nav a{padding:7px 12px !important;font-size:13.5px !important;line-height:1.4 !important}
+  html body .toc-nav a.toc-h3{padding-left:24px !important;font-size:13px !important}
+  html body .toc-nav a.toc-h4{padding-left:36px !important;font-size:12.5px !important}
+}
 </style>
 
 <script>
