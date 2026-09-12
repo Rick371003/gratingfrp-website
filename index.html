@@ -350,7 +350,7 @@ img {
     "email": "sales@gratingfrp.com",
     "availableLanguage": ["English", "Spanish", "German", "French", "Chinese"]
   },
-  "sameAs": [],
+  "sameAs": ["https://www.linkedin.com/company/zeall-grating","https://www.youtube.com/@zeallgrating","https://www.facebook.com/zeallgrating","https://x.com/zeallgrating","https://www.alibaba.com","https://www.made-in-china.com","https://www.instagram.com/zeallgrating"],
   "knowsLanguage": ["en", "es", "de", "fr", "zh"]
 }
 </script><script type="application/ld+json">
@@ -12931,6 +12931,14 @@ function renderDetail(type, id){
       type: 'product'
     });
     // 恢复默认容器宽度（非博客页面）
+    // 动态注入Breadcrumb JSON-LD
+    var bcOld = document.getElementById('ld-breadcrumb');
+    if(bcOld) bcOld.remove();
+    var bcSc = document.createElement('script');
+    bcSc.type = 'application/ld+json';
+    bcSc.id = 'ld-breadcrumb';
+    bcSc.textContent = JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://gratingfrp.com/"},{"@type":"ListItem","position":2,"name":"Products","item":"https://gratingfrp.com/#/products"},{"@type":"ListItem","position":3,"name":p.name,"item":window.location.href}]});
+    document.head.appendChild(bcSc);
     content.parentElement.style.maxWidth = '';
     content.parentElement.style.padding = '';
     content.parentElement.style.width = '';
