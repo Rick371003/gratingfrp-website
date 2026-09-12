@@ -13100,7 +13100,7 @@ function renderDetail(type, id){
             </div><a class="btn btn-primary" href="#/contact" data-nav>${t('blog.haveQuestions')} <span class="arrow">→</span></a></div>
           ${renderPostNav(p.id)}
           ${renderRelatedPosts(p.id, p.category)}
-        </article><aside class="blog-toc-sidebar" id="blog-toc-sidebar" style="display:block !important;position:sticky !important;top:80px !important;order:2 !important;width:340px !important;max-width:340px !important"><div class="toc-sticky"><div class="toc-header" onclick="toggleTOC()"><div class="toc-title">${t('blog.tableOfContents')}</div><button class="toc-toggle" id="toc-toggle-btn" title="Toggle table of contents"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button></div><nav class="toc-nav" id="toc-nav"></nav></div></aside></div>`;
+        </article><aside class="blog-toc-sidebar" id="blog-toc-sidebar"><div class="toc-sticky"><div class="toc-header" onclick="toggleTOC()"><div class="toc-title">${t('blog.tableOfContents')}</div><button class="toc-toggle" id="toc-toggle-btn" title="Toggle table of contents"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></button></div><nav class="toc-nav" id="toc-nav"></nav></div></aside></div>`;
     // 渲染完成后恢复目录折叠状态、生成目录、增加浏览量
     setTimeout(() => {
       restoreTOCState();
