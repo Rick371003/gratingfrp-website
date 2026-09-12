@@ -12587,7 +12587,7 @@ function renderHomeProjects(){
 function renderHomeBlog(){
   const cards = posts.slice(0,8).map(p=>
     `<div class="bcard" data-go="blog|${p.id}" draggable="false"><div class="thumb"><img src="${p.img}" alt="${p.title}" width="800" height="450" loading="lazy"><span class="cat">${p.category}</span></div><div class="body"><div class="cat">${p.category}</div><h3>${p.title}</h3><span class="more">Read Article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div></div>`).join('');
-  const btn = '<div style="grid-column:1/-1;text-align:center;padding:20px 0 10px"><button onclick="navigate('blog')" style="padding:14px 48px;font-size:15px;font-weight:700;background:var(--accent);color:#0a121a;border:none;border-radius:8px;cursor:pointer;font-family:var(--display);letter-spacing:.05em;text-transform:uppercase;min-width:200px;box-sizing:border-box">View All Articles</button></div>';
+  const btn = '<div style="grid-column:1/-1;text-align:center;padding:20px 0 10px"><button onclick="navigate(&#39;blog&#39;)" style="padding:14px 48px;font-size:15px;font-weight:700;background:var(--accent);color:#0a121a;border:none;border-radius:8px;cursor:pointer;font-family:var(--display);letter-spacing:.05em;text-transform:uppercase;min-width:200px;box-sizing:border-box">View All Articles</button></div>';
   document.getElementById('home-blog').innerHTML = cards + btn;
 }
 /* ===== 视频教程渲染 ===== */
