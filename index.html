@@ -13418,6 +13418,23 @@ function updateSEO(page, customData = {}){
   if(canonical) canonical.href = url;
   // 更新hreflang标签
   updateHreflangTags(url);
+  // 动态WebPage JSON-LD
+  let wpOld = document.getElementById('ld-webpage');
+  if(wpOld) wpOld.remove();
+  let wpSc = document.createElement('script');
+  wpSc.type = 'application/ld+json';
+  wpSc.id = 'ld-webpage';
+  wpSc.textContent = JSON.stringify({
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":title,
+    "description":description,
+    "url":url,
+    "inLanguage":lang,
+    "isPartOf":{"@type":"WebSite","name":"ZEALL FRP Grating","url":"https://gratingfrp.com/"},
+    "publisher":{"@type":"Organization","name":"NANTONG ZEALL NEW MATERIALS CO., LTD.","email":"sales@gratingfrp.com"}
+  });
+  document.head.appendChild(wpSc);
 }
 // 更新hreflang标签
 function updateHreflangTags(baseUrl) {
