@@ -1,11 +1,22 @@
 User-agent: *
-Content-Signal: search=yes, ai-input=yes, ai-train=no, use=reference
 Allow: /
-Disallow: /assets/*.py
-Disallow: /assets/*.js
-Disallow: /api/
 
-# All search engines
+# AI crawlers - allow all
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
 User-agent: Googlebot
 Allow: /
 
@@ -18,64 +29,12 @@ Allow: /
 User-agent: Baiduspider
 Allow: /
 
-User-agent: YandexBot
-Allow: /
+# Block scrapers
+User-agent: AhrefsBot
+Disallow: /admin/
 
-User-agent: DuckDuckBot
-Allow: /
+User-agent: SemrushBot
+Disallow: /admin/
 
-# AI crawlers - all allowed for AI assistant visibility
-User-agent: GPTBot
-Allow: /
-
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: Claude-Web
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: Applebot
-Allow: /
-
-User-agent: Applebot-Extended
-Allow: /
-
-User-agent: Amazonbot
-Allow: /
-
-User-agent: CCBot
-Allow: /
-
-User-agent: Bytespider
-Allow: /
-
-User-agent: meta-externalagent
-Allow: /
-
-User-agent: FacebookBot
-Allow: /
-
-User-agent: LinkedInBot
-Allow: /
-
-User-agent: TwitterBot
-Allow: /
-
-# Sitemaps
 Sitemap: https://www.gratingfrp.com/sitemap.xml
-Sitemap: https://www.gratingfrp.com/sitemap-es.xml
-Sitemap: https://www.gratingfrp.com/sitemap-de.xml
-Sitemap: https://www.gratingfrp.com/sitemap-fr.xml
-Sitemap: https://www.gratingfrp.com/llms.txt
+Sitemap: https://www.gratingfrp.com/image-sitemap.xml
