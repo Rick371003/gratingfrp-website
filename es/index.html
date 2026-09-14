@@ -7444,8 +7444,8 @@ img.footer-logo {
   /* About company name one line */
   .about-company-name{font-size:18px !important;white-space:normal !important;word-break:break-word !important;line-height:1.3 !important}
 
-  /* Related articles 3 per row */
-  .related-grid{grid-template-columns:repeat(3,1fr) !important;gap:12px !important}
+  /* Related articles 1 per row on mobile */
+  .related-grid{grid-template-columns:1fr !important;gap:12px !important}
   .related-card .body{padding:10px 12px !important}
   .related-card h4{font-size:13px !important;line-height:1.3 !important}
   .related-card .cat{font-size:10px !important;margin-bottom:4px !important}
@@ -15783,6 +15783,14 @@ html body .foot-bottom{padding-top:8px !important;margin-top:8px !important}
   html body .toc-nav a.toc-h4{padding-left:36px !important;font-size:12.5px !important}
   html body .blog-toc-sidebar.toc-collapsed .toc-nav{max-height:0 !important;padding:0 !important;overflow:hidden !important}
   html body .blog-toc-sidebar.toc-collapsed{margin-bottom:0 !important}
+  /* NUCLEAR overflow protection */
+  html body #detail-content, html body #detail-content *{max-width:100% !important}
+  html body #detail-content img{max-width:100% !important;height:auto !important}
+  html body #detail-content table{max-width:100% !important;display:block !important;overflow-x:auto !important}
+  html body #detail-content .author-card{left:auto !important;transform:none !important;position:static !important;width:100% !important;max-width:100% !important}
+  html body #detail-content .related-grid{grid-template-columns:1fr !important}
+  html body #detail-content .post-nav{grid-template-columns:1fr !important}
+  html body #detail-content .share-buttons{flex-wrap:wrap !important;white-space:normal !important}
 }
 </style>
 
