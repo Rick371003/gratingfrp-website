@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://www.gratingfrp.com/</loc>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/0fmkAXNc5Y.webp</image:loc><image:title>ZEALL FRP Grating Factory - Nantong China</image:title></image:image>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/GHVIFYalwg.webp</image:loc><image:title>FRP Grating Industrial Applications</image:title></image:image>
+  </url>
+
+  <!-- Molded Grating -->
+  <url>
+    <loc>https://www.gratingfrp.com/#/product/molded</loc>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/product-molded.webp</image:loc><image:title>FRP Molded Grating</image:title></image:image>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/molded-grating.webp</image:loc><image:title>Molded FRP Grating - Yellow Grit Top</image:title></image:image>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/0fmkAXNc5Y.webp</image:loc><image:title>FRP Molded Grating Production</image:title></image:image>
+  </url>
+
+  <!-- Pultruded Grating -->
+  <url>
+    <loc>https://www.gratingfrp.com/#/product/pultruded</loc>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/product-pultruded.webp</image:loc><image:title>FRP Pultruded Grating</image:title></image:image>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/pultruded-grating.webp</image:loc><image:title>FRP Pultruded Grating Heavy Duty</image:title></image:image>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/zw9ojZXVmN.webp</image:loc><image:title>Pultruded FRP Grating I-Bar</image:title></image:image>
+  </url>
+
+  <!-- Covers & Panels -->
+  <url>
+    <loc>https://www.gratingfrp.com/#/product/covers</loc>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/product-covers.webp</image:loc><image:title>FRP Covers and Panels</image:title></image:image>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/b8zE2DLnHg.webp</image:loc><image:title>FRP Trench Cover</image:title></image:image>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/UMcUgA6hRZ.webp</image:loc><image:title>FRP Solid Panel</image:title></image:image>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/BFYWRocc0Q.webp</image:loc><image:title>FRP Covered Grating</image:title></image:image>
+  </url>
+
+  <!-- Profiles -->
+  <url>
+    <loc>https://www.gratingfrp.com/#/product/profiles</loc>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/product-profiles.webp</image:loc><image:title>FRP Pultruded Profiles</image:title></image:image>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/ip7v6iSAWO.webp</image:loc><image:title>Fiberglass Structural Shapes I-Beam Channel</image:title></image:image>
+  </url>
+
+  <!-- Handrail -->
+  <url>
+    <loc>https://www.gratingfrp.com/#/product/handrail</loc>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/product-handrail.webp</image:loc><image:title>FRP Handrail and Stair System</image:title></image:image>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/Vk1TnbPiUR.webp</image:loc><image:title>FRP Railing System Industrial</image:title></image:image>
+  </url>
+
+  <!-- Fabric -->
+  <url>
+    <loc>https://www.gratingfrp.com/#/product/fabric</loc>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/product-fabric.webp</image:loc><image:title>Fiberglass Fabric and Cloth</image:title></image:image>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/JpVCsETz8s.webp</image:loc><image:title>E-Glass Woven Roving Fabric</image:title></image:image>
+  </url>
+
+  <!-- Clips -->
+  <url>
+    <loc>https://www.gratingfrp.com/#/product/clips</loc>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/product-clips.webp</image:loc><image:title>Grating Clips and Fasteners</image:title></image:image>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/1PMVJCnXoj.webp</image:loc><image:title>Stainless Steel Grating Clip</image:title></image:image>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/bRJp7EMFja.webp</image:loc><image:title>FRP Grating Fastener M-Clip</image:title></image:image>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/7ZDRM9IWz6.webp</image:loc><image:title>Grating Saddle Clip Installation</image:title></image:image>
+  </url>
+
+  <!-- Fiberglass Mesh & Tape -->
+  <url>
+    <loc>https://www.gratingfrp.com/#/product/fiberglass-mesh-tape</loc>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/product-custom.webp</image:loc><image:title>Fiberglass Mesh and Tape</image:title></image:image>
+    <image:image><image:loc>https://gratingfrp.com/assets/images/g2QIVyyLiO.webp</image:loc><image:title>Alkali-Resistant Fiberglass Mesh Tape</image:title></image:image>
+  </url>
+
+</urlset>
