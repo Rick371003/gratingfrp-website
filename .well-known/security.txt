@@ -1,0 +1,6 @@
+# Security.txt - https://securitytxt.org/
+# For security researchers to report vulnerabilities
+Contact: mailto:sales@gratingfrp.com
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: en, zh-CN
+Canonical: https://www.gratingfrp.com/.well-known/security.txt
