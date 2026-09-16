@@ -13734,10 +13734,11 @@ function renderDetail(type, id){
     if(detailSubEl) detailSubEl.style.display = '';
     const detailPageHead = document.querySelector('#view-detail .page-head');
     if(detailPageHead) detailPageHead.style.padding = '';
+    const pSEO = PRODUCT_SEO[p.id] || {};
     updateSEO('products', {
-      title: p.name + ' | FRP Grating Manufacturer - ZEALL',
-      description: p.short + ' ' + (p.features ? p.features.join('. ') : '') + ' High quality FRP products from ZEALL, 20+ years factory experience.',
-      keywords: p.name + ', ' + p.cat + ', FRP grating, fiberglass grating, ' + p.name.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim(),
+      title: pSEO.title || (p.name + ' | FRP Grating Manufacturer - ZeAllgrate'),
+      description: pSEO.description || (p.short + ' High quality FRP products from ZEALL, 20+ years factory experience.'),
+      keywords: pSEO.keywords || (p.name + ', ' + p.cat + ', FRP grating, fiberglass grating, ZeAllgrate'),
       image: p.img || p.gallery?.[0] || seoConfig.products.image,
       type: 'product'
     });
@@ -14074,6 +14075,51 @@ const seoConfigMultiLang = {
     }
   }
 };
+
+// ===== Per-product SEO config (core keyword targeting) =====
+const PRODUCT_SEO = {
+  molded: {
+    title: 'FRP Molded Grating | Fiberglass Concave/Grit-Top Walkway - ZeAllgrate',
+    description: 'Molded FRP grating factory direct. Concave, grit-top, smooth & covered surfaces. 25-50mm thickness, polyester/vinyl ester. ISO 9001, export 40+ countries.',
+    keywords: 'frp molded grating, molded fiberglass grating, frp grating walkway, concave top grating, grit top grating, molded grating manufacturer, frp floor grating, fiberglass grid, molded grating price, GRP molded grating'
+  },
+  pultruded: {
+    title: 'FRP Pultruded Grating | I-Bar Heavy-Duty Platform - ZeAllgrate',
+    description: 'Pultruded FRP grating manufacturer. I-bar/T-bar profiles, 25-100mm depth, high load capacity for large spans. Vinyl ester & isophthalic. Factory direct, 20+ years.',
+    keywords: 'frp pultruded grating, pultruded fiberglass grating, I-bar grating, heavy duty grating, frp platform grating, pultruded grid, pultruded grating manufacturer, GRP pultruded grating, deep grate, wide span grating'
+  },
+  covers: {
+    title: 'FRP Covers & Panels | Trench Covers, Cable Trench Covers - ZeAllgrate',
+    description: 'FRP solid covers, trench covers, cable trench covers & equipment panels. Corrosion resistant, anti-theft, non-conductive. Custom sizes. Factory direct from ZEALL.',
+    keywords: 'frp covers, frp trench cover, cable trench cover, fiberglass cover panel, solid FRP panel, frp flooring cover, corrosion resistant cover, GRP cover plate, trench drain cover'
+  },
+  profiles: {
+    title: 'FRP Pultruded Profiles | I-Beam, Channel, Angle, Tube - ZeAllgrate',
+    description: 'FRP pultruded profiles: I-beam, channel, angle, square tube, round tube, flat bar. Lightweight high-strength, corrosion resistant, non-conductive. Direct steel replacement.',
+    keywords: 'frp profiles, frp pultruded profiles, fiberglass I-beam, frp channel, frp angle, frp tube, pultruded structural shapes, frp square tube, frp flat bar, composite profiles'
+  },
+  handrail: {
+    title: 'FRP Handrail & Stair System | Corrosion Resistant Safety - ZeAllgrate',
+    description: 'Complete FRP handrail & stair system. Corrosion resistant, non-conductive, anti-slip modular railing. No welding required. ISO 9001 certified factory, 20+ year warranty.',
+    keywords: 'frp handrail, frp stair, fiberglass railing, composite handrail, corrosion resistant railing, frp stair tread, frp safety railing, GRP handrail, modular railing system, non-conductive handrail'
+  },
+  fabric: {
+    title: 'Fiberglass Fabric | E-Glass Woven Fabric for FRP Molding - ZeAllgrate',
+    description: 'E-glass fiberglass woven fabric 200-800 g/m2. Plain, twill, satin weave. Core reinforcement for FRP molding, marine composites, electrical insulation. Compatible with polyester/VE/epoxy.',
+    keywords: 'fiberglass fabric, fiberglass cloth, e-glass fabric, woven roving, fiberglass reinforcement, FRP fabric, fiberglass sheet, composite fabric, fiberglass roll, glass fiber cloth'
+  },
+  clips: {
+    title: 'FRP Grating Clips | M/C/L/Z Type SS304/SS316 Fasteners - ZeAllgrate',
+    description: 'FRP grating clips: M-clip, C-clip, L-clip, Z-clip in SS304, SS316 & HDG steel. Fasten grating to support beams. Anti-vibration, easy installation. Factory direct.',
+    keywords: 'frp grating clips, grating clips, M clip, C clip, L clip, Z clip, grating fasteners, SS316 grating clip, grating fixing clip, fiberglass grating clips, GRP clips'
+  },
+  'fiberglass-mesh-tape': {
+    title: 'Fiberglass Mesh & Tape | Alkali-Resistant, Self-Adhesive - ZeAllgrate',
+    description: 'Fiberglass mesh & self-adhesive tape. Alkali-resistant mesh for wall insulation, joint repair, FRP wrapping. 80-200 g/m2, multiple widths. Factory direct from ZEALL.',
+    keywords: 'fiberglass mesh, fiberglass tape, self-adhesive mesh tape, alkali resistant mesh, wall repair mesh, fiberglass joint tape, FRP mesh, glass fiber mesh, mesh tape drywall'
+  }
+};
+
 /* ===== SEO配置（每个页面独立的meta信息） ===== */
 const seoConfig = {
   home: {
