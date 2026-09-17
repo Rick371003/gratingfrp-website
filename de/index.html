@@ -16382,6 +16382,8 @@ img{
   -webkit-user-drag: none;
   user-drag: none;
   pointer-events: auto;
+  -webkit-touch-callout: none;
+  -khtml-user-drag: none;
 }
 /* 图片水印保护：防止直接右键保存 */
 img::after{
@@ -17378,6 +17380,68 @@ function updateBlogPostingSchema(post){
     if(e.target.tagName === 'IMG'){
       e.preventDefault();
     }
+  });
+
+  // 25. 拦截 cut / beforecopy / beforecut / select 事件
+  ['cut','beforecopy','beforecut','selectstart','select'].forEach(function(evt){
+    document.addEventListener(evt, function(e){
+      if(e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA' && !e.target.isContentEditable){
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+  });
+
+  // 26. 鼠标右键（mousedown button===2 / mouseup button===2）双重拦截
+  document.addEventListener('mousedown', function(e){
+    if(e.button === 2){ e.preventDefault(); }
+  });
+  document.addEventListener('mouseup', function(e){
+    if(e.button === 2){ e.preventDefault(); }
+  });
+
+  // 27. F12 三事件拦截（keydown/keypress/keyup）
+  ['keydown','keypress','keyup'].forEach(function(evt){
+    document.addEventListener(evt, function(e){
+      if(e.key === 'F12' || e.keyCode === 123){
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+    }, true);
+  });
+
+  // 28. MutationObserver：动态加载的图片自动应用保护
+  var imgProtect = new MutationObserver(function(mutations){
+    mutations.forEach(function(m){
+      m.addedNodes.forEach(function(node){
+        if(node.nodeType === 1){
+          if(node.tagName === 'IMG'){
+            node.style.webkitUserDrag = 'none';
+            node.style.userDrag = 'none';
+            node.addEventListener('dragstart', function(e){ e.preventDefault(); });
+            node.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+          }
+          if(node.querySelectorAll){
+            node.querySelectorAll('img').forEach(function(img){
+              img.style.webkitUserDrag = 'none';
+              img.style.userDrag = 'none';
+              img.addEventListener('dragstart', function(e){ e.preventDefault(); });
+              img.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+            });
+          }
+        }
+      });
+    });
+  });
+  imgProtect.observe(document.body || document.documentElement, {childList:true, subtree:true});
+
+  // 29. SPA 路由变化时重新应用保护（hashchange）
+  window.addEventListener('hashchange', function(){
+    document.querySelectorAll('img').forEach(function(img){
+      img.style.webkitUserDrag = 'none';
+      img.style.userDrag = 'none';
+    });
   });
 })();
 
