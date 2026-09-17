@@ -16258,7 +16258,8 @@ function submitDownloadForm(e){
   });
 }
 // 点击modal外部关闭
-document.getElementById('downloadModal').addEventListener('click', function(e){
+const _dm = document.getElementById('downloadModal');
+if(_dm) _dm.addEventListener('click', function(e){
   if(e.target === this){
     closeDownloadModal();
   }
