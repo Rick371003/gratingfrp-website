@@ -15929,7 +15929,7 @@ function openPreview(title){
   titleEl.textContent = title;
   var pdfUrl = pdfUrls[title];
   if(!pdfUrl){
-    body.innerHTML = '<div style="padding:40px;text-align:center"><p style="color:#e74c3c;font-size:16px">Document not found</p><p style="color:#666;font-size:14px;margin-top:10px">Please use Download button or contact sales@gratingfrp.com</p></div>';
+    body.innerHTML = '<div style="padding:40px;text-align:center"><p style="color:#e74c3c;font-size:16px">Document not found</p><p style="color:#aaa;font-size:14px;margin-top:10px">Please use Download button or contact sales@gratingfrp.com</p></div>';
     modal.id = 'previewModal';
     modal.className = 'pdf-open';
     modal.style.display = 'flex';
@@ -15939,18 +15939,18 @@ function openPreview(title){
   // 设置"在新标签页打开"链接
   if(openNew){ openNew.href = pdfUrl; openNew.style.display = 'inline'; }
   // 显示加载动画
-  body.innerHTML = '<div style="padding:80px 20px;text-align:center"><div style="display:inline-block;width:50px;height:50px;border:5px solid #e0e0e0;border-top-color:#f5b800;border-radius:50%;animation:pdfspin 1s linear infinite"></div><p style="margin-top:20px;color:#666;font-size:16px">Loading PDF...</p><p style="color:#999;font-size:13px;margin-top:8px">If it takes too long, click "Open in New Tab" above</p></div><style>@keyframes pdfspin{to{transform:rotate(360deg)}}</style>';
+  body.innerHTML = '<div style="padding:80px 20px;text-align:center"><div style="display:inline-block;width:50px;height:50px;border:5px solid #2a3a4a;border-top-color:#f5b800;border-radius:50%;animation:pdfspin 1s linear infinite"></div><p style="margin-top:20px;color:#fff;font-size:16px">Loading PDF...</p><p style="color:#888;font-size:13px;margin-top:8px">If it takes too long, click "Open in New Tab" above</p></div><style>@keyframes pdfspin{to{transform:rotate(360deg)}}</style>';
   modal.style.display = 'flex';
   document.body.style.overflow = 'hidden';
   // 延迟加载iframe
   setTimeout(function(){
     var iframe = document.createElement('iframe');
     iframe.src = pdfUrl + '#toolbar=0&navpanes=0&scrollbar=1&view=FitH';
-    iframe.style.cssText = 'width:100%;height:96vh;border:none;background:#fff;display:block';
+    iframe.style.cssText = 'width:100%;height:100%;border:none;background:#fff;display:block;min-height:calc(100vh - 40px);';
     iframe.title = title;
     iframe.onload = function(){ this.style.opacity = '1'; };
     iframe.onerror = function(){
-      body.innerHTML = '<div style="padding:40px;text-align:center"><p style="color:#e74c3c;font-size:16px">Preview failed to load</p><p style="color:#666;font-size:14px;margin-top:10px">Please click "Open in New Tab" or use Download button</p></div>';
+      body.innerHTML = '<div style="padding:40px;text-align:center"><p style="color:#e74c3c;font-size:16px">Preview failed to load</p><p style="color:#aaa;font-size:14px;margin-top:10px">Please click "Open in New Tab" or use Download button</p></div>';
     };
     body.innerHTML = '';
     body.appendChild(iframe);
@@ -16371,16 +16371,16 @@ if ('connection' in navigator) {
 
 <!-- PDF Preview Modal -->
 <div id="previewModal" style="display:none;position:fixed;inset:0;background:#000;z-index:99999;align-items:center;justify-content:center;padding:0;border-radius:0">
-  <div style="background:#fff;border-radius:0;max-width:100%;width:100%;max-height:100vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:none">
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 10px;border-bottom:1px solid #e0e0e0;background:#f8f9fa;flex-shrink:0">
-      <h3 id="previewTitle" style="font-size:16px;font-weight:700;color:#1a1a2e;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:70%">PDF Preview</h3>
+  <div style="background:#0a121a;border-radius:0;max-width:100%;width:100%;max-height:100vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:none">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 12px;border-bottom:1px solid #2a3a4a;background:#0a121a;flex-shrink:0">
+      <h3 id="previewTitle" style="font-size:15px;font-weight:700;color:#fff;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:70%">PDF Preview</h3>
       <div style="display:flex;align-items:center;gap:10px">
         <a id="previewOpenNew" href="#" target="_blank" style="font-size:13px;color:#f5b800;text-decoration:none;font-weight:600;display:none">↗ Open in New Tab</a>
-        <button onclick="closePreview()" style="background:none;border:none;font-size:24px;color:#666;cursor:pointer;padding:0 6px;line-height:1">&times;</button>
+        <button onclick="closePreview()" style="background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.3);color:#fff;cursor:pointer;font-size:28px;font-weight:900;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;line-height:1;flex-shrink:0;padding:0" onmouseover="this.style.background='#f5b800';this.style.color='#000';this.style.borderColor='#f5b800';this.style.transform='scale(1.08)'" onmouseout="this.style.background='rgba(255,255,255,.1)';this.style.color='#fff';this.style.borderColor='rgba(255,255,255,.3)';this.style.transform='scale(1)'">&times;</button>
       </div>
     </div>
-    <div id="previewBody" style="flex:1;overflow:auto;background:#f5f5f5;position:relative;min-height:400px">
-      <div style="padding:60px;text-align:center;color:#999">Loading...</div>
+    <div id="previewBody" style="flex:1;overflow:auto;background:#000;position:relative;min-height:400px">
+      <div style="padding:60px;text-align:center;color:#888">Loading...</div>
     </div>
   </div>
 </div>
