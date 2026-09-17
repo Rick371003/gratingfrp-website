@@ -17325,9 +17325,60 @@ function updateBlogPostingSchema(post){
     return false;
   });
 
-  console.log('%c⚠️ 警告', 'color:red;font-size:20px;font-weight:bold');
-  console.log('%c本网站内容受版权保护，禁止复制、下载或未经授权使用。', 'color:red;font-size:14px');
-  console.log('%c如需资料请联系: sales@gratingfrp.com', 'color:blue;font-size:14px');
+  // 20. iframe 破壳检测：如果被嵌入 iframe，自动跳出
+  if(window.top !== window.self){
+    try{
+      window.top.location = window.self.location;
+    }catch(e){
+      document.body.innerHTML = '<div style="padding:60px;text-align:center;font-family:Arial;"><h2>禁止嵌入</h2><p>本网站不允许被其他网站iframe嵌入。</p></div>';
+    }
+  }
+
+  // 21. 拦截更多快捷键：Ctrl+Shift+C/J/K/I
+  document.addEventListener('keydown', function(e){
+    if((e.ctrlKey || e.metaKey) && e.shiftKey){
+      var k = (e.key || '').toLowerCase();
+      if(k === 'c' || k === 'j' || k === 'k' || k === 'i'){
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+    }
+    // F12 单独拦截
+    if(e.key === 'F12'){
+      e.preventDefault();
+      return false;
+    }
+  }, true);
+
+  // 22. 拦截 console.log/info/warn（防止查看console输出）
+  var _origLog = console.log;
+  // 先输出警告
+  _origLog.call(console, '%c⚠️ 警告', 'color:red;font-size:20px;font-weight:bold');
+  _origLog.call(console, '%c本网站内容受版权保护，禁止复制、下载或未经授权使用。', 'color:red;font-size:14px');
+  _origLog.call(console, '%c如需资料请联系: sales@gratingfrp.com', 'color:blue;font-size:14px');
+  // 然后屏蔽
+  var _noop = function(){};
+  console.log = _noop;
+  console.info = _noop;
+  console.debug = _noop;
+
+  // 23. 禁止文本选择残留：CSS selection 透明
+  var style = document.createElement('style');
+  style.textContent = '::selection{background:transparent!important;color:transparent!important;}::-moz-selection{background:transparent!important;color:transparent!important;}';
+  (document.head || document.documentElement).appendChild(style);
+
+  // 24. 禁止触摸长按弹出菜单（移动端）
+  document.addEventListener('touchstart', function(e){
+    if(e.target.tagName === 'IMG'){
+      e.preventDefault();
+    }
+  }, {passive:false});
+  document.addEventListener('touchend', function(e){
+    if(e.target.tagName === 'IMG'){
+      e.preventDefault();
+    }
+  });
 })();
 
 
