@@ -14574,15 +14574,25 @@ function updateSEO(page, customData = {}){
 }
 // 更新hreflang标签
 function updateHreflangTags(baseUrl) {
-  const langs = ['en', 'es', 'de', 'fr'];
-  langs.forEach(lang => {
-    let tag = document.querySelector(`link[rel="alternate"][hreflang="${lang}"]`);
-    if (tag) {
-      tag.href = baseUrl + (baseUrl.includes('?') ? '&' : '?') + 'lang=' + lang;
+  try {
+    const u = new URL(baseUrl);
+    const hash = u.hash || '';
+    const langs = ['en', 'es', 'de', 'fr'];
+    langs.forEach(lang => {
+      let tag = document.querySelector(`link[rel="alternate"][hreflang="${lang}"]`);
+      if (tag) {
+        // Build: scheme://host/path/?lang=XX#/hash-path  (query BEFORE hash)
+        tag.href = u.origin + u.pathname + '?lang=' + lang + hash;
+      }
+    });
+    let xdefault = document.querySelector('link[rel="alternate"][hreflang="x-default"]');
+    if (xdefault) {
+      // x-default: strip lang param, keep hash
+      xdefault.href = u.origin + u.pathname + hash;
     }
-  });
-  let xdefault = document.querySelector('link[rel="alternate"][hreflang="x-default"]');
-  if (xdefault) xdefault.href = baseUrl;
+  } catch(e) {
+    console.warn('hreflang update failed', e);
+  }
 }
 function updateMetaTag(attr, name, content){
   let tag = document.querySelector(`meta[${attr}="${name}"]`);
