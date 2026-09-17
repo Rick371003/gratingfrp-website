@@ -16383,6 +16383,28 @@ img{
   user-drag: none;
   pointer-events: auto;
 }
+/* 图片水印保护：防止直接右键保存 */
+img::after{
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: transparent;
+}
+/* 所有图片添加版权水印（通过CSS伪元素） */
+.pcard .pimg, .bcard .thumb, .ccard .thumb, .cat-product-img{
+  position: relative;
+}
+.pcard .pimg::after, .bcard .thumb::after, .ccard .thumb::after{
+  content: '© ZEALL GRATING';
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  z-index: 5;
+  pointer-events: none;
+  letter-spacing: 1px;
+}
 /* 禁用打印 */
 @media print{
   body *{
@@ -17226,7 +17248,34 @@ function updateBlogPostingSchema(post){
       e.preventDefault();
     });
   });
-  
+
+  // 10. 复制拦截：如果有人强行复制，替换为版权声明
+  document.addEventListener('copy', function(e){
+    if(e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA' && !e.target.isContentEditable){
+      e.preventDefault();
+      e.clipboardData.setData('text/plain', 'Content © ZEALL GRATING (gratingfrp.com). Unauthorized copying prohibited. Contact sales@gratingfrp.com for licensing.');
+    }
+  });
+
+  // 11. 禁止拖放文件到页面（防止拖拽上传/截图工具）
+  document.addEventListener('dragover', function(e){ e.preventDefault(); });
+  document.addEventListener('drop', function(e){ e.preventDefault(); });
+
+  // 12. 禁止图片另存为（覆盖所有图片的右键菜单）
+  document.addEventListener('contextmenu', function(e){
+    if(e.target.tagName === 'IMG'){
+      e.preventDefault();
+      return false;
+    }
+  });
+
+  // 13. 反调试：console.clear 防止查看console
+  setInterval(function(){
+    if(devtoolsOpen){
+      console.clear();
+    }
+  }, 2000);
+
   console.log('%c⚠️ 警告', 'color:red;font-size:20px;font-weight:bold');
   console.log('%c本网站内容受版权保护，禁止复制、下载或未经授权使用。', 'color:red;font-size:14px');
   console.log('%c如需资料请联系: sales@gratingfrp.com', 'color:blue;font-size:14px');
