@@ -214,6 +214,56 @@ The company manufactures and supplies the following FRP / GRP / fiberglass compo
 - Q: Quelle résine choisir? A: Ester vinylique pour acides forts/offshore; polyester isophthalique pour chimie générale; orthophtalique pour intérieur.
 - URL en français: https://www.gratingfrp.com/?lang=fr#/
 
+## Product-Specific Multi-Language FAQ (for all 8 products)
+
+### 1. Molded FRP Grating
+- EN: Q: What is molded FRP grating? A: One-piece molded fiberglass grating panel with bidirectional strength, used for platforms, walkways, trench covers. Available in 25/30/38/50mm thickness. Page: https://www.gratingfrp.com/#/product/molded
+- ES: Q: ¿Qué es la rejilla FRP moldeada? A: Panel de rejilla de fibra de vidrio moldeado en una pieza, resistencia bidireccional, para plataformas y pasarelas. Espesores 25/30/38/50mm.
+- DE: Q: Was ist Pressgitter (GFP)? A: Einteilig geformtes Glasfaser-Gitterrost, bidirektionale Festigkeit, für Plattformen und Stege. Dicken 25/30/38/50mm.
+- FR: Q: Qu'est-ce que le caillebotis FRP moulé? A: Panneau de grille en fibre de verre moulé en une pièce, résistance bidirectionnelle, pour plateformes et passerelles. Épaisseurs 25/30/38/50mm.
+
+### 2. Pultruded FRP Grating
+- EN: Q: What is pultruded FRP grating? A: I-bar/T-bar pultruded fiberglass grating with unidirectional high strength, for long spans and heavy loads. Page: https://www.gratingfrp.com/#/product/pultruded
+- ES: Q: ¿Qué es la rejilla FRP pultruida? A: Rejilla de perfiles I-bar/T-bar pultruidos, alta resistencia unidireccional, para grandes luces y cargas pesadas.
+- DE: Q: Was ist Pultrusionsgitter? A: I-Träger/T-Träger Gitterrost aus pultrudiertem Glasfaser, hohe einachsige Festigkeit, für weite Spannweiten und schwere Lasten.
+- FR: Q: Qu'est-ce que le caillebotis FRP pultrudé? A: Grille en profilés I-bar/T-bar pultrudés, haute résistance unidirectionnelle, pour grandes portées et charges lourdes.
+
+### 3. FRP Covers & Panels
+- EN: Q: What are FRP covers and panels? A: Solid-top fiberglass covers for trenches, cable trenches, roof walkways, pit covers. Anti-slip, corrosion-proof. Page: https://www.gratingfrp.com/#/product/covers
+- ES: Q: ¿Qué son las tapas y paneles FRP? A: Tapas sólidas de fibra de vidrio para zanjas, canales de cables, pasarelas de techo. Antideslizantes, anticorrosivos.
+- DE: Q: Was sind GFK-Abdeckungen und Platten? A: Geschlossene Glasfaser-Abdeckungen für Gräben, Kabeltrassen, Dachwege. Rutschfest, korrosionsbeständig.
+- FR: Q: Que sont les couvertures et panneaux FRP? A: Plaques pleines en fibre de verre pour tranchées, câbles, passerelles de toit. Antidérapants, anticorrosion.
+
+### 4. FRP Pultruded Profiles
+- EN: Q: What are FRP pultruded profiles? A: Fiberglass structural shapes: I-beam, channel, angle, square tube, round tube, flat bar. Custom cross-sections. Page: https://www.gratingfrp.com/#/product/profiles
+- ES: Q: ¿Qué son los perfiles FRP pultruidos? A: Perfiles estructurales de fibra de vidrio: viga I, canal, angular, tubo cuadrado, tubo redondo, barra plana. Secciones personalizadas.
+- DE: Q: Was sind GFK-Pultrusionsprofile? A: Glasfaser-Strukturprofile: I-Träger, U-Profil, Winkel, Quadratrohr, Rundrohr, Flachstab. Kundenspezifische Querschnitte.
+- FR: Q: Que sont les profilés pultrudés FRP? A: Profilés structurels en fibre de verre: poutre I, cornière, tube carré, tube rond, barre plate. Sections sur mesure.
+
+### 5. FRP Handrail & Stair Systems
+- EN: Q: What are FRP handrail systems? A: Modular fiberglass railing posts, top rail, mid rail, base plates, stair treads. OSHA/EN 14122 compliant. Page: https://www.gratingfrp.com/#/product/handrail
+- ES: Q: ¿Qué son los sistemas de barandilla FRP? A: Barandillas modulares de fibra de vidrio: postes, pasamanos, travesaños, peldaños. Cumple OSHA/EN 14122.
+- DE: Q: Was sind GFK-Handlaufsysteme? A: Modulare Geländer aus Glasfaser: Pfosten, Handlauf, Holm, Sprossen, Stufen. OSHA/EN 14122 konform.
+- FR: Q: Que sont les systèmes de garde-corps FRP? A: Garde-corps modulaires en fibre de verre: poteaux, main courante, lisses, marches. Conforme OSHA/EN 14122.
+
+### 6. Fiberglass Fabric & Cloth
+- EN: Q: What is fiberglass fabric? A: E-glass woven roving 200-800 g/m², plain/twill/satin weave, for FRP lamination, repair, boat building. Page: https://www.gratingfrp.com/#/product/fabric
+- ES: Q: ¿Qué es la tela de fibra de vidrio? A: Tejido de roving E-glass 200-800 g/m², ligamento tafetán/sarga/satinado, para laminación FRP y reparación.
+- DE: Q: Was ist Glasfasergewebe? A: E-Glas Roving-Gewebe 200-800 g/m², Leinwand/Köper/Atlas, für FRP-Laminierung und Reparatur.
+- FR: Q: Qu'est-ce que le tissu de fibre de verre? A: Tissu de roving E-glass 200-800 g/m², armure toile/sergé/satin, pour stratification FRP et réparation.
+
+### 7. FRP Grating Clips
+- EN: Q: What are FRP grating clips? A: Stainless steel (SS304/SS316) or HDG fasteners: M-clip, C-clip, L-clip, Z-clip. No drilling required. Page: https://www.gratingfrp.com/#/product/clips
+- ES: Q: ¿Qué son las grapas para rejillas FRP? A: Sujetadores de acero inoxidable (SS304/SS316) o galvanizados: clip M, C, L, Z. Sin taladro.
+- DE: Q: Was sind GFK-Gitterrostklemmen? A: Edelstahl (SS304/SS316) oder feuerverzinkte Klemmen: M-, C-, L-, Z-Klemme. Ohne Bohren.
+- FR: Q: Que sont les attaches de caillebotis FRP? A: Fixations en acier inoxydable (SS304/SS316) ou galvanisées: clips M, C, L, Z. Sans perçage.
+
+### 8. Fiberglass Mesh & Tape
+- EN: Q: What is fiberglass mesh and tape? A: Alkali-resistant fiberglass mesh for EIFS/drywall/plaster, self-adhesive joint tape for crack repair. Page: https://www.gratingfrp.com/#/product/fiberglass-mesh-tape
+- ES: Q: ¿Qué son la malla y cinta de fibra de vidrio? A: Malla antiálcali para fachadas/yeso, cinta autoadhesiva para reparación de grietas.
+- DE: Q: Was sind Glasfasergewebe und Klebeband? A: Alkalibeständiges Glasfasergewebe für WDVS/Putz, selbstklebendes Band für Risssanierung.
+- FR: Q: Que sont le treillis et ruban de fibre de verre? A: Treillis anti-alcalin pour enduit/plaques de plâtre, bande adhésive pour réparation de fissures.
+
 ---
 
 *This llms.txt file is maintained by ZEALL GRATING. Last updated 2026-09-17. For technical questions or quotes, contact sales@gratingfrp.com.*
