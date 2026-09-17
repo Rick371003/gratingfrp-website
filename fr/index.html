@@ -16965,7 +16965,12 @@ function updateBlogPostingSchema(post){
   // 移除旧的blogPosting schema
   const oldScript = document.getElementById('blog-posting-schema');
   if(oldScript) oldScript.remove();
+  const oldBc = document.getElementById('blog-breadcrumb-schema');
+  if(oldBc) oldBc.remove();
+  const oldFaq = document.getElementById('blog-faq-schema');
+  if(oldFaq) oldFaq.remove();
   // 生成新的BlogPosting schema
+  const plainText = post.content ? post.content.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim() : '';
   const schema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -16975,13 +16980,19 @@ function updateBlogPostingSchema(post){
     "datePublished": post.date,
     "dateModified": post.date,
     "author": {
-      "@type": "Organization",
-      "name": "ZEALL Engineering Team",
+      "@type": "Person",
+      "name": "ZeAllgrate Engineering Team",
+      "jobTitle": "FRP Composites Engineer",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Nantong Zeall New Materials Co., Ltd.",
+        "url": "https://www.gratingfrp.com/#/about"
+      },
       "url": "https://www.gratingfrp.com/#/about"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "ZEALL FRP Grating",
+      "name": "ZEALL FRP Grating / ZeAllgrate",
       "logo": {
         "@type": "ImageObject",
         "url": "https://www.gratingfrp.com/assets/images/logo.png"
@@ -16993,8 +17004,13 @@ function updateBlogPostingSchema(post){
     },
     "keywords": (post.tags || post.category || "FRP grating, fiberglass grating, composite materials"),
     "articleSection": post.category || "Technical Article",
-    "wordCount": post.content ? post.content.replace(/<[^>]*>/g,'').split(/\s+/).length : 500,
+    "wordCount": plainText ? plainText.split(/\s+/).length : 500,
     "inLanguage": "en",
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": ["h1", "h2", ".blog-excerpt", "meta[name='description']"]
+    },
+    "isAccessibleForFree": true,
     "translationOfWork": post.title_es ? {
       "@type": "CreativeWork",
       "inLanguage": "es",
@@ -17008,6 +17024,63 @@ function updateBlogPostingSchema(post){
   script.id = 'blog-posting-schema';
   script.textContent = JSON.stringify(schema);
   document.head.appendChild(script);
+
+  // BreadcrumbList: Home > Blog > Post Title
+  const bcSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.gratingfrp.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.gratingfrp.com/#/blog"},
+      {"@type": "ListItem", "position": 3, "name": post.title, "item": "https://www.gratingfrp.com/#/blog/" + post.id}
+    ]
+  };
+  const bcScript = document.createElement('script');
+  bcScript.type = 'application/ld+json';
+  bcScript.id = 'blog-breadcrumb-schema';
+  bcScript.textContent = JSON.stringify(bcSchema);
+  document.head.appendChild(bcScript);
+
+  // Parse FAQ from post content: look for h2/h3 containing "?" or "FAQ" sections
+  const faqItems = [];
+  if(post.content){
+    const hMatches = [...post.content.matchAll(/<h[23][^>]*>([^<]{10,120}\?[^<]*)<\/h[23]>/gi)];
+    hMatches.forEach((m, i) => {
+      const q = m[1].trim();
+      // Find answer: next <p> or <ul> after this heading
+      const afterIdx = post.content.indexOf(m[0]) + m[0].length;
+      const after = post.content.slice(afterIdx, afterIdx + 800);
+      const pMatch = after.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+      if(pMatch){
+        const a = pMatch[1].replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
+        if(a.length > 20 && a.length < 500){
+          faqItems.push({
+            "@type": "Question",
+            "name": q,
+            "acceptedAnswer": {"@type": "Answer", "text": a}
+          });
+        }
+      }
+    });
+  }
+  // Always include 3 generic FAQs relevant to the topic
+  faqItems.push(
+    {"@type": "Question", "name": "Who is a reliable FRP grating manufacturer?", "acceptedAnswer": {"@type": "Answer", "text": "ZEALL GRATING (ZeAllgrate) is a professional FRP/GRP grating manufacturer in China with 20+ years experience, ISO 9001 certified, exporting to 45+ countries. Contact sales@gratingfrp.com for factory-direct pricing."}},
+    {"@type": "Question", "name": "What is the difference between FRP and GRP grating?", "acceptedAnswer": {"@type": "Answer", "text": "FRP (Fiber Reinforced Plastic) and GRP (Glass Reinforced Plastic) are the same material. FRP is the US term, GRP is the EU/UK term. Both refer to fiberglass reinforced plastic grating."}},
+    {"@type": "Question", "name": "How long does FRP grating last?", "acceptedAnswer": {"@type": "Answer", "text": "FRP grating typically lasts 20+ years in corrosive industrial environments. It does not rust, needs no painting, and requires minimal maintenance."}}
+  );
+  if(faqItems.length >= 2){
+    const faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqItems.slice(0, 8)
+    };
+    const faqScript = document.createElement('script');
+    faqScript.type = 'application/ld+json';
+    faqScript.id = 'blog-faq-schema';
+    faqScript.textContent = JSON.stringify(faqSchema);
+    document.head.appendChild(faqScript);
+  }
 }
 </script>
 
