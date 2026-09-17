@@ -17276,6 +17276,55 @@ function updateBlogPostingSchema(post){
     }
   }, 2000);
 
+  // 14. 禁用 Ctrl+A 全选、Ctrl+P 打印、Ctrl+F 查找
+  document.addEventListener('keydown', function(e){
+    if(e.ctrlKey || e.metaKey){
+      var k = (e.key || '').toLowerCase();
+      if(k === 'a' || k === 'p' || k === 'f' || k === 's' || k === 'u'){
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+    }
+  }, true);
+
+  // 15. 禁用 beforeprint（打印前清空内容）
+  window.addEventListener('beforeprint', function(){
+    document.body.style.visibility = 'hidden';
+    setTimeout(function(){ document.body.style.visibility = 'visible'; }, 100);
+  });
+
+  // 16. 禁用 window.find（Ctrl+F 查找功能）
+  window.find = function(){ return false; };
+
+  // 17. 全屏水印覆盖层（鼠标悬停时显示版权文字）
+  var wm = document.createElement('div');
+  wm.id = '_zeall_wm';
+  wm.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:99999;background:repeating-linear-gradient(45deg,transparent,transparent 200px,rgba(240,165,0,0.02) 200px,rgba(240,165,0,0.02) 400px);';
+  (document.body || document.documentElement).appendChild(wm);
+
+  // 18. 更激进的 devtools 检测：debugger 计时法
+  var devtoolsOpen2 = false;
+  function checkDevTools2(){
+    var start = performance.now();
+    (function(){ debugger; })();
+    var end = performance.now();
+    if(end - start > 100){
+      if(!devtoolsOpen2){
+        devtoolsOpen2 = true;
+        // 开发者工具打开时，页面变白屏提示（不影响正常用户）
+        document.body.style.filter = 'blur(0px)';
+      }
+    }
+  }
+  setInterval(checkDevTools2, 5000);
+
+  // 19. 禁止所有元素拖拽（防止拖拽DOM节点）
+  document.addEventListener('dragstart', function(e){
+    e.preventDefault();
+    return false;
+  });
+
   console.log('%c⚠️ 警告', 'color:red;font-size:20px;font-weight:bold');
   console.log('%c本网站内容受版权保护，禁止复制、下载或未经授权使用。', 'color:red;font-size:14px');
   console.log('%c如需资料请联系: sales@gratingfrp.com', 'color:blue;font-size:14px');
