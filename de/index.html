@@ -15595,7 +15595,7 @@ function renderRelatedPosts(currentId, category){
   return `
     <div class="related-posts"><h3>${t('blog.relatedArticles')}</h3><div class="related-grid">
         ${related.map(p => `
-          <div class="related-card" data-go="blog|${p.id}"><div class="body"><div class="cat">${p.category}</div><h4>${p.title}</h4></div></div>
+          <div class="related-card" data-go="blog|${p.id}"><div class="body"><div class="cat">${getBlogText(p, 'category')}</div><h4>${getBlogText(p, 'title')}</h4></div></div>
         `).join('')}
       </div></div>
   `;
@@ -15609,10 +15609,10 @@ function renderPostNav(currentId){
   return `
     <div class="post-nav">
       ${prev ? `
-        <div class="post-nav-item" data-go="blog|${prev.id}"><div class="post-nav-label">← Previous Article</div><div class="post-nav-title">${prev.title}</div></div>
+        <div class="post-nav-item" data-go="blog|${prev.id}"><div class="post-nav-label">${t("blog.previousArticle")}</div><div class="post-nav-title">${getBlogText(prev, "title")}</div></div>
       ` : '<div></div>'}
       ${next ? `
-        <div class="post-nav-item next" data-go="blog|${next.id}"><div class="post-nav-label">Next Article →</div><div class="post-nav-title">${next.title}</div></div>
+        <div class="post-nav-item next" data-go="blog|${next.id}"><div class="post-nav-label">${t("blog.nextArticle")}</div><div class="post-nav-title">${getBlogText(next, "title")}</div></div>
       ` : '<div></div>'}
     </div>
   `;
