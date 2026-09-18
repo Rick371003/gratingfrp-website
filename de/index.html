@@ -43,6 +43,48 @@
     var md2 = document.querySelector('meta[name="description"]');
     if(md2) md2.setAttribute('content', 'Expert technical guide on ' + bt.toLowerCase() + ' by ZEALL FRP Grating — corrosion-resistant fiberglass composite solutions, factory direct pricing, 20+ years manufacturing experience.');
   }
+  // Dynamic BreadcrumbList + BlogPosting Schema
+  try {
+    var oldBc = document.getElementById('dyn-breadcrumb');
+    if(oldBc) oldBc.remove();
+    var oldBlog = document.getElementById('dyn-blogpost');
+    if(oldBlog) oldBlog.remove();
+    var hash = location.hash || '#/';
+    var crumbs = [{"@type":"ListItem","position":1,"name":"Home","item":"https://www.gratingfrp.com/"}];
+    var itemPos = 2;
+    if(m && m[1] === 'product' && m[2]) {
+      crumbs.push({"@type":"ListItem","position":itemPos++,"name":"Products","item":"https://www.gratingfrp.com/#/products"});
+      crumbs.push({"@type":"ListItem","position":itemPos++,"name":bt || m[2].replace(/-/g,' '),"item":"https://www.gratingfrp.com/#/product/"+m[2]});
+    } else if(m && m[1] === 'blog' && m[2]) {
+      crumbs.push({"@type":"ListItem","position":itemPos++,"name":"Blog","item":"https://www.gratingfrp.com/#/blog"});
+      crumbs.push({"@type":"ListItem","position":itemPos++,"name":bt || m[2].replace(/-/g,' '),"item":"https://www.gratingfrp.com/#/blog/"+m[2]});
+    } else if(m && m[1]) {
+      crumbs.push({"@type":"ListItem","position":itemPos++,"name":m[1].charAt(0).toUpperCase()+m[1].slice(1),"item":"https://www.gratingfrp.com/#/"+m[1]});
+    }
+    var bcScript = document.createElement('script');
+    bcScript.type = 'application/ld+json';
+    bcScript.id = 'dyn-breadcrumb';
+    bcScript.textContent = JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":crumbs});
+    document.head.appendChild(bcScript);
+    // BlogPosting schema for blog articles
+    if(b && b[1]) {
+      var bpScript = document.createElement('script');
+      bpScript.type = 'application/ld+json';
+      bpScript.id = 'dyn-blogpost';
+      bpScript.textContent = JSON.stringify({
+        "@context":"https://schema.org",
+        "@type":"BlogPosting",
+        "headline": bt,
+        "description": "Expert technical guide on " + bt.toLowerCase() + " by ZeAllgrate",
+        "author": {"@type":"Organization","name":"ZeAllgrate / ZeAll FRP Grating"},
+        "publisher": {"@type":"Organization","name":"ZeAllgrate","logo":{"@type":"ImageObject","url":"https://www.gratingfrp.com/assets/images/logo.png"}},
+        "url": "https://www.gratingfrp.com/#/blog/" + b[1],
+        "mainEntityOfPage": {"@type":"WebPage","@id":"https://www.gratingfrp.com/#/blog/" + b[1]},
+        "inLanguage": ["en","es","de","fr"]
+      });
+      document.head.appendChild(bpScript);
+    }
+  } catch(e) {}
 })();
 </script>
 
