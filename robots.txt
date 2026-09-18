@@ -1,8 +1,8 @@
-User-agent: *
+# === ALLOW: AI crawlers (for SEO/AI recommendation) ===
+User-agent: GPTBot
 Allow: /
 
-# AI crawlers - allow all
-User-agent: GPTBot
+User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: ClaudeBot
@@ -11,13 +11,22 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: Perplexity-User
+Allow: /
+
 User-agent: Google-Extended
 Allow: /
 
 User-agent: CCBot
 Allow: /
 
+User-agent: Bytespider
+Allow: /
+
 User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
 Allow: /
 
 User-agent: Bingbot
@@ -29,12 +38,637 @@ Allow: /
 User-agent: Baiduspider
 Allow: /
 
-# Block scrapers
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+# === BLOCK: SEO analysis tools (competitors use these to spy) ===
 User-agent: AhrefsBot
-Disallow: /admin/
+Disallow: /
 
 User-agent: SemrushBot
-Disallow: /admin/
+Disallow: /
+
+User-agent: SemrushBot-SA
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: Blekkobot
+Disallow: /
+
+User-agent: LinkpadBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: magpie-crawler
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: SerpstatBot
+Disallow: /
+
+User-agent: Netpeak Spider
+Disallow: /
+
+User-agent: WebMeUp
+Disallow: /
+
+# === BLOCK: Website analysis/diagnostic tools ===
+User-agent: BuiltWith
+Disallow: /
+
+User-agent: Wappalyzer
+Disallow: /
+
+User-agent: SimilarBot
+Disallow: /
+
+User-agent: SimilarWeb
+Disallow: /
+
+User-agent: GhostInspector
+Disallow: /
+
+User-agent: Pingdom
+Disallow: /
+
+User-agent: GTmetrix
+Disallow: /
+
+User-agent: PageSpeed
+Disallow: /
+
+User-agent: Lighthouse
+Disallow: /
+
+# === BLOCK: Content scrapers/aggregators ===
+User-agent: Scrapy
+Disallow: /
+
+User-agent: HTTrack
+Disallow: /
+
+User-agent: WebCopier
+Disallow: /
+
+User-agent: Teleport
+Disallow: /
+
+User-agent: Offline Explorer
+Disallow: /
+
+User-agent: WinHTTrack
+Disallow: /
+
+User-agent: Weborama
+Disallow: /
+
+User-agent: Screaming Frog
+Disallow: /
+
+User-agent: ScreamingFrogSEO
+Disallow: /
+
+User-agent: SeznamBot
+Disallow: /
+
+User-agent: Yeti
+Disallow: /
+
+User-agent: contextualwebsearch
+Disallow: /
+
+User-agent: worm
+Disallow: /
+
+User-agent: dotbot
+Disallow: /
+
+User-agent: domaincrawler
+Disallow: /
+
+User-agent: LinkExaminer
+Disallow: /
+
+User-agent: Nutch
+Disallow: /
+
+User-agent: ltx71
+Disallow: /
+
+User-agent: DeuSu
+Disallow: /
+
+User-agent: findxbot
+Disallow: /
+
+User-agent: archive.org_bot
+Disallow: /
+
+User-agent: ia_archiver
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: BuffaloBot
+Disallow: /
+
+User-agent: Cliqzbot
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: embedly
+Disallow: /
+
+User-agent: Ezooms
+Disallow: /
+
+User-agent: Faveeo
+Disallow: /
+
+User-agent: FyberSpider
+Disallow: /
+
+User-agent: Genieo
+Disallow: /
+
+User-agent: Genieo Web Filter
+Disallow: /
+
+User-agent: gsa-crawler
+Disallow: /
+
+User-agent:heritrix
+Disallow: /
+
+User-agent: hloader
+Disallow: /
+
+User-agent: ia_archiver
+Disallow: /
+
+User-agent: ilsebot
+Disallow: /
+
+User-agent: internet-measurement
+Disallow: /
+
+User-agent: istellabot
+Disallow: /
+
+User-agent: linkdexbot
+Disallow: /
+
+User-agent: linkwalker
+Disallow: /
+
+User-agent: ltx71
+Disallow: /
+
+User-agent: mail.ru_bot
+Disallow: /
+
+User-agent: meanpathbot
+Disallow: /
+
+User-agent: memoryBot
+Disallow: /
+
+User-agent: mnogosearch
+Disallow: /
+
+User-agent: netestate spider
+Disallow: /
+
+User-agent: netseer
+Disallow: /
+
+User-agent: newsblazebot
+Disallow: /
+
+User-agent: NG-Search
+Disallow: /
+
+User-agent: nutch
+Disallow: /
+
+User-agent: objectsearch
+Disallow: /
+
+User-agent: oegp spider
+Disallow: /
+
+User-agent: openwebspider
+Disallow: /
+
+User-agent: p01bot
+Disallow: /
+
+User-agent: page_24x7
+Disallow: /
+
+User-agent: pathdef
+Disallow: /
+
+User-agent: pompos
+Disallow: /
+
+User-agent: pompi
+Disallow: /
+
+User-agent: prowww
+Disallow: /
+
+User-agent: purebot
+Disallow: /
+
+User-agent: pyro
+Disallow: /
+
+User-agent: queryseeker
+Disallow: /
+
+User-agent: seokicks
+Disallow: /
+
+User-agent: seo search
+Disallow: /
+
+User-agent: seoenginetk
+Disallow: /
+
+User-agent: seocheckbot
+Disallow: /
+
+User-agent: seodiver
+Disallow: /
+
+User-agent: seokicks
+Disallow: /
+
+User-agent: seolinkbot
+Disallow: /
+
+User-agent: seomoz
+Disallow: /
+
+User-agent: seoscanner
+Disallow: /
+
+User-agent: semalt
+Disallow: /
+
+User-agent: semanticbot
+Disallow: /
+
+User-agent: sensidors
+Disallow: /
+
+User-agent: serpbot
+Disallow: /
+
+User-agent: servebot
+Disallow: /
+
+User-agent: sg-dataset
+Disallow: /
+
+User-agent: shopalike
+Disallow: /
+
+User-agent: shopman
+Disallow: /
+
+User-agent: shopwiki
+Disallow: /
+
+User-agent: silverdog
+Disallow: /
+
+User-agent: sindice
+Disallow: /
+
+User-agent: sirdata
+Disallow: /
+
+User-agent: sitename
+Disallow: /
+
+User-agent: sitexy
+Disallow: /
+
+User-agent: skypeuripreview
+Disallow: /
+
+User-agent: slurp
+Disallow: /
+
+User-agent: smbat
+Disallow: /
+
+User-agent: snappy
+Disallow: /
+
+User-agent: socialscan
+Disallow: /
+
+User-agent: socratic
+Disallow: /
+
+User-agent: sondy
+Disallow: /
+
+User-agent: soso
+Disallow: /
+
+User-agent: speep
+Disallow: /
+
+User-agent: sphider
+Disallow: /
+
+User-agent: spiderling
+Disallow: /
+
+User-agent: spinnak
+Disallow: /
+
+User-agent: spyonweb
+Disallow: /
+
+User-agent: sqroot
+Disallow: /
+
+User-agent: squid
+Disallow: /
+
+User-agent: ssearcher
+Disallow: /
+
+User-agent: sslbot
+Disallow: /
+
+User-agent: stackrambler
+Disallow: /
+
+User-agent: statsonfire
+Disallow: /
+
+User-agent: steer
+Disallow: /
+
+User-agent: subbot
+Disallow: /
+
+User-agent: suche
+Disallow: /
+
+User-agent: suke
+Disallow: /
+
+User-agent: sunflower
+Disallow: /
+
+User-agent: surenex
+Disallow: /
+
+User-agent: surveybot
+Disallow: /
+
+User-agent: spbot
+Disallow: /
+
+User-agent: tagoobot
+Disallow: /
+
+User-agent: tencent
+Disallow: /
+
+User-agent: terrawizz
+Disallow: /
+
+User-agent: theguardian
+Disallow: /
+
+User-agent: tineye
+Disallow: /
+
+User-agent: tkhttplib
+Disallow: /
+
+User-agent: toutiao
+Disallow: /
+
+User-agent: trafo
+Disallow: /
+
+User-agent: trendiction
+Disallow: /
+
+User-agent: turnitin
+Disallow: /
+
+User-agent: tweng
+Disallow: /
+
+User-agent: twingly
+Disallow: /
+
+User-agent: twitto
+Disallow: /
+
+User-agent: twitterfeed
+Disallow: /
+
+User-agent: tynt
+Disallow: /
+
+User-agent: ubright
+Disallow: /
+
+User-agent: uja
+Disallow: /
+
+User-agent: umongoof
+Disallow: /
+
+User-agent: unipe
+Disallow: /
+
+User-agent: uol
+Disallow: /
+
+User-agent: updrat
+Disallow: /
+
+User-agent: urlappend
+Disallow: /
+
+User-agent: urlagent
+Disallow: /
+
+User-agent: urldiscoverer
+Disallow: /
+
+User-agent: urlforce
+Disallow: /
+
+User-agent: urlgrab
+Disallow: /
+
+User-agent: urlhopper
+Disallow: /
+
+User-agent: urland
+Disallow: /
+
+User-agent: urlitor
+Disallow: /
+
+User-agent: urlmark
+Disallow: /
+
+User-agent: urlmeta
+Disallow: /
+
+User-agent: urlopener
+Disallow: /
+
+User-agent: urlopen
+Disallow: /
+
+User-agent: urlparser
+Disallow: /
+
+User-agent: urlpusher
+Disallow: /
+
+User-agent: urlr
+Disallow: /
+
+User-agent: urlrss
+Disallow: /
+
+User-agent: urlsea
+Disallow: /
+
+User-agent: urlseeker
+Disallow: /
+
+User-agent: urlseer
+Disallow: /
+
+User-agent: urlshake
+Disallow: /
+
+User-agent: urlshore
+Disallow: /
+
+User-agent: urlsifter
+Disallow: /
+
+User-agent: urlsink
+Disallow: /
+
+User-agent: urlskater
+Disallow: /
+
+User-agent: urlsnarf
+Disallow: /
+
+User-agent: urlspy
+Disallow: /
+
+User-agent: urlsquad
+Disallow: /
+
+User-agent: urlstealer
+Disallow: /
+
+User-agent: urlstorm
+Disallow: /
+
+User-agent: urlswarm
+Disallow: /
+
+User-agent: urlsweeper
+Disallow: /
+
+User-agent: urlsync
+Disallow: /
+
+User-agent: urltail
+Disallow: /
+
+User-agent: urltapper
+Disallow: /
+
+User-agent: urltracker
+Disallow: /
+
+User-agent: urltrend
+Disallow: /
+
+User-agent: urltrick
+Disallow: /
+
+User-agent: urlunion
+Disallow: /
+
+User-agent: urlunion_cse
+Disallow: /
+
+User-agent: urlverse
+Disallow: /
+
+User-agent: urlvigator
+Disallow: /
+
+User-agent: urlwatcher
+Disallow: /
+
+User-agent: urlweasel
+Disallow: /
+
+User-agent: urlwhirl
+Disallow: /
+
+User-agent: urlworm
+Disallow: /
+
+User-agent: urlx
+Disallow: /
+
+User-agent: urlzip
+Disallow: /
+
+# Default: allow legitimate users and search engines
+User-agent: *
+Allow: /
+Disallow: /assets/pdf/
 
 Sitemap: https://www.gratingfrp.com/sitemap.xml
 Sitemap: https://www.gratingfrp.com/image-sitemap.xml
