@@ -18559,41 +18559,8 @@ document.addEventListener('dragstart', function(e){
   if(e.target.tagName === 'IMG') { e.preventDefault(); return false; }
 });
 
-// DevTools detection - console.log object size trick
-var devtoolsOpen = false;
-var checkDevTools = function() {
-  var threshold = 160;
-  var w = window.outerWidth - window.innerWidth;
-  var h = window.outerHeight - window.innerHeight;
-  if(w > threshold || h > threshold) {
-    if(!devtoolsOpen) {
-      devtoolsOpen = true;
-      // Show warning overlay
-      var overlay = document.createElement('div');
-      overlay.id = 'devtools-warning';
-      overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;flex-direction:column;';
-      overlay.innerHTML = '<div style="text-align:center;padding:40px;"><h2 style="color:#f59e0b;font-size:24px;margin-bottom:16px;">Protected Content</h2><p style="color:#ccc;font-size:16px;max-width:400px;line-height:1.6;margin:0 auto;">This website is protected. Developer tools are disabled.<br><br>If you need technical information, please contact:<br><strong style="color:#f59e0b;">sales@gratingfrp.com</strong></p></div>';
-      document.body.appendChild(overlay);
-    }
-  } else {
-    if(devtoolsOpen) {
-      devtoolsOpen = false;
-      var ov = document.getElementById('devtools-warning');
-      if(ov) ov.remove();
-    }
-  }
-};
-setInterval(checkDevTools, 1000);
-
-// debugger statement that pauses when devtools is open
-(function(){
-  function d() {
-    debugger;
-  }
-  setInterval(function(){
-    try { d(); } catch(e){}
-  }, 5000);
-})();
+// DevTools detection removed - was causing false positives on normal browsers
+// Protection kept: right-click block, keyboard block, copy block, robots.txt
 </script>
 
 <script>
@@ -18632,26 +18599,7 @@ console.info = function() { /* suppress */ };
 // Restore only for our own warning
 _log.call(console, '%c🔒 ZeAllgrate - Protected', 'color:#f59e0b;font-size:14px;font-weight:bold;');
 
-// 6. Anti-debugging: debugger loop (runs when devtools is open)
-(function() {
-  var startTime = performance.now();
-  function check() {
-    var endTime = performance.now();
-    if(endTime - startTime > 100) {
-      // DevTools is open (debugger paused execution)
-      // Show warning overlay if not already shown
-      if(!document.getElementById('devtools-warning')) {
-        var overlay = document.createElement('div');
-        overlay.id = 'devtools-warning';
-        overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;background:rgba(0,0,0,0.9);display:flex;align-items:center;justify-content:center;';
-        overlay.innerHTML = '<div style="text-align:center;padding:40px;max-width:400px;"><h2 style="color:#f59e0b;font-size:22px;margin-bottom:16px;">Protected</h2><p style="color:#ccc;font-size:14px;line-height:1.6;">Developer tools disabled.<br>Contact: <strong style="color:#f59e0b;">sales@gratingfrp.com</strong></p></div>';
-        document.body.appendChild(overlay);
-      }
-    }
-    startTime = performance.now();
-  }
-  setInterval(check, 2000);
-})();
+// Performance devtools detection removed
 
 // 7. Block window blur detection (prevents focus stealing)
 window.addEventListener('blur', function() {
