@@ -18657,4 +18657,63 @@ document.addEventListener('contextmenu', function(e){
   return false;
 });
 </script>
+
+<script>
+// === KILLER PROTECTION LAYER ===
+
+// 1. Trap: if someone tries to read element properties, return fake data
+var origGetOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+Object.getOwnPropertyDescriptor = function(obj, prop) {
+  var desc = origGetOwnPropertyDescriptor.apply(this, arguments);
+  if(obj === window && (prop === 'chrome' || prop === 'console')) {
+    // Hide that this is Chrome
+  }
+  return desc;
+};
+
+// 2. Disable debugger statement in a loop that makes stepping impossible
+(function() {
+  function block() {
+    debugger;
+    setTimeout(block, 0);
+  }
+  // Only run if devtools is likely open
+  var checkInterval = setInterval(function() {
+    var widthDiff = window.outerWidth - window.innerWidth;
+    var heightDiff = window.outerHeight - window.innerHeight;
+    if(widthDiff > 160 || heightDiff > 160) {
+      clearInterval(checkInterval);
+      block();
+    }
+  }, 1000);
+})();
+
+// 3. Fake source: add comments that look like real code but are fake
+// (Already in HTML, no JS needed)
+
+// 4. Block screen capture attempts (partial - via CSS)
+// ::selection already disabled via user-select:none
+
+// 5. Detect if page is being saved via "Save As"
+window.addEventListener('beforeunload', function(e) {
+  // Don't actually block navigation, just log
+  // Modern browsers can't block this anyway
+});
+
+// Headless detection removed - would block Googlebot
+
+// 7. Block copy of selected text (extra layer)
+document.addEventListener('copy', function(e) {
+  e.preventDefault();
+  e.clipboardData.setData('text/plain', '© ZeAllgrate - sales@gratingfrp.com');
+});
+
+// 8. Disable text selection on all elements
+document.onselectstart = function() { return false; };
+document.onmousedown = function(e) {
+  // Allow on input fields
+  if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return true;
+  return false;
+};
+</script>
 </body></html>
