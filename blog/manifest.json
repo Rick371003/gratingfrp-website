@@ -19,8 +19,16 @@
     "frp-grating-solar-rooftop-walkway.json",
     "frp-grating-surface-options-guide.json",
     "frp-grating-maintenance-cleaning-guide.json",
-    "frp-grating-glossary-49-terms.json"
+    "frp-grating-glossary-49-terms.json",
+    "frp-grating-australia-supplier.json",
+    "frp-grating-saudi-arabia-supplier.json",
+    "frp-grating-germany-supplier.json",
+    "frp-grating-brazil-supplier.json",
+    "25mm-frp-grating-thickness-guide.json",
+    "38mm-frp-grating-standard-size.json",
+    "mini-mesh-frp-grating-guide.json",
+    "heavy-duty-frp-grating-guide.json"
   ],
-  "updated": "2026-09-12",
-  "count": 20
+  "updated": "2026-09-18",
+  "count": 28
 }
