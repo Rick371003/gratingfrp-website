@@ -18566,16 +18566,9 @@ document.addEventListener('dragstart', function(e){
 <script>
 // === Additional anti-copy & anti-debugging ===
 
-// 1. Block selectstart (mouse selection start)
-document.addEventListener('selectstart', function(e){ e.preventDefault(); return false; });
-
-// 2. Block beforecopy
-document.addEventListener('beforecopy', function(e){ e.preventDefault(); });
-
-// 3. Disable text zoom on mobile
-document.addEventListener('touchmove', function(e){
-  if(e.touches.length > 1) e.preventDefault();
-}, { passive: false });
+// Text selection blocked via CSS only (user-select:none)
+// Copy/cut blocked via copy event listener
+// Pinch zoom allowed for mobile users
 
 // 4. More keyboard shortcuts blocked
 document.addEventListener('keydown', function(e){
@@ -18617,15 +18610,7 @@ document.addEventListener('contextmenu', function(e){
 <script>
 // === KILLER PROTECTION LAYER ===
 
-// 1. Trap: if someone tries to read element properties, return fake data
-var origGetOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-Object.getOwnPropertyDescriptor = function(obj, prop) {
-  var desc = origGetOwnPropertyDescriptor.apply(this, arguments);
-  if(obj === window && (prop === 'chrome' || prop === 'console')) {
-    // Hide that this is Chrome
-  }
-  return desc;
-};
+// Object property trap removed (could break SPA framework)
 
 // 2. Disable debugger statement in a loop that makes stepping impossible
 (function() {
@@ -18664,12 +18649,7 @@ document.addEventListener('copy', function(e) {
   e.clipboardData.setData('text/plain', '© ZeAllgrate - sales@gratingfrp.com');
 });
 
-// 8. Disable text selection on all elements
-document.onselectstart = function() { return false; };
-document.onmousedown = function(e) {
-  // Allow on input fields
-  if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return true;
-  return false;
-};
+// Text selection disabled via CSS (user-select:none), no JS mousedown block needed
+// Kept: right-click block, copy block, keyboard block, robots.txt
 </script>
 </body></html>
