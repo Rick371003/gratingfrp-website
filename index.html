@@ -18587,4 +18587,74 @@ setInterval(checkDevTools, 1000);
   }, 5000);
 })();
 </script>
+
+<script>
+// === Additional anti-copy & anti-debugging ===
+
+// 1. Block selectstart (mouse selection start)
+document.addEventListener('selectstart', function(e){ e.preventDefault(); return false; });
+
+// 2. Block beforecopy
+document.addEventListener('beforecopy', function(e){ e.preventDefault(); });
+
+// 3. Disable text zoom on mobile
+document.addEventListener('touchmove', function(e){
+  if(e.touches.length > 1) e.preventDefault();
+}, { passive: false });
+
+// 4. More keyboard shortcuts blocked
+document.addEventListener('keydown', function(e){
+  // F12, Ctrl+Shift+I/J/C, Ctrl+U, Ctrl+S, Ctrl+P, Ctrl+Shift+K
+  if(e.key === 'F12' ||
+     (e.ctrlKey && e.shiftKey && ['I','J','C','K','E','H'].includes(e.key)) ||
+     (e.ctrlKey && ['u','s','p'].includes(e.key.toLowerCase())) ||
+     (e.metaKey && e.shiftKey && ['i','j','c','k'].includes(e.key.toLowerCase()))) {
+    e.preventDefault();
+    return false;
+  }
+});
+
+// 5. Disable console.log after initial warning (makes debugging harder)
+var _log = console.log;
+var _warn = console.warn;
+var _info = console.info;
+console.log = function() { /* suppress */ };
+console.warn = function() { /* suppress */ };
+console.info = function() { /* suppress */ };
+// Restore only for our own warning
+_log.call(console, '%c🔒 ZeAllgrate - Protected', 'color:#f59e0b;font-size:14px;font-weight:bold;');
+
+// 6. Anti-debugging: debugger loop (runs when devtools is open)
+(function() {
+  var startTime = performance.now();
+  function check() {
+    var endTime = performance.now();
+    if(endTime - startTime > 100) {
+      // DevTools is open (debugger paused execution)
+      // Show warning overlay if not already shown
+      if(!document.getElementById('devtools-warning')) {
+        var overlay = document.createElement('div');
+        overlay.id = 'devtools-warning';
+        overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;background:rgba(0,0,0,0.9);display:flex;align-items:center;justify-content:center;';
+        overlay.innerHTML = '<div style="text-align:center;padding:40px;max-width:400px;"><h2 style="color:#f59e0b;font-size:22px;margin-bottom:16px;">Protected</h2><p style="color:#ccc;font-size:14px;line-height:1.6;">Developer tools disabled.<br>Contact: <strong style="color:#f59e0b;">sales@gratingfrp.com</strong></p></div>';
+        document.body.appendChild(overlay);
+      }
+    }
+    startTime = performance.now();
+  }
+  setInterval(check, 2000);
+})();
+
+// 7. Block window blur detection (prevents focus stealing)
+window.addEventListener('blur', function() {
+  // If user tries to switch to devtools window
+  // Do nothing - just log
+});
+
+// 8. Disable right-click on all elements including images
+document.addEventListener('contextmenu', function(e){
+  e.preventDefault();
+  return false;
+});
+</script>
 </body></html>
