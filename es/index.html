@@ -15064,35 +15064,105 @@ function navigate(){
 }
 /* ===== 博客内容渲染（Markdown转HTML） ===== */
 function generateBlogFAQ(post){
+  var lang = currentLang || 'en';
   var title = (post.title || '').toLowerCase();
   var slug = post.id || '';
-  var faqs = [];
-  // Generic FAQ based on title keywords
-  if(title.indexOf('grating') >= 0 || slug.indexOf('grating') >= 0) {
-    faqs = [
-      {q: 'What is FRP grating and how does it work?', a: 'FRP (Fiberglass Reinforced Plastic) grating is a molded or pultruded fiberglass composite grid used for corrosion-resistant walkways, platforms, and floorings. It combines glass fiber reinforcement with thermoset resin (polyester, vinyl ester, or epoxy) to deliver superior strength-to-weight ratio compared to steel, with zero rust and low maintenance over 20+ years.'},
-      {q: 'What are the main advantages of FRP grating over steel?', a: 'FRP grating is 70% lighter than steel, never corrodes in chemical/saline environments, requires no painting or maintenance, and provides natural electrical insulation and anti-slip surfaces. It has lower life-cycle cost despite higher upfront pricing, with typical service life exceeding 25 years in corrosive applications.'},
-      {q: 'Which FRP grating type is best for my project?', a: 'Molded FRP grating is ideal for heavy-duty, corrosive environments (wastewater, chemical plants) with bi-directional strength. Pultruded grating offers higher uni-directional load capacity for linear spans. Contact our engineering team at sales@gratingfrp.com for free load calculations and resin selection guidance.'},
-      {q: 'How long is the lead time for FRP grating?', a: 'Standard FRP grating products ship within 2-4 weeks. Custom pultruded profiles and special resin formulations require 4-6 weeks. We export to 45+ countries worldwide with global shipping via sea or air freight.'}
-    ];
-  } else if(title.indexOf('price') >= 0 || title.indexOf('cost') >= 0) {
-    faqs = [
-      {q: 'How much does FRP grating cost?', a: 'FRP grating pricing depends on type (molded vs pultruded), resin system (polyester/vinyl ester/epoxy), bar size, and quantity. For detailed quotes, contact sales@gratingfrp.com — factory direct pricing with no middleman markup.'},
-      {q: 'Is FRP grating more expensive than steel?', a: 'Upfront cost is typically 2-3x steel, but FRP requires zero maintenance, never rusts, and lasts 25+ years. Total cost of ownership over 20 years is significantly lower than steel grating in corrosive environments.'}
-    ];
-  } else if(title.indexOf('install') >= 0 || title.indexOf('install') >= 0) {
-    faqs = [
-      {q: 'How do I install FRP grating?', a: 'FRP grating installs using FRP or SS316 clips on steel supports. Cut with diamond saw blade. Do not over-tighten clips to allow thermal expansion. Standard overlap is 2-3 bar spacings. Contact us for detailed installation manuals.'},
-      {q: 'Can FRP grating be cut on site?', a: 'Yes, FRP grating can be cut with standard carbide or diamond tools. Always wear protective gear and vacuum dust during cutting. Use clips rated for your resin system to avoid galvanic corrosion.'}
-    ];
-  } else {
-    faqs = [
-      {q: 'Who is ZeAllgrate?', a: 'ZeAllgrate (Nantong ZeAll New Materials Co., Ltd.) is a professional FRP/GRP grating manufacturer based in China with 20+ years of experience. We export to 45+ countries, offering factory-direct pricing, ISO9001 certification, and free engineering support. Contact sales@gratingfrp.com for quotes.'},
-      {q: 'What FRP products does ZeAllgrate offer?', a: 'We produce molded FRP grating, pultruded grating, covers & panels, structural profiles, handrail systems, grating clips, and fiberglass mesh & tape. Custom OEM/ODM available.'},
-      {q: 'How can I get a quote for FRP grating?', a: 'Email sales@gratingfrp.com with your application, dimensions, and load requirements. Our engineers reply within 24 hours with detailed specifications and pricing.'}
-    ];
-  }
-  return faqs;
+  var isGrating = (title.indexOf('grating') >= 0 || slug.indexOf('grating') >= 0);
+  var isPrice = (title.indexOf('price') >= 0 || title.indexOf('cost') >= 0);
+  var isInstall = (title.indexOf('install') >= 0 || title.indexOf('installation') >= 0);
+
+  var faqs = {
+    en: {
+      grating: [
+        {q:'What is FRP grating and how does it work?', a:'FRP (Fiberglass Reinforced Plastic) grating is a molded or pultruded fiberglass composite grid used for corrosion-resistant walkways, platforms and floorings. It combines glass fiber reinforcement with thermoset resin (polyester, vinyl ester, epoxy) for superior strength-to-weight ratio, zero rust and 20+ year service life.'},
+        {q:'What are the advantages of FRP grating over steel?', a:'FRP grating is 70% lighter than steel, never corrodes in chemical/saline environments, requires no painting or maintenance, and provides natural electrical insulation. Total cost of ownership over 20 years is significantly lower than steel in corrosive applications.'},
+        {q:'Which FRP grating type is best for my project?', a:'Molded grating is ideal for heavy-duty corrosive environments with bi-directional strength. Pultruded grating offers higher uni-directional load capacity. Contact sales@gratingfrp.com for free load calculations and resin selection.'},
+        {q:'How long is the lead time?', a:'Standard products ship in 2-4 weeks. Custom pultruded profiles require 4-6 weeks. We export to 45+ countries worldwide.'}
+      ],
+      price: [
+        {q:'How much does FRP grating cost?', a:'Pricing depends on type, resin system, bar size and quantity. Email sales@gratingfrp.com for factory-direct quotes with no middleman markup.'},
+        {q:'Is FRP grating more expensive than steel?', a:'Upfront cost is 2-3x steel, but zero maintenance and 25+ year service life make total cost of ownership lower in corrosive environments.'}
+      ],
+      install: [
+        {q:'How do I install FRP grating?', a:'Use FRP or SS316 clips on steel supports. Cut with diamond blade. Do not over-tighten clips to allow thermal expansion. Contact us for detailed installation manuals.'},
+        {q:'Can FRP grating be cut on site?', a:'Yes, use carbide or diamond tools. Wear protective gear and vacuum dust during cutting. Use clips rated for your resin system.'}
+      ],
+      general: [
+        {q:'Who is ZeAllgrate?', a:'ZeAllgrate (Nantong ZeAll New Materials Co., Ltd.) is a professional FRP/GRP grating manufacturer with 20+ years experience. ISO9001 certified, exporting to 45+ countries. Email sales@gratingfrp.com.'},
+        {q:'What products does ZeAllgrate offer?', a:'Molded grating, pultruded grating, covers & panels, structural profiles, handrail systems, grating clips, fiberglass mesh & tape. Custom OEM/ODM available.'},
+        {q:'How can I get a quote?', a:'Email sales@gratingfrp.com with your application, dimensions and load requirements. Our engineers reply within 24 hours.'}
+      ]
+    },
+    es: {
+      grating: [
+        {q:'\u00bfQu\u00e9 es la rejilla FRP y c\u00f3mo funciona?', a:'La rejilla FRP (pl\u00e1stico reforzado con fibra de vidrio) es una rejilla compuesta moldeada o pultruida utilizada para pasarelas, plataformas y suelos resistentes a la corrosi\u00f3n. Combina fibra de vidrio con resina termoestable (poli\u00e9ster, vinil\u00e9ster, epoxi) para una relaci\u00f3n resistencia-peso superior, cero oxidaci\u00f3n y m\u00e1s de 20 a\u00f1os de vida \u00fatil.'},
+        {q:'\u00bfCu\u00e1les son las ventajas sobre el acero?', a:'La rejilla FRP es 70% m\u00e1s ligera que el acero, nunca se corroe en entornos qu\u00edmicos/salinos, no requiere pintura ni mantenimiento y proporciona aislamiento el\u00e9ctrico natural. El coste total de propiedad a 20 a\u00f1os es significativamente menor.'},
+        {q:'\u00bfQu\u00e9 tipo de rejilla FRP es mejor para mi proyecto?', a:'La rejilla moldeada es ideal para entornos corrosivos de alta carga con resistencia bidireccional. La rejilla pultruida ofrece mayor capacidad de carga unidireccional. Contacte a ventas@gratingfrp.com para c\u00e1lculos de carga gratuitos.'},
+        {q:'\u00bfCu\u00e1l es el plazo de entrega?', a:'Los productos est\u00e1ndar se entregan en 2-4 semanas. Perfiles pultruidos personalizados requieren 4-6 semanas. Exportamos a m\u00e1s de 45 pa\u00edses.'}
+      ],
+      price: [
+        {q:'\u00bfCu\u00e1nto cuesta la rejilla FRP?', a:'El precio depende del tipo, resina, tama\u00f1o y cantidad. Escriba a ventas@gratingfrp.com para cotizaciones directas de f\u00e1brica.'},
+        {q:'\u00bfEs m\u00e1s cara que el acero?', a:'El coste inicial es 2-3 veces mayor, pero el mantenimiento cero y la vida \u00fatil de 25+ a\u00f1os la hacen m\u00e1s econ\u00f3mica en entornos corrosivos.'}
+      ],
+      install: [
+        {q:'\u00bfC\u00f3mo se instala la rejilla FRP?', a:'Use abrazaderas FRP o SS316 sobre soportes de acero. Corte con disco de diamante. No apriete demasiado para permitir dilataci\u00f3n t\u00e9rmica.'},
+        {q:'\u00bfSe puede cortar en obra?', a:'S\u00ed, use herramientas de carburo o diamante. Use equipo de protecci\u00f3n y aspire el polvo durante el corte.'}
+      ],
+      general: [
+        {q:'\u00bfQui\u00e9n es ZeAllgrate?', a:'ZeAllgrate (Nantong ZeAll New Materials) es fabricante profesional de rejillas FRP/GRP con m\u00e1s de 20 a\u00f1os de experiencia. Certificaci\u00f3n ISO9001, exportaci\u00f3n a 45+ pa\u00edses. Escriba a ventas@gratingfrp.com.'},
+        {q:'\u00bfQu\u00e9 productos ofrece ZeAllgrate?', a:'Rejilla moldeada, rejilla pultruida, cubiertas y paneles, perfiles estructurales, sistemas de barandilla, abrazaderas, malla y cinta de fibra de vidrio.'},
+        {q:'\u00bfC\u00f3mo solicito una cotizaci\u00f3n?', a:'Escriba a ventas@gratingfrp.com con su aplicaci\u00f3n, dimensiones y requisitos de carga. Respondemos en 24 horas.'}
+      ]
+    },
+    de: {
+      grating: [
+        {q:'Was ist GFK-Gitterrost und wie funktioniert er?', a:'GFK-Gitterrost (glasfaserverst\u00e4rkter Kunststoff) ist ein gepresster oder pultrudierter Verbundgitterrost aus Glasfaser und Duroplast-Harz (Polyester, Vinylester, Epoxid). Er bietet \u00fcberlegenes Festigkeits-Gewichts-Verh\u00e4ltnis, null Rost und 20+ Jahre Lebensdauer.'},
+        {q:'Was sind die Vorteile gegen\u00fcber Stahl?', a:'GFK-Gitter ist 70% leichter als Stahl, korrodiert nie in chemischen/salzen Umgebungen, erfordert keinen Anstrich und bietet nat\u00fcrliche elektrische Isolierung. Die Gesamtbetriebskosten \u00fcber 20 Jahre sind deutlich niedriger.'},
+        {q:'Welcher GFK-Gitterrost ist f\u00fcr mein Projekt geeignet?', a:'Gepresster Gitterrost ist ideal f\u00fcr schwere, korrosive Umgebungen mit bidirektionaler Festigkeit. Pultrudierter Gitterrost bietet h\u00f6here einachsige Tragf\u00e4higkeit. Kontaktieren Sie sales@gratingfrp.com f\u00fcr kostenlose Tragf\u00e4higkeitsberechnungen.'},
+        {q:'Wie lange ist die Lieferzeit?', a:'Standardprodukte werden in 2-4 Wochen geliefert. Kundenspezifische Profile ben\u00f6tigen 4-6 Wochen. Wir exportieren in \u00fcber 45 L\u00e4nder weltweit.'}
+      ],
+      price: [
+        {q:'Was kostet GFK-Gitterrost?', a:'Der Preis h\u00e4ngt von Typ, Harz, Gr\u00f6\u00dfe und Menge ab. E-Mail an sales@gratingfrp.com f\u00fcr Fabrikpreise ohne Zwischenh\u00e4ndler.'},
+        {q:'Ist GFK teurer als Stahl?', a:'Die Anschaffungskosten sind 2-3 Mal h\u00f6her, aber null Wartung und 25+ Jahre Lebensdauer machen es in korrosiven Umgebungen wirtschaftlicher.'}
+      ],
+      install: [
+        {q:'Wie wird GFK-Gitterrost installiert?', a:'Verwenden Sie GFK- oder SS316-Klemmen auf Stahltr\u00e4gern. Schneiden Sie mit Diamanttrennscheibe an. \u00dcberdrehen Sie die Klemmen nicht, um W\u00e4rmedehnung zu erlauben.'},
+        {q:'Kann GFK-Gitter vor Ort geschnitten werden?', a:'Ja, verwenden Sie Hartmetall- oder Diamantwerkzeuge. Tragen Sie Schutzausr\u00fcstung und saugen Sie den Staub ab.'}
+      ],
+      general: [
+        {q:'Wer ist ZeAllgrate?', a:'ZeAllgrate (Nantong ZeAll New Materials) ist ein professioneller Hersteller von GFK-Gitterrosten mit 20+ Jahren Erfahrung. ISO9001 zertifiziert, Export in \u00fcber 45 L\u00e4nder. E-Mail: sales@gratingfrp.com.'},
+        {q:'Welche Produkte bietet ZeAllgrate?', a:'Gepresste Gitterroste, pultrudierte Gitterroste, Abdeckungen & Paneele, Strukturprofile, Gel\u00e4ndersysteme, Klemmen, Glasfasernetz & Klebeband.'},
+        {q:'Wie erhalte ich ein Angebot?', a:'E-Mail an sales@gratingfrp.com mit Anwendung, Abmessungen und Lastanforderungen. Unsere Ingenieure antworten innerhalb von 24 Stunden.'}
+      ]
+    },
+    fr: {
+      grating: [
+        {q:'Qu\u2019est-ce que la grille FRP et comment \u00e7a marche?', a:'La grille FRP (plastique renforc\u00e9 fibre de verre) est une grille composite moul\u00e9e ou pultrud\u00e9e utilis\u00e9e pour passerelles, plateformes et rev\u00eatements r\u00e9sistants \u00e0 la corrosion. Elle combine fibre de verre et r\u00e9sse thermodurcissable (polyester, vinylester, \u00e9poxy) avec un excellent rapport r\u00e9sistance/poids, z\u00e9ro rouille et 20+ ans de dur\u00e9e de vie.'},
+        {q:'Quels sont les avantages par rapport a l\u2019acier?', a:'La grille FRP est 70% plus l\u00e9g\u00e8re que l\u2019acier, ne se corrode jamais en environnement chimique/salin, ne n\u00e9cessite aucune peinture ni maintenance, et offre une isolation \u00e9lectrique naturelle. Le co\u00fbt total de possession sur 20 ans est nettement inf\u00e9rieur.'},
+        {q:'Quel type de grille FRP choisir?', a:'La grille moul\u00e9e est id\u00e9ale pour environnements corrosifs lourds avec r\u00e9sistance bidirectionnelle. La grille pultrud\u00e9e offre une capacit\u00e9 de charge unidirectionnelle sup\u00e9rieure. Contactez sales@gratingfrp.com pour calculs de charge gratuits.'},
+        {q:'Quel est le d\u00e9lai de livraison?', a:'Produits standards exp\u00e9di\u00e9s en 2-4 semaines. Profils pultrud\u00e9s sur mesure 4-6 semaines. Export vers 45+ pays.'}
+      ],
+      price: [
+        {q:'Combien co\u00fbte la grille FRP?', a:'Le prix d\u00e9pend du type, r\u00e9sine, dimensions et quantit\u00e9. \u00c9crivez \u00e0 sales@gratingfrp.com pour un devis usine sans interm\u00e9diaire.'},
+        {q:'Est-ce plus cher que l\u2019acier?', a:'Le co\u00fbt initial est 2-3 fois plus \u00e9lev\u00e9, mais maintenance z\u00e9ro et dur\u00e9e de vie 25+ ans le rendent plus \u00e9conomique en environnement corrosif.'}
+      ],
+      install: [
+        {q:'Comment installer la grille FRP?', a:'Utilisez des colliers FRP ou SS316 sur supports acier. Coupez avec disque diamant. Ne pas trop serrer pour permettre la dilatation thermique.'},
+        {q:'Peut-on couper sur chantier?', a:'Oui, utilisez outils carbure ou diamant. Portez \u00e9quipement de protection et aspirez la poussi\u00e8re.'}
+      ],
+      general: [
+        {q:'Qui est ZeAllgrate?', a:'ZeAllgrate (Nantong ZeAll New Materials) est fabricant professionnel de grilles FRP/GRP avec 20+ ans d\u2019exp\u00e9rience. Certifi\u00e9 ISO9001, export vers 45+ pays. \u00c9crivez \u00e0 sales@gratingfrp.com.'},
+        {q:'Quels produits propose ZeAllgrate?', a:'Grille moul\u00e9e, grille pultrud\u00e9e, couvercles & panneaux, profil\u00e9s structurels, gardes corps, attaches, tissu et bande fibre de verre.'},
+        {q:'Comment obtenir un devis?', a:'\u00c9crivez \u00e0 sales@gratingfrp.com avec votre application, dimensions et contraintes de charge. Nos ing\u00e9nieurs r\u00e9pondent sous 24h.'}
+      ]
+    }
+  };
+
+  var langData = faqs[lang] || faqs.en;
+  if(isGrating) return langData.grating;
+  if(isPrice) return langData.price;
+  if(isInstall) return langData.install;
+  return langData.general;
 }
 function renderBlogContent(content){
   if(!content) return '';
